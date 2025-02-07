@@ -1,0 +1,295 @@
+
+"use client"
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import Link from "next/link";
+import line from "@/public/line.svg"
+import { useRef, useState } from "react";
+import CodeHighlight from "@/components/CodeSection";
+import Script from "next/script";
+import CodeHighlightWritter from "@/components/CodeSectionWritter";
+import  image1 from "@/public/list mail.png"
+import  formImage from "@/public/form.png"
+export default function Home() {
+
+  const [tabSelectId, setTabSelectId] = useState<number>(1)
+
+  const switcherTab = (id: number) => {
+    setTabSelectId(id)
+  }
+
+
+  const axiosCode = `
+export const axiosCode = async (project_id, public_key) => {
+    try {
+        const response = await
+         axios.post("https://smad-back-end.vercel.app/api/email/save",
+        {
+            email: "leoel@gmail.com",
+            project_id,
+            public_key
+        }, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        console.log(response.data);
+    } catch (error) {
+        console.error('Axios error:', error);
+    }
+};
+`;
+
+
+
+  const fetchCode = `
+export const fetchCode = async (project_id, public_key) => {
+    try {
+        const response = await fetch("https://smad-back-end.vercel.app/api/email/save",
+         {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: "leoel@gmail.com",
+                project_id,
+                public_key
+            })
+        });
+
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error('Fetch error:', error);
+    }
+};
+`;
+
+
+  const [isCodeCopy, setIsCodeCopy] = useState(false)
+
+  const handleCopyCode = () => {
+    setIsCodeCopy(true)
+    navigator.clipboard?.writeText(tabSelectId === 1 ? fetchCode : axiosCode)
+    setTimeout(() => {
+      setIsCodeCopy(false)
+    }, 1000)
+  }
+
+
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-between lg:px-24 px-8 py-4  ">
+
+      <div className="flex flex-col-reverse md:flex-row  w-full pt-10  md:pb-14  relative   justify-center items-center">
+        <div className="absolute w-full -top-[30%]  ">
+        {/* <Image  src={image2} className="object-contain h-36" alt="hero section image" /> */}
+        
+        </div>
+        <div className="w-full md:w-1/2">
+        <h1 className="md:text-4xl text-3xl flex lg:text-4xl text-balance  w-full wb-gradient  ">
+
+          Build quickly your newletters form
+          and stay focus on business side
+
+        </h1>
+        <div className="w-ull flex justify-start gap-x-4 items-center py-8 ">
+          <Link href="/login"><Button variant="default" className="rounded-full px-16  bx-shabtn py-2"> start now  </Button></Link>
+          {/* <Link href="/"><Button variant="secondary" className="rounded-full px-8 py-2"> video Guides   </Button></Link> */}
+
+        </div>
+        </div>
+        <div className="w-full md:w-1/2 px-8  md:px-10 flex justify-center items-center">
+        <Image  src={image1} className="object-contain " alt="hero section image" />
+        {/* <Image  src={envelop} className="object-contain " alt="hero section image" /> */}
+        </div>
+       
+      </div>
+      
+
+      <div className="w-full flex justify-between items-center">
+        <h2 className="opacity-80 w-full text-left uppercase ">How it work ?? </h2>
+
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="size-6">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+        </svg>
+
+      </div>
+
+      <section className="flex my-4 border relative lv line overflow-hidden border-neutral-700 rounded-xl flex-col gap-y-1 w-full ">
+        <div className="lv  absolute left-0 "> </div>
+        <div className="w-full  bg-neutral-700/50  overflow-auto">
+
+          <div className="w-full  pl-4 pr-2 py-2 flex gap-x-4  justify-between items-center">
+
+            <div className="flex justify-start gap-x-4 items-center">
+              <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">1</div>
+              <h4 className="text-xs md:text-sm"> Begin by create your account and subscribe a plan </h4>
+            </div>
+
+            <Link href="/" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10  hover:bg-neutral-800 transition-all ease duration-400 ">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+                <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+              </svg>
+
+            </Link>
+
+
+
+          </div>
+
+        </div>
+
+        <div className="w-full  overflow-auto">
+
+          <div className="w-full  pl-4 pr-2 py-2 flex gap-x-4  justify-between items-center">
+
+            <div className="flex justify-start gap-x-4 items-center">
+              <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">2</div>
+              <h4 className="text-xs md:text-sm">  Copy your api private key on page /account and set It as variables environments in your project </h4>
+            </div>
+
+            <Link href="/" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10  hover:bg-neutral-800 transition-all ease duration-400 ">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+                <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+              </svg>
+
+            </Link>
+
+
+
+          </div>
+
+        </div>
+
+
+        <div className="w-full  overflow-auto">
+
+          <div className="w-full  pl-4 pr-2 py-2 flex gap-x-4  justify-between items-center">
+
+            <div className="flex justify-s bg-neutral-700t art gap-x-4 items-center">
+              <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">3</div>
+              <h4 className="text-xs md:text-sm"> create a project in dashboard </h4>
+            </div>
+
+            <Link href="/" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10  hover:bg-neutral-800 transition-all ease duration-400 ">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+                <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+              </svg>
+
+            </Link>
+
+
+
+          </div>
+
+        </div>
+
+
+        <div className="w-full  overflow-auto">
+
+          <div className="w-full  pl-4 pr-2 py-2 flex gap-x-4  justify-between items-center">
+
+            <div className="flex justify-s bg-neutral-700t art gap-x-4 items-center">
+              <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">5</div>
+              <h4 className="text-xs md:text-sm"> Copy id of this project throught horizontal tree points button modal </h4>
+            </div>
+
+            <Link href="/" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10 hover:bg-neutral-800 transition-all ease duration-400 ">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+                <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+              </svg>
+
+            </Link>
+
+
+
+          </div>
+
+        </div>
+
+
+        <div className="w-full  overflow-auto">
+
+          <div className="w-full  pl-4 pr-2 py-2 flex gap-x-4  justify-between items-center">
+
+            <div className="flex justify-s bg-neutral-700t art gap-x-4 items-center">
+              <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">6</div>
+              <h4 className="pr-8 text-xs md:text-sm "> Click the {"'Generate Config'"} header button, select a model template, and copy the configuration. Generation complete</h4>
+            </div>
+
+            <Link href="/" target='_blank' className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10 hover:bg-neutral-800 transition-all ease duration-400 ">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+                <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+              </svg>
+
+            </Link>
+
+
+
+          </div>
+
+        </div>
+
+
+        <div className="w-full  overflow-auto">
+
+          <div className="w-full   pl-4 pr-2 py-2 flex gap-x-4  justify-between items-center">
+
+            <div className="flex justify-start    gap-x-4 items-center">
+              <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">7</div>
+              <div className="flex">
+                <h4 className="flex text-xs md:text-sm justify-start items-center gap-2"> copy the code and set it in a file like a component  and import it where you want  </h4>
+              </div>
+            </div>
+            <Link href="/" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10 hover:bg-neutral-800 transition-all ease duration-400 ">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+                <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+              </svg>
+
+            </Link>
+
+
+
+          </div>
+
+        </div>
+
+      </section>
+    
+
+      <h2 className="text-lg md:text-xl my-10 text-left w-full max-w-4xl text-balance">
+
+        <span className="font-medium text-neutral-400  uppercase"> Design available for implementation with tailwind  </span>
+
+      </h2>
+      <div className="flex w-full lg:border rounded-xl relative md:flex-row flex-col gap-y-4 lg:line lg:overflow-hidden gap-4 justify-start items-start">
+        <div className="flex w-full md:w-1/2     p-4  border border-neutral-700/30  bordergradient relative h-72 rounded-xl  overflow-hidden bg-neutral-700/30 ">
+
+          <div className="bg-neutral-900/30 rounded-xl overflow-hidden  px-4 h-full  w-full">
+        <Image src={formImage} className="object-contain w-full h-full" alt="form image"  />
+
+          </div>
+
+
+        </div>
+        <div className="w-full md:w-1/2 flex gap-y-4 h-full flex-col md:px-0 py-8 px-4 justify-center  items-start">
+          <p className="text-xl md:text-2xl text-balance">Get beautiful form 🌟 Components for begining </p>
+          <span className="text-sm md:text-sm text-neutral-500 pr-4"> Save Time and Get to the Final Goal with Our Exclusive Newsletter!
+            Sign up  to save time and reach your goals faster with exclusive tips and regular updates.
+          </span>
+          <div className="flex  my-4 gap-4">
+            <Link href="/template" className="w-full"> <Button variant={"default"} className="rounded-full w-full px-8 bx-shabtn py-2"> See all design + code  </Button> </Link>
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+
+    </main>
+  );
+}

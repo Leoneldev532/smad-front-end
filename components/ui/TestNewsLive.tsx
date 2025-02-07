@@ -1,0 +1,68 @@
+import useEmailForm from "@/app/template/formLogic";
+
+const EmailRegisterForm = () => {
+    const project_id = process.env.NEXT_PUBLIC_API_SMAD_PROJECT_ID || " ";
+    const private_key = process.env.NEXT_PUBLIC_API_SMAD_PRIVATE_KEY || " ";
+
+    const { data, setData, errors, handleSubmit, loading, success } = useEmailForm(project_id, private_key);
+
+    // Constantes pour les classes CSS
+    const formClasses = "flex bg-neutral-700 border border-neutral-700/40 overflow-hidden rounded-full justify-between";
+    const buttonClasses = "px-3 w-1/3 rounded-full py-1  group  flex justify-center items-center text-black font-bold hover:bg-neutral-900 hover:text-white transition-all ease duration-300  text-sm bg-yellow-500";
+    const inputClasses = "px-2.5 appearance-none text-neutral-400 font-medium py-2.5 outline-none text-sm w-full bg-neutral-700 text-capitalize";
+
+    return (
+        <section className="flex flex-col py-10">
+            <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className={formClasses}>
+                <div className="flex w-8/12 px-4 overflow-hidden justify-start items-center">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="size-6 stroke-neutral-500"
+                        aria-hidden="true"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+                        />
+                    </svg>
+
+                    <label htmlFor="email-input" className="sr-only">Email</label>
+                    <input
+                        id="email-input"
+                        type="email"
+                        placeholder="johndoe@gmail.com"
+                        className={inputClasses}
+                        value={data.email}
+                        onChange={(e) => setData({ ...data, email: e.target.value })}
+                    />
+                </div>
+                <button
+                    type="submit"
+                    className={buttonClasses}
+                    aria-label="save"
+                    disabled={loading}
+                >
+                    {loading ? (
+                        <div className="animate-spin h-5 w-5 border-2 group-hover:border-t-white group-hover:border-b-transparent  border-b-transparent border-r-transparent border-neutral-900 rounded-full"></div>
+                    ) : success ? (
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                        </svg>
+                    ) : (
+                        'save'
+                    )}
+                </button>
+            </form>
+            {errors.email && <p className="text-red-500 mt-2">{errors.email}</p>}
+        </section>
+    );
+};
+
+export default EmailRegisterForm;
+
+
