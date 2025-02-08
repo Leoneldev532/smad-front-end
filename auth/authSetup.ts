@@ -70,34 +70,6 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
 
-  cookies: {
-    sessionToken: {
-      name: `next-auth.session-token`,
-      options: {
-        httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
-        secure: process.env.NODE_ENV === 'production',
-      },
-    },
-    callbackUrl: {
-      name: `next-auth.callback-url`,
-      options: {
-        sameSite: 'lax',
-        path: '/',
-        secure: process.env.NODE_ENV === 'production',
-      },
-    },
-    csrfToken: {
-      name: `next-auth.csrf-token`,
-      options: {
-        httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
-        secure: process.env.NODE_ENV === 'production',
-      },
-    },
-  },
   
   callbacks: {   
     async signIn({ user, account }) {
@@ -106,7 +78,7 @@ export const authOptions: NextAuthOptions = {
         where: { email: user?.email  || " " },
       });
   
-  
+      console.log(process.env.NEXTAUTH_URL,process.env.GOOGLE_CLIENT_ID,process.env.GOOGLE_CLIENT_SECRET)
       // Si l'utilisateur n'existe pas, créez-le
       if (!existingUser) {
         await prisma.user.create({
