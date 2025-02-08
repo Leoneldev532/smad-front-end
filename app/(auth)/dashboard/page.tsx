@@ -161,11 +161,11 @@ export default   function Page() {
 
   
   const handleShowDialogCreateProject = () =>{
-    if(getAllUserInfo?.privateKey?.expiresAt && !isDatePassed(dayjs(getAllUserInfo?.privateKey?.expiresAt))){
+    // if(getAllUserInfo?.privateKey?.expiresAt && !isDatePassed(dayjs(getAllUserInfo?.privateKey?.expiresAt))){
     setIsOpenCreateProject(true)
-    }else{
-      toast.error("Please subscription a new plan")
-    }
+    // }else{
+    //   toast.error("Please subscription a new plan")
+    // }
   }
   const handleCloseDialogCreateProject = () =>{
     setIsOpenCreateProject(false)
@@ -292,8 +292,8 @@ export default   function Page() {
       className="px-4 py-2 rounded-lg bg-[#dbdbdb] border border-white hover:bg-black hover:text-white">
          <b className="text-2xl">+</b> <span>Create a project </span> </Button>
 
-         <span className=" italic text-neutral-400 max-w-sm text-balance"> you can make a new subscription here :   <Link href="/pricing" className="underline"> <span> pricing </span></Link>
-         </span> 
+         {/* <span className=" italic text-neutral-400 max-w-sm text-balance"> you can make a new subscription here :   <Link href="/pricing" className="underline"> <span> pricing </span></Link> */}
+         {/* </span>  */}
   </div>
 
   </div>

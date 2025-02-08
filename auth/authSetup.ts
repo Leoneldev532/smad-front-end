@@ -5,7 +5,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { compare } from 'bcryptjs';
 
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { generateprivateKey } from '@/lib/utils';
+import { generateFinalDate, generateprivateKey } from '@/lib/utils';
 
 import { prisma } from "@/lib/db";
 
@@ -88,7 +88,7 @@ export const authOptions: NextAuthOptions = {
             privateKey: {
               create: {
                 key: generateprivateKey(user?.email?.toLowerCase() || " "),
-                expiresAt: null, 
+                expiresAt: generateFinalDate("1year").toDate(), 
               },
             },
           },

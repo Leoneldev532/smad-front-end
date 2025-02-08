@@ -89,7 +89,8 @@ const Page = () => {
 
             </div>
           </div>
-          {getAllUserInfo?.privateKey?.expiresAt ? <div className="flex flex-col gap-4  px-4 w-full md:px-0  md:w-1/2 justify-center items-center">
+
+          <div className="flex flex-col gap-4  px-4 w-full md:px-0  md:w-1/2 justify-center items-center">
             <h2 className="py-4 text-xl"> Your Billing - Subscriptions </h2>
             <div className="w-full justify-center items-center flex flex-col ">
 
@@ -100,7 +101,7 @@ const Page = () => {
                 <div className='w-1/3 py-3 border md:text-sm text-xs border-neutral-700 flex justify-start items-center px-4'> <b>Expire date</b> </div>
               </div>
 
-              {getAllUserInfo.subscriptions?.map((subscription: any, index: number) => (
+              {getAllUserInfo && getAllUserInfo?.subscriptions?.map((subscription: any, index: number) => (
                 <div key={index} className='flex w-full'>
                   <div className='w-1/3 py-3 border md:text-sm text-xs border-neutral-800 flex justify-start items-center px-4'>
                     <span>{dayjs(subscription.billingDate).format("YYYY-MM-DD")}</span>
@@ -112,7 +113,7 @@ const Page = () => {
                     <span>{subscription.typeSubscription}</span>
                   </div>
                   <div className='w-1/3 py-3 border md:text-sm text-xs border-neutral-800 flex justify-start items-center px-4'>
-                    <span>{dayjs(getAllUserInfo.privateKey.expiresAt).format("YYYY-MM-DD")}</span>
+                    <span>{dayjs(getAllUserInfo?.privateKey?.expiresAt).format("YYYY-MM-DD")}</span>
                   </div>
                 </div>
               ))}
@@ -122,15 +123,19 @@ const Page = () => {
 
 
             </div>
-            <span className="opacity-80 italic"> you can make a new subscription here :   <Link href="/pricing" className="underline"> <span> pricing </span></Link>
-            </span>
+            {/* <span className="opacity-80 italic"> you can make a new subscription here :   <Link href="/pricing" className="underline"> <span> pricing </span></Link> */}
+            {/* </span> */}
 
-          </div> :
+          </div>
+
+          {/* {getAllUserInfo?.privateKey?.expiresAt ?
+          
+           :
             <Link href="/pricing">
               <Button className="px-4 py-2 rounded-lg bg-[#dbdbdb] border border-white hover:bg-black hover:text-white"> <b className="text-2xl">+</b> <span> Choose a plan  </span> </Button>
             </Link>
 
-          }
+          } */}
         </>
 
       }</div>
