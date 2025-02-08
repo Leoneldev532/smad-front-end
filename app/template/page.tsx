@@ -11,7 +11,6 @@ import CodeHighlightWriter from '@/components/CodeSectionWritter'
 import { logicEmailSubmition, logicImportString, TabTemplateCode } from './listTemplateCode'
 import { toast } from 'sonner'
 import { componentStructure } from './mainGenerateCodeFunc'
-import FormRegisterEmail from '@/components/TestNewsLive2'
 
 const Page = () => {
 
