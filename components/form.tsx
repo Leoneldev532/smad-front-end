@@ -1,7 +1,7 @@
+
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
-
-
+const formRegisterEmail = ()=> {
 
 type ValidationRules = {
     [key: string]: (value: any) => string | null;
@@ -28,18 +28,18 @@ type FormValidationState = {
 };
 
 
-const API_URL = "https://smad.api.leonelyimga.com/api/v1/email/save";
+const API_URL = "https://smad.leonelyimga.com/api/v1/email/save";
 const CONTENT_TYPE = "application/json";
 
 const getErrorMessage = (axiosError: AxiosError) => axiosError.message || 'An error occurred';
 
 const defaultValidationRules: ValidationRules = {
     email: (email) => {
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
         if (!email) {
-            return 'L\'adresse email est requise';
+            return 'L adresse email est requise';
         } else if (!emailRegex.test(email)) {
-            return 'L\'adresse email doit être valide';
+            return 'L adresse email doit être valide';
         }
         return null;
     },
@@ -55,11 +55,11 @@ const useEmailForm = (project_id: string, private_key: string, customValidationR
 
     const validate = () => {
         const validationErrors: Record<string, string> = {};
-        Object.keys(validationRules).forEach((email:string) => {
-            const rule : any = validationRules[email];
-            const error  = rule(data.email as any);
+        Object.keys(validationRules).forEach((key:string) => {
+            const rule = validationRules[key];
+            const error = rule(data[key]);
             if (error) {
-                validationErrors[email] = error;
+                validationErrors[key] = error;
             }
         });
         return validationErrors;
@@ -114,4 +114,7 @@ const useEmailForm = (project_id: string, private_key: string, customValidationR
 };
 
 
-export default useEmailForm
+ 
+ }
+ export default formRegisterEmail
+        

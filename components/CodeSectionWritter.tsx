@@ -15,6 +15,7 @@ const CodeHighlightWriter = ({
     code: string;
     onTypingComplete?: () => void; 
   }) => {
+    
   const [html, setHtml] = useState<string>('');
   const [isTypingComplete, setIsTypingComplete] = useState(false);
   const typingDelay = 0;
@@ -62,7 +63,7 @@ const CodeHighlightWriter = ({
   const [text, helper] = useTypewriter({
     words: [code],
     loop: 1,
-    typeSpeed: typingDelay,
+    typeSpeed:0 ,
   });
 
   const { isType, isDelete, isDelay, isDone } = helper;
