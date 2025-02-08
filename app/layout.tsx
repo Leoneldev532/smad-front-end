@@ -6,11 +6,11 @@ import { Toaster } from "sonner"
 import { NextAuthProvider } from "@/components/providers";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import { RecoilRoot } from "recoil";
 import { Analytics } from "@vercel/analytics/react"
-import { CSPostHogProvider } from "@/lib/providerPostHog";
 import Head from "next/head";
+import { CSPostHogProvider } from "@/lib/providerPostHog";
 
 const inter =  Nunito({subsets: ["latin"],weight:"400" })
 
@@ -23,6 +23,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  useEffect(()=>{
+      document.title = "Smad by leonel Yimga";
+  },[])
+
   return (
 
     <QueryClientProvider client={queryClient}>
