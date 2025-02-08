@@ -94,8 +94,8 @@ export const setGoodPlan = (productId:number | undefined)=>{
 }
 
 export const planName = {
-  "14days":"FREE TRIAL",
-  "1month":"PER MONTH",
+  "14days":"PER YEAR",
+  "1month":"PER YEAR",
   "1year":"PER YEAR"
 }
 
