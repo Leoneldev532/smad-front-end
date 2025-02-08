@@ -90,7 +90,7 @@ const Page = () => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-4  px-4 w-full md:px-0  md:w-1/2 justify-center items-center">
+          {/* <div className="flex flex-col gap-4  px-4 w-full md:px-0  md:w-1/2 justify-center items-center">
             <h2 className="py-4 text-xl"> Your Billing - Subscriptions </h2>
             <div className="w-full justify-center items-center flex flex-col ">
 
@@ -99,9 +99,9 @@ const Page = () => {
                 <div className='w-1/3 py-3 border md:text-sm text-xs border-neutral-700 flex justify-start items-center px-4'> <b>Amount</b> </div>
                 <div className='w-1/3 py-3 border md:text-sm text-xs border-neutral-700 flex justify-start items-center px-4'> <b>Plan</b> </div>
                 <div className='w-1/3 py-3 border md:text-sm text-xs border-neutral-700 flex justify-start items-center px-4'> <b>Expire date</b> </div>
-              </div>
+              </div> */}
 
-              {getAllUserInfo && getAllUserInfo?.subscriptions?.map((subscription: any, index: number) => (
+              {/* {getAllUserInfo && getAllUserInfo?.subscriptions?.map((subscription: any, index: number) => (
                 <div key={index} className='flex w-full'>
                   <div className='w-1/3 py-3 border md:text-sm text-xs border-neutral-800 flex justify-start items-center px-4'>
                     <span>{dayjs(subscription.billingDate).format("YYYY-MM-DD")}</span>
@@ -116,17 +116,17 @@ const Page = () => {
                     <span>{dayjs(getAllUserInfo?.privateKey?.expiresAt).format("YYYY-MM-DD")}</span>
                   </div>
                 </div>
-              ))}
+              ))} */}
 
 
 
 
 
-            </div>
+            {/* </div> */}
             {/* <span className="opacity-80 italic"> you can make a new subscription here :   <Link href="/pricing" className="underline"> <span> pricing </span></Link> */}
             {/* </span> */}
 
-          </div>
+          {/* </div> */}
 
           {/* {getAllUserInfo?.privateKey?.expiresAt ?
           
