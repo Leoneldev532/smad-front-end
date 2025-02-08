@@ -65,7 +65,7 @@ export async function POST(req:Request) {
           await prisma.privateKey.update({
             where: { userId: userId },
             data: {
-              expiresAt: generateFinalDate(setGoodPlan(body.data?.attributes?.product_id) || "14days").toDate()
+              expiresAt: generateFinalDate("1year").toDate()
             }
           });
 
@@ -114,7 +114,7 @@ export async function POST(req:Request) {
             await prisma.privateKey.update({
               where: { userId: userId },
               data: {
-                expiresAt: generateFinalDate(setGoodPlan(body.data?.attributes?.product_id) || "14days").toDate()
+                expiresAt: generateFinalDate("1year").toDate()
               }
             });
   
