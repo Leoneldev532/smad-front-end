@@ -88,8 +88,9 @@ export const generateFinalDate = (period:"14days"|"1month"|"1year") => {
 // free config
 export const setGoodPlan = (productId:number | undefined)=>{
   if( productId === 421959) return "1year"
-  if( productId === 421960) return "1month"
+  if( productId === 421960) return "1year"
   if( productId === 421961) return "1year"
+  return "1year"
 }
 
 export const planName = {
