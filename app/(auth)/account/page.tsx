@@ -43,7 +43,8 @@ const Page = () => {
         <>
           <div className="flex flex-col justify-center  w-full h-full items-center">
             <div className="bg-white h-24 w-24  rounded-full overflow-hidden flex justify-center items-center">
-              <Image alt={"avatar"} width="300" height="500" className="object-contain h-24 w-24 rounded-full " src={`https://api.dicebear.com/9.x/adventurer-neutral/png?seed=${user?.name}`} />
+              <Image alt={"avatar"} width="300" height="500" className="object-contain h-24 w-24 rounded-full "
+               src={`https://api.dicebear.com/9.x/lorelei/png?seed=${user?.name}`} />
             </div>
             <h2 className='py-2'>Your Account : <b>{user?.name}</b> </h2>
 

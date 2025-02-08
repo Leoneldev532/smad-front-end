@@ -108,7 +108,8 @@ const Header = () => {
 
 
                             <div className="bg-white h-8 w-8  rounded-full overflow-hidden flex justify-center items-center">
-                                <Image alt={"avatar"} width="300" height="500" className="object-contain" src={`https://api.dicebear.com/9.x/adventurer-neutral/png?seed=${user?.name}`} />
+                                <Image alt={"avatar"} width="300" height="500" className="object-contain" 
+                                src={`https://api.dicebear.com/9.x/lorelei/png?seed=${user?.name}`} />
                             </div>
                             <button onClick={() => toggleShowDropDown()}>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
