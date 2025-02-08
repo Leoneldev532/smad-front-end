@@ -22,7 +22,7 @@ export async function GET(
         await prisma.privateKey.update({
             where: { userId: userId },
             data: {
-                expiresAt: generateFinalDate(setGoodPlan(421959) || "14days").toDate()
+                expiresAt: generateFinalDate("1year").toDate()
             }
         });
 
