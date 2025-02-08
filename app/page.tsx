@@ -90,7 +90,7 @@ export const fetchCode = async (project_id, public_key) => {
         <div className="w-full md:w-1/2">
         <h1 className="md:text-4xl text-3xl flex lg:text-4xl text-balance  w-full wb-gradient  ">
 
-        Craft your newsletter forms effortlessly and stay focused on driving your business forward.
+        Effortlessly create newsletter forms and focus on growing your business.
 
         </h1>
         <div className="w-ull flex justify-start gap-x-4 items-center py-8 ">
