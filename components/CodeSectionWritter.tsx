@@ -17,7 +17,7 @@ const CodeHighlightWriter = ({
   }) => {
   const [html, setHtml] = useState<string>('');
   const [isTypingComplete, setIsTypingComplete] = useState(false);
-  const typingDelay = 1;
+  const typingDelay = 0;
 
   useEffect(() => {
     const processCode = async () => {

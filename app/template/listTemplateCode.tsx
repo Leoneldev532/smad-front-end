@@ -27,7 +27,7 @@ type FormValidationState = {
 };
 
 
-const API_URL = "https://smad-back-end.vercel.app/api/email/save";
+const API_URL = "https://smad.leonelyimga.com/api/v1/email/save";
 const CONTENT_TYPE = "application/json";
 
 const getErrorMessage = (axiosError: AxiosError) => axiosError.message || 'An error occurred';

@@ -128,7 +128,7 @@ export const fetchCode = async (project_id, public_key) => {
               <h4 className="text-xs md:text-sm"> Begin by create your account and subscribe a plan </h4>
             </div>
 
-            <Link href="/" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10  hover:bg-neutral-800 transition-all ease duration-400 ">
+            <Link href="/register" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10  hover:bg-neutral-800 transition-all ease duration-400 ">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
                 <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
               </svg>
@@ -150,7 +150,7 @@ export const fetchCode = async (project_id, public_key) => {
               <h4 className="text-xs md:text-sm">  Copy your api private key on page /account and set It as variables environments in your project </h4>
             </div>
 
-            <Link href="/" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10  hover:bg-neutral-800 transition-all ease duration-400 ">
+            <Link href="/account" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10  hover:bg-neutral-800 transition-all ease duration-400 ">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
                 <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
               </svg>
@@ -173,7 +173,7 @@ export const fetchCode = async (project_id, public_key) => {
               <h4 className="text-xs md:text-sm"> create a project in dashboard </h4>
             </div>
 
-            <Link href="/" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10  hover:bg-neutral-800 transition-all ease duration-400 ">
+            <Link href="/dashboard" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10  hover:bg-neutral-800 transition-all ease duration-400 ">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
                 <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
               </svg>
@@ -196,7 +196,7 @@ export const fetchCode = async (project_id, public_key) => {
               <h4 className="text-xs md:text-sm"> Copy id of this project throught horizontal tree points button modal </h4>
             </div>
 
-            <Link href="/" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10 hover:bg-neutral-800 transition-all ease duration-400 ">
+            <Link href="/dashboard" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10 hover:bg-neutral-800 transition-all ease duration-400 ">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
                 <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
               </svg>
@@ -219,7 +219,7 @@ export const fetchCode = async (project_id, public_key) => {
               <h4 className="pr-8 text-xs md:text-sm "> Click the {"'Generate Config'"} header button, select a model template, and copy the configuration. Generation complete</h4>
             </div>
 
-            <Link href="/" target='_blank' className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10 hover:bg-neutral-800 transition-all ease duration-400 ">
+            <Link href="/template" target='_blank' className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10 hover:bg-neutral-800 transition-all ease duration-400 ">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
                 <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
               </svg>
@@ -243,7 +243,7 @@ export const fetchCode = async (project_id, public_key) => {
                 <h4 className="flex text-xs md:text-sm justify-start items-center gap-2"> copy the code and set it in a file like a component  and import it where you want  </h4>
               </div>
             </div>
-            <Link href="/" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10 hover:bg-neutral-800 transition-all ease duration-400 ">
+            <Link href="/template" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10 hover:bg-neutral-800 transition-all ease duration-400 ">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
                 <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
               </svg>
