@@ -15,6 +15,7 @@ import Head from "next/head";
 const inter =  Nunito({subsets: ["latin"],weight:"400" })
 
 
+const queryClient = new QueryClient()
 
 
 export default function RootLayout({
@@ -22,7 +23,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const queryClient = new QueryClient()
   return (
 
     <QueryClientProvider client={queryClient}>
