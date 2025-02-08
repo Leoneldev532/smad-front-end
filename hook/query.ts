@@ -1,48 +1,49 @@
 import { getProducts } from "@/app/lemon";
+import axiosInstance from "@/lib/api.intercept";
 import { Email, Project, User } from "@/lib/type";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 export const getAllProjectOneUserFunc = async (idUser: string | null | undefined): Promise<Project[]> => {
     if (!idUser) throw new Error("Invalid user ID");
-    const response = await axios.get(`./api/users/${idUser}/projects`);
+    const response = await axiosInstance.get(`./api/users/${idUser}/projects`);
     return response.data;
 };
 
 export const getAllEmailsOneProjectFunc = async (idUser: string | null | undefined, idProject: string): Promise<Email[]> => {
     if (!idUser || !idProject) throw new Error("Invalid user ID or project ID");
-    const response = await axios.get(`./api/users/${idUser}/projects/${idProject}/emails`);
+    const response = await axiosInstance.get(`./api/users/${idUser}/projects/${idProject}/emails`);
     return response.data;
 };
 
 export const getAllUserInfo = async (idUser: string | null | undefined): Promise<User> => {
     if (!idUser) throw new Error("Invalid user ID");
-    const response = await axios.get(`./api/users/${idUser}`);
+    const response = await axiosInstance.get(`./api/users/${idUser}`);
     return response.data;
 };
 
 export const getAllUserTrial_planFunc = async (idUser: string | null | undefined): Promise<{ trial_is_finished: boolean }> => {
     if (!idUser) throw new Error("Invalid user ID");
-    const response = await axios.get(`./api/users/${idUser}/trialplan`);
+    const response = await axiosInstance.get(`./api/users/${idUser}/trialplan`);
     return response.data;
 };
 
 export const deleteProject = async (idUser: string | null | undefined, idProject: string): Promise<Email[]> => {
     if (!idUser || !idProject) throw new Error("Invalid user ID or project ID");
-    const response = await axios.delete(`./api/users/${idUser}/projects/${idProject}/delete`);
+    const response = await axiosInstance.delete(`./api/users/${idUser}/projects/${idProject}/delete`);
     return response.data;
 };
 
 export const deleteEmail = async (idUser: string | null | undefined, idProject: string, idEmail: string): Promise<Email[]> => {
     if (!idUser || !idProject || !idEmail) throw new Error("Invalid user ID, project ID, or email ID");
-    const response = await axios.delete(`./api/users/${idUser}/projects/${idProject}/emails/${idEmail}/delete`);
+    const response = await axiosInstance.delete(`./api/users/${idUser}/projects/${idProject}/emails/${idEmail}/delete`);
     return response.data;
 };
 
 export const updateEmail = async (idUser: string | null | undefined, idProject: string, idEmail: string, newValue: string): Promise<Email[]> => {
     if (!idUser || !idProject || !idEmail || !newValue) throw new Error("Invalid parameters");
     console.log(newValue);
-    const response = await axios.put(`./api/users/${idUser}/projects/${idProject}/emails/${idEmail}/update`, {
+    const response = await axiosInstance.put(`./api/users/${idUser}/projects/${idProject}/emails/${idEmail}/update`, {
         newEmail: newValue
     });
     return response.data;
@@ -50,7 +51,7 @@ export const updateEmail = async (idUser: string | null | undefined, idProject: 
 
 export const createProject = async (idUser: string | null | undefined, nameProject: string) => {
     if (!idUser || !nameProject) throw new Error("Invalid user ID or project name");
-    const response = await axios.post(`./api/users/${idUser}/projects`, {
+    const response = await axiosInstance.post(`./api/users/${idUser}/projects`, {
         name: nameProject
     });
     return response.data;
@@ -58,7 +59,7 @@ export const createProject = async (idUser: string | null | undefined, nameProje
 
 export const updateProject = async (idUser: string | null | undefined, idProject: string, newNameProject: string) => {
     if (!idUser || !idProject || !newNameProject) throw new Error("Invalid parameters");
-    const response = await axios.put(`./api/users/${idUser}/projects/${idProject}/update`, {
+    const response = await axiosInstance.put(`./api/users/${idUser}/projects/${idProject}/update`, {
         name: newNameProject
     });
     return response.data;
@@ -66,7 +67,7 @@ export const updateProject = async (idUser: string | null | undefined, idProject
 
 export const addEmailAddress = async (idUser: string | null | undefined, idProject: string, nameEmail: string) => {
     if (!idUser || !idProject || !nameEmail) throw new Error("Invalid parameters");
-    const response = await axios.post(`./api/users/${idUser}/projects/${idProject}/emails`, {
+    const response = await axiosInstance.post(`./api/users/${idUser}/projects/${idProject}/emails`, {
         email: nameEmail
     });
     return response.data;
@@ -101,13 +102,13 @@ export const useGetAllProjectsOfOneUser = (userId: string | null | undefined) =>
 
 export const getprivateKeyUser = async (idUser: string | null | undefined): Promise<{ privateKey: string, expiresAt: string }> => {
     if (!idUser) throw new Error("Invalid user ID");
-    const response = await axios.get(`./api/users/${idUser}/privateKey`);
+    const response = await axiosInstance.get(`./api/users/${idUser}/privateKey`);
     return response.data;
 };
 
 export const setSubscriptionTrial = async (idUser: string | null | undefined) => {
     // if (!idUser) throw new Error("Invalid user ID");
-    const response = await axios.put(`./api/users/${idUser}/trialplan/update`, {});
+    const response = await axiosInstance.put(`./api/users/${idUser}/trialplan/update`, {});
     return response.data;
 };
 
