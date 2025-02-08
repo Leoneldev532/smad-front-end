@@ -113,7 +113,6 @@ export const setSubscriptionTrial = async (idUser: string | null | undefined) =>
 };
 
 export const useGetprivateKeyOfOneUser = (userId: string | null | undefined) => {
- 
     return useQuery({
         queryKey: ["privateKeyOfOneUser", userId],
         queryFn: () => getprivateKeyUser(userId),
