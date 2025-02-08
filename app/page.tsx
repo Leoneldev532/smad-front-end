@@ -87,13 +87,13 @@ export const fetchCode = async (project_id, public_key) => {
         {/* <Image  src={image2} className="object-contain h-36" alt="hero section image" /> */}
         
         </div>
-        <div className="w-full md:w-1/2">
+        <div className="w-full md:w-8/12">
         <h1 className="md:text-4xl text-3xl flex lg:text-4xl text-balance  w-full wb-gradient  ">
 
         Effortlessly create newsletter forms and focus on growing your business.
 
         </h1>
-        <div className="w-ull flex justify-start gap-x-4 items-center py-8 ">
+        <div className="w-full flex justify-start gap-x-4 items-center py-8 ">
           <Link href="/login"><Button variant="default" className="rounded-full px-16  bx-shabtn py-2"> start now  </Button></Link>
           {/* <Link href="/"><Button variant="secondary" className="rounded-full px-8 py-2"> video Guides   </Button></Link> */}
 
