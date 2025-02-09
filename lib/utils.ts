@@ -58,6 +58,8 @@ export const  generateprivateKey = (email: string): string => {
 
 import dayjs, { Dayjs } from 'dayjs';
 import { User, UserSession } from "./type"
+import { componentStructure } from "@/app/template/mainGenerateCodeFunc"
+import { logicEmailSubmition, logicImportString, TabTemplateCode } from "@/app/template/listTemplateCode"
 
 export const isDatePassed = (inputDate:Dayjs) => {
     // Convertir la date d'entrée en objet Day.js
@@ -125,4 +127,11 @@ export const checkCurrentPlan= (productName:string,planName:string)=>{
     return false
   }
 }
+
+
+
+export const finalCode  = (ui:string) =>{
+  return componentStructure("formRegisterEmail", logicImportString, logicEmailSubmition, ui)
+  
+} 
 

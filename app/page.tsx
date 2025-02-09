@@ -3,90 +3,21 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import line from "@/public/line.svg"
-import { useRef, useState } from "react";
-import CodeHighlight from "@/components/CodeSection";
-import Script from "next/script";
-import CodeHighlightWritter from "@/components/CodeSectionWritter";
+import {  useState } from "react";
 import  image1 from "@/public/list mail.png"
 import  formImage from "@/public/form.png"
 export default function Home() {
 
   const [tabSelectId, setTabSelectId] = useState<number>(1)
 
-  const switcherTab = (id: number) => {
-    setTabSelectId(id)
-  }
-
-
-  const axiosCode = `
-export const axiosCode = async (project_id, public_key) => {
-    try {
-        const response = await
-         axios.post("https://smad-back-end.vercel.app/api/email/save",
-        {
-            email: "leoel@gmail.com",
-            project_id,
-            public_key
-        }, {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-
-        console.log(response.data);
-    } catch (error) {
-        console.error('Axios error:', error);
-    }
-};
-`;
-
-
-
-  const fetchCode = `
-export const fetchCode = async (project_id, public_key) => {
-    try {
-        const response = await fetch("https://smad-back-end.vercel.app/api/email/save",
-         {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email: "leoel@gmail.com",
-                project_id,
-                public_key
-            })
-        });
-
-        const data = await response.json();
-        console.log(data);
-    } catch (error) {
-        console.error('Fetch error:', error);
-    }
-};
-`;
-
-
-  const [isCodeCopy, setIsCodeCopy] = useState(false)
-
-  const handleCopyCode = () => {
-    setIsCodeCopy(true)
-    navigator.clipboard?.writeText(tabSelectId === 1 ? fetchCode : axiosCode)
-    setTimeout(() => {
-      setIsCodeCopy(false)
-    }, 1000)
-  }
+ 
 
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between lg:px-24 px-8 py-4  ">
 
       <div className="flex flex-col-reverse md:flex-row  w-full pt-10  md:pb-14  relative   justify-center items-center">
-        <div className="absolute w-full -top-[30%]  ">
-        {/* <Image  src={image2} className="object-contain h-36" alt="hero section image" /> */}
-        
-        </div>
+       
         <div className="w-full md:w-8/12">
         <h1 className="md:text-4xl text-3xl flex lg:text-4xl text-balance  w-full wb-gradient  ">
 
@@ -95,13 +26,11 @@ export const fetchCode = async (project_id, public_key) => {
         </h1>
         <div className="w-full flex justify-start gap-x-4 items-center py-8 ">
           <Link href="/login"><Button variant="default" className="rounded-full px-16  bx-shabtn py-2"> start now  </Button></Link>
-          {/* <Link href="/"><Button variant="secondary" className="rounded-full px-8 py-2"> video Guides   </Button></Link> */}
 
         </div>
         </div>
         <div className="w-full md:w-1/2 px-8  md:px-10 flex justify-center items-center">
         <Image  src={image1} className="object-contain " alt="hero section image" />
-        {/* <Image  src={envelop} className="object-contain " alt="hero section image" /> */}
         </div>
        
       </div>
@@ -116,8 +45,153 @@ export const fetchCode = async (project_id, public_key) => {
 
       </div>
 
-      <section className="flex my-4 border relative lv line overflow-hidden border-neutral-700 rounded-xl flex-col gap-y-1 w-full ">
-        <div className="lv  absolute left-0 "> </div>
+      <div className="md:hidden w-full flex flex-col mt-3 gap-y-4">
+
+      <div className="w-full  bg-neutral-700/50 rounded-xl  overflow-auto">
+
+<div className="w-full  pl-4 pr-2 py-2 flex gap-x-4  justify-between items-start">
+
+  <div className="flex justify-start gap-x-4 items-center">
+    <div className="size-4 sm:size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">1</div>
+    <h4 className="text-sm"> Begin by create your account and subscribe a plan </h4>
+  </div>
+
+  <Link href="/register" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-8 min-w-8  hover:bg-neutral-800 transition-all ease duration-400 ">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+    </svg>
+
+  </Link>
+
+
+
+</div>
+
+     </div>
+
+
+     <div className="w-full rounded-xl flex justify-start items-start border border-neutral-700/50  overflow-auto">
+
+<div className="w-full  pl-4 pr-2 py-2 flex gap-x-4  justify-between items-start">
+
+  <div className="flex justify-start gap-x-4 items-center">
+    <div className="size-4 sm:size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">2</div>
+    <h4 className="text-sm">  Copy your api private key on page /account and set It as variables environments in your project </h4>
+  </div>
+
+  <Link href="/account" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-8 min-w-8 
+   hover:bg-neutral-800 transition-all ease duration-400 ">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+    </svg>
+
+  </Link>
+
+
+
+</div>
+
+    </div>
+
+
+    <div className="w-full border rounded-xl border-neutral-700/50  overflow-auto">
+
+<div className="w-full  pl-4 pr-2 py-2 flex gap-x-4  justify-between items-start">
+
+  <div className="flex justify-s bg-neutral-700t art gap-x-4 items-center">
+    <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">3</div>
+    <h4 className="text-sm"> create a project in dashboard </h4>
+  </div>
+
+  <Link href="/dashboard" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-8 min-w-8  hover:bg-neutral-800 transition-all ease duration-400 ">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+    </svg>
+
+  </Link>
+
+
+
+</div>
+
+    </div>
+
+
+    <div className="w-full rounded-xl border border-neutral-700/50  overflow-auto">
+
+<div className="w-full  pl-4 pr-2 py-2 flex gap-x-4  justify-between items-start">
+
+  <div className="flex justify-s bg-neutral-700t art gap-x-4 items-center">
+    <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">4</div>
+    <h4 className="text-sm"> Copy id of this project throught horizontal tree points button modal </h4>
+  </div>
+
+  <Link href="/dashboard" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-8 min-w-8 hover:bg-neutral-800 transition-all ease duration-400 ">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+    </svg>
+
+  </Link>
+
+
+
+</div>
+
+      </div>
+
+
+      <div className="w-full  rounded-xl border border-neutral-700/50 overflow-auto">
+
+<div className="w-full  pl-4 pr-2 py-2 flex gap-x-4  justify-between items-start">
+
+  <div className="flex justify-s bg-neutral-700t art gap-x-4 items-center">
+    <div className="size-4  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">5</div>
+    <h4 className="pr-8 text-sm "> Click the {"'Generate Config'"} header button, select a model template, and copy the configuration. Generation complete</h4>
+  </div>
+
+  <Link href="/template" target='_blank' className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-8 min-w-8 hover:bg-neutral-800 transition-all ease duration-400 ">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+    </svg>
+
+  </Link>
+
+
+
+</div>
+
+</div>
+
+
+<div className="w-full rounded-xl border border-neutral-700/50 overflow-auto">
+
+<div className="w-full   pl-4 pr-2 py-2 flex gap-x-4  justify-between items-start">
+
+  <div className="flex justify-start    gap-x-4 items-center">
+    <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">6</div>
+    <div className="flex">
+      <h4 className="flex text-sm justify-start items-center gap-2"> copy the code and set it in a file like a component  and import it where you want  </h4>
+    </div>
+  </div>
+  <Link href="/template" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-8 min-w-8 hover:bg-neutral-800 transition-all ease duration-400 ">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+    </svg>
+
+  </Link>
+
+
+
+</div>
+
+</div>
+
+        
+
+      </div>
+
+      <section className="hidden md:flex my-4 border relative lv line overflow-hidden border-neutral-700 rounded-xl flex-col gap-y-1 w-full ">
+        
         <div className="w-full  bg-neutral-700/50  overflow-auto">
 
           <div className="w-full  pl-4 pr-2 py-2 flex gap-x-4  justify-between items-center">
@@ -191,7 +265,7 @@ export const fetchCode = async (project_id, public_key) => {
           <div className="w-full  pl-4 pr-2 py-2 flex gap-x-4  justify-between items-center">
 
             <div className="flex justify-s bg-neutral-700t art gap-x-4 items-center">
-              <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">5</div>
+              <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">4</div>
               <h4 className="text-xs md:text-sm"> Copy id of this project throught horizontal tree points button modal </h4>
             </div>
 
@@ -214,7 +288,7 @@ export const fetchCode = async (project_id, public_key) => {
           <div className="w-full  pl-4 pr-2 py-2 flex gap-x-4  justify-between items-center">
 
             <div className="flex justify-s bg-neutral-700t art gap-x-4 items-center">
-              <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">6</div>
+              <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">5</div>
               <h4 className="pr-8 text-xs md:text-sm "> Click the {"'Generate Config'"} header button, select a model template, and copy the configuration. Generation complete</h4>
             </div>
 
@@ -237,7 +311,7 @@ export const fetchCode = async (project_id, public_key) => {
           <div className="w-full   pl-4 pr-2 py-2 flex gap-x-4  justify-between items-center">
 
             <div className="flex justify-start    gap-x-4 items-center">
-              <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">7</div>
+              <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">6</div>
               <div className="flex">
                 <h4 className="flex text-xs md:text-sm justify-start items-center gap-2"> copy the code and set it in a file like a component  and import it where you want  </h4>
               </div>

@@ -2,7 +2,7 @@
 //@ts-nocheck
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
-const FormRegisterEmail = ()=> {
+const FormRegisterEmail1 = ()=> {
 
 type ValidationRules = {
     [key: string]: (value: any) => string | null;
@@ -56,9 +56,9 @@ const useEmailForm = (project_id: string, private_key: string, customValidationR
 
     const validate = () => {
         const validationErrors: Record<string, string> = {};
-        Object.keys(validationRules).forEach((email:string) => {
-            const rule = validationRules[email];
-            const error = rule(data[email] as string);
+        Object.keys(validationRules).forEach((key:string) => {
+            const rule = validationRules[key];
+            const error = rule(data[key] as string);
             if (error) {
                 validationErrors[key] = error;
             }
@@ -173,8 +173,8 @@ const useEmailForm = (project_id: string, private_key: string, customValidationR
                     )}
                 </button>
             </form>
-            {errors.email && <p className="text-red-500 mt-2">{errors.email}</p>}
+            {errors.email && <p className="text-red-500 mt-2 w-full text-center">{errors.email}</p>}
         </section>)
         
  }
- export default FormRegisterEmail
+ export default FormRegisterEmail1

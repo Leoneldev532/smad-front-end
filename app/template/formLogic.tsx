@@ -37,9 +37,9 @@ const defaultValidationRules: ValidationRules = {
     email: (email) => {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         if (!email) {
-            return 'L\'adresse email est requise';
+            return 'Email address is required';
         } else if (!emailRegex.test(email)) {
-            return 'L\'adresse email doit être valide';
+            return 'Email address must be valid';
         }
         return null;
     },

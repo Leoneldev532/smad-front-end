@@ -80,14 +80,14 @@ const Header = () => {
     return (
         <div className="flex justify-between items-center  md:px-0 px-6  pb-4 w-full min-h-8">
 
-            <Link href="/" className='w-[200px] md:w-1/2 outline-none' tabIndex={-1}>
-                <div className="flex text-md w-1/2   md:w-1/2 overflow-hidden gap-x-2 justify-start items-center h-full ">
+            <Link href="/" className=' w-1/3 md:w-1/2 outline-none' tabIndex={-1}>
+                <div className="flex  md:text-md w-1/2  md:w-1/2 overflow-hidden gap-x-2 justify-start items-center h-full ">
                     <Image src={logo} className="object-contain h-8 w-8" alt="logo" />
-                    <span> Smad </span>
+                    <span className="sm:block hidden"> Smad </span>
                 </div>
             </Link>
 
-            <div className="flex gap-x-2 justify-end items-center  w-1/2   md:w-8/12">
+            <div className="flex gap-x-2 justify-end items-center  w-full    md:w-8/12">
                 <Link href="/template" className="hidden md:block">
 
                     <button className="px-4 py-1 group  text-xs md:text-sm gap-x-4  border border-neutral-700 line1  hover:bg-neutral-600 relative overflow-hidden flex justify-center items-center rounded-lg text-center">

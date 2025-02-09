@@ -1,4 +1,5 @@
 import { StaticImageData } from "next/image";
+import { ReactNode } from "react";
 
 
 export  type Email = {
@@ -48,11 +49,10 @@ export  type User = {
 
 
   
-  export type selectOptionType = {
+  export type templateCardType = {
     id?:number,
-    image:StaticImageData;
-    isSelected?:boolean,
-    onClick?:()=>void
+    name?:string,
+    form?:ReactNode
   }
 
   export type  projectItemMobileType = {
