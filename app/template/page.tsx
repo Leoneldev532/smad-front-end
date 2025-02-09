@@ -33,9 +33,6 @@ const Page = () => {
     ]
 
 
-
-
-
     return (
         <main className="flex min-h-screen flex-col w-full py-5 items-start justify-between ">
             <div className="flex w-full  flex-col px-8  lg:px-0 relative   justify-start items-start">

@@ -25,7 +25,7 @@ const TemplateCard = (templateCardProps: templateCardType) => {
       border  bg-neutral-700/30  flex-col line flex justify-around  border-neutral-500/40 items-center min-h-72 overflow-hidden relative w-full`}
     >
 
-     <div className='w-full flex justify-center items-center'>{templateCardProps?.form}</div>
+     <div className='w-full flex justify-center items-center md:px-0 px-4'>{templateCardProps?.form}</div>
       
      <div className='flex justify-end items-end w-full px-6 '>
       <button  onClick={() => handleCopyCode()} className='border cursor-pointer   flex gap-x-2 mt-8 hover:bg-neutral-900 transition-colors 
