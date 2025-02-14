@@ -70,7 +70,7 @@ useEffect(()=>{
   if(user){
     router.push("/dashboard")
   }
-},[user])
+},[user,router])
 
   return (
     <div className="flex gap-x-3 w-full h-full justify-center min-h-screen  items-start py-8">
