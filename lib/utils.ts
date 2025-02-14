@@ -4,6 +4,8 @@ import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { useEffect, useMemo } from "react"
 import { twMerge } from "tailwind-merge"
+import bcrypt from 'bcryptjs'
+
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -135,3 +137,29 @@ export const finalCode  = (ui:string) =>{
   
 } 
 
+
+export  const hashData = async(data:string)=> {
+  const saltRounds = 10; 
+  try {
+    // Générer un sel et hacher la donnée
+    const salt = await bcrypt.genSalt(saltRounds);
+    const hashedData = await bcrypt.hash(data, salt);
+    return hashedData;
+  } catch (error) {
+    console.error('Erreur lors du hachage :', error);
+    throw error;
+  }
+}
+
+
+
+export const verifyData = async (inputData:string, hashedData:string) => {
+  try {
+    // Comparer la donnée d'entrée avec la donnée hachée
+    const match = await bcrypt.compare(inputData, hashedData);
+    return match;
+  } catch (error) {
+    console.error('Erreur lors de la vérification :', error);
+    throw error;
+  }
+};

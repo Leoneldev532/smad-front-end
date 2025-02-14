@@ -41,7 +41,7 @@ model User {
   sessions          Session[]
   password          String?
   emailVerified     DateTime?    @map("email_verified")
-  
+  resendApiKey      String?     @unique
   privateKey        privateKey? 
   trial_is_finished  Boolean @default(false)
   subscriptions     Subscription[]

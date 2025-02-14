@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev ",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -52,6 +52,7 @@
     "rehype": "^13.0.2",
     "rehype-code-titles": "^1.2.0",
     "rehype-pretty-code": "^0.14.0",
+    "resend": "^4.1.2",
     "shiki": "^1.26.1",
     "sonner": "^1.7.1",
     "stream": "^0.0.3",

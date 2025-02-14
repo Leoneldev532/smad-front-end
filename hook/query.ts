@@ -106,10 +106,48 @@ export const getprivateKeyUser = async (idUser: string | null | undefined): Prom
     return response.data;
 };
 
+
+export const getResendApiKey = async (idUser: string | null | undefined): Promise<{ resendApiKey: string}> => {
+    if (!idUser) throw new Error("Invalid user ID");
+    const response = await axiosInstance.get(`./api/users/${idUser}/resend`);
+    return response.data;
+};
+
 export const setSubscriptionTrial = async (idUser: string | null | undefined) => {
     // if (!idUser) throw new Error("Invalid user ID");
     const response = await axiosInstance.put(`./api/users/${idUser}/trialplan/update`, {});
     return response.data;
+};
+
+
+
+export const setResendApiKey = async (idUser: string | null | undefined,resendApiKey:string| null | undefined) => {
+    const response = await axiosInstance.post(`./api/users/${idUser}/resend/`, {
+        resendApiKey
+    });
+    return response.data;
+};
+
+
+
+export const GetAllAudienceOfUser = async (resendApiKey: string) => {
+    console.log(resendApiKey, "-----000");
+    try {
+        const response = await axios.get(
+            'https://api.resend.com/audiences',
+            {
+                params:null, 
+                headers: {
+                    Authorization: `Bearer ${resendApiKey}`,
+                    "Content-Type": "application/json"
+                }
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching audiences:', error);
+        throw error;
+    }
 };
 
 export const useGetprivateKeyOfOneUser = (userId: string | null | undefined) => {
@@ -156,3 +194,36 @@ export const useGetAllUserInfo = (userId: string | null | undefined) => {
         enabled: !!userId 
     });
 };
+
+
+export const useGetResendUser = (userId: string | null | undefined) => {
+    return useQuery({
+        queryKey: ["resendApiKey", userId],
+        queryFn: () => getResendApiKey(userId),
+        gcTime: 5 * 60 * 1000, 
+        staleTime: Infinity, 
+        refetchOnWindowFocus: false, 
+        refetchInterval: false, 
+        retry: 3,
+        enabled: !!userId 
+    });
+};
+
+
+
+export const useGetResendUserAudience = (resendApiKey: string | null | undefined) => {
+    console.log(resendApiKey,"lll")
+    return useQuery({
+        queryKey: ["resendApiKeyAudience"],
+        queryFn: () => GetAllAudienceOfUser(resendApiKey || " "),
+        gcTime: 5 * 60 * 1000, 
+        staleTime: Infinity, 
+        refetchOnWindowFocus: false, 
+        refetchInterval: false, 
+        retry: 3,
+        enabled: !!resendApiKey 
+    });
+};
+
+
+

@@ -158,7 +158,7 @@ h1,h2,h3,h4,h5,h6,p{
   width:214px;
   left:0;
   top:99.45%;
-  background-image:-webkit-linear-gradient(45deg, transparent,white 20%,transparent)
+  background-image: red;
 }
 
 
@@ -169,7 +169,8 @@ h1,h2,h3,h4,h5,h6,p{
   width:214px;
   left:78%;
   top:0%;
-  background-image:-webkit-linear-gradient(45deg, transparent,white 20%,transparent 40%)
+ 
+  background-image: red;
 }
 
 .lv::after{
@@ -196,7 +197,8 @@ h1,h2,h3,h4,h5,h6,p{
   width:214px;
   left:0%;
   top:99%;
-  background-image:-webkit-linear-gradient(45deg, transparent,white 20%,transparent 40%);
+ 
+  background-image: red;;
 }
 
 .wb-gradient{
@@ -261,7 +263,8 @@ pre{
   width:214px;
   left:78%;
   top:80%;
-  background-image:-webkit-linear-gradient(45deg, transparent,white 20%,transparent 40%)
+ 
+  background-image: red;
 } */
 
 pre {

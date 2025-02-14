@@ -1,6 +1,7 @@
 // authSetup.ts
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
+import GitHubProvider from 'next-auth/providers/github';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { compare } from 'bcryptjs';
 
@@ -24,7 +25,7 @@ export const authOptions: NextAuthOptions = {
           access_type: "offline",
           response_type: "code"
         }
-        
+
       },
       profile(profile) {
         return {
@@ -33,7 +34,28 @@ export const authOptions: NextAuthOptions = {
           email: profile.email,
         };
       },
-   }),
+    }),
+    GitHubProvider({
+      clientId: process.env.GITHUB_ID!,
+      clientSecret: process.env.GITHUB_SECRET!,
+      allowDangerousEmailAccountLinking: true,
+      httpOptions: { timeout: 6000000, agent: false },
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code"
+        }
+
+      },
+      profile(profile) {
+        return {
+          id: profile.id,
+          name: profile.name,
+          email: profile.email,
+        };
+      },
+    }),
     CredentialsProvider({
       name: 'Sign in',
       id: 'credentials',
@@ -73,9 +95,11 @@ export const authOptions: NextAuthOptions = {
   
   callbacks: {   
     async signIn({ user, account }) {
+
+      console.log(user,"-----")
       // Vérifiez si l'utilisateur existe déjà dans la base de données
       const existingUser = await prisma.user.findUnique({
-        where: { email: user?.email  || " " },
+        where: { email: user?.email  || " "  },
       });
   
       // console.log(process.env.NEXTAUTH_URL,process.env.GOOGLE_CLIENT_ID,process.env.GOOGLE_CLIENT_SECRET)

@@ -121,8 +121,10 @@ import Loader from './Loader'
       </AlertDialogDescription>
     </AlertDialogHeader>
     <AlertDialogFooter>
+      
       <Button onClick={()=>handleCloseDialogDelete()}>Cancel</Button>
       <ButtonValidation title={"confirm"}  isLoading={mutationDeleteProject.isPending} typeButton="button" type='negative' onClick={()=>handleDelete(project?.id)} />
+
     </AlertDialogFooter>
   </AlertDialogContent>
 </AlertDialog>

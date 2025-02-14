@@ -146,7 +146,7 @@ export default function Home() {
 
   <div className="flex justify-s bg-neutral-700t art gap-x-4 items-center">
     <div className="size-4  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">5</div>
-    <h4 className="pr-8 text-sm "> Click the {"'Generate Config'"} header button, select a model template, and copy the configuration. Generation complete</h4>
+    <h4 className="pr-8 text-sm "> Click the {"'Get Config'"} header button, select a model template, and copy the configuration. Generation complete</h4>
   </div>
 
   <Link href="/template" target='_blank' className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-8 min-w-8 hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -289,7 +289,7 @@ export default function Home() {
 
             <div className="flex justify-s bg-neutral-700t art gap-x-4 items-center">
               <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">5</div>
-              <h4 className="pr-8 text-xs md:text-sm "> Click the {"'Generate Config'"} header button, select a model template, and copy the configuration. Generation complete</h4>
+              <h4 className="pr-8 text-xs md:text-sm "> Click the {"'Get Config'"} header button, Choose your template form and copy the code</h4>
             </div>
 
             <Link href="/template" target='_blank' className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10 hover:bg-neutral-800 transition-all ease duration-400 ">

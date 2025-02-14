@@ -16,7 +16,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 
-import { addEmailAddress, createProject, useGetAllEmailsOneProject, useGetAllProjectsOfOneUser, useGetAllUserInfo } from "@/hook/query"
+import { addEmailAddress, createProject, setResendApiKey, useGetAllEmailsOneProject, useGetAllProjectsOfOneUser, useGetAllUserInfo, useGetResendUser, useGetResendUserAudience } from "@/hook/query"
 import { Email, Project } from "@/lib/type"
 import  { isDatePassed, useGetUserInfo}  from "@/lib/utils"
 import { ChangeEvent, FormEvent, useEffect, useState } from "react"
@@ -40,10 +40,14 @@ import ButtonValidation from "@/components/ButtonValidation"
 import NoData from "@/components/NoData"
 import Message from "@/components/Message"
 import Link from "next/link"
-import dayjs from "dayjs"
+import dayjs, { Dayjs } from "dayjs"
 import ProjectItemMobile from "@/components/ui/ProjectItemMobile"
 import { useRecoilValue } from "recoil"
 import {  userInfoState } from "@/lib/atom"
+import { Resend } from 'resend';
+import { ResendServerComponent } from "@/components/resendData"
+
+
 export default   function Page() {
 
   const user = useRecoilValue(userInfoState);
@@ -60,6 +64,9 @@ export default   function Page() {
   const {data:allEmailsOneProject,isLoading:allEmailsOneProjectLoading,isError:allEmailsOneProjectError,refetch:allEmailsOneProjectRefetch} =
    useGetAllEmailsOneProject(user?.id,idProjectActive )
 
+
+   
+  const {data:resendApiKeydata,isLoading:resendApiKeyLoading,isError:resendApiKeyError,refetch:resendApiKeyRefetch} = useGetResendUser(user?.id)
 
 
 
@@ -84,6 +91,7 @@ export default   function Page() {
 
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [currentIdProject,setCurrentIdProject]= useState<string>("")
+
   const handleTabClick = (index:number,idProject:string,nameProject:string) => {
     setActiveTabIndex(index);
     setCurrentIdProject(idProject)
@@ -171,12 +179,107 @@ export default   function Page() {
     setIsOpenCreateProject(false)
   }
 
+  const GetCorrectFormOfTabCsvData = (data:Email[]) => {
+    const newTab  = data.map((item: Email, index: number) => {
+      if (typeof item === 'object' && item !== null && 'email' in item) {
+        return {
+          email: item.email
+        };
+      } else {
+        console.warn(`Element invalide trouvé à l'index ${index}:`, item);
+        return {
+          email: 'N/A' 
+        };
+      }
+    });
+    return newTab as Email[];
+  };
+
+  const convertToCSV = (objArray:Email[]) => {
+    const array = typeof objArray !== 'object' ? JSON.parse(objArray) : objArray;
+    let str = '';
+
+    for (let i = 0; i < array.length; i++) {
+      let line = '';
+      for (let index in array[i]) {
+        if (line !== '') line += ',';
+
+        line += array[i][index];
+      }
+      str += line + '\r\n';
+    }
+    return str;
+  };
+
+
+  const downloadCSV = (data:Email[],fileName:string) => {
+    const csvData = new Blob([convertToCSV(GetCorrectFormOfTabCsvData(data))], { type: 'text/csv' });
+    const csvURL = URL.createObjectURL(csvData);
+    const link = document.createElement('a');
+    link.href = csvURL;
+    link.download = `${fileName}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+
 
   const handleSetProjectName = (e:ChangeEvent<HTMLInputElement>)=>{
     setProjectName(e.target.value)
   }
 
 
+  const [isOpenExportModal,setIsOpenExportModal] = useState(false)
+
+  const handleOpenExportModal = ()=>{
+    setIsOpenExportModal(true)
+  }
+
+
+const [resendApiKeyState,setResendApiKeyState] = useState<string | null>(resendApiKeydata?.resendApiKey || " ")
+
+
+  useEffect(()=>{
+    setResendApiKeyState(resendApiKeydata?.resendApiKey || " " ) 
+  },[resendApiKeydata])
+
+
+const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(false)
+
+  const handleShowInputResendApiKey =(e:any)=>{
+    e.preventDefault()
+    if(isOpenFormResendApiKey){
+      if(resendApiKeyState?.length === 0){
+        toast.error("Veuillez remplir ce champ")
+      }else{
+        
+        mutationAddResendApiKey.mutate()
+      }
+    }else{
+      setisOpenFormResendApiKey(true)
+    }
+  }
+
+
+
+
+  
+
+  
+  const mutationAddResendApiKey = useMutation({
+    mutationFn: () => setResendApiKey(user?.id,resendApiKeyState), 
+    onSuccess: () => {
+      toast.success("operation d'ajout reuissie")
+      setisOpenFormResendApiKey(false)
+      handleCloseModalExport()
+    },
+    onError:(error)=>{
+      setisOpenFormResendApiKey(true)
+      toast.error("Une erreur est survenue" + error)
+    }
+    
+  });
 
 
   const mutationAddProject = useMutation({
@@ -224,10 +327,18 @@ export default   function Page() {
 
   const [emailAddress,setEmailAddress] = useState("")
 
+ 
+
+  const handleCloseModalExport = () =>{
+    setIsOpenExportModal(false)
+  }
+
+
   const handleSetEmailAddress = (e:ChangeEvent<HTMLInputElement>) =>{
     setEmailAddress(e.target.value)
   }
 
+ 
 
   
 
@@ -257,6 +368,50 @@ export default   function Page() {
 </AlertDialog>
 
 
+<AlertDialog   open={isOpenExportModal}>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle className="">Exporter les adresses mails du projet {nameProjectActive}  </AlertDialogTitle>
+      </AlertDialogHeader>
+
+      <ul className="flex flex-col gap-y-2">
+        <li><button className="px-4 py-2 w-full group  text-xs md:text-sm gap-x-4  border border-neutral-700 line1 
+         hover:bg-neutral-600 relative  flex justify-center items-center rounded-lg text-center" onClick={()=>  downloadCSV(filterTabEmails || [],`${nameProjectActive}-${dayjs()}`)}> Exporter en CSV </button></li>
+        
+          {<form className="w-full flex flex-col p-2 rounded-lg gap-y-2  border border-neutral-600/40 mt-8">
+          <span className="text-sm py-1 "> Your Api Key :  </span>
+          <div className="flex gap-x-2">
+          <input  type="password" value={resendApiKeyState || ""} onChange={(e)=>setResendApiKeyState(e.target.value)}
+                     className="px-3 appearance-none py-2 w-10/12 bg-neutral-700/50 border-2 border-neutral-700 text-white rounded-md"
+                      placeholder="resend Key..." />
+
+                      <button  type="submit" className="px-4 w-2/12 py-2  overflow-hidden group  text-xs md:text-sm gap-x-4  border border-neutral-700 line1 
+         hover:bg-neutral-600 relative  flex justify-center items-center rounded-lg text-center" 
+         onClick={(e)=> handleShowInputResendApiKey(e)}> 
+         {mutationAddResendApiKey.isPending ? <><Loader/></>  : <span>Save</span>}
+            </button>
+
+                      </div>
+            <li>
+          <button  type="button" className="px-4 py-2 w-full group  text-xs md:text-sm gap-x-4  border border-neutral-700 line1 
+         hover:bg-neutral-600 relative  flex justify-center items-center rounded-lg text-center" 
+        //  onClick={(e)=> handleShowInputResendApiKey(e)}
+         > 
+         {mutationAddResendApiKey.isPending ? <><span>En cours</span><Loader/></>  : <span>Exporter en Contact Resend</span>}
+            </button></li>               
+          </form>
+          }
+       
+        
+      </ul>
+
+      <div className="w-full flex justify-end items-center">
+           <Button onClick={()=>handleCloseModalExport()}>Cancel</Button>
+      </div>    
+    
+  </AlertDialogContent>
+</AlertDialog>
+
    
    <AlertDialog open={isOpenAddEmailDialog}>
   <AlertDialogContent>
@@ -282,8 +437,7 @@ export default   function Page() {
 </AlertDialog>
    
    
-{allProjectsOneUser?.length === 0 ?  
-
+{allProjectsOneUser?.length === 0 ? 
     <div className="w-full    px-0 py-3 gap-2 text-balance flex overflow-auto flex-col min-h-72 justify-center items-center">
       <div className="flex flex-col gap-y-4 justify-center items-center max-w-sm  text-center ">
       <h2 className="font-extrabold text-3xl">Begin with your first project now </h2>
@@ -403,7 +557,7 @@ export default   function Page() {
                 </svg>
                 </button>}
 
-                {!allProjectsOneUserLoading &&  allProjectsOneUser && allProjectsOneUser?.length > 0 &&  
+                {!allProjectsOneUserLoading && !allEmailsOneProjectLoading &&  allProjectsOneUser && allProjectsOneUser?.length > 0 &&  
                    <button disabled={idProjectActive?.length === 0} onClick={()=> allEmailsOneProjectRefetch()}
                     className="text-4xl bg-neutral-700/50 border-2 border-neutral-700   px-3 py-3 rounded-md flex justify-center items-center"> 
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
@@ -411,6 +565,27 @@ export default   function Page() {
                     </svg>
 
                 </button>}
+
+
+                {/* {!allProjectsOneUserLoading && !allEmailsOneProjectLoading &&  allProjectsOneUser && allProjectsOneUser?.length > 0 &&  
+                   <button disabled={idProjectActive?.length === 0} onClick={()=> handleOpenExportModal()}
+                    className="text-4xl bg-neutral-700/50 border-2 border-neutral-700   px-3 py-3 rounded-md flex justify-center items-center"> 
+            
+                  
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            width="1em"
+                            height="1em"
+                            className="size-4"
+                          >
+                            <path
+                              fill="currentColor"
+                              d="M13 14h-2a9 9 0 0 0-7.968 4.81A10 10 0 0 1 3 18C3 12.477 7.477 8 13 8V3l10 8l-10 8z"
+                            ></path>
+                          </svg>
+
+                </button>} */}
 
                     </div>
               </div>
