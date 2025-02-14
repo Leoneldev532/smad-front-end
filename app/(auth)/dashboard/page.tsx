@@ -376,7 +376,7 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
 
       <ul className="flex flex-col gap-y-2">
         <li><button className="px-4 py-2 w-full group  text-xs md:text-sm gap-x-4  border border-neutral-700 line1 
-         hover:bg-neutral-600 relative  flex justify-center items-center rounded-lg text-center" onClick={()=>  downloadCSV(filterTabEmails || [],`${nameProjectActive}-${dayjs()}`)}> Exporter en CSV </button></li>
+         hover:bg-neutral-600 relative  flex justify-center items-center rounded-lg text-center" onClick={()=>  downloadCSV(filterTabEmails || [],`${nameProjectActive}-${dayjs()}`)}> Exporter To CSV </button></li>
         
           {/* {<form className="w-full flex flex-col p-2 rounded-lg gap-y-2  border border-neutral-600/40 mt-8">
           <span className="text-sm py-1 "> Your Api Key :  </span>
