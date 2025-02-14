@@ -371,7 +371,7 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
 <AlertDialog   open={isOpenExportModal}>
   <AlertDialogContent>
     <AlertDialogHeader>
-      <AlertDialogTitle className="">Exporter les adresses mails du projet {nameProjectActive}  </AlertDialogTitle>
+      <AlertDialogTitle className="">Export mail address of project : {nameProjectActive}  </AlertDialogTitle>
       </AlertDialogHeader>
 
       <ul className="flex flex-col gap-y-2">
@@ -401,7 +401,8 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
             </button></li>               
           </form>
           } */}
-       
+        
+        {/* ----------------- */}
         
       </ul>
 
