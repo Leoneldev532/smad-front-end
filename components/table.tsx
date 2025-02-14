@@ -253,7 +253,7 @@ import ButtonValidation from "./ButtonValidation"
       <TableFooter>
         <TableRow className="bg-neutral-700">
           <TableCell colSpan={2}>Total</TableCell>
-          <TableCell className=" flex w-full gap-x-2"> <span>{emailsList?.length } row(s) l</span></TableCell>
+          <TableCell className=" flex w-full gap-x-2"> <span>{emailsList?.length } row(s)</span></TableCell>
         </TableRow>
       </TableFooter>
     </Table>
