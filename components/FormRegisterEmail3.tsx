@@ -29,7 +29,7 @@ type FormValidationState = {
 };
 
 
-const API_URL = "https://smad.api.leonelyimga.com/api/v1/email/save";
+const API_URL = "https://api.smadmail.com/api/v1/email/save";
 const CONTENT_TYPE = "application/json";
 
 const getErrorMessage = (axiosError: AxiosError) => axiosError.message || 'An error occurred';
