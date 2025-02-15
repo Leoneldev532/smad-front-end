@@ -101,7 +101,7 @@ export default function Home() {
 
   <div className="flex justify-start gap-x-4 items-center">
     <div className="size-4 sm:size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">1</div>
-    <h4 className="text-sm "> Begin by create your account and subscribe a plan </h4>
+    <h4 className="text-sm "> Begin by create your account  </h4>
   </div>
 
   <Link href="/register" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-8 min-w-8  hover:bg-neutral-800 transition-all ease duration-400 ">
