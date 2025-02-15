@@ -40,6 +40,15 @@ const Page = () => {
                 <h1 className="text-3xl md:text-2xl wb-gradient  py-5 text-balance">
                     Copy code of template you want {"😊"}
                 </h1>
+                <p className='text-neutral-400 text-md max-w-2xl mb-2 '>
+
+                    These forms are build with : React js / Next js , tailiwind css , typescript , axios,
+                
+                    you maybe need to install some dependencies to make it work properly.
+                    
+                    you can also use it as a base to build your own form. 
+
+                </p>
                 <div className="grid sm:grid-cols-2  gap-4 grid-cols-1 lg:grid-cols-3 z-10 bg-neutral-900 gap-x-4 mt-4 relative  w-full ">
 
                     {tabTemplateCode?.map((option: templateCardType,index:number) => (
