@@ -39,7 +39,7 @@ export default function RootLayout({
         <title>Smad by leonel Yimga</title>
         <meta name="description" content={"Build quickly a newsletter form , wailist form and more for your landing page, website"} />
       </Head>
-        <body className={`flex justify-center bg-neutral-900 items-center w-full ${inter.className}`}>
+        <body className={`flex justify-center bg-black items-center w-full ${inter.className}`}>
           <NextAuthProvider>
             <div className="flex max-w-[1050px] w-full gap-x-4  p-2 h-full justify-center items-center flex-col">
 

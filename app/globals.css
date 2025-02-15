@@ -114,20 +114,22 @@ td,th{
 
 
 .loader {
-  width: 10px;
+  width: 5px;
   aspect-ratio: 1;
   border-radius: 50%;
   animation: l5 1s infinite linear alternate;
 }
+
 @keyframes l5 {
-    0%  {box-shadow: 14px 0 rgb(51, 51, 51,0.6), -14px 0 #000000;background: rgb(51, 51, 51,0.6) }
-    33% {box-shadow: 14px 0 rgb(51, 51, 51,0.6), -14px 0 #000000;background: rgb(51, 51, 51,0.6)}
-    66% {box-shadow: 14px 0 #000000,-14px 0 rgb(51, 51, 51,0.6); background: #000000}
-    100%{box-shadow: 14px 0 #000000,-14px 0 rgb(51, 51, 51,0.6); background: rgb(51, 51, 51,0.6) }
+  0%  {box-shadow: 8px 0 rgba(209, 207, 207, 0.6), -8px 0 #fff7f7; background: rgb(51, 51, 51,0.6)}
+  33% {box-shadow: 8px 0 rgb(51, 51, 51,0.6), -8px 0 #fff7f7; background: rgb(51, 51, 51,0.6)}
+  66% {box-shadow: 8px 0 #fff7f7, -8px 0 rgb(51, 51, 51,0.6); background: #fff7f7}
+  100%{box-shadow: 8px 0 #fff7f7, -8px 0 rgb(51, 51, 51,0.6); background: rgb(51, 51, 51,0.6)}
 }
 
+
 .bx-sha{
-  /* box-shadow:0px 40px 38px rgb(62, 62, 62) inset,10px 0px 38px black inset; */
+  /* box-shadow:0px 40px 38px rgb(62, 62, 62) inset,14px 0px 38px black inset; */
   &::before{
     height:125px;
     width:100%;

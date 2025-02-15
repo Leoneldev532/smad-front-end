@@ -49,7 +49,7 @@ const Page = () => {
                     you can also use it as a base to build your own form. 
 
                 </p>
-                <div className="grid sm:grid-cols-2  gap-4 grid-cols-1 lg:grid-cols-3 z-10 bg-neutral-900 gap-x-4 mt-4 relative  w-full ">
+                <div className="grid sm:grid-cols-2  gap-4 grid-cols-1 lg:grid-cols-3 z-10  gap-x-4 mt-4 relative  w-full ">
 
                     {tabTemplateCode?.map((option: templateCardType,index:number) => (
                         <TemplateCard key={index}  id={option.id} name={option.name}  form={option?.form}   />
