@@ -3,29 +3,77 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
 import  image1 from "@/public/list mail.png"
-import  formImage from "@/public/form.png"
+import  formImage from "@/public/Form34.png"
+import gsap from  "gsap"
+
 export default function Home() {
 
-  const [tabSelectId, setTabSelectId] = useState<number>(1)
 
- 
 
+    useEffect(()=>{
+      const tl = gsap.timeline({defaults:{ease:"power1.out"}})
+
+
+      tl.fromTo(".part1",{
+        y:40,
+        opacity:0
+      },{
+        y:0,
+        opacity:1,
+        duration:0.6,
+
+      }).fromTo(".part2",{
+        y:40,
+        opacity:0
+      },{
+        y:0,
+        opacity:1,
+        duration:0.6,
+
+      }).fromTo(".part3",{
+        y:40,
+        opacity:0
+      },{
+        y:0,
+        opacity:1,
+        duration:0.6,
+
+      }).fromTo(".part4",{
+        y:40,
+        opacity:0
+      },{
+        y:0,
+        opacity:1,
+        duration:0.6,
+
+      }).fromTo(".part5",{
+        y:40,
+        opacity:0
+      },{
+        y:0,
+        opacity:1,
+        duration:0.6,
+
+      })
+      
+
+    },[])
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between lg:px-24 px-8 py-4  ">
+    <main className="flex min-h-screen flex-col items-center justify-between lg:px-8 px-8 py-4  ">
 
-      <div className="flex flex-col-reverse md:flex-row  w-full pt-10  md:pb-14  relative   justify-center items-center">
+      <div className="flex part1  opacity-0 flex-col-reverse md:flex-row  w-full pt-10  md:pb-14  relative   justify-start items-center">
        
         <div className="w-full md:w-8/12">
-        <h1 className="md:text-4xl text-3xl flex lg:text-4xl text-balance  w-full wb-gradient  ">
+        <h1 className="md:text-5xl text-3xl flex lg:text-4xl text-balance  w-full wb-gradient  ">
 
         Effortlessly create newsletter forms and focus on growing your business.
 
         </h1>
         <div className="w-full flex justify-start gap-x-4 items-center py-8 ">
-          <Link href="/login"><Button variant="default" className="rounded-full px-16  bx-shabtn py-2"> start now  </Button></Link>
+          <Link href="/login"><Button variant="default" className="rounded-full px-16 font-bold bx-shabtn py-2"> start now  </Button></Link>
 
         </div>
         </div>
@@ -36,7 +84,7 @@ export default function Home() {
       </div>
       
 
-      <div className="w-full flex justify-between items-center">
+      <div className="w-full part2 opacity-0 flex justify-between items-center">
         <h2 className="opacity-80 w-full text-left uppercase ">How it work ?? </h2>
 
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="size-6">
@@ -53,7 +101,7 @@ export default function Home() {
 
   <div className="flex justify-start gap-x-4 items-center">
     <div className="size-4 sm:size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">1</div>
-    <h4 className="text-sm"> Begin by create your account and subscribe a plan </h4>
+    <h4 className="text-sm "> Begin by create your account and subscribe a plan </h4>
   </div>
 
   <Link href="/register" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-8 min-w-8  hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -190,7 +238,7 @@ export default function Home() {
 
       </div>
 
-      <section className="hidden md:flex my-4 border relative lv line overflow-hidden border-neutral-700 rounded-xl flex-col gap-y-1 w-full ">
+      <section className="hidden part3 md:flex opacity-0 mt-4 border relative lv line overflow-hidden border-neutral-700 rounded-xl flex-col gap-y-1 w-full ">
         
         <div className="w-full  bg-neutral-700/50  overflow-auto">
 
@@ -198,7 +246,7 @@ export default function Home() {
 
             <div className="flex justify-start gap-x-4 items-center">
               <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">1</div>
-              <h4 className="text-xs md:text-sm"> Begin by create your account and subscribe a plan </h4>
+              <h4 className="text-xs md:text-lg"> Begin by create your account and subscribe a plan </h4>
             </div>
 
             <Link href="/register" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10  hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -220,7 +268,7 @@ export default function Home() {
 
             <div className="flex justify-start gap-x-4 items-center">
               <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">2</div>
-              <h4 className="text-xs md:text-sm">  Copy your api private key on page /account and set It as variables environments in your project </h4>
+              <h4 className="text-xs md:text-lg">  Copy your api private key on page /account and set It as variables environments in your project </h4>
             </div>
 
             <Link href="/account" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10  hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -243,7 +291,7 @@ export default function Home() {
 
             <div className="flex justify-s bg-neutral-700t art gap-x-4 items-center">
               <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">3</div>
-              <h4 className="text-xs md:text-sm"> create a project in dashboard </h4>
+              <h4 className="text-xs md:text-lg"> create a project in dashboard </h4>
             </div>
 
             <Link href="/dashboard" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10  hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -266,7 +314,7 @@ export default function Home() {
 
             <div className="flex justify-s bg-neutral-700t art gap-x-4 items-center">
               <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">4</div>
-              <h4 className="text-xs md:text-sm"> Copy id of this project throught horizontal tree points button modal </h4>
+              <h4 className="text-xs md:text-lg"> Copy id of this project throught horizontal tree points button modal </h4>
             </div>
 
             <Link href="/dashboard" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10 hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -289,7 +337,7 @@ export default function Home() {
 
             <div className="flex justify-s bg-neutral-700t art gap-x-4 items-center">
               <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">5</div>
-              <h4 className="pr-8 text-xs md:text-sm "> Click the {"'Get Config'"} header button, Choose your template form and copy the code</h4>
+              <h4 className="pr-8 text-xs md:text-lg "> Click the {"'Get Config'"} header button, Choose your template form and copy the code</h4>
             </div>
 
             <Link href="/template" target='_blank' className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10 hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -313,7 +361,7 @@ export default function Home() {
             <div className="flex justify-start    gap-x-4 items-center">
               <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">6</div>
               <div className="flex">
-                <h4 className="flex text-xs md:text-sm justify-start items-center gap-2"> copy the code and set it in a file like a component  and import it where you want  </h4>
+                <h4 className="flex text-xs md:text-lg justify-start items-center gap-2"> copy the code and set it in a file like a component  and import it where you want  </h4>
               </div>
             </div>
             <Link href="/template" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10 hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -332,12 +380,13 @@ export default function Home() {
       </section>
     
 
-      <h2 className="text-lg md:text-xl my-10 text-left w-full max-w-4xl text-balance">
+      <h2 className="text-lg md:text-xl part4 my-10 opacity-0 font-medium  text-neutral-400  uppercase text-left w-full   text-balance">
 
-        <span className="font-medium text-neutral-400  uppercase"> Design available for implementation with tailwind  </span>
+         Design available for implementation with tailwind 
 
       </h2>
-      <div className="flex w-full lg:border rounded-xl relative md:flex-row flex-col gap-y-4 lg:line lg:overflow-hidden gap-4 justify-start items-start">
+
+      <div className="flex w-full lg:border part5 opacity-0  rounded-xl relative md:flex-row flex-col gap-y-4 lg:line lg:overflow-hidden gap-4 justify-start items-start">
         <div className="flex w-full md:w-1/2     p-4  border border-neutral-700/30  bordergradient relative h-72 rounded-xl  overflow-hidden bg-neutral-700/30 ">
 
           <div className="bg-neutral-900/30 rounded-xl overflow-hidden  px-4 h-full  w-full">

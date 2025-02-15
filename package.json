@@ -34,6 +34,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.13",
+    "gsap": "^3.12.7",
     "html-escaper": "^3.0.3",
     "lemonsqueezy.ts": "^0.1.8",
     "lucide-react": "^0.468.0",
