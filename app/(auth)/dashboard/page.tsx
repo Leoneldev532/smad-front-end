@@ -46,6 +46,8 @@ import { useRecoilValue } from "recoil"
 import {  userInfoState } from "@/lib/atom"
 import { Resend } from 'resend';
 import { ResendServerComponent } from "@/components/resendData"
+import SkeletonEmailLine from "@/components/ui/skeletonEmailLine"
+import SkeletonProject from "@/components/ui/skeletonProject"
 
 
 export default   function Page() {
@@ -156,13 +158,17 @@ export default   function Page() {
   const [projectName,setProjectName] = useState<string>("")
 
    const handleShowDialogAddEmail = ()=>{
+
+
     
     if(getAllUserInfo?.privateKey?.expiresAt && !isDatePassed(dayjs(getAllUserInfo?.privateKey?.expiresAt)) ){
     setIsOpenAddEmailDialog(true)
     }else{
-      toast.error("Please subscription a new plan")
+      // toast.error("Please subscription a new plan")
     }
    }
+
+
    const handleCloseDialogAddEmail = ()=>{
     setIsOpenAddEmailDialog(false)
    }
@@ -359,7 +365,7 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
   return (
     <>
      <AlertDialog  open={isOpenCreateProject}>
-  <AlertDialogContent>
+  <AlertDialogContent className="bg-neutral-900">
     <AlertDialogHeader>
       <AlertDialogTitle className="">Create a project</AlertDialogTitle>
       </AlertDialogHeader>
@@ -382,7 +388,7 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
 
 
 <AlertDialog   open={isOpenExportModal}>
-  <AlertDialogContent>
+  <AlertDialogContent className="bg-neutral-900">
     <AlertDialogHeader>
       <AlertDialogTitle className="">Export mail address of project : {nameProjectActive}  </AlertDialogTitle>
       </AlertDialogHeader>
@@ -428,7 +434,7 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
 
    
    <AlertDialog open={isOpenAddEmailDialog}>
-  <AlertDialogContent>
+  <AlertDialogContent className="bg-neutral-900" >
     <AlertDialogHeader>
       <AlertDialogTitle className="">Add email on project : {nameProjectActive}  </AlertDialogTitle>
       </AlertDialogHeader>
@@ -468,16 +474,16 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
 
 :
        
-        <div className="flex flex-1  h-full w-full justify-start items-start md:px-0 px-6  gap-4  ">
+        <div className="flex flex-1   rounded-md p-2 h-full w-full justify-start items-start md:px-0 px-6  gap-4  ">
         
 
 
 
 
-          <div className="w-1/3 lg:flex hidden max-h-[89vh]  overflow-y-auto bg-neutral-900/20 border   rounded-xl px-3 py-3  flex-col justify-start items-start">
+          <div className="w-1/3 lg:flex hidden h-auto  overflow-y-auto     rounded-md px-3 py-3  flex-col justify-start items-start">
         
           <div className="flex flex-col w-full   justify-start items-start gap-y-2">
-             <h3 className="pb-2 text-xl  w-full font-bold "> Yours projects   </h3>
+             <h3 className=" text-xl  w-full font-bold "> Yours projects   </h3>
               <div className="flex gap-x-2  justify-start w-full items-center">
                
                 <div className="w-full flex justify-start  h-full  items-center">
@@ -501,7 +507,9 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
 
           <ul className="w-full flex flex-col py-3 gap-y-3 justify-center items-center ">
 
-              {allProjectsOneUserLoading && <div className="py-10 flex justify-center items-center"><Loader/></div>}  
+              {allProjectsOneUserLoading && <div className="py-10 flex justify-center items-center">
+                <SkeletonProject/>
+                </div>}  
               
            { !allProjectsOneUserLoading && filterTabProjects?.length === 0  && <div className="py-8"><NoData/></div> }
             {!allProjectsOneUserLoading && filterTabProjects?.map((item:Project,index:number)=>(
@@ -533,7 +541,7 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
               </ul>
            <ul className="w-full hidden lg:flex  py-3 gap-x-3 justify-center items-center ">
 
-                {allProjectsOneUserLoading && <div className="py-10 flex justify-center items-center"><Loader /></div>}
+                {allProjectsOneUserLoading && <div className="py-2 w-full h-full flex justify-center items-center"> <SkeletonProject/></div>}
 
                 {!allProjectsOneUserLoading && filterTabProjects?.length === 0 && <div className="py-8"><NoData /></div>}
                 {!allProjectsOneUserLoading && filterTabProjects?.map((item: Project, index: number) => (
@@ -550,7 +558,7 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
            {getAllUserInfo?.privateKey?.expiresAt && isDatePassed(dayjs(getAllUserInfo.privateKey.expiresAt)) && (
                 <Message text="Your plan has expired. Please renew your subscription." variant="error" />
             )}
-           <h3 className="pb-2 text-sm md:text-xl flex justify-start items-center gap-x-2 w-full font-bold "> Emails 
+           <h3 className=" text-sm md:text-xl flex justify-start items-center gap-x-2 w-full font-bold "> Emails 
              {nameProjectActive && <>     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
               className="size-4 stroke-neutral-400">
   <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
@@ -564,7 +572,7 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
 
                    <div className="flex justify-start items-center gap-x-3">
                     {!allProjectsOneUserLoading &&  allProjectsOneUser && allProjectsOneUser?.length > 0 &&  
-                   <button disabled={idProjectActive?.length === 0} onClick={()=> {idProjectActive?.length !== 0 && handleShowDialogAddEmail()}}
+                   <button disabled={idProjectActive?.length === 0} onClick={()=> {idProjectActive?.length !== 0 && handleShowDialogAddEmail() }}
                     className="text-4xl bg-neutral-500/20 border border-neutral-700   px-3 py-3 rounded-md flex justify-center items-center"> 
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -605,8 +613,8 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
               </div>
               
               
-           { allEmailsOneProjectLoading && <div className="py-10 flex justify-center items-center"><Loader/></div>}
-           { !allEmailsOneProjectLoading && filterTabEmails?.length === 0  && <div className="py-10 flex justify-center items-center"><NoData/></div> }
+           { allEmailsOneProjectLoading && <div className="py-3 flex justify-start w-full h-full items-start"><SkeletonEmailLine/></div>}
+           { !allEmailsOneProjectLoading && filterTabEmails?.length === 0  && <div className="w-full h-full flex justify-start items-start"><NoData/></div> }
            {!allEmailsOneProjectLoading && filterTabEmails?.length !== 0 &&
            <>
           

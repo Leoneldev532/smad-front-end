@@ -227,7 +227,7 @@ import ButtonValidation from "./ButtonValidation"
             <MoreHorizontal />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="bg-neutral-700">
+        <DropdownMenuContent align="end" className="bg-neutral-900">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
          
           <DropdownMenuSeparator />
@@ -251,7 +251,7 @@ import ButtonValidation from "./ButtonValidation"
         ))}
       </TableBody>
       <TableFooter>
-        <TableRow className="bg-neutral-700">
+        <TableRow className="bg-neutral-700/30 hover:bg-neutral-700/30">
           <TableCell colSpan={2}>Total</TableCell>
           <TableCell className=" flex w-full gap-x-2"> <span>{emailsList?.length } row(s)</span></TableCell>
         </TableRow>

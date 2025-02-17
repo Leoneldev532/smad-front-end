@@ -58,7 +58,7 @@ const Page = () => {
                 </div>
                 {isCodeCopy ?
 
-                  <button onClick={() => handleCopyCode()} className="p-2 flex justify-center  border items-center rounded-md ">
+                  <button onClick={() => handleCopyCode()} className="p-3 flex hover:bg-neutral-900 justify-center  border items-center rounded-md ">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
 
                       className="size-4 stroke-slate-300">
@@ -67,7 +67,7 @@ const Page = () => {
                   </button>
 
                   :
-                  <button onClick={() => handleCopyCode()} className="p-2 flex justify-center border-slate-500/60 border items-center rounded-md ">
+                  <button onClick={() => handleCopyCode()} className="p-3 hover:bg-neutral-900 flex justify-center  border items-center rounded-md ">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"

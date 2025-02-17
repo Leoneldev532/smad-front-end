@@ -64,7 +64,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between lg:px-8 px-8 py-4  ">
 
-      <div className="flex part1  opacity-0 flex-col-reverse md:flex-row  w-full pt-10  md:pb-14  relative   justify-start items-center">
+      <section className="flex part1  opacity-0 flex-col-reverse md:flex-row  w-full pt-10  md:pb-14  relative   justify-start items-center">
        
         <div className="w-full md:w-8/12">
         <h1 className="md:text-5xl text-3xl flex lg:text-4xl text-balance  w-full wb-gradient  ">
@@ -81,17 +81,17 @@ export default function Home() {
         <Image  src={image1} className="object-contain " alt="hero section image" />
         </div>
        
-      </div>
+      </section>
       
 
-      <div className="w-full part2 opacity-0 flex justify-between items-center">
+      <section className="w-full part2 opacity-0 flex justify-between items-center">
         <h2 className="opacity-80 w-full text-left uppercase ">How it work ?? </h2>
 
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="size-6">
           <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
         </svg>
 
-      </div>
+      </section>
 
       <div className="md:hidden w-full flex flex-col mt-3 gap-y-4">
 
@@ -245,7 +245,7 @@ export default function Home() {
           <div className="w-full  pl-4 pr-2 py-2 flex gap-x-4  justify-between items-center">
 
             <div className="flex justify-start gap-x-4 items-center">
-              <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">1</div>
+              <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700/30 border-neutral-700">1</div>
               <h4 className="text-xs md:text-lg"> Begin by create your account</h4>
             </div>
 
@@ -386,7 +386,7 @@ export default function Home() {
 
       </h2>
 
-      <div className="flex w-full lg:border part5 opacity-0  rounded-xl relative md:flex-row flex-col gap-y-4 lg:line lg:overflow-hidden gap-4 justify-start items-start">
+      <section className="flex w-full lg:border part5 opacity-0  rounded-xl relative md:flex-row flex-col gap-y-4 lg:line lg:overflow-hidden gap-4 justify-start items-start">
         <div className="flex w-full md:w-1/2     p-4  border border-neutral-700/30  bordergradient relative h-72 rounded-xl  overflow-hidden bg-neutral-700/30 ">
 
           <div className="bg-neutral-900/30 rounded-xl overflow-hidden  px-4 h-full  w-full">
@@ -406,7 +406,7 @@ export default function Home() {
           </div>
         </div>
 
-      </div>
+      </section>
 
 
 

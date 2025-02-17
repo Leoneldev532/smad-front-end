@@ -90,7 +90,7 @@ const Header = () => {
             <div className="flex gap-x-2 justify-end items-center  w-full    md:w-8/12">
                 <Link href="/template" className="hidden md:block">
 
-                    <button className="px-4 py-1 group  text-xs md:text-sm gap-x-4  border border-neutral-700 line1  hover:bg-neutral-600 relative overflow-hidden flex justify-center items-center rounded-lg text-center">
+                    <button className="px-4 py-1.5 group  text-xs md:text-sm gap-x-4  border border-neutral-700 line1  hover:bg-neutral-700/30 relative overflow-hidden flex justify-center items-center rounded-lg text-center">
 
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4 group-hover:fill-white">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
@@ -120,14 +120,14 @@ const Header = () => {
 
                             
                             {dropdownIsOpen &&
-                                <div className="absolute z-50 w-48 lg:w-56 top-12 left-1/2 transform -translate-x-1/2 max-[1400px]:-translate-x-[160px]   max-h-[90vh] overflow-y-auto rounded-xl bg-muted flex flex-col justify-start items-start p-4">
-                                <h3 className="text-sm px-3 py-2">Menu</h3>
+                                <div className="absolute z-50 w-48 lg:w-56 top-12 left-1/2 transform -translate-x-1/2 max-[1400px]:-translate-x-[160px]   max-h-[90vh] overflow-y-auto rounded-xl bg-neutral-900 border  border-neutral-700 flex flex-col justify-start items-start">
+                                <h3 className="text-lg px-3 py-2">Menu</h3>
                                 <Separator className="bg-neutral-700" />
-                                <div className="w-full flex flex-col gap-y-2">
+                                <div className="w-full flex flex-col  ">
                                     {LinkTab?.map((link, index) => (
                                         <React.Fragment key={index}>
                                             <LinkSideBar LinkSideBarProps={link} />
-                                            <Separator className="bg-neutral-700" />
+                                            {/* <Separator className="bg-neutral-700" /> */}
                                         </React.Fragment>
                                     ))}
                                 </div>
@@ -138,9 +138,9 @@ const Header = () => {
 
                         </div> :
 
-                        <div className="flex gap-x-2 md:gap-x-4 w-auto justify-end items-center ">
-                            <Link href="/login"> <button className="px-4 py-1 text-xs md:text-sm   border border-neutral-700 line relative overflow-hidden rounded-lg text-center"> Sign-in </button>  </Link>
-                            <Link href="/register"> <button className="px-4 py-1 text-xs md:text-sm border rounded-lg text-center"> Register </button>  </Link>
+                        <div className="flex gap-x-2 w-auto justify-end items-center ">
+                            <Link href="/login"> <button className="px-4 py-1.5 text-xs md:text-sm  hover:bg-neutral-700 border border-neutral-700 line relative overflow-hidden rounded-lg text-center"> Sign-in </button>  </Link>
+                            <Link href="/register"> <button className="px-4 py-1.5 text-xs md:text-sm hover:bg-neutral-700 border rounded-lg text-center"> Register </button>  </Link>
                         </div>
 
 

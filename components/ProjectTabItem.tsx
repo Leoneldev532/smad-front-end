@@ -156,7 +156,7 @@ import Loader from './Loader'
                   <div className="w-6 h-6 flex justify-start items-start">   {mutationUpdateProjectName?.isPending &&  <Loader  height="6" width="6" /> }     </div>
                 </div>
 
-                <DropdownMenu>
+                <DropdownMenu >
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="h-8 w-8 p-0">
             <span className="sr-only">Open menu</span>
@@ -165,7 +165,7 @@ import Loader from './Loader'
         </DropdownMenuTrigger>
         
         <DropdownMenuSeparator />
-        <DropdownMenuContent className="bg-neutral-700"  align="end">
+        <DropdownMenuContent className="bg-neutral-900"  align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           
         <DropdownMenuSeparator />
