@@ -195,19 +195,32 @@ export default   function Page() {
     return newTab as Email[];
   };
 
-  const convertToCSV = (objArray:Email[]) => {
+  // const convertToCSV = (objArray:Email[]) => {
+  //   const array = typeof objArray !== 'object' ? JSON.parse(objArray) : objArray;
+  //   let str = '';
+
+  //   for (let i = 0; i < array.length; i++) {
+  //     let line = '';
+  //     for (let index in array[i]) {
+  //       if (line !== '') line += ',';
+
+  //       line += array[i][index];
+  //     }
+  //     str += line + '\r\n';
+  //   }
+  //   return str;
+  // };
+
+
+  const convertToCSV = (objArray: Email[]) => {
     const array = typeof objArray !== 'object' ? JSON.parse(objArray) : objArray;
-    let str = '';
-
+    let str = 'emails\r\n'; // Add the header for the email column
+  
     for (let i = 0; i < array.length; i++) {
-      let line = '';
-      for (let index in array[i]) {
-        if (line !== '') line += ',';
-
-        line += array[i][index];
-      }
-      str += line + '\r\n';
+      const email = array[i].email;
+      str += email + '\r\n'; // Append each email to the CSV string
     }
+  
     return str;
   };
 
