@@ -48,6 +48,7 @@ import { Resend } from 'resend';
 import { ResendServerComponent } from "@/components/resendData"
 import SkeletonEmailLine from "@/components/ui/skeletonEmailLine"
 import SkeletonProject from "@/components/ui/skeletonProject"
+import GetAudience from "@/components/getAudience"
 
 
 export default   function Page() {
@@ -357,9 +358,7 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
     setEmailAddress(e.target.value)
   }
 
- 
 
-  
 
  
   return (
@@ -397,7 +396,7 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
         <li><button className="px-4 py-2 w-full group  text-xs md:text-sm gap-x-4  border border-neutral-700 line1 
          hover:bg-neutral-600 relative  flex justify-center items-center rounded-lg text-center" onClick={()=>  downloadCSV(filterTabEmails || [],`${nameProjectActive}-${dayjs()}`)}> Export To CSV </button></li>
         
-          {/* {<form className="w-full flex flex-col p-2 rounded-lg gap-y-2  border border-neutral-600/40 mt-8">
+          {<form className="w-full flex flex-col p-2 rounded-lg gap-y-2  border border-neutral-600/40 mt-8">
           <span className="text-sm py-1 "> Your Api Key :  </span>
           <div className="flex gap-x-2">
           <input  type="password" value={resendApiKeyState || ""} onChange={(e)=>setResendApiKeyState(e.target.value)}
@@ -419,7 +418,7 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
          {mutationAddResendApiKey.isPending ? <><span>En cours</span><Loader/></>  : <span>Exporter en Contact Resend</span>}
             </button></li>               
           </form>
-          } */}
+          }
         
         {/* ----------------- */}
         
@@ -456,7 +455,8 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
   </AlertDialogContent>
 </AlertDialog>
    
-   
+   {/* <GetAudience key={1}   /> */}
+
 {allProjectsOneUser?.length === 0 ? 
     <div className="w-full    px-0 py-3 gap-2 text-balance flex overflow-auto flex-col min-h-72 justify-center items-center">
       <div className="flex flex-col gap-y-4 justify-center items-center max-w-sm  text-center ">
@@ -507,7 +507,7 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
 
           <ul className="w-full flex flex-col py-3 gap-y-3 justify-center items-center ">
 
-              {allProjectsOneUserLoading && <div className="py-10 flex justify-center items-center">
+              {allProjectsOneUserLoading && <div className="py-0 w-full h-full flex justify-center items-center">
                 <SkeletonProject/>
                 </div>}  
               
