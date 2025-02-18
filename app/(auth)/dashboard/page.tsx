@@ -48,7 +48,7 @@ import { Resend } from 'resend';
 import { ResendServerComponent } from "@/components/resendData"
 import SkeletonEmailLine from "@/components/ui/skeletonEmailLine"
 import SkeletonProject from "@/components/ui/skeletonProject"
-import GetAudience from "@/components/getAudience"
+// import GetAudience from "@/components/getAudience"
 
 
 export default   function Page() {
