@@ -396,7 +396,7 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
         <li><button className="px-4 py-2 w-full group  text-xs md:text-sm gap-x-4  border border-neutral-700 line1 
          hover:bg-neutral-600 relative  flex justify-center items-center rounded-lg text-center" onClick={()=>  downloadCSV(filterTabEmails || [],`${nameProjectActive}-${dayjs()}`)}> Export To CSV </button></li>
         
-          {<form className="w-full flex flex-col p-2 rounded-lg gap-y-2  border border-neutral-600/40 mt-8">
+          {/* {<form className="w-full flex flex-col p-2 rounded-lg gap-y-2  border border-neutral-600/40 mt-8">
           <span className="text-sm py-1 "> Your Api Key :  </span>
           <div className="flex gap-x-2">
           <input  type="password" value={resendApiKeyState || ""} onChange={(e)=>setResendApiKeyState(e.target.value)}
@@ -418,7 +418,7 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
          {mutationAddResendApiKey.isPending ? <><span>En cours</span><Loader/></>  : <span>Exporter en Contact Resend</span>}
             </button></li>               
           </form>
-          }
+          } */}
         
         {/* ----------------- */}
         
