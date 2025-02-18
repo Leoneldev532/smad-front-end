@@ -16,7 +16,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 
-import { addEmailAddress, createProject, setResendApiKey, useGetAllEmailsOneProject, useGetAllProjectsOfOneUser, useGetAllUserInfo, useGetResendUser, useGetResendUserAudience } from "@/hook/query"
+import { addEmailAddress, createProject, setResendApiKey, useGetAllEmailsOneProject, useGetAllProjectsOfOneUser, useGetAllUserInfo, useGetAudience, useGetResendUser, useGetResendUserAudience } from "@/hook/query"
 import { Email, Project } from "@/lib/type"
 import  { isDatePassed, useGetUserInfo}  from "@/lib/utils"
 import { ChangeEvent, FormEvent, useEffect, useState } from "react"
@@ -48,7 +48,7 @@ import { Resend } from 'resend';
 import { ResendServerComponent } from "@/components/resendData"
 import SkeletonEmailLine from "@/components/ui/skeletonEmailLine"
 import SkeletonProject from "@/components/ui/skeletonProject"
-// import GetAudience from "@/components/getAudience"
+import { GetAudience, SendContactToAudience } from "@/components/GetAudience"
 
 
 export default   function Page() {
@@ -358,7 +358,39 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
     setEmailAddress(e.target.value)
   }
 
+  const [audiencesOfUser,setAudiencesOfUser ] = useState([])
+  const [idAudienceSelected,setIdAudienceSelected] = useState<string>("")
 
+
+
+  const handleSelectedAudience = (id:string) =>{
+    setIdAudienceSelected(id)
+  }
+
+
+  const {data:allAudiences,isLoading:loadingAllAudiences} = useGetAudience(resendApiKeyState || " ")
+
+  const mutationSendContactResend = useMutation({
+    mutationKey: ["sendContactToAudience"], // Clé unique pour cette mutation
+    mutationFn: async ({ idAudience, resendApiKeyState, TabEmail }:{idAudience:string,resendApiKeyState:string,TabEmail:string[]}) => {
+      return SendContactToAudience(idAudience, resendApiKeyState || " ", TabEmail || []);
+    },
+    onSuccess: () => {
+      toast.success("Opération réussie !");
+    },
+    onError: (error) => {
+      console.error("Erreur :", error);
+      toast.error("Une erreur est survenue.");
+    },
+  });
+
+const handleResendExport = async (idAudience:string) =>{
+
+  const TabEmail =allEmailsOneProject && allEmailsOneProject?.map((item)=>item.email)
+  mutationSendContactResend.mutate({ idAudience, resendApiKeyState:resendApiKeyState || " " , TabEmail :  TabEmail || []  });
+
+  
+}
 
  
   return (
@@ -396,10 +428,10 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
         <li><button className="px-4 py-2 w-full group  text-xs md:text-sm gap-x-4  border border-neutral-700 line1 
          hover:bg-neutral-600 relative  flex justify-center items-center rounded-lg text-center" onClick={()=>  downloadCSV(filterTabEmails || [],`${nameProjectActive}-${dayjs()}`)}> Export To CSV </button></li>
         
-          {/* {<form className="w-full flex flex-col p-2 rounded-lg gap-y-2  border border-neutral-600/40 mt-8">
+          {<form className="w-full flex flex-col p-4 rounded-lg gap-y-2  border border-neutral-600/40 mt-8">
           <span className="text-sm py-1 "> Your Api Key :  </span>
           <div className="flex gap-x-2">
-          <input  type="password" value={resendApiKeyState || ""} onChange={(e)=>setResendApiKeyState(e.target.value)}
+          <input  autoComplete="off" type="password" value={resendApiKeyState || ""} onChange={(e)=>setResendApiKeyState(e.target.value)}
                      className="px-3 appearance-none py-2 w-10/12 bg-neutral-500/20 border border-neutral-700 text-white rounded-md"
                       placeholder="resend Key..." />
 
@@ -410,15 +442,40 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
             </button>
 
                       </div>
+                      <div className="flex justify-between   w-full">
+                          <h5>Vos audiences  </h5>
+                         <span className="px-3 py-1 rounded-full bg-neutral-700"> {allAudiences?.data?.data.length} </span>  
+                         </div>
+
+                      {loadingAllAudiences && <SkeletonProject/> }
+
+                      {allAudiences?.data?.data && allAudiences?.data?.data?.length > 0 ? <div className="flex flex-col gap-2  ">	
+                        
+                        <select className="bg-neutral-800 h-10 px-1 outline-none rounded-sm pr-2" onChange={(e)=>handleSelectedAudience(e.target.value)} >
+                          <option className="flex bg-neutral-900  gap-2" selected disabled> select One audience </option>
+                        {allAudiences?.data?.data.map((item:any,index:number)=>(
+                        <option key={index +  "io"} value={item?.id} className="flex bg-neutral-900  gap-2">
+                          {item?.name}
+                        </option>
+                           ))}
+
+                        </select>
+
+                     
+
+                      </div> :
+                       <p className="w-full text-center font-bold">
+                           No audiences find !! 
+                        </p>}
             <li>
-          <button  type="button" className="px-4 py-2 w-full group  text-xs md:text-sm gap-x-4  border border-neutral-700 line1 
+          <button  style={{opacity:idAudienceSelected?.length === 0 ? "0.5": 1 }}  type="button" className="px-4 py-2 w-full group  text-xs md:text-sm gap-x-4  border border-neutral-700 line1 
          hover:bg-neutral-600 relative  flex justify-center items-center rounded-lg text-center" 
-        //  onClick={(e)=> handleShowInputResendApiKey(e)}
+         onClick={()=> handleResendExport(idAudienceSelected)}
          > 
-         {mutationAddResendApiKey.isPending ? <><span>En cours</span><Loader/></>  : <span>Exporter en Contact Resend</span>}
+         {mutationSendContactResend.isPending ? <><span>En cours</span><Loader/></>  : <span>Exporter en Contact Resend</span>}
             </button></li>               
           </form>
-          } */}
+          }
         
         {/* ----------------- */}
         
@@ -455,7 +512,6 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
   </AlertDialogContent>
 </AlertDialog>
    
-   {/* <GetAudience key={1}   /> */}
 
 {allProjectsOneUser?.length === 0 ? 
     <div className="w-full    px-0 py-3 gap-2 text-balance flex overflow-auto flex-col min-h-72 justify-center items-center">
@@ -628,8 +684,8 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
               </div>
               </>  }
            </div> 
-        
-        
+
+           
           </div>
 
 }

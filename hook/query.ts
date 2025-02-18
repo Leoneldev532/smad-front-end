@@ -1,4 +1,5 @@
 import { getProducts } from "@/app/lemon";
+import { GetAudience } from "@/components/GetAudience";
 import axiosInstance from "@/lib/api.intercept";
 import { Email, Project, User } from "@/lib/type";
 import { useQuery } from "@tanstack/react-query";
@@ -227,3 +228,12 @@ export const useGetResendUserAudience = (resendApiKey: string | null | undefined
 
 
 
+
+
+export const useGetAudience = (audienceId:string) => {
+    return useQuery({
+        queryKey: ["audienceId", audienceId],
+        queryFn: () => GetAudience(audienceId),
+        enabled: !!audienceId,
+    });
+};
