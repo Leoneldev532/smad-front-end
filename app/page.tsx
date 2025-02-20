@@ -67,7 +67,7 @@ export default function Home() {
       <section className="flex part1  opacity-0 flex-col-reverse md:flex-row  w-full pt-10  md:pb-14  relative   justify-start items-center">
        
         <div className="w-full md:w-8/12">
-        <h1 className="md:text-5xl text-3xl flex lg:text-4xl text-balance  w-full wb-gradient  ">
+        <h1 className="md:text-5xl text-3xl bg-red-400 flex lg:text-4xl text-balance  w-full wb-gradient  ">
 
         Effortlessly create newsletter forms and focus on growing your business.
 

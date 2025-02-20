@@ -662,7 +662,7 @@ const handleCopyCode = () => {
 </svg>
  {nameProjectActive} 
   
-  {!allProjectsOneUserLoading && allProjectsOneUser?.length > 0  && <button  onClick={() => handleCopyCode()} className='border my-1 cursor-pointer 
+  {!allProjectsOneUserLoading && allProjectsOneUser && allProjectsOneUser?.length > 0  && <button  onClick={() => handleCopyCode()} className='border my-1 cursor-pointer 
               flex-shrink flex gap-x-2 hover:bg-neutral-900 transition-colors 
       duration-300 ease justify-center items-center border-neutral-500/40 text-neutral-500 px-2 py-1 rounded-lg'> 
         <span className="text-xs">ID of Project</span>
