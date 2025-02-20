@@ -80,7 +80,7 @@ export default function  RegisterForm (){
     <div className="flex gap-x-3 w-full py-8 h-full justify-center min-h-screen  items-start">
 
       <div className="px-8  min-w-96 rounded-2xl  relative overflow-hidden  flex flex-col gap-y-4 justify-center items-center">
-        {/* <form onSubmit={handleOnSubmitLogin(onSubmitRegisterForm1)} className="w-full   h-full flex flex-col gap-4 justify-start items-center">
+        <form onSubmit={handleOnSubmitLogin(onSubmitRegisterForm1)} className="w-full   h-full flex flex-col gap-4 justify-start items-center">
           <Image alt='logo' src={logo} className="object-contain h-16 w-16" />
 
           <div className="flex flex-col gap-y-2 w-full justify-center items-center">
@@ -89,9 +89,9 @@ export default function  RegisterForm (){
           Create a new account
           </span>
           </div>
-
+{/* 
          
-  <input
+          <input
             {...register("name", {
               required: true,
               minLength:3
@@ -143,9 +143,9 @@ export default function  RegisterForm (){
             </span>
           )}
           <ButtonValidation className=" py-2    cursor-pointer  w-full  rounded-lg"
-            isLoading={mutation?.isPending} type='positive' typeButton='submit' title='register' />
+            isLoading={mutation?.isPending} type='positive' typeButton='submit' title='register' /> */}
 
-        </form> */}
+        </form>
         <Button
           onClick={() => signIn("google", { callbackUrl: "/dashboard" })} 
           variant="outline" className=" bx-sha1 py-5   border hover:bg-neutral-900 cursor-pointer border-neutral-400/10 w-full  rounded-lg">
