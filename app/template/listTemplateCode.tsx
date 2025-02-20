@@ -54,7 +54,7 @@ const useEmailForm = (project_id: string, private_key: string, customValidationR
 
     const validate = () => {
         const validationErrors: Record<string, string> = {};
-        Object.keys(validationRules).forEach((key:string) => {
+        Object.keys(validationRules).forEach((key) => {
             const rule = validationRules[key];
             const error = rule(data[key]);
             if (error) {

@@ -1,7 +1,5 @@
-
-import axios, { AxiosError } from "axios";
-import { useEffect, useState } from "react";
-const FormRegisterEmail1 = ()=> {
+import React, { useEffect, useState } from 'react';
+import axios, { AxiosError } from 'axios';
 
 type ValidationRules = {
     [key: string]: (value: any) => string | null;
@@ -10,23 +8,6 @@ type ValidationRules = {
 type FormData = {
     [key: string]: any;
 };
-
-type EmailSubmissionState = {
-    handleSubmit: (email: string) => Promise<void>;
-    error: string;
-    loading: boolean;
-    success: boolean;
-};
-
-type FormValidationState = {
-    data: FormData;
-    setData: (data: FormData) => void;
-    errors: Record<string, string>;
-    handleSubmit: () => Promise<void>;
-    loading: boolean;
-    success: boolean;
-};
-
 
 const API_URL = "https://api.smadmail.com/api/v1/email/save";
 const CONTENT_TYPE = "application/json";
@@ -37,9 +18,9 @@ const defaultValidationRules: ValidationRules = {
     email: (email) => {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
         if (!email) {
-            return 'Ladresse email est requise';
+            return 'L\'adresse email est requise';
         } else if (!emailRegex.test(email)) {
-            return 'Ladresse email doit être valide';
+            return 'L\'adresse email doit être valide';
         }
         return null;
     },
@@ -48,16 +29,16 @@ const defaultValidationRules: ValidationRules = {
 const useEmailForm = (project_id: string, private_key: string, customValidationRules?: ValidationRules) => {
     const validationRules = customValidationRules || defaultValidationRules;
 
-    const [data, setData] = useState({ email: '' });
+    const [data, setData] = useState<FormData>({ email: '' });
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
 
     const validate = () => {
         const validationErrors: Record<string, string> = {};
-        Object.keys(validationRules).forEach((key:string) => {
+        Object.keys(validationRules).forEach((key) => {
             const rule = validationRules[key];
-            const error = rule(data[key] as string);
+            const error = rule(data[key]);
             if (error) {
                 validationErrors[key] = error;
             }
@@ -97,7 +78,7 @@ const useEmailForm = (project_id: string, private_key: string, customValidationR
         if (success) {
             const timer = setTimeout(() => {
                 setSuccess(false);
-                setData({email:" "})
+                setData({ email: "" });
             }, 3000);
             return () => clearTimeout(timer);
         }
@@ -113,29 +94,23 @@ const useEmailForm = (project_id: string, private_key: string, customValidationR
     };
 };
 
-
-
-         const project_id = process.env.NEXT_PUBLIC_API_SMAD_PROJECT_ID || " ";
-    const private_key = process.env.NEXT_PUBLIC_API_SMAD_PRIVATE_KEY || " ";
+const EmailRegistrationForm: React.FC = () => {
+    const project_id = process.env.API_SMAD_PROJECT_ID || " ";
+    const private_key = process.env.API_SMAD_PRIVATE_KEY || " ";
 
     const { data, setData, errors, handleSubmit, loading, success } = useEmailForm(project_id, private_key);
 
-    // Constantes pour les classes CSS
-    const formClasses = "flex bg-neutral-700 border border-neutral-700/40 py-0.5 px-0.5 overflow-hidden rounded-xl justify-between";
-    const buttonClasses = "px-3 w-1/3 rounded-xl py-1  group  flex justify-center items-center text-black font-bold hover:bg-neutral-900 hover:text-white transition-all ease duration-300  text-sm bg-yellow-500";
-    const inputClasses = "px-2.5 appearance-none  text-neutral-400 font-medium py-2.5 outline-none text-sm w-full bg-neutral-700 text-capitalize";
-
     return (
-        <section className="flex flex-col py-10">
-            <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className={formClasses}>
-                <div className="flex w-8/12 px-1.5 overflow-hidden justify-start items-center">
+        <section className="form-section">
+            <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="form-container">
+                <div className="input-container">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className="size-6 stroke-neutral-500"
+                        className="email-icon"
                         aria-hidden="true"
                     >
                         <path
@@ -144,27 +119,26 @@ const useEmailForm = (project_id: string, private_key: string, customValidationR
                             d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
                         />
                     </svg>
-
                     <label htmlFor="email-input" className="sr-only">Email</label>
                     <input
                         id="email-input"
                         type="email"
                         placeholder="johndoe@gmail.com"
-                        className={inputClasses}
+                        className="email-input"
                         value={data.email}
                         onChange={(e) => setData({ ...data, email: e.target.value })}
                     />
                 </div>
                 <button
                     type="submit"
-                    className={buttonClasses}
+                    className="submit-button"
                     aria-label="save"
                     disabled={loading}
                 >
                     {loading ? (
-                        <div className="animate-spin h-5 w-5 border-2 group-hover:border-t-white group-hover:border-b-transparent  border-b-transparent border-r-transparent border-neutral-900 rounded-full"></div>
+                        <div className="loading-spinner"></div>
                     ) : success ? (
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="success-icon">
                             <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                         </svg>
                     ) : (
@@ -172,8 +146,9 @@ const useEmailForm = (project_id: string, private_key: string, customValidationR
                     )}
                 </button>
             </form>
-            {errors.email && <p className="text-red-500 mt-2 w-full text-center">{errors.email}</p>}
-        </section>)
-        
- }
- export default FormRegisterEmail1
+            {errors.email && <p className="error-message">{errors.email}</p>}
+        </section>
+    );
+};
+
+export default EmailRegistrationForm;

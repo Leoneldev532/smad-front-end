@@ -49,6 +49,7 @@ import { ResendServerComponent } from "@/components/resendData"
 import SkeletonEmailLine from "@/components/ui/skeletonEmailLine"
 import SkeletonProject from "@/components/ui/skeletonProject"
 import { GetAudience, SendContactToAudience } from "@/components/GetAudience"
+import Loader2 from "@/components/Loader2"
 
 
 export default   function Page() {
@@ -257,7 +258,7 @@ export default   function Page() {
   }
 
 
-const [resendApiKeyState,setResendApiKeyState] = useState<string | null>(resendApiKeydata?.resendApiKey || " ")
+const [resendApiKeyState,setResendApiKeyState] = useState<string | null>(resendApiKeydata?.resendApiKey || null)
 
 
   useEffect(()=>{
@@ -266,10 +267,15 @@ const [resendApiKeyState,setResendApiKeyState] = useState<string | null>(resendA
 
 
 const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(false)
+const {data:allAudiences,isLoading:loadingAllAudiences,refetch:refetchAudiences} = useGetAudience(resendApiKeyState || " ")
 
   const handleShowInputResendApiKey =(e:any)=>{
     e.preventDefault()
     if(isOpenFormResendApiKey){
+      if(resendApiKeydata?.resendApiKey === resendApiKeyState){
+        
+        toast.error("Key identical to the one already registered")
+      }
       if(resendApiKeyState?.length === 0){
         toast.error("Veuillez remplir ce champ")
       }else{
@@ -292,7 +298,8 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
     onSuccess: () => {
       toast.success("operation d'ajout reuissie")
       setisOpenFormResendApiKey(false)
-      handleCloseModalExport()
+      // handleCloseModalExport()
+      refetchAudiences()
     },
     onError:(error)=>{
       setisOpenFormResendApiKey(true)
@@ -351,6 +358,8 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
 
   const handleCloseModalExport = () =>{
     setIsOpenExportModal(false)
+    
+    setIdAudienceSelected(null)	
   }
 
 
@@ -359,7 +368,7 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
   }
 
   const [audiencesOfUser,setAudiencesOfUser ] = useState([])
-  const [idAudienceSelected,setIdAudienceSelected] = useState<string>("")
+  const [idAudienceSelected,setIdAudienceSelected] = useState<string | null>(null)
 
 
 
@@ -367,8 +376,8 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
     setIdAudienceSelected(id)
   }
 
+console.log(idAudienceSelected)
 
-  const {data:allAudiences,isLoading:loadingAllAudiences} = useGetAudience(resendApiKeyState || " ")
 
   const mutationSendContactResend = useMutation({
     mutationKey: ["sendContactToAudience"], // Clé unique pour cette mutation
@@ -383,6 +392,7 @@ const [isOpenFormResendApiKey,setisOpenFormResendApiKey] = useState<boolean>(fal
       toast.error("Une erreur est survenue.");
     },
   });
+
 
 const handleResendExport = async (idAudience:string) =>{
 
@@ -429,29 +439,34 @@ const handleResendExport = async (idAudience:string) =>{
          hover:bg-neutral-600 relative  flex justify-center items-center rounded-lg text-center" onClick={()=>  downloadCSV(filterTabEmails || [],`${nameProjectActive}-${dayjs()}`)}> Export To CSV </button></li>
         
           {<form className="w-full flex flex-col p-4 rounded-lg gap-y-2  border border-neutral-600/40 mt-8">
+          <h5 className="font-bold">Share data to Resend </h5>
           <span className="text-sm py-1 "> Your Api Key :  </span>
           <div className="flex gap-x-2">
-          <input  autoComplete="off" type="password" value={resendApiKeyState || ""} onChange={(e)=>setResendApiKeyState(e.target.value)}
+          <input  autoComplete="off" placeholder="set yout resend Api Key" type="password" value={resendApiKeyState || ""} onChange={(e)=>setResendApiKeyState(e.target.value)}
                      className="px-3 appearance-none py-2 w-10/12 bg-neutral-500/20 border border-neutral-700 text-white rounded-md"
                       placeholder="resend Key..." />
 
                       <button  type="submit" className="px-4 w-2/12 py-2  overflow-hidden group  text-xs md:text-sm gap-x-4  border border-neutral-700 line1 
          hover:bg-neutral-600 relative  flex justify-center items-center rounded-lg text-center" 
          onClick={(e)=> handleShowInputResendApiKey(e)}> 
-         {mutationAddResendApiKey.isPending ? <><Loader/></>  : <span>Save</span>}
+         {mutationAddResendApiKey.isPending ? <><Loader2/></>  : <span>Save</span>}
             </button>
 
                       </div>
+                      {resendApiKeydata?.resendApiKey && resendApiKeydata?.resendApiKey?.length > 0 ?  
+                     <>                       
                       <div className="flex justify-between   w-full">
                           <h5>Vos audiences  </h5>
                          <span className="px-3 py-1 rounded-full bg-neutral-700"> {allAudiences?.data?.data.length} </span>  
-                         </div>
+                      </div>
 
                       {loadingAllAudiences && <SkeletonProject/> }
 
                       {allAudiences?.data?.data && allAudiences?.data?.data?.length > 0 ? <div className="flex flex-col gap-2  ">	
                         
-                        <select className="bg-neutral-800 h-10 px-1 outline-none rounded-sm pr-2" onChange={(e)=>handleSelectedAudience(e.target.value)} >
+                        <select className="bg-neutral-800 h-10 px-1 outline-none rounded-sm pr-2"
+                         onChange={(e)=>handleSelectedAudience(e.target.value)} 
+                        >
                           <option className="flex bg-neutral-900  gap-2" selected disabled> select One audience </option>
                         {allAudiences?.data?.data.map((item:any,index:number)=>(
                         <option key={index +  "io"} value={item?.id} className="flex bg-neutral-900  gap-2">
@@ -467,24 +482,30 @@ const handleResendExport = async (idAudience:string) =>{
                        <p className="w-full text-center font-bold">
                            No audiences find !! 
                         </p>}
+                        </> :   
+                        <p>Please set your resend APi Key </p>
+                        }
             <li>
-          <button  style={{opacity:idAudienceSelected?.length === 0 ? "0.5": 1 }}  type="button" className="px-4 py-2 w-full group  text-xs md:text-sm gap-x-4  border border-neutral-700 line1 
+          <button  style={{opacity:idAudienceSelected === null ? "0.3": "1",pointerEvents:idAudienceSelected === null ? "none": "auto"}} 
+           type="button" className="px-4 py-2 w-full group  text-xs md:text-sm gap-x-4  border border-neutral-700 line1 
          hover:bg-neutral-600 relative  flex justify-center items-center rounded-lg text-center" 
-         onClick={()=> handleResendExport(idAudienceSelected)}
+         onClick={()=> handleResendExport(idAudienceSelected || " ")}
          > 
-         {mutationSendContactResend.isPending ? <><span>En cours</span><Loader/></>  : <span>Exporter en Contact Resend</span>}
-            </button></li>               
+         {mutationSendContactResend.isPending ? <><span>En cours</span><Loader2/></>  : <span>Set as Contact Resend</span>}
+            </button></li>
+
+
           </form>
-          }
+               }  
         
-        {/* ----------------- */}
         
-      </ul>
+        
+      </ul> 
 
       <div className="w-full flex justify-end items-center">
            <Button className="w-full " onClick={()=>handleCloseModalExport()}>Cancel</Button>
       </div>    
-    
+  
   </AlertDialogContent>
 </AlertDialog>
 
@@ -517,7 +538,7 @@ const handleResendExport = async (idAudience:string) =>{
     <div className="w-full    px-0 py-3 gap-2 text-balance flex overflow-auto flex-col min-h-72 justify-center items-center">
       <div className="flex flex-col gap-y-4 justify-center items-center max-w-sm  text-center ">
       <h2 className="font-extrabold text-3xl">Begin with your first project now </h2>
-      <span className="text-neutral-400"> Get the ID project and your public key available on page account & billing  </span>
+      <span className="text-neutral-400"> Get the ID project and your private key available on page account & billing  </span>
       <Button onClick ={()=>handleShowDialogCreateProject()} 
       className="px-4 py-2 rounded-lg bg-[#dbdbdb] border border-white hover:bg-black hover:text-white">
          <b className="text-2xl">+</b> <span>Create a project </span> </Button>

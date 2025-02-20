@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import {  useEffect, useState } from "react";
+import { useEffect } from "react";
 import  image1 from "@/public/list mail.png"
 import  formImage from "@/public/Form34.png"
 import gsap from  "gsap"
@@ -85,7 +85,7 @@ export default function Home() {
       
 
       <section className="w-full part2 opacity-0 flex justify-between items-center">
-        <h2 className="opacity-80 w-full text-left uppercase ">How it work ?? </h2>
+        <h2 className="opacity-80 w-full text-left uppercase ">How it works?</h2>
 
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="size-6">
           <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
@@ -101,7 +101,7 @@ export default function Home() {
 
   <div className="flex justify-start gap-x-4 items-center">
     <div className="size-4 sm:size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">1</div>
-    <h4 className="text-sm "> Begin by create your account  </h4>
+    <h4 className="text-sm "> Begin by creating your account  </h4>
   </div>
 
   <Link href="/register" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-8 min-w-8  hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -124,7 +124,7 @@ export default function Home() {
 
   <div className="flex justify-start gap-x-4 items-center">
     <div className="size-4 sm:size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">2</div>
-    <h4 className="text-sm">  Copy your api private key on page /account and set It as variables environments in your project </h4>
+    <h4 className="text-sm">  Copy your API private key on the /account page</h4>
   </div>
 
   <Link href="/account" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-8 min-w-8 
@@ -148,7 +148,7 @@ export default function Home() {
 
   <div className="flex justify-s bg-neutral-700t art gap-x-4 items-center">
     <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">3</div>
-    <h4 className="text-sm"> create a project in dashboard </h4>
+    <h4 className="text-sm"> Create a project in the dashboard </h4>
   </div>
 
   <Link href="/dashboard" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-8 min-w-8  hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -171,7 +171,7 @@ export default function Home() {
 
   <div className="flex justify-s bg-neutral-700t art gap-x-4 items-center">
     <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">4</div>
-    <h4 className="text-sm"> Copy id of this project throught horizontal tree points button modal </h4>
+    <h4 className="text-sm"> Copy the project ID through the horizontal three dots button modal and set it as   </h4>
   </div>
 
   <Link href="/dashboard" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-8 min-w-8 hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -194,7 +194,7 @@ export default function Home() {
 
   <div className="flex justify-s bg-neutral-700t art gap-x-4 items-center">
     <div className="size-4  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">5</div>
-    <h4 className="pr-8 text-sm "> Click the {"'Get Config'"} header button, select a model template, and copy the configuration. Generation complete</h4>
+    <h4 className="pr-8 text-sm "> Click the {"'Get Config'"} header button, select a model template, and copy the configuration. Generation is complete</h4>
   </div>
 
   <Link href="/template" target='_blank' className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-8 min-w-8 hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -218,7 +218,7 @@ export default function Home() {
   <div className="flex justify-start    gap-x-4 items-center">
     <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">6</div>
     <div className="flex">
-      <h4 className="flex text-sm justify-start items-center gap-2"> copy the code and set it in a file like a component  and import it where you want  </h4>
+      <h4 className="flex text-sm justify-start items-center gap-2"> Copy the code and set it in a file as a component and import it where you want  </h4>
     </div>
   </div>
   <Link href="/template" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-8 min-w-8 hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -246,7 +246,7 @@ export default function Home() {
 
             <div className="flex justify-start gap-x-4 items-center">
               <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700/30 border-neutral-700">1</div>
-              <h4 className="text-xs md:text-lg"> Begin by create your account</h4>
+              <h4 className="text-xs md:text-lg"> Begin by creating your account</h4>
             </div>
 
             <Link href="/register" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10  hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -268,7 +268,7 @@ export default function Home() {
 
             <div className="flex justify-start gap-x-4 items-center">
               <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">2</div>
-              <h4 className="text-xs md:text-lg">  Copy your api private key on page /account and set It as variables environments in your project </h4>
+              <h4 className="text-xs md:text-lg">  Copy your API private key on the /account page and set it as environment variables in your project </h4>
             </div>
 
             <Link href="/account" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10  hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -291,7 +291,7 @@ export default function Home() {
 
             <div className="flex justify-s bg-neutral-700t art gap-x-4 items-center">
               <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">3</div>
-              <h4 className="text-xs md:text-lg"> create a project in dashboard </h4>
+              <h4 className="text-xs md:text-lg"> Create a project in the dashboard </h4>
             </div>
 
             <Link href="/dashboard" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10  hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -314,7 +314,7 @@ export default function Home() {
 
             <div className="flex justify-s bg-neutral-700t art gap-x-4 items-center">
               <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">4</div>
-              <h4 className="text-xs md:text-lg"> Copy id of this project throught horizontal tree points button modal </h4>
+              <h4 className="text-xs md:text-lg"> Copy the project ID through the horizontal three dots button modal and set it as environment variables in your projects </h4>
             </div>
 
             <Link href="/dashboard" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10 hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -337,7 +337,7 @@ export default function Home() {
 
             <div className="flex justify-s bg-neutral-700t art gap-x-4 items-center">
               <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">5</div>
-              <h4 className="pr-8 text-xs md:text-lg "> Click the {"'Get Config'"} header button, Choose your template form and copy the code</h4>
+              <h4 className="pr-8 text-xs md:text-lg "> Click the {"'Get Config'"} header button, choose your template form, and copy the code</h4>
             </div>
 
             <Link href="/template" target='_blank' className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10 hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -361,7 +361,7 @@ export default function Home() {
             <div className="flex justify-start    gap-x-4 items-center">
               <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">6</div>
               <div className="flex">
-                <h4 className="flex text-xs md:text-lg justify-start items-center gap-2"> copy the code and set it in a file like a component  and import it where you want  </h4>
+                <h4 className="flex text-xs md:text-lg justify-start items-center gap-2"> Copy the code and set it in a file as a component and import it where you want  </h4>
               </div>
             </div>
             <Link href="/template" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10 hover:bg-neutral-800 transition-all ease duration-400 ">

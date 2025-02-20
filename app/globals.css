@@ -368,3 +368,101 @@ pre {
 
 
 
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-container {
+  display: flex;
+  height:44px;
+  background-color: rgb(64,64,64) ;
+  border: 1px solid rgba(74, 85, 104, 0.4);
+  padding: 2px 1.5px;
+  border-radius: 12px;
+  justify-content: space-between;
+  width: 100%;
+  overflow:hidden;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  padding: 6px;
+  overflow: hidden;
+  width: 66.67%;
+}
+
+.email-icon {
+  width: 24px;
+  height: 24px;
+  stroke: #a0aec0;
+}
+
+.email-input {
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  background-color: rgb(64,64,64) ;
+  color: #cbd5e0;
+  text-transform: capitalize;
+  width: 100%;
+}
+
+.submit-button {
+  padding: 4px 12px;
+  width: 33.33%;
+  border-radius: 12px;
+  color: black;
+  font-weight:800;
+  background-color: rgb(251, 191, 10);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.submit-button:hover {
+  background-color: black;
+  color: white;
+}
+
+.submit-button:disabled {
+  background-color: black;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #4a5568;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.success-icon {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+}
+
+.error-message {
+  color: #e53e3e;
+  margin-top: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+
