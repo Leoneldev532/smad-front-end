@@ -1,5 +1,5 @@
 "use client"
-import {  Nunito, Rosarivo,Noto_Sans_Old_Persian } from "next/font/google";
+import {  Nunito, Rosarivo,Noto_Sans_Old_Persian, Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner"
@@ -12,7 +12,8 @@ import { Analytics } from "@vercel/analytics/react"
 import Head from "next/head";
 import { CSPostHogProvider } from "@/lib/providerPostHog";
 
-const inter =  Nunito({subsets: ["latin"],weight:"400" })
+const jakarta =  Plus_Jakarta_Sans({subsets: ["latin"],weight:"400",variable:"--font-jakarta" })
+const inter =  Inter({subsets: ["latin"],weight:"400",variable:"--font-inter" })
 
 
 const queryClient = new QueryClient()
@@ -39,7 +40,7 @@ export default function RootLayout({
         <title>Smad by leonel Yimga</title>
         <meta name="description" content={"Build quickly a newsletter form , wailist form and more for your landing page, website"} />
       </Head>
-        <body className={`flex justify-center bg-black items-center w-full ${inter.className}`}>
+        <body className={`flex justify-center bg-black items-center w-full ${inter.variable} ${jakarta.variable}`}>
           <NextAuthProvider>
             <div className="flex max-w-[1050px] w-full gap-x-4  p-2 h-full justify-center items-center flex-col">
 

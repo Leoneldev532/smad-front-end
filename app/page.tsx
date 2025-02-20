@@ -101,7 +101,7 @@ export default function Home() {
 
   <div className="flex justify-start gap-x-4 items-center">
     <div className="size-4 sm:size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">1</div>
-    <h4 className="text-sm "> Begin by creating your account  </h4>
+    <span className="text-sm "> Begin by creating your account  </span>
   </div>
 
   <Link href="/register" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-8 min-w-8  hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -124,7 +124,7 @@ export default function Home() {
 
   <div className="flex justify-start gap-x-4 items-center">
     <div className="size-4 sm:size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">2</div>
-    <h4 className="text-sm">  Copy your API private key on the /account page</h4>
+    <span className="text-sm">  Copy your API private key on the /account page</span>
   </div>
 
   <Link href="/account" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-8 min-w-8 
@@ -148,7 +148,7 @@ export default function Home() {
 
   <div className="flex justify-s bg-neutral-700t art gap-x-4 items-center">
     <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">3</div>
-    <h4 className="text-sm"> Create a project in the dashboard </h4>
+    <span className="text-sm"> Create a project in the dashboard </span>
   </div>
 
   <Link href="/dashboard" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-8 min-w-8  hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -171,7 +171,7 @@ export default function Home() {
 
   <div className="flex justify-s bg-neutral-700t art gap-x-4 items-center">
     <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">4</div>
-    <h4 className="text-sm"> Copy the project ID through the horizontal three dots button modal and set it as   </h4>
+    <span className="text-sm"> Copy the project ID through the horizontal three dots button modal and set it as   </span>
   </div>
 
   <Link href="/dashboard" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-8 min-w-8 hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -194,7 +194,7 @@ export default function Home() {
 
   <div className="flex justify-s bg-neutral-700t art gap-x-4 items-center">
     <div className="size-4  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">5</div>
-    <h4 className="pr-8 text-sm "> Click the {"'Get Config'"} header button, select a model template, and copy the configuration. Generation is complete</h4>
+    <span className="pr-8 text-sm "> Click the {"'Get Config'"} header button, select a model template, and copy the configuration. Generation is complete</span>
   </div>
 
   <Link href="/template" target='_blank' className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-8 min-w-8 hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -218,7 +218,7 @@ export default function Home() {
   <div className="flex justify-start    gap-x-4 items-center">
     <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">6</div>
     <div className="flex">
-      <h4 className="flex text-sm justify-start items-center gap-2"> Copy the code and set it in a file as a component and import it where you want  </h4>
+      <span className="flex text-sm justify-start items-center gap-2"> Copy the code and set it in a file as a component and import it where you want  </span>
     </div>
   </div>
   <Link href="/template" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-8 min-w-8 hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -246,7 +246,7 @@ export default function Home() {
 
             <div className="flex justify-start gap-x-4 items-center">
               <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700/30 border-neutral-700">1</div>
-              <h4 className="text-xs md:text-lg"> Begin by creating your account</h4>
+              <span className="text-xs md:text-lg"> Begin by creating your account</span>
             </div>
 
             <Link href="/register" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10  hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -268,7 +268,7 @@ export default function Home() {
 
             <div className="flex justify-start gap-x-4 items-center">
               <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">2</div>
-              <h4 className="text-xs md:text-lg">  Copy your API private key on the /account page and set it as environment variables in your project </h4>
+              <span className="text-xs md:text-lg">  Copy your API private key on the /account page and set it as environment variables in your project </span>
             </div>
 
             <Link href="/account" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10  hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -291,7 +291,7 @@ export default function Home() {
 
             <div className="flex justify-s bg-neutral-700t art gap-x-4 items-center">
               <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">3</div>
-              <h4 className="text-xs md:text-lg"> Create a project in the dashboard </h4>
+              <span className="text-xs md:text-lg"> Create a project in the dashboard </span>
             </div>
 
             <Link href="/dashboard" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10  hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -314,7 +314,7 @@ export default function Home() {
 
             <div className="flex justify-s bg-neutral-700t art gap-x-4 items-center">
               <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">4</div>
-              <h4 className="text-xs md:text-lg"> Copy the project ID through the horizontal three dots button modal and set it as environment variables in your projects </h4>
+              <span className="text-xs md:text-lg"> Copy the project ID through the horizontal three dots button modal and set it as environment variables in your projects </span>
             </div>
 
             <Link href="/dashboard" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10 hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -337,7 +337,7 @@ export default function Home() {
 
             <div className="flex justify-s bg-neutral-700t art gap-x-4 items-center">
               <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">5</div>
-              <h4 className="pr-8 text-xs md:text-lg "> Click the {"'Get Config'"} header button, choose your template form, and copy the code</h4>
+              <span className="pr-8 text-xs md:text-lg "> Click the {"'Get Config'"} header button, choose your template form, and copy the code</span>
             </div>
 
             <Link href="/template" target='_blank' className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10 hover:bg-neutral-800 transition-all ease duration-400 ">
@@ -361,7 +361,7 @@ export default function Home() {
             <div className="flex justify-start    gap-x-4 items-center">
               <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">6</div>
               <div className="flex">
-                <h4 className="flex text-xs md:text-lg justify-start items-center gap-2"> Copy the code and set it in a file as a component and import it where you want  </h4>
+                <span className="flex text-xs md:text-lg justify-start items-center gap-2"> Copy the code and set it in a file as a component and import it where you want  </span>
               </div>
             </div>
             <Link href="/template" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10 hover:bg-neutral-800 transition-all ease duration-400 ">

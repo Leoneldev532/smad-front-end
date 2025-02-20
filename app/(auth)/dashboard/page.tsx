@@ -401,6 +401,18 @@ const handleResendExport = async (idAudience:string) =>{
   
 }
 
+
+const [isCodeCopy, setIsCodeCopy] = useState(false)
+
+const handleCopyCode = () => {
+        setIsCodeCopy(true)
+        navigator.clipboard?.writeText(idProjectActive || " ")
+        setTimeout(() => {
+          setIsCodeCopy(false)
+        }, 1000)
+      }
+    
+
  
   return (
     <>
@@ -588,7 +600,7 @@ const handleResendExport = async (idAudience:string) =>{
                 <SkeletonProject/>
                 </div>}  
               
-           { !allProjectsOneUserLoading && filterTabProjects?.length === 0  && <div className="py-8"><NoData/></div> }
+           { !allProjectsOneUserLoading && filterTabProjects?.length === 0  && <div className="py-1 md:py-1  w-full"><NoData/></div> }
             {!allProjectsOneUserLoading && filterTabProjects?.map((item:Project,index:number)=>(
               <ProjectTabItem project={item} 
               refetch={()=>allProjectsOneUserRefetch()}
@@ -600,8 +612,8 @@ const handleResendExport = async (idAudience:string) =>{
            </ul>
            </div>
          
-           <div className="w-full h-[90vh]   px-0 py-3 gap-2 flex overflow-auto flex-col min-h-72 justify-start items-center">
-           <div className="w-full  overflow-x-auto overflow-y-hidden lg:hidden  h-20 justify-start items-start flex gap-x-2">
+           <div className="w-full min-h-[90vh]   px-0 py-3 gap-2 flex overflow-auto flex-col  justify-start items-center">
+           <div className="w-full   overflow-x-auto overflow-y-hidden lg:hidden  h-12 justify-start items-start flex gap-x-2">
               <ul className="w-full flex  py-3 gap-x-3 justify-start items-start h-full ">
 
                 {allProjectsOneUserLoading && <div className="py-10 flex justify-center items-center"><Loader /></div>}
@@ -632,17 +644,60 @@ const handleResendExport = async (idAudience:string) =>{
            </ul>
            </div>
 
+
+
+
            {getAllUserInfo?.privateKey?.expiresAt && isDatePassed(dayjs(getAllUserInfo.privateKey.expiresAt)) && (
                 <Message text="Your plan has expired. Please renew your subscription." variant="error" />
             )}
-           <h3 className=" text-sm md:text-xl flex justify-start items-center gap-x-2 w-full font-bold "> Emails 
-             {nameProjectActive && <>     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
+
+
+            <div className=" flex w-full p-0 m-0   justify-between items-start ">
+
+           <h3 className=" text-sm md:text-lg    flex justify-start items-center h-8  gap-x-2 font-bold "> Emails 
+             {nameProjectActive &&
+              <>   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
               className="size-4 stroke-neutral-400">
   <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
 </svg>
- {nameProjectActive}</>}  </h3>
-              <div className="flex justify-between gap-x-2 w-full ">
-                  <div className="w-full ">
+ {nameProjectActive} 
+  
+  {!allProjectsOneUserLoading && allProjectsOneUser?.length > 0  && <button  onClick={() => handleCopyCode()} className='border my-1 cursor-pointer 
+              flex-shrink flex gap-x-2 hover:bg-neutral-900 transition-colors 
+      duration-300 ease justify-center items-center border-neutral-500/40 text-neutral-500 px-2 py-1 rounded-lg'> 
+        <span className="text-xs">ID of Project</span>
+  { isCodeCopy ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
+
+                      className="size-4 stroke-slate-300">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                    </svg> :  <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1}
+                stroke="currentColor"
+                className="size-4 stroke-neutral-400"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z"
+                />
+              </svg>}
+            </button> } </>
+            
+            }
+  </h3>
+
+            
+             
+
+           </div>
+
+
+
+              <div className="flex justify-between gap-x-2 items-start m-0 p-0  w-full ">
+                  <div className="w-full flex justify-start items-start  ">
                       <input type="search" onChange={(e)=>handleSearchEmails(e)} placeholder="Search..." 
                         className="px-3 appearance-none py-2 bg-neutral-500/20 border border-neutral-700 text-white rounded-md w-full" />
                    </div> 
