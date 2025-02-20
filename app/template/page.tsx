@@ -17,7 +17,7 @@ const Page = () => {
     const tabTemplateCode: templateCardType[] = [
         {
             id: 0,
-            idLanguage: 0,
+            // idLanguage: 0,
             name:"form 1",
             form:<FormRegisterEmail1  key={1} />
         },
