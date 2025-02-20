@@ -6,7 +6,6 @@ export async function PUT(request: Request, { params }: { params: { user_Id: str
   const { project_Id,email_Id } = params;
   const { newEmail } = await request.json();
 
-  console.log(project_Id,newEmail)
 
   if (!project_Id || !newEmail) {
     return NextResponse.json({ error: 'Missing project_Id or newEmail' }, { status: 400 });

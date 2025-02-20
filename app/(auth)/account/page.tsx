@@ -15,7 +15,6 @@ const Page = () => {
   const user = useRecoilValue(userInfoState);
 
   const { data: getAllUserInfo, isLoading: getAllUserInfoIsLoading } = useGetAllUserInfo(user?.id)
-  console.log(user, getAllUserInfo)
 
   const [privateKey, setprivateKey] = useState<string>()
   useEffect(() => {

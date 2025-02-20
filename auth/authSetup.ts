@@ -96,7 +96,6 @@ export const authOptions: NextAuthOptions = {
   callbacks: {   
     async signIn({ user, account }) {
 
-      console.log(user,"-----")
       // Vérifiez si l'utilisateur existe déjà dans la base de données
       const existingUser = await prisma.user.findUnique({
         where: { email: user?.email  || " "  },

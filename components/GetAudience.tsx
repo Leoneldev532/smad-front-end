@@ -18,18 +18,28 @@ export  const   getAEmailsOfOneAudience  = async (resendApikey:string | null,idA
 }
 
 
+export const getUniqueElement = (array1: string[], array2: string[]) => {
+    const set2 = new Set(array2);
+    return array1.filter(item => !set2.has(item));
+};
+
+
 export const SendContactToAudience  = async (
     idAudienceSelected: string,
     resendApikey: string,
     data: any[]
 ) => {
     const resend = new Resend(resendApikey);
+    const AudiencesDataAvailable = await getAEmailsOfOneAudience(resendApikey, idAudienceSelected);
+    const tabAudiencesEmailsAvailable =  AudiencesDataAvailable?.data?.data?.map((item) => item.email) || [];
+    const tabEmail = getUniqueElement(data, tabAudiencesEmailsAvailable);
+
     const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
+
     const results = await Promise.all(
-        data.map(async (contact, index) => {
+        tabEmail.map(async (contact, index) => {
             try {
-                console.log(contact, "contact", idAudienceSelected, "idAudienceSelected");
                 await resend.contacts.create({
                     email: contact,
                     audienceId: idAudienceSelected,

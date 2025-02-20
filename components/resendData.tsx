@@ -10,7 +10,6 @@ export const ResendServerComponent = ({ resendApiKey }:{resendApiKey:string}) =>
 
   // Récupérer les audiences
   const audiences = resend ? resend.audiences.list() : null;
-    console.log(audiences,"0000")
   return {
     resend,
     audiences,

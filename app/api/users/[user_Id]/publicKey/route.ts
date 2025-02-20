@@ -22,7 +22,6 @@ export async function GET(request: Request, { params }: { params: { user_Id: str
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    console.log(user,"============")
 
     // Retourner la clé publique
     return NextResponse.json({ privateKey: user.privateKey?.key }, { status: 200 }); // Assurez-vous d'accéder au bon champ

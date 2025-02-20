@@ -31,6 +31,5 @@ export default function RootLayout({
       </SessionProvider>
     );
   }
-  console.log("object")
   return null;
 }

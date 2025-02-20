@@ -43,7 +43,6 @@ export const deleteEmail = async (idUser: string | null | undefined, idProject: 
 
 export const updateEmail = async (idUser: string | null | undefined, idProject: string, idEmail: string, newValue: string): Promise<Email[]> => {
     if (!idUser || !idProject || !idEmail || !newValue) throw new Error("Invalid parameters");
-    console.log(newValue);
     const response = await axiosInstance.put(`./api/users/${idUser}/projects/${idProject}/emails/${idEmail}/update`, {
         newEmail: newValue
     });
@@ -132,7 +131,6 @@ export const setResendApiKey = async (idUser: string | null | undefined,resendAp
 
 
 export const GetAllAudienceOfUser = async (resendApiKey: string) => {
-    console.log(resendApiKey, "-----000");
     try {
         const response = await axios.get(
             'https://api.resend.com/audiences',
@@ -213,7 +211,6 @@ export const useGetResendUser = (userId: string | null | undefined) => {
 
 
 export const useGetResendUserAudience = (resendApiKey: string | null | undefined) => {
-    console.log(resendApiKey,"lll")
     return useQuery({
         queryKey: ["resendApiKeyAudience"],
         queryFn: () => GetAllAudienceOfUser(resendApiKey || " "),

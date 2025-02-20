@@ -376,7 +376,6 @@ const {data:allAudiences,isLoading:loadingAllAudiences,refetch:refetchAudiences}
     setIdAudienceSelected(id)
   }
 
-console.log(idAudienceSelected)
 
 
   const mutationSendContactResend = useMutation({

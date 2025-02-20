@@ -76,7 +76,7 @@ useEffect(()=>{
     <div className="flex gap-x-3 w-full h-full justify-center min-h-screen  items-start py-8">
 
       <div className="px-8 py-10  min-w-96 rounded-2xl  relative overflow-hidden    flex flex-col gap-y-4 justify-center items-center">
-        <form onSubmit={handleOnSubmitLogin(onSubmitRegisterForm1)} className="w-full  relative  max-w-xs  h-full flex flex-col gap-4 justify-start items-center">
+        {/* <form onSubmit={handleOnSubmitLogin(onSubmitRegisterForm1)} className="w-full  relative  max-w-xs  h-full flex flex-col gap-4 justify-start items-center">
           <Image alt='logo' src={logo} className="object-contain h-16 w-16" />
           <div className="flex flex-col gap-y-2 w-full justify-center items-center">
           <h2 className="font-bold m-0 text-2xl">Welcome back</h2>
@@ -118,9 +118,8 @@ useEffect(()=>{
           )}
           <ButtonValidation className=" py-2    cursor-pointer  w-full  rounded-lg"
             isLoading={loading} type='positive' typeButton='submit' title='Sign In' />
-          {/* <input type="submit"   disabled={loading}  value="Login"   /> */}
 
-        </form>
+        </form> */}
         <Button
           onClick={() => {signIn("google", { callbackUrl: "/dashboard" }); }} variant="outline" className=" bx-sha1 py-5   border hover:bg-neutral-900 cursor-pointer border-neutral-400/10 w-full  rounded-lg">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
