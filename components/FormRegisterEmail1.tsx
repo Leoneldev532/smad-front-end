@@ -48,16 +48,16 @@ const defaultValidationRules: ValidationRules = {
 const useEmailForm = (project_id: string, private_key: string, customValidationRules?: ValidationRules) => {
     const validationRules = customValidationRules || defaultValidationRules;
 
-    const [data, setData] = useState({ email: '' });
+    const [data, setData] = useState<FormData>({ email: '' });
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
 
     const validate = () => {
         const validationErrors: Record<string, string> = {};
-        Object.keys(validationRules).forEach((key:string) => {
+        Object.keys(validationRules).forEach((key) => {
             const rule = validationRules[key];
-            const error = rule(data[key] as string);
+            const error = rule(data[key as keyof FormData]);
             if (error) {
                 validationErrors[key] = error;
             }
