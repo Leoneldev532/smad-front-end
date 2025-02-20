@@ -442,9 +442,10 @@ const handleResendExport = async (idAudience:string) =>{
           <h5 className="font-bold">Share data to Resend </h5>
           <span className="text-sm py-1 "> Your Api Key :  </span>
           <div className="flex gap-x-2">
-          <input  autoComplete="off" placeholder="set yout resend Api Key" type="password" value={resendApiKeyState || ""} onChange={(e)=>setResendApiKeyState(e.target.value)}
+          <input  autoComplete="off" placeholder="set yout resend Api Key"
+           type="password" value={resendApiKeyState || ""} onChange={(e)=>setResendApiKeyState(e.target.value)}
                      className="px-3 appearance-none py-2 w-10/12 bg-neutral-500/20 border border-neutral-700 text-white rounded-md"
-                      placeholder="resend Key..." />
+                      />
 
                       <button  type="submit" className="px-4 w-2/12 py-2  overflow-hidden group  text-xs md:text-sm gap-x-4  border border-neutral-700 line1 
          hover:bg-neutral-600 relative  flex justify-center items-center rounded-lg text-center" 
