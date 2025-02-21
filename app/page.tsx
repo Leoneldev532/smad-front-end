@@ -133,11 +133,11 @@ export default function Home() {
 
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between lg:px-8 px-8 py-4  ">
+    <main className="flex min-h-screen flex-col overflow-hidden items-center justify-between  px-8 lg:px-8 sm:px-8 py-4  ">
 
-      <section className="flex part1  opacity-0 flex-col-reverse md:flex-row  w-full pt-10  md:pb-14  relative   justify-start items-center">
+      <section className="flex part1   opacity-0 flex-col-reverse md:flex-row  w-full pt-10  md:pb-14  relative   justify-start items-center">
        
-        <div className="w-full md:w-8/12">
+        <div className="w-full   md:w-8/12">
         <h1 className="md:text-5xl text-3xl  flex lg:text-4xl text-balance  w-full ">
 
         Effortlessly create newsletter forms and focus on growing your business.
@@ -156,8 +156,8 @@ export default function Home() {
       
     {/* <span>{isWeUserStarter ? "fdsgsdf" :"11111222222"}</span> */}
 
-      <section className="w-full part2 opacity-0 flex justify-between items-center">
-        <h2 className="opacity-80 w-full text-left uppercase ">How it works?</h2>
+      <section className="w-full part2 opacity-0 flex justify-between overflow-hidden items-center">
+        {/* <h2 className="opacity-80 w-full text-left uppercase ">How it works?</h2> */}
 
         {/* <div className=" flex gap-x-2 justify-center items-center ">
           Or
@@ -183,7 +183,7 @@ export default function Home() {
       </section>
    
     
-      <div className=" flex-col gap-y-2 opacity-0  magicPart overflow-hidden hidden justify-start items-start min-h-72 w-full my-3 rounded-lg border border-neutral-800">
+      <div className=" flex-col gap-y-2 opacity-0   magicPart  hidden justify-start items-start min-h-72 w-full my-3 rounded-lg border border-neutral-800">
         <div className="flex justify-between p-3 items-center w-full bg-neutral-900">
           <span> Good Action </span>
 
@@ -353,16 +353,16 @@ export default function Home() {
 
 </div>
      </div> */}
-      <section className="  part3 flex  mt-4 justify-start  px-4 lg:pl-36 py-8 relative  opacity-0  line overflow-hidden  rounded-xl flex-col gap-y-4 w-full ">
+      <section className="  part3 flex  mt-4 justify-start   pl-0 lg:pl-36 py-8 relative  opacity-0  line   rounded-xl flex-col gap-y-4 w-full ">
 
         <div className="lv flex rounded-xl flex-col gap-y-4 w-full"></div>
         
-          <div className="flex flex-col lr gap-y-3 border border-neutral-800 bg-neutral-700/30 justify-start w-full items-start py-4 rounded-md relative">
-        <div className="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-neutral-700 text-white rounded-full w-8 h-8 flex items-center wb-gradient2 justify-center">1</div>
+          <div className="flex  flex-col lr gap-y-3 border border-neutral-800 bg-neutral-700/30 justify-start w-full items-start py-4 rounded-md relative">
+        {/* <div className="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-neutral-700 text-white rounded-full w-8 h-8 flex items-center wb-gradient2 justify-center">1</div> */}
         <div className="flex gap-x-3 justify-start items-start w-full pl-6 md:pr-0 pr-3">
           <div className="flex flex-col justify-start gap-y-2 items-start">
             <b className="text-md">Create Account & Setup Project</b>
-            <span className="text-neutral-400 tex-sm md:text-base">Create your account and set up your first project in the dashboard.</span>
+            <span className="text-neutral-400 tex-xs sm:text-sm md:text-base">Create your account and set up your first project in the dashboard.</span>
             
           <Link href="/register" className=" px-3 my-2 bg-neutral-800 text-sm hover:bg-neutral-900 transition-all
            ease duration-300  text-neutral-300 rounded-md border border-neutral-700 py-1  "><button className="">Sign Up</button></Link>
@@ -370,24 +370,24 @@ export default function Home() {
         </div>
           </div>
 
-          <div className="flex flex-col lr gap-y-3 border border-neutral-800 bg-neutral-700/30 justify-start w-full items-start py-4 rounded-md relative">
+          <div className="flex flex-col  lr gap-y-3 border border-neutral-800 bg-neutral-700/30 justify-start w-full items-start py-4 rounded-md relative">
         <div className="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2  text-white rounded-full w-8 h-8 flex items-center wb-gradient2 justify-center">2</div>
         <div className="flex gap-x-3 justify-start items-start w-full pl-6 md:pr-0 pr-3">
           <div className="flex flex-col justify-start gap-y-2 items-start">
             <b className="text-md">Configure Environment</b>
-            <span className="text-neutral-400 tex-sm md:text-base">
+            <span className="text-neutral-400 tex-xs sm:text-sm md:text-base">
                     Set your API key (copy it from the /account page) and project ID 
                     (copy it through the button near the project name) as environment variables in your project.</span> <code className="p-2 rounded-md text-sm text-white">
         
-          <span className="text-neutral-400 tex-sm md:text-base">SMAD_API_PRIVATE_KEY</span>=your_api_key<br />
-          <span className="text-neutral-400 tex-sm md:text-base">SMAD_PROJECT_ID</span>=your_project_id
+          <span className="text-neutral-400 tex-xs sm:text-sm md:text-base">SMAD_API_PRIVATE_KEY</span>=your_api_key<br />
+          <span className="text-neutral-400 tex-xs sm:text-sm md:text-base">SMAD_PROJECT_ID</span>=your_project_id
             </code>
           </div>
         </div>
           </div>
 
-          <div className="flex flex-col lr gap-y-3 border border-neutral-800 bg-neutral-700/30 justify-start w-full items-start py-4 rounded-md relative">
-        <div className="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-neutral-700 text-white rounded-full w-8 h-8 flex items-center wb-gradient2 justify-center">3</div>
+          <div className="flex flex-col  lr gap-y-3 border border-neutral-800 bg-neutral-700/30 justify-start w-full items-start py-4 rounded-md relative">
+        {/* <div className="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-neutral-700 text-white rounded-full w-8 h-8 flex items-center wb-gradient2 justify-center">3</div> */}
         <div className="flex gap-x-3 justify-start items-start w-full pl-6 md:pr-2 pr-3">
           <div className="flex flex-col justify-start gap-y-2 items-start">
             <b className="text-md">Import & Start Using</b>
@@ -432,7 +432,7 @@ export default function Home() {
         </> 
        
 
-      {/* <section className="hidden part3 md:flex opacity-0 mt-4 border relative lv line overflow-hidden border-neutral-700 rounded-xl flex-col gap-y-1 w-full ">
+      {/* <section className="hidden part3 md:flex opacity-0 mt-4 border relative lv line  border-neutral-700 rounded-xl flex-col gap-y-1 w-full ">
         
         <div className="w-full  bg-neutral-700/50  overflow-auto">
 
