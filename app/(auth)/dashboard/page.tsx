@@ -647,9 +647,9 @@ const handleCopyCode = () => {
 
 
 
-           {getAllUserInfo?.privateKey?.expiresAt && isDatePassed(dayjs(getAllUserInfo.privateKey.expiresAt)) && (
+           {/* {getAllUserInfo?.privateKey?.expiresAt && isDatePassed(dayjs(getAllUserInfo.privateKey.expiresAt)) && (
                 <Message text="Your plan has expired. Please renew your subscription." variant="error" />
-            )}
+            )} */}
 
 
             <div className=" flex w-full p-0 m-0   justify-between items-start ">
