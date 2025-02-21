@@ -118,8 +118,8 @@ const useEmailForm = (project_id: string, private_key: string, customValidationR
 export const TabTemplateCode = [
     {
         id: 1,
-        code: `const project_id = process.env.NEXT_PUBLIC_API_SMAD_PROJECT_ID || " ";
-    const private_key = process.env.NEXT_PUBLIC_API_SMAD_PRIVATE_KEY || " ";
+        code: `const project_id = process.env.SMAD_PROJECT_ID|| " ";
+    const private_key = process.env.SMAD_API_PRIVATE_KEY  || " ";
 
     const { data, setData, errors, handleSubmit, loading, success } = useEmailForm(project_id, private_key);
  const formClasses = "flex bg-neutral-700 border border-neutral-700/40 py-0.5 px-0.5 overflow-hidden rounded-xl justify-between";
@@ -179,8 +179,8 @@ export const TabTemplateCode = [
     }, {    
         id: 2,
         code: `
-         const project_id = process.env.NEXT_PUBLIC_API_SMAD_PROJECT_ID || " ";
-    const private_key = process.env.NEXT_PUBLIC_API_SMAD_PRIVATE_KEY || " ";
+         const project_id = process.env.SMAD_PROJECT_ID || " ";
+    const private_key = process.env.SMAD_API_PRIVATE_KEY  || " ";
 
     const { data, setData, errors, handleSubmit, loading, success } = useEmailForm(project_id, private_key);
 
@@ -244,8 +244,8 @@ export const TabTemplateCode = [
     {
         id:3,
         code: `
-           const project_id = process.env.NEXT_PUBLIC_API_SMAD_PROJECT_ID || " ";
-    const private_key = process.env.NEXT_PUBLIC_API_SMAD_PRIVATE_KEY || " ";
+           const project_id = process.env.SMAD_PROJECT_ID  || " ";
+    const private_key = process.env.SMAD_API_PRIVATE_KEY  || " ";
 
     const { data, setData, errors, handleSubmit, loading, success } = useEmailForm(project_id, private_key);
 

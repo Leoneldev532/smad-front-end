@@ -556,7 +556,7 @@ const handleCopyCode = () => {
          <b className="text-2xl">+</b> <span>Create a project </span> </Button>
 
          {/* <span className=" italic text-neutral-400 max-w-sm text-balance"> you can make a new subscription here :   <Link href="/pricing" className="underline"> <span> pricing </span></Link> */}
-         {/* </span>  */}
+         {/* </span>  */}  
   </div>
 
   </div>
