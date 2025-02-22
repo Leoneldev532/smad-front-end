@@ -358,7 +358,7 @@ export default function Home() {
         <div className="lv flex rounded-xl flex-col gap-y-4 w-full"></div>
         
           <div className="flex  flex-col lr gap-y-3 border border-neutral-800 bg-neutral-700/30 justify-start w-full items-start py-4 rounded-md relative">
-        {/* <div className="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-neutral-700 text-white rounded-full w-8 h-8 flex items-center wb-gradient2 justify-center">1</div> */}
+        <div className="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-neutral-700 text-white rounded-full w-8 h-8 flex items-center wb-gradient2 justify-center">1</div>
         <div className="flex gap-x-3 justify-start items-start w-full pl-6 md:pr-0 pr-3">
           <div className="flex flex-col justify-start gap-y-2 items-start">
             <b className="text-md">Create Account & Setup Project</b>
@@ -387,7 +387,7 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col  lr gap-y-3 border border-neutral-800 bg-neutral-700/30 justify-start w-full items-start py-4 rounded-md relative">
-        {/* <div className="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-neutral-700 text-white rounded-full w-8 h-8 flex items-center wb-gradient2 justify-center">3</div> */}
+        <div className="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-neutral-700 text-white rounded-full w-8 h-8 flex items-center wb-gradient2 justify-center">3</div>
         <div className="flex gap-x-3 justify-start items-start w-full pl-6 md:pr-2 pr-3">
           <div className="flex flex-col justify-start gap-y-2 items-start">
             <b className="text-md">Import & Start Using</b>
