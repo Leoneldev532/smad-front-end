@@ -386,7 +386,8 @@ export default function Home() {
             <span className="text-neutral-400 tex-xs sm:text-sm md:text-base">
                   Copy the modal code shown and paste it into your code: (basic form default)
                     </span> 
-                    <span className="text-neutral-500 pr-9">If the project is already created, click on the three dots of the project, select "Copy Code Integration," and copy the code.</span>
+                    <span className="text-neutral-500 pr-9">If the project is already created, 
+                      click on the three dots of the project, select ({"Copy Code Integration,"}) and copy the code.</span>
                     
                    
           </div>
