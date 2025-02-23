@@ -433,7 +433,8 @@ const handleCopyCode = () => {
       }
 
    
-      const codeScript = `<script type="text/javascript" src="https://templates.smadmail.com/js/iframeResizer.min.js"></script>
+      const codeScript = `
+<link rel="stylesheet"  href="https://templates.smadmail.com/css/iframe.css"/>
       <iframe src="https://templates.smadmail.com/ui/form1.html?private_key=${privateKey}&project_id=${currentIdProject}"
        scrolling="no"  ></iframe>`    
 

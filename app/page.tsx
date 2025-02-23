@@ -641,6 +641,10 @@ export default function Home() {
 
  </div> */}
 
+<link rel="stylesheet"  href="https://templates.smadmail.com/css/iframe.css"/>
+  <iframe id="iframe_container" src="https://templates.smadmail.com/ui/form1.html?private_key=smad250208172113c78c8db84d&project_id=79b0b48a-fa25-4c24-a3d9-cb59e9b6f2a3"
+   scrolling="no"  ></iframe>
+
 
 
 
