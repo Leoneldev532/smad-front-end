@@ -34,30 +34,21 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import ButtonValidation from './ButtonValidation'
 import Loader from './Loader'
-         const ProjectTabItem = ({project,onClick,isActive,refetch,className}:{project:Project,onClick:()=>void,refetch:()=>void,className:string,isActive:boolean}) => {
+         const ProjectTabItem = ({project,onClick,isActive,refetch,className,privateKey}:
+          {project:Project,onClick:()=>void,refetch:()=>void,className:string,isActive:boolean,privateKey:string}) => {
           
   const queryClient = useQueryClient();
   const {user} = useGetUserInfo()
 
-  const mutationDeleteProject = useMutation({
-    mutationFn: () => deleteProject(user?.id || " ",project.id), 
-    onSuccess: () => {
-      queryClient.invalidateQueries({queryKey:['getAllProjectsOneUser', user?.id]});
-      toast.success("operation de suppression reuissie")
-      handleCloseDialogDelete()
 
-      refetch()
-    },
-    onError:()=>{
-      toast.error("Une erreur est survenue")
-    }
-    
-  });
+  
 
+  
   
   const [isprojectNameUpdate,setIsprojectNameUpdate] = useState<boolean>(false)
   const [idProject,setIdProject] = useState<string>(" ")
   const [newNameProject,setNewNameProject] = useState<string>(" ")
+
   const [isOpenDelete,setIsOpenDelete] = useState(false)
 
 
@@ -76,6 +67,21 @@ import Loader from './Loader'
     
   });
 
+
+
+  const mutationDeleteProject = useMutation({
+    mutationFn: () => deleteProject(user?.id || " ",project.id), 
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey:['getAllProjectsOneUser', user?.id]});
+      toast.success("operation de suppression reuissie")
+      handleCloseDialogDelete()
+      refetch()
+    },
+    onError:()=>{
+      toast.error("Une erreur est survenue")
+    }
+    
+  });
 
 
  const inputRef = useRef<HTMLInputElement | null>(null)
@@ -109,9 +115,90 @@ import Loader from './Loader'
     };
   },[])
   
+
+  const [isOpenModalConfig,setIsOpenModalConfig] = useState(false)
+  const [isCodeCopyCodeScript,setIsCodeCopyCodeScript] = useState(false)
+
+
+  const codeScript = `<script type="text/javascript" src="https://templates.smadmail.com/js/iframeResizer.min.js"></script>
+  <iframe src="https://templates.smadmail.com/ui/form1.html?private_key=${privateKey}&project_id=${project?.id}"
+   scrolling="no"  ></iframe>`  
+
+
+  const handleCopyCodeScript = () => {
+    setIsCodeCopyCodeScript(true)
+    navigator.clipboard?.writeText(codeScript || " ")
+    setTimeout(() => {
+      setIsCodeCopyCodeScript(false)
+    }, 1000)
+  }
+
+  const handleCloseScriptCode = () =>{
+    setIsOpenModalConfig(false)
+  }
+
+  const handleOpenScriptCode = () =>{
+    setIsOpenModalConfig(true)
+  }
+
+
+
          
           return (
             <>
+
+<AlertDialog open={isOpenModalConfig}>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Copy this code and paste in your code </AlertDialogTitle>
+      <AlertDialogDescription>
+        <div className='flex flex-col justify-start items-start py-3  w-full'>
+            <textarea
+              readOnly
+              className="w-full outline  border border-neutral-700/50   rounded-md bg-neutral-900 p-4 "
+              rows={10}
+              value={codeScript}
+            />
+<div className="flex justify-end items-center w-full gap-x-3 py-3">
+{<button  onClick={() => handleCopyCodeScript()} 
+  className='border  cursor-pointer 
+              flex-shrink flex gap-x-2 w-full  hover:bg-neutral-900 transition-colors 
+      duration-300 ease justify-center text-lg items-center border-neutral-500/40 text-neutral-500 px-2 py-2.5 rounded-lg'> 
+        <span className="text-xs"> Copy Code  </span>
+  { isCodeCopyCodeScript ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
+
+                      className="size-4 stroke-slate-300">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                    </svg> :  <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1}
+                stroke="currentColor"
+                className="size-4 stroke-neutral-400"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z"
+                />
+              </svg>}
+            </button> }
+
+         <Button onClick={()=>handleCloseScriptCode()}>Cancel</Button>
+         </div>
+        </div>
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      
+      {/* <Button onClick={()=>handleCloseDialogDelete()}>Cancel</Button> */}
+      {/* <ButtonValidation title={"confirm"}  isLoading={mutationDeleteProject.isPending} typeButton="button" type='negative' onClick={()=>handleDelete(project?.id)} /> */}
+
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+
             <AlertDialog open={isOpenDelete}>
   <AlertDialogContent>
     <AlertDialogHeader>
@@ -128,6 +215,10 @@ import Loader from './Loader'
     </AlertDialogFooter>
   </AlertDialogContent>
 </AlertDialog>
+
+
+
+
             <button type="button" onClick={onClick}  className={cn("py-2 flex px-3 text-sm rounded-md  w-full justify-between items-center gap-x-3 ",className, isActive ? "bg-neutral-800":"bg-transparent")}>
             <div  className="flex gap-2 justify-start items-center w-full">
             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.875" 
@@ -170,6 +261,10 @@ import Loader from './Loader'
           
         <DropdownMenuSeparator />
         <DropdownMenuItem className="cursor-pointer"  onClick={() => navigator.clipboard.writeText(project.id)} >Copy project ID </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem className="cursor-pointer"  onClick={() => handleOpenScriptCode()} > 
+                  show code integration
+         </DropdownMenuItem>
           
         <DropdownMenuSeparator />
           <DropdownMenuItem className="cursor-pointer" onClick={()=>{setIsprojectNameUpdate(true) ; setIdProject(project.id) ; setNewNameProject(project.name) } } >

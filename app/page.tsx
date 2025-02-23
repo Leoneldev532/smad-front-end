@@ -10,6 +10,7 @@ import gsap from  "gsap"
 import { finalCode } from "@/lib/utils";
 import { TabTemplateCode } from "./template/listTemplateCode";
 import Loader2 from "@/components/Loader2";
+import Script from "next/script";
 
 export default function Home() {
 
@@ -157,7 +158,11 @@ export default function Home() {
     {/* <span>{isWeUserStarter ? "fdsgsdf" :"11111222222"}</span> */}
 
       <section className="w-full part2 opacity-0 flex justify-between overflow-hidden items-center">
-        {/* <h2 className="opacity-80 w-full text-left uppercase ">How it works?</h2> */}
+        <h2 className="opacity-80 w-full text-left uppercase ">How it works?</h2>
+
+
+
+{/* <script type="text/javascript">iFrameResize({log: false, checkOrigin: false}, "#testimonialto-wall-of-love-for-testimonial-light");</script> */}
 
         {/* <div className=" flex gap-x-2 justify-center items-center ">
           Or
@@ -371,22 +376,27 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col  lr gap-y-3 border border-neutral-800 bg-neutral-700/30 justify-start w-full items-start py-4 rounded-md relative">
-        <div className="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2  text-white rounded-full w-8 h-8 flex items-center wb-gradient2 justify-center">2</div>
+
+        <div className="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2  text-white rounded-full w-8 h-8 flex 
+        items-center wb-gradient2 justify-center">2</div>
+
         <div className="flex gap-x-3 justify-start items-start w-full pl-6 md:pr-0 pr-3">
           <div className="flex flex-col justify-start gap-y-2 items-start">
             <b className="text-md">Configure Environment</b>
             <span className="text-neutral-400 tex-xs sm:text-sm md:text-base">
-                    Set your API key (copy it from the /account page) and project ID 
-                    (copy it through the button near the project name) as environment variables in your project.</span> <code className="p-2 rounded-md text-sm text-white">
-        
-          <span className="text-neutral-400 tex-xs sm:text-sm md:text-base">SMAD_API_PRIVATE_KEY</span>=your_api_key<br />
-          <span className="text-neutral-400 tex-xs sm:text-sm md:text-base">SMAD_PROJECT_ID</span>=your_project_id
-            </code>
+                  Copy the modal code shown and paste it into your code: (basic form default)
+                    {/* <Link  className="underline text-yellow-400" href="/docs"> Create your custom Form   </Link> */}
+                    </span> 
+                    
+                   
           </div>
         </div>
           </div>
 
-          <div className="flex flex-col  lr gap-y-3 border border-neutral-800 bg-neutral-700/30 justify-start w-full items-start py-4 rounded-md relative">
+
+          
+
+          {/* <div className="flex flex-col  lr gap-y-3 border border-neutral-800 bg-neutral-700/30 justify-start w-full items-start py-4 rounded-md relative">
         <div className="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-neutral-700 text-white rounded-full w-8 h-8 flex items-center wb-gradient2 justify-center">3</div>
         <div className="flex gap-x-3 justify-start items-start w-full pl-6 md:pr-2 pr-3">
           <div className="flex flex-col justify-start gap-y-2 items-start">
@@ -394,11 +404,38 @@ export default function Home() {
             <span className="text-neutral-400 text-sm md:text-base">Choose your template on page /template accessible by the button &quot;get Config&quot;, 
               copy the configuration, and import it into your project as component.</span>
 
-            <div className="flex md:flex-row flex-col gap-2 py-2">
+           
+          </div>
+
+        </div>
+          </div> */}
+
+      </section>
+        </> 
+        <br/>
+
+        {/* <div className="flex flex-col justify-start items-start px-36">
+                    <span> ** If you want a customizable template (optional) </span>
+                    
+            <span className="text-neutral-400 text-xs md:text-sm pr-8 text-balance italic">Choose your template on page /template accessible by the button &quot;get Config&quot;, 
+              copy the configuration, and import it into your project as component.</span>
+
+
+              <code className="py-2 rounded-md text-sm text-white">
+          <span className="text-neutral-400 tex-xs sm:text-sm">Set these data as environment variables </span>
+          <span className="text-neutral-400 tex-xs sm:text-sm">SMAD_API_PRIVATE_KEY</span>=your_api_key<br />
+          <span className="text-neutral-400 tex-xs sm:text-sm">SMAD_PROJECT_ID</span>=your_project_id
+            </code>
+
+
+              <div className="flex md:flex-row flex-col gap-2 py-2">
+
           <button  onClick={()=>handleCopyCode()} 
           className=" px-3  bg-neutral-800 text-sm hover:bg-neutral-900 transition-all ease duration-300 
            text-neutral-300 rounded-md border flex gap-x-2 border-neutral-700 py-1  ">
            <span>Copy Form Code</span>
+
+
            { isCodeCopy ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
 
                       className="size-4 stroke-slate-300">
@@ -423,15 +460,8 @@ export default function Home() {
           <Link href="/template" className=" px-3  bg-neutral-800 text-sm hover:bg-neutral-900 transition-all
            ease duration-300  text-neutral-300 rounded-md border border-neutral-700 py-1  "><button className="">see All Templates</button></Link>
             </div>
-          </div>
-
-        </div>
-          </div>
-
-      </section>
-        </> 
-       
-
+                    
+            </div> */}
       {/* <section className="hidden part3 md:flex opacity-0 mt-4 border relative lv line  border-neutral-700 rounded-xl flex-col gap-y-1 w-full ">
         
         <div className="w-full  bg-neutral-700/50  overflow-auto">
@@ -602,6 +632,13 @@ export default function Home() {
 
       </section>
 
+
+      {/* <script type="text/javascript" src="https://templates.smadmail.com/js/iframeResizer.min.js"></script>
+      <div className="flex justify-center items-center w-full mt-4">
+      <iframe src="https://templates.smadmail.com/ui/form1.html?private_key=smad250208172113c78c8db84d&project_id=79b0b48a-fa25-4c24-a3d9-cb59e9b6f2a3"
+       scrolling="no"  ></iframe>
+
+ </div> */}
 
 
 

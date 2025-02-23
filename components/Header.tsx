@@ -88,7 +88,7 @@ const Header = () => {
             </Link>
 
             <div className="flex gap-x-2 justify-end items-center  w-full    md:w-8/12">
-                <Link href="/template" className="hidden md:block">
+                {/* <Link href="/template" className="hidden md:block">
 
                     <button className="px-4 py-1.5 group  text-xs md:text-sm gap-x-4  border border-neutral-700 line1  hover:bg-neutral-700/30 relative overflow-hidden flex justify-center items-center rounded-lg text-center">
 
@@ -96,7 +96,7 @@ const Header = () => {
 
                         <span> Get Config  </span>
 
-                    </button>  </Link>
+                    </button>  </Link> */}
 
                 {status === "loading" ? <div className="flex gap-x-2 md:gap-x-4  justify-end items-center ">  <Loader /> </div> :
                     status !== "unauthenticated" && user ?

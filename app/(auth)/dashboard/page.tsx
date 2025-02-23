@@ -61,6 +61,12 @@ export default   function Page() {
 
   const {data:getAllUserInfo,isLoading:getAllUserInfoIsLoading} = useGetAllUserInfo(user?.id)
 
+   const [privateKey, setprivateKey] = useState<string>()
+
+    useEffect(() => {
+      setprivateKey(getAllUserInfo?.privateKey?.key)
+    }, [getAllUserInfo])
+
 
   const {data:allProjectsOneUser,isLoading:allProjectsOneUserLoading,isError:allProjectsOneUserError,refetch:allProjectsOneUserRefetch}  = 
   useGetAllProjectsOfOneUser(user?.id)
@@ -309,11 +315,16 @@ const {data:allAudiences,isLoading:loadingAllAudiences,refetch:refetchAudiences}
   });
 
 
+    const [isOpenModalConfig,setIsOpenModalConfig] = useState(false)
+    const [isCodeCopyCodeScript,setIsCodeCopyCodeScript] = useState(false)
+
   const mutationAddProject = useMutation({
     mutationFn: () => createProject(user?.id || " ",projectName), 
-    onSuccess: () => {
+    onSuccess: (data:{id:string}) => {
       toast.success("operation d'ajout reuissie")
       setIsOpenCreateProject(false)
+      setCurrentIdProject(data?.id || " ")
+      setIsOpenModalConfig(true)
       allProjectsOneUserRefetch()
       setProjectName("")
     },
@@ -403,6 +414,7 @@ const handleResendExport = async (idAudience:string) =>{
 
 
 const [isCodeCopy, setIsCodeCopy] = useState(false)
+const [isCodeCopyPrivateApiKey, setIsCodeCopyPrivateApiKey] = useState(false)
 
 const handleCopyCode = () => {
         setIsCodeCopy(true)
@@ -411,11 +423,96 @@ const handleCopyCode = () => {
           setIsCodeCopy(false)
         }, 1000)
       }
-    
 
- 
+      const handleCopyCodePrivateApiKey = () => {
+        setIsCodeCopyPrivateApiKey(true)
+        navigator.clipboard?.writeText(privateKey || " ")
+        setTimeout(() => {
+          setIsCodeCopyPrivateApiKey(false)
+        }, 1000)
+      }
+
+   
+      const codeScript = `<script type="text/javascript" src="https://templates.smadmail.com/js/iframeResizer.min.js"></script>
+      <iframe src="https://templates.smadmail.com/ui/form1.html?private_key=${privateKey}&project_id=${currentIdProject}"
+       scrolling="no"  ></iframe>`    
+
+     
+
+      
+  const handleCopyCodeScript = () => {
+    setIsCodeCopyCodeScript(true)
+    navigator.clipboard?.writeText(codeScript || " ")
+    setTimeout(() => {
+      setIsCodeCopyCodeScript(false)
+    }, 1000)
+  }
+
+  const handleCloseScriptCode = () =>{
+    setIsOpenModalConfig(false)
+  }
+
+
+
+
+
   return (
     <>
+
+<AlertDialog open={isOpenModalConfig}>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Copy this code and paste in your code </AlertDialogTitle>
+      <AlertDialogDescription>
+        <div className='flex flex-col justify-start items-start py-3  w-full'>
+            <textarea
+              readOnly
+              className="w-full outline  border border-neutral-700/50   rounded-md bg-neutral-900 p-4 "
+              rows={10}
+              value={codeScript}
+            />
+<div className="flex justify-end items-center w-full gap-x-3 py-3">
+{<button  onClick={() => handleCopyCodeScript()} 
+  className='border  cursor-pointer 
+              flex-shrink flex gap-x-2 w-full  hover:bg-neutral-900 transition-colors 
+      duration-300 ease justify-center text-lg items-center border-neutral-500/40 text-neutral-500 px-2 py-2.5 rounded-lg'> 
+        <span className="text-xs"> Copy Code  </span>
+  { isCodeCopyCodeScript ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
+
+                      className="size-4 stroke-slate-300">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                    </svg> :  <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1}
+                stroke="currentColor"
+                className="size-4 stroke-neutral-400"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z"
+                />
+              </svg>}
+            </button> }
+
+         <Button onClick={()=>handleCloseScriptCode()}>Cancel</Button>
+         </div>
+        </div>
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      
+      {/* <Button onClick={()=>handleCloseDialogDelete()}>Cancel</Button> */}
+      {/* <ButtonValidation title={"confirm"}  isLoading={mutationDeleteProject.isPending} typeButton="button" type='negative' onClick={()=>handleDelete(project?.id)} /> */}
+
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+
+
+
      <AlertDialog  open={isOpenCreateProject}>
   <AlertDialogContent className="bg-neutral-900">
     <AlertDialogHeader>
@@ -572,6 +669,34 @@ const handleCopyCode = () => {
           <div className="w-1/3 lg:flex hidden h-auto  overflow-y-auto     rounded-md px-3 py-3  flex-col justify-start items-start">
         
           <div className="flex flex-col w-full   justify-start items-start gap-y-2">
+                
+
+  {/* {!allProjectsOneUserLoading && allProjectsOneUser && allProjectsOneUser?.length > 0  && <button  onClick={() => handleCopyCodePrivateApiKey()} 
+  className='border my-1 cursor-pointer 
+              flex-shrink flex gap-x-2 w-full hover:bg-neutral-900 transition-colors 
+      duration-300 ease justify-center text-lg items-center border-neutral-500/40 text-neutral-500 px-2 py-2 rounded-lg'> 
+        <span className="text-xs"> Copy private API  key  </span>
+  { isCodeCopyPrivateApiKey ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
+
+                      className="size-4 stroke-slate-300">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                    </svg> :  <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1}
+                stroke="currentColor"
+                className="size-4 stroke-neutral-400"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z"
+                />
+              </svg>}
+            </button> } */}
+
+
              <h3 className=" text-xl  w-full font-bold "> Yours projects   </h3>
               <div className="flex gap-x-2  justify-start w-full items-center">
                
@@ -603,6 +728,7 @@ const handleCopyCode = () => {
            { !allProjectsOneUserLoading && filterTabProjects?.length === 0  && <div className="py-1 md:py-1  w-full"><NoData/></div> }
             {!allProjectsOneUserLoading && filterTabProjects?.map((item:Project,index:number)=>(
               <ProjectTabItem project={item} 
+              privateKey={privateKey || " "}
               refetch={()=>allProjectsOneUserRefetch()}
                isActive={index === activeTabIndex} className="bg-red-500" 
               onClick={()=>handleTabClick(index,item.id,item.name)} key={"p"+ index} />
@@ -635,6 +761,7 @@ const handleCopyCode = () => {
                 {!allProjectsOneUserLoading && filterTabProjects?.length === 0 && <div className="py-8"><NoData /></div>}
                 {!allProjectsOneUserLoading && filterTabProjects?.map((item: Project, index: number) => (
                   <ProjectTabItem project={item}
+                    privateKey={privateKey || " "}
                     refetch={() => allProjectsOneUserRefetch()}
                     isActive={index === activeTabIndex} className="bg-red-500"
                     onClick={() => handleTabClick(index, item.id, item.name)} key={"p" + index} />
