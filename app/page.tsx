@@ -385,8 +385,8 @@ export default function Home() {
             <b className="text-md">Configure Environment</b>
             <span className="text-neutral-400 tex-xs sm:text-sm md:text-base">
                   Copy the modal code shown and paste it into your code: (basic form default)
-                    {/* <Link  className="underline text-yellow-400" href="/docs"> Create your custom Form   </Link> */}
                     </span> 
+                    <span className="text-neutral-500 pr-9">If the project is already created, click on the three dots of the project, select "Copy Code Integration," and copy the code.</span>
                     
                    
           </div>
