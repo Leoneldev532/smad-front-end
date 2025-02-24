@@ -146,6 +146,7 @@ export default function Home() {
         </h1>
         <div className="w-full flex justify-start gap-x-4 items-center py-8 ">
           <Link href="/login"><Button variant="default" className="rounded-full px-16 font-bold bx-shabtn py-2"> start now  </Button></Link>
+          <Link href="/docs"><Button variant="outline" className="rounded-full px-16 font-bold bx-shabtn py-2"> docs </Button></Link>
 
         </div>
         </div>

@@ -491,3 +491,13 @@ span,b{
 .wb-gradient2{
   background-image: linear-gradient(0deg,  rgb(109, 109, 109) 0%,rgb(52, 51, 51) 100%);
 }
+
+div[data-ntpc="YouTubeEmbed"] {
+  width: 100% !important;
+
+}
+
+lite-youtube {
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
