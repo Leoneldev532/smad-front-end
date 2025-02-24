@@ -359,7 +359,7 @@ export default function Home() {
 
 </div>
      </div> */}
-      <section className="  part3 flex  mt-4 justify-start   pl-0 lg:pl-36 py-8 relative  opacity-0  line   rounded-xl flex-col gap-y-4 w-full ">
+      <section className="  part3 flex  mt-4 justify-start   pl-0 lg:pl-36 py-8 relative  opacity-0  line  overflow-hidden  rounded-xl flex-col gap-y-4 w-full ">
 
         <div className="lv flex rounded-xl flex-col gap-y-4 w-full"></div>
         

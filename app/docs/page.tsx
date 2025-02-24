@@ -21,9 +21,23 @@ const Page = () => {
 
             <h3 className="text-xl text-yellow-400 font-bold mb-4 text-left  w-full  pt-4 max-w-xl">How to custom form (example)  </h3>
               <div className="pb-3">
+
+
+                
             {`<link rel="stylesheet"  href="https://templates.smadmail.com/css/iframe.css"/>
-                <iframe src="https://templates.smadmail.com/ui/form1.html?private_key=smad250208172113c78c8ab94d&project_id=3fb6d9ce-2433-4b8c-ede-bfd9c26c945d&bg_btn=#000000&bg_hover_btn=black&text_color_btn=white&border_radius_btn=5px&bg_input=#f0f0f0&text_color_input=#333333&border_radius_form=10px&border_form=#cccccc&text_color_hover_btn=yellow" 
-                 scrolling="no"  ></iframe>`}
+                <iframe src="https://templates.smadmail.com/ui/form1.html?private_key=smad250208172113c78c8ab94d&project_id=3fb6d9ce-2433-4b8c-ede-bfd9c26c945d 
+                \n
+                &bg_btn=000000\n
+                &bg_hover_btn=black\n
+                &text_color_btn=white\n
+                &border_radius_btn=5px\n
+                &bg_input=f0f0f0\n
+                &text_color_input=333333\n
+                &border_radius_form=10px\n
+                &border_form=cccccc\n
+                &text_color_hover_btn=yellow" \n
+                 scrolling="no"  ></iframe>
+                 `}
           </div>
 
             <table className="min-w-full  border rounded-lg overflow-hidden border-neutral-700/30 text-neutral-400">
