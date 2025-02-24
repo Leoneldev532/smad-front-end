@@ -38,6 +38,7 @@ export default function RootLayout({
       <html lang="en" className="dark" >
       <Head>
         <title>Smad by leonel Yimga</title>
+        <link rel="icon" href="/logo.png" sizes="any" />
         <meta name="description" content={"Build quickly a newsletter form , wailist form and more for your landing page, website"} />
       </Head>
         <body className={`flex justify-center bg-black items-center w-full ${inter.variable} ${jakarta.variable}`}>
