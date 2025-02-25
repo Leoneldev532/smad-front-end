@@ -139,14 +139,14 @@ export default function Home() {
       <section className="flex part1   opacity-0 flex-col-reverse md:flex-row  w-full pt-10  md:pb-14  relative   justify-start items-center">
        
         <div className="w-full   md:w-8/12">
-        <h1 className="md:text-5xl text-3xl  flex lg:text-4xl text-balance  w-full ">
+        <h1 className="md:text-5xl text-xl  flex lg:text-4xl text-balance  w-full ">
 
         Effortlessly create newsletter forms and focus on growing your business.
 
         </h1>
-        <div className="w-full flex justify-start gap-x-4 items-center py-8 ">
-          <Link href="/login"><Button variant="default" className="rounded-full px-16 font-bold bx-shabtn py-2"> start now  </Button></Link>
-          <Link href="/docs"><Button variant="outline" className="rounded-full px-16 font-bold bx-shabtn py-2"> docs </Button></Link>
+        <div className="w-full flex md:flex-row flex-col justify-start gap-4 items-start py-8 ">
+          <Link href="/login" className="w-full "><Button variant="default" className="rounded-full px-0 md:px-16 font-bold  w-full  bx-shabtn py-2"> start now  </Button></Link>
+          <Link href="/docs" className="w-full "><Button variant="outline" className="rounded-full px-0 md:px-16 font-bold  w-full bx-shabtn py-2"> docs </Button></Link>
 
         </div>
         </div>
@@ -359,7 +359,7 @@ export default function Home() {
 
 </div>
      </div> */}
-      <section className="  part3 flex  mt-4 justify-start   pl-0 lg:pl-36 py-8 relative  opacity-0  line  overflow-hidden  rounded-xl flex-col gap-y-4 w-full ">
+      <section className="  part3 flex  mt-4 justify-start   pl-0 lg:pl-36 py-8 relative  opacity-0  line    rounded-xl flex-col gap-y-4 w-full ">
 
         <div className="lv flex rounded-xl flex-col gap-y-4 w-full"></div>
         

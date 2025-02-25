@@ -34,6 +34,9 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import ButtonValidation from './ButtonValidation'
 import Loader from './Loader'
+import { useSetRecoilState } from 'recoil'
+import { templateInfo } from '@/lib/atom'
+import { useRouter } from 'next/navigation'
          const ProjectTabItem = ({project,onClick,isActive,refetch,className,privateKey}:
           {project:Project,onClick:()=>void,refetch:()=>void,className:string,isActive:boolean,privateKey:string}) => {
           
@@ -122,9 +125,18 @@ import Loader from './Loader'
 
   const codeScript = `
 <link rel="stylesheet"  href="https://templates.smadmail.com/css/iframe.css"/>
-  <iframe src="https://templates.smadmail.com/ui/form1.html?private_key=${privateKey}&project_id=${project?.id}"
-   scrolling="no"  ></iframe>`  
+  <iframe src="https://templates.smadmail.com/ui/form1.html?private_key=${privateKey}&project_id=${project?.id}" scrolling="no"  ></iframe>`  
 
+
+    const router  = useRouter()
+   
+      const setDataUser = useSetRecoilState(templateInfo)
+   
+     const handleCustomize = () =>{
+       setDataUser(`?private_key=${privateKey}&project_id=${project?.id.trim()}`)
+       router.push("/playground")
+     }
+   
 
   const handleCopyCodeScript = () => {
     setIsCodeCopyCodeScript(true)
@@ -186,6 +198,7 @@ import Loader from './Loader'
               </svg>}
             </button> }
 
+            <Button className="bg-yellow-500" onClick={()=>handleCustomize()}>Customize</Button>
          <Button onClick={()=>handleCloseScriptCode()}>Cancel</Button>
          </div>
         </div>

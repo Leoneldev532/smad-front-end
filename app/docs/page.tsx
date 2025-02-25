@@ -9,7 +9,7 @@ const Page = () => {
         <section className="flex justify-start px-8 flex-col items-start w-full h-full">
             <h5 className="text-xl font-bold mb-4 text-left text-neutral-400 w-full  py-4">How it work ?  </h5>
 
-            <div className="flex justify-start bg-white/70 border-white/70 border-[0.4px]  overflow-hidden items-start h-60 md:h-[28rem] w-full rounded-lg">
+            <div className="flex justify-start bg-white/70 border-white/70 border-[0.4px]  overflow-hidden items-start h-auto md:h-[28rem] w-full rounded-lg">
 
             <YouTubeEmbed videoid="1IiksZuKKq8" height={1500} width={1000}    />
             
@@ -43,46 +43,46 @@ const Page = () => {
             <table className="min-w-full  border rounded-lg overflow-hidden border-neutral-700/30 text-neutral-400">
             <thead className="bg-neutral-700">
                 <tr>
-                    <th className="py-2 px-4 border-b text-left">Parameter</th>
-                    <th className="py-2 px-4 border-b text-left">Description</th>
+                    <th className="py-2 px-4 border-b text-left text-xs md:text-sm">Parameter</th>
+                    <th className="py-2 px-4 border-b text-left text-xs md:text-sm">Description</th>
                 </tr>
             </thead>
             <tbody className="bg-neutral-900">
                 <tr>
-                    <td className="py-4 px-4 border-b">bg_btn</td>
-                    <td className="py-4 px-4 border-b">Background color of the button</td>
+                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">bg_btn</td>
+                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">Background color of the button</td>
                 </tr>
                 <tr>
-                    <td className="py-4 px-4 border-b">text_color_btn</td>
-                    <td className="py-4 px-4 border-b">Text color of the button</td>
+                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">text_color_btn</td>
+                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">Text color of the button</td>
                 </tr>
                 <tr>
-                    <td className="py-4 px-4 border-b">border_radius_btn</td>
-                    <td className="py-4 px-4 border-b">Border radius of the button</td>
+                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">border_radius_btn</td>
+                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">Border radius of the button</td>
                 </tr>
                 <tr>
-                    <td className="py-4 px-4 border-b">bg_input</td>
-                    <td className="py-4 px-4 border-b">Background color of the input field</td>
+                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">bg_input</td>
+                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">Background color of the input field</td>
                 </tr>
                 <tr>
-                    <td className="py-4 px-4 border-b">text_color_input</td>
-                    <td className="py-4 px-4 border-b">Text color of the input field</td>
+                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">text_color_input</td>
+                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">Text color of the input field</td>
                 </tr>
                 <tr>
-                    <td className="py-4 px-4 border-b">border_radius_form</td>
-                    <td className="py-4 px-4 border-b">Border radius of the form</td>
+                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">border_radius_form</td>
+                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">Border radius of the form</td>
                 </tr>
                 <tr>
-                    <td className="py-4 px-4 border-b">border_form</td>
-                    <td className="py-4 px-4 border-b">Border color of the form</td>
+                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">border_form</td>
+                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">Border color of the form</td>
                 </tr>
                 <tr>
-                    <td className="py-4 px-4 border-b">bg_hover_btn</td>
-                    <td className="py-4 px-4 border-b">Background color of the button on hover</td>
+                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">bg_hover_btn</td>
+                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">Background color of the button on hover</td>
                 </tr>
                 <tr>
-                    <td className="py-4 px-4 border-b">text_color_hover_btn</td>
-                    <td className="py-4 px-4 border-b">Text color of the button on hover</td>
+                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">text_color_hover_btn</td>
+                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">Text color of the button on hover</td>
                 </tr>
             </tbody>
         </table>

@@ -42,14 +42,16 @@ import Message from "@/components/Message"
 import Link from "next/link"
 import dayjs, { Dayjs } from "dayjs"
 import ProjectItemMobile from "@/components/ui/ProjectItemMobile"
-import { useRecoilValue } from "recoil"
-import {  userInfoState } from "@/lib/atom"
+import { useRecoilValue, useSetRecoilState } from "recoil"
+import {  templateInfo, userInfoState } from "@/lib/atom"
 import { Resend } from 'resend';
 import { ResendServerComponent } from "@/components/resendData"
 import SkeletonEmailLine from "@/components/ui/skeletonEmailLine"
 import SkeletonProject from "@/components/ui/skeletonProject"
 import { GetAudience, SendContactToAudience } from "@/components/GetAudience"
 import Loader2 from "@/components/Loader2"
+import { useRouter } from "next/navigation"
+
 
 
 export default   function Page() {
@@ -453,7 +455,14 @@ const handleCopyCode = () => {
     setIsOpenModalConfig(false)
   }
 
+  const router  = useRouter()
 
+   const setDataUser = useSetRecoilState(templateInfo)
+
+  const handleCustomize = () =>{
+    setDataUser(`?private_key=${privateKey}&project_id=${currentIdProject.trim()}`)
+    router.push("/playground")
+  }
 
 
 
@@ -498,6 +507,8 @@ const handleCopyCode = () => {
               </svg>}
             </button> }
 
+
+         <Button className="bg-yellow-500" onClick={()=>handleCustomize()}>Customize</Button>
          <Button onClick={()=>handleCloseScriptCode()}>Cancel</Button>
          </div>
         </div>
