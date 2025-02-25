@@ -144,11 +144,14 @@ export default function Home() {
         Effortlessly create newsletter forms and focus on growing your business.
 
         </h1>
-        <div className="w-full flex md:flex-row flex-col justify-start gap-4 items-start py-8 ">
+        <div className=" flex md:flex-row w-8/12 flex-col justify-start gap-4   items-start py-8 ">
           <Link href="/login" className="w-full "><Button variant="default" className="rounded-full px-0 md:px-16 font-bold  w-full  bx-shabtn py-2"> start now  </Button></Link>
-          <Link href="/docs" className="w-full "><Button variant="outline" className="rounded-full px-0 md:px-16 font-bold  w-full bx-shabtn py-2"> docs </Button></Link>
+          <Link href="/docs" className="w-full ">
+            <Button variant="outline" className="rounded-full px-6  font-bold  w-full bx-shabtn py-2"> docs </Button>
+          </Link>
 
         </div>
+
         </div>
         <div className="w-full md:w-1/2 px-8  md:px-10 flex justify-center items-center">
         <Image  src={image1} className="object-contain " alt="hero section image" />
