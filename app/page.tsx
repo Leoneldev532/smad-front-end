@@ -609,7 +609,7 @@ export default function Home() {
       </section> */}
     
 
-      <h2 className="text-lg md:text-xl part4 my-10 opacity-0 font-medium  text-neutral-400  uppercase text-left w-full   text-balance">
+      {/* <h2 className="text-lg md:text-xl part4 my-10 opacity-0 font-medium  text-neutral-400  uppercase text-left w-full   text-balance">
 
          Design available for implementation with tailwind 
 
@@ -635,7 +635,7 @@ export default function Home() {
           </div>
         </div>
 
-      </section>
+      </section> */}
 
 
       {/* <script type="text/javascript" src="https://templates.smadmail.com/js/iframeResizer.min.js"></script>
