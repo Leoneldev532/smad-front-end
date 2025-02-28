@@ -174,7 +174,7 @@ h1,h2,h3,h4,h5,h6,p{
   width:214px;
   left:78%;
   top:0%;
- 
+
   background-image: red;
 }
 
@@ -190,7 +190,7 @@ h1,h2,h3,h4,h5,h6,p{
   @media screen and (max-width:1040px) {
 
     display:none
-    
+
   }
 }
 
@@ -206,7 +206,7 @@ h1,h2,h3,h4,h5,h6,p{
   @media screen and (max-width:1040px) {
 
     display:none
-    
+
   }
 }
 
@@ -217,7 +217,7 @@ h1,h2,h3,h4,h5,h6,p{
   width:214px;
   left:0%;
   top:99%;
- 
+
   background-image: red;;
 }
 
@@ -283,7 +283,7 @@ pre{
   width:214px;
   left:78%;
   top:80%;
- 
+
   background-image: red;
 } */
 
@@ -299,7 +299,7 @@ pre {
 .line-v-tree{
   left:50%;
   z-index:1;
-  
+
   top:-10px;
 }
 
@@ -309,7 +309,7 @@ pre {
   position:absolute;
   height:214px;
   left:0;
-  
+
   background-image:-webkit-linear-gradient(45deg, transparent,white 20%,transparent)
 }
 
@@ -381,7 +381,7 @@ pre {
 }
 
 h1,h2,h3,h4,h5,b,button{
-  font-family:var(--font-jakarta)
+  font-family:"JUST"
 }
 span,b{
   font-family:var(--font-inter)
@@ -500,4 +500,11 @@ div[data-ntpc="YouTubeEmbed"] {
 lite-youtube {
   max-width: 100% !important;
   max-height: 100% !important;
+}
+
+@font-face {
+    font-family: 'JUST';
+    src: url('../public/font/JUST\ Sans\ Regular.otf');
+    font-weight: normal;
+    font-style: normal;
 }

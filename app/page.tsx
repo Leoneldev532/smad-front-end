@@ -61,14 +61,14 @@ export default function Home() {
         duration:0.6,
 
       })
-      
+
 
     },[])
 
     const [isCodeCopy, setIsCodeCopy] = useState(false)
-    
+
     const [isWeUserStarter,setIsWeUsertarter] = useState<boolean>(false)
-       
+
          const handleCopyCode = () => {
            setIsCodeCopy(true)
            navigator.clipboard?.writeText(finalCode(TabTemplateCode[1]?.code))
@@ -76,7 +76,7 @@ export default function Home() {
              setIsCodeCopy(false)
            }, 1000)
          }
-         
+
          const handleShowMagicBlock = () =>{
           gsap.to(".part3",{
             opacity:0,
@@ -124,28 +124,28 @@ export default function Home() {
            setIsWeUsertarter(true)
            handleUpdateStep("step1",true)
          }
-         
+
          const handleEndMagicAction = () =>{
            handleHideMagicBlock()
           setIsWeUsertarter(false)
          }
-         
-     
+
+
 
 
   return (
     <main className="flex min-h-screen flex-col overflow-hidden items-center justify-between  px-8 lg:px-8 sm:px-8 py-4  ">
 
       <section className="flex part1   opacity-0 flex-col-reverse md:flex-row  w-full pt-10  md:pb-14  relative   justify-start items-center">
-       
+
         <div className="w-full   md:w-8/12">
         <h1 className="md:text-5xl text-xl  flex lg:text-4xl text-balance  w-full ">
 
         Effortlessly create newsletter forms and focus on growing your business.
 
         </h1>
-        <div className=" flex md:flex-row w-8/12 flex-col justify-start gap-4   items-start py-8 ">
-          <Link href="/login" className="w-full "><Button variant="default" className="rounded-full px-0 md:px-16 font-bold  w-full  bx-shabtn py-2"> start now  </Button></Link>
+        <div className=" flex sm:flex-row md:w-8/12 flex-col justify-start gap-4   items-start py-6 ">
+          <Link href="/login" className="w-full "><Button variant="default" className="rounded-full px-0 md:px-16 font-bold  w-full  bx-shabtn py-2"> start now is free </Button></Link>
           <Link href="/docs" className="w-full ">
             <Button variant="outline" className="rounded-full px-6  font-bold  w-full bx-shabtn py-2"> docs </Button>
           </Link>
@@ -154,11 +154,11 @@ export default function Home() {
 
         </div>
         <div className="w-full md:w-1/2 px-8  md:px-10 flex justify-center items-center">
-        <Image  src={image1} className="object-contain " alt="hero section image" />
+        <Image  src={image1} className="object-contain md:h-auto h-96" alt="hero section image" />
         </div>
-       
+
       </section>
-      
+
     {/* <span>{isWeUserStarter ? "fdsgsdf" :"11111222222"}</span> */}
 
       <section className="w-full part2 opacity-0 flex justify-between overflow-hidden items-center">
@@ -170,56 +170,56 @@ export default function Home() {
 
         {/* <div className=" flex gap-x-2 justify-center items-center ">
           Or
-          <button onClick={()=>handleStartMagicAction()} className={`rounded-lg flex-shrink ${isWeUserStarter ? "w-16" : "w-44" } 
-          text-center border relative overflow-hidden  justify-center border-neutral-700/50 text-white 
+          <button onClick={()=>handleStartMagicAction()} className={`rounded-lg flex-shrink ${isWeUserStarter ? "w-16" : "w-44" }
+          text-center border relative overflow-hidden  justify-center border-neutral-700/50 text-white
           line1 bg-neutral-700/30 px-4 py-2 flex gap-x-1 items-center`}>
 
              {isWeUserStarter ?  <Loader2/>  : <>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} 
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
               stroke="currentColor" className="size-6 group-hover:fill-white">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
                 </svg>
 
-            <span className="text-neutral-200 text-sm w-full text-center md:text-sm"> 
-               Magic Starter 
-               </span></> 
+            <span className="text-neutral-200 text-sm w-full text-center md:text-sm">
+               Magic Starter
+               </span></>
                }
           </button>
 
-       
+
         </div> */}
 
       </section>
-   
-    
+
+
       <div className=" flex-col gap-y-2 opacity-0   magicPart  hidden justify-start items-start min-h-72 w-full my-3 rounded-lg border border-neutral-800">
         <div className="flex justify-between p-3 items-center w-full bg-neutral-900">
           <span> Good Action </span>
 
           <button onClick={()=>handleEndMagicAction()}   className="
-          text-center border relative overflow-hidden  text-xs justify-center rounded-lg border-neutral-500/50 text-white 
+          text-center border relative overflow-hidden  text-xs justify-center rounded-lg border-neutral-500/50 text-white
           line1 bg-neutral-700/30 px-4 py-2 flex gap-x-2 items-center">  Stop   </button>
 
 
-         </div>  
+         </div>
 
          <div className="flex justify-between  items-center w-full p-4">
               {step.step1 &&
                <div className="flex flex-col justify-start items-start gap-y-3">
                 <span className="text-neutral-400"> Begin by create an account Or connect click down </span>
-                <div className="flex gap-x-3 justify-start items-start"> 
+                <div className="flex gap-x-3 justify-start items-start">
 
                   <Link href="/register&magicaction"><button className=" px-3  bg-neutral-500 text-sm hover:bg-neutral-900 transition-all
-           ease duration-300  text-neutral-300 rounded-md border border-neutral-700 py-1  "> Sign Up </button></Link> 
-           
+           ease duration-300  text-neutral-300 rounded-md border border-neutral-700 py-1  "> Sign Up </button></Link>
+
      <Link href="/login&magicaction"><button className=" px-3  bg-neutral-800 text-sm hover:bg-neutral-900 transition-all
-           ease duration-300  text-neutral-300 rounded-md border border-neutral-700 py-1  "> Sign In </button></Link> 
+           ease duration-300  text-neutral-300 rounded-md border border-neutral-700 py-1  "> Sign In </button></Link>
            </div>
-                </div> }  
+                </div> }
          </div>
-      
-      </div> 
-         
+
+      </div>
+
          <>
       {/* <div className="sm:hidden w-full flex flex-col   mt-3 gap-y-4">
 
@@ -255,7 +255,7 @@ export default function Home() {
     <span className="text-sm">  Copy your API private key on the /account page</span>
   </div>
 
-  <Link href="/account" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-8 min-w-8 
+  <Link href="/account" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-8 min-w-8
    hover:bg-neutral-800 transition-all ease duration-400 ">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
       <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
@@ -365,14 +365,14 @@ export default function Home() {
       <section className="  part3 flex  mt-4 justify-start   pl-0 lg:pl-36 py-8 relative  opacity-0  line    rounded-xl flex-col gap-y-4 w-full ">
 
         <div className="lv flex rounded-xl flex-col gap-y-4 w-full"></div>
-        
+
           <div className="flex  flex-col lr gap-y-3 border border-neutral-800 bg-neutral-700/30 justify-start w-full items-start py-4 rounded-md relative">
         <div className="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-neutral-700 text-white rounded-full w-8 h-8 flex items-center wb-gradient2 justify-center">1</div>
         <div className="flex gap-x-3 justify-start items-start w-full pl-6 md:pr-0 pr-3">
           <div className="flex flex-col justify-start gap-y-2 items-start">
             <b className="text-md">Create Account & Setup Project</b>
             <span className="text-neutral-400 tex-xs sm:text-sm md:text-base">Create your account and set up your first project in the dashboard.</span>
-            
+
           <Link href="/register" className=" px-3 my-2 bg-neutral-800 text-sm hover:bg-neutral-900 transition-all
            ease duration-300  text-neutral-300 rounded-md border border-neutral-700 py-1  "><button className="">Sign Up</button></Link>
           </div>
@@ -381,7 +381,7 @@ export default function Home() {
 
           <div className="flex flex-col  lr gap-y-3 border border-neutral-800 bg-neutral-700/30 justify-start w-full items-start py-4 rounded-md relative">
 
-        <div className="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2  text-white rounded-full w-8 h-8 flex 
+        <div className="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2  text-white rounded-full w-8 h-8 flex
         items-center wb-gradient2 justify-center">2</div>
 
         <div className="flex gap-x-3 justify-start items-start w-full pl-6 md:pr-0 pr-3">
@@ -389,40 +389,40 @@ export default function Home() {
             <b className="text-md">Configure Environment</b>
             <span className="text-neutral-400 tex-xs sm:text-sm md:text-base">
                   Copy the modal code shown and paste it into your code: (basic form default)
-                    </span> 
-                    <span className="text-neutral-500 pr-9">If the project is already created, 
+                    </span>
+                    <span className="text-neutral-500 pr-9">If the project is already created,
                       click on the three dots of the project, select ({"Copy Code Integration,"}) and copy the code.</span>
-                    
-                   
+
+
           </div>
         </div>
           </div>
 
 
-          
+
 
           {/* <div className="flex flex-col  lr gap-y-3 border border-neutral-800 bg-neutral-700/30 justify-start w-full items-start py-4 rounded-md relative">
         <div className="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-neutral-700 text-white rounded-full w-8 h-8 flex items-center wb-gradient2 justify-center">3</div>
         <div className="flex gap-x-3 justify-start items-start w-full pl-6 md:pr-2 pr-3">
           <div className="flex flex-col justify-start gap-y-2 items-start">
             <b className="text-md">Import & Start Using</b>
-            <span className="text-neutral-400 text-sm md:text-base">Choose your template on page /template accessible by the button &quot;get Config&quot;, 
+            <span className="text-neutral-400 text-sm md:text-base">Choose your template on page /template accessible by the button &quot;get Config&quot;,
               copy the configuration, and import it into your project as component.</span>
 
-           
+
           </div>
 
         </div>
           </div> */}
 
       </section>
-        </> 
+        </>
         <br/>
 
         {/* <div className="flex flex-col justify-start items-start px-36">
                     <span> ** If you want a customizable template (optional) </span>
-                    
-            <span className="text-neutral-400 text-xs md:text-sm pr-8 text-balance italic">Choose your template on page /template accessible by the button &quot;get Config&quot;, 
+
+            <span className="text-neutral-400 text-xs md:text-sm pr-8 text-balance italic">Choose your template on page /template accessible by the button &quot;get Config&quot;,
               copy the configuration, and import it into your project as component.</span>
 
 
@@ -435,8 +435,8 @@ export default function Home() {
 
               <div className="flex md:flex-row flex-col gap-2 py-2">
 
-          <button  onClick={()=>handleCopyCode()} 
-          className=" px-3  bg-neutral-800 text-sm hover:bg-neutral-900 transition-all ease duration-300 
+          <button  onClick={()=>handleCopyCode()}
+          className=" px-3  bg-neutral-800 text-sm hover:bg-neutral-900 transition-all ease duration-300
            text-neutral-300 rounded-md border flex gap-x-2 border-neutral-700 py-1  ">
            <span>Copy Form Code</span>
 
@@ -465,10 +465,10 @@ export default function Home() {
           <Link href="/template" className=" px-3  bg-neutral-800 text-sm hover:bg-neutral-900 transition-all
            ease duration-300  text-neutral-300 rounded-md border border-neutral-700 py-1  "><button className="">see All Templates</button></Link>
             </div>
-                    
+
             </div> */}
       {/* <section className="hidden part3 md:flex opacity-0 mt-4 border relative lv line  border-neutral-700 rounded-xl flex-col gap-y-1 w-full ">
-        
+
         <div className="w-full  bg-neutral-700/50  overflow-auto">
 
           <div className="w-full  pl-4 pr-2 py-2 flex gap-x-4  justify-between items-center">
@@ -607,11 +607,11 @@ export default function Home() {
         </div>
 
       </section> */}
-    
+
 
       {/* <h2 className="text-lg md:text-xl part4 my-10 opacity-0 font-medium  text-neutral-400  uppercase text-left w-full   text-balance">
 
-         Design available for implementation with tailwind 
+         Design available for implementation with tailwind
 
       </h2>
 

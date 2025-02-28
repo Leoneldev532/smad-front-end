@@ -9,10 +9,10 @@ const Page = () => {
         <section className="flex justify-start px-8 flex-col items-start w-full h-full">
             <h5 className="text-xl font-bold mb-4 text-left text-neutral-400 w-full  py-4">How it work ?  </h5>
 
-            <div className="flex justify-start bg-white/70 border-white/70 border-[0.4px]  overflow-hidden items-start h-auto md:h-[28rem] w-full rounded-lg">
+            <div className="flex justify-start bg-white/70 border-white/70 border-[0.4px]  overflow-hidden items-start h-56 md:h-[28rem] w-full rounded-lg">
 
             <YouTubeEmbed videoid="1IiksZuKKq8" height={1500} width={1000}    />
-            
+
             </div>
             <h1 className="text-3xl text-neutral-300 font-bold mb-4 text-left  w-full  py-4 max-w-xl">How To build a newsletters form in less than 2 minutes </h1>
             <div className=" w-full overflow-hidden  border-t border-neutral-500/40">
@@ -23,9 +23,9 @@ const Page = () => {
               <div className="pb-3">
 
 
-                
+
             {`<link rel="stylesheet"  href="https://templates.smadmail.com/css/iframe.css"/>
-                <iframe src="https://templates.smadmail.com/ui/form1.html?private_key=smad250208172113c78c8ab94d&project_id=3fb6d9ce-2433-4b8c-ede-bfd9c26c945d 
+                <iframe src="https://templates.smadmail.com/ui/form1.html?private_key=smad250208172113c78c8ab94d&project_id=3fb6d9ce-2433-4b8c-ede-bfd9c26c945d
                 \n
                 &bg_btn=000000\n
                 &bg_hover_btn=black\n
@@ -89,7 +89,7 @@ const Page = () => {
             </div>
 
 
-           
+
         </section>
     );
 };
