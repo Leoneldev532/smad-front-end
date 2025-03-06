@@ -1,6 +1,7 @@
 "use client";
 
 
+import signUpImage from "@/public/signUp.png"
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import React, { ChangeEvent, FormEvent, useState } from 'react'
@@ -18,7 +19,7 @@ import Link from 'next/link';
 
 export default function  RegisterForm (){
   const [loading, setLoading] = useState(false);
- 
+
   const [error, setError] = useState("");
 
   const {
@@ -45,11 +46,11 @@ export default function  RegisterForm (){
             "Content-Type": "application/json",
           },
         });
-  
+
         if (res.status !== 200) {
           throw new Error(res.data.message);
         }
-  
+
         return res.data;
       },
     onSuccess: () => {
@@ -60,7 +61,7 @@ export default function  RegisterForm (){
     onError: (error) => {
         toast.error("An Error occur" + error)
     }
-  
+
   });
 
   const onSubmitRegisterForm1: SubmitHandler<registerDataInput> = async (data, e) => {
@@ -71,7 +72,7 @@ export default function  RegisterForm (){
       password: data.password,
     });
   };
- 
+
 
   const input_style =
     "form-control block w-full px-4 py-5 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none";
@@ -79,75 +80,23 @@ export default function  RegisterForm (){
   return (
     <div className="flex gap-x-3 w-full py-8 h-full justify-center min-h-screen  items-start">
 
-      <div className="px-8  py-8 min-w-96 rounded-2xl  relative overflow-hidden  flex flex-col gap-y-4 justify-center items-center">
-        <form onSubmit={handleOnSubmitLogin(onSubmitRegisterForm1)} className="w-full  h-full flex flex-col gap-4 justify-start items-center">
-          <Image alt='logo' src={logo} className="object-contain h-16 w-16" />
 
+<div className="px-8 py-8  gap-x-8 rounded-2xl   relative overflow-hidden  w-full  flex md:flex-row flex-col  justify-center items-center">
+
+<Image  src={signUpImage} className="object-contain  my-3 md:my-0 w-60 " alt="hero section image" />
+
+
+<div className=" w-[0.8px] linev h-72 md:block hidden relative overflow-hidden">   </div>
+
+<div className="w-full  relative  max-w-xs  my-3 h-full flex flex-col gap-4 justify-start items-center">
           <div className="flex flex-col gap-y-1 w-full justify-center items-center">
           <h2 className="font-bold m-0 text-2xl">Get started</h2>
           <span className='max-w-lg text-center text-sm  text-neutral-500 '>
           Create a new account
           </span>
           </div>
-{/* 
-         
-          <input
-            {...register("name", {
-              required: true,
-              minLength:3
-            })}
-            type="text" name="name" placeholder="name" 
-            className={"px-3 appearance-none py-2 bg-neutral-700/50 border-2 border-neutral-700 text-white rounded-md w-full"}  />
-          {errorsRegister.name && errorsRegister.name.type === "required" && (
-            <span className="text-sm text-red-500 text-center">
-              please fill this field
-            </span>
-          )}
-           {errorsRegister.name && errorsRegister.name.type === "minLength" && (
-            <span className="text-sm text-red-500 text-center">
-             name must be at least 3 characters long
-            </span>
-          )}
-
-          <input
-            {...register("email", {
-              required: true,
-              pattern: emailRegex,
-            })}
-            type="email" name="email" placeholder="Email" 
-            className={"px-3 appearance-none py-2 bg-neutral-700/50 border-2 border-neutral-700 text-white rounded-md w-full"}  />
-          {errorsRegister.email && errorsRegister.email.type === "required" && (
-            <span className="text-sm text-red-500 text-center">
-              please fill this field
-            </span>
-          )}
-          {errorsRegister.email && errorsRegister.email.type === "pattern" && (
-            <span className="text-sm text-red-500 text-center">
-              Veuillez remplir une email correcte
-            </span>
-          )}
-          <input   {...register("password", {
-            required: true,
-            pattern:passwordRegex
-          })} type="password" placeholder="password" 
-            className={"px-3 appearance-none py-2 bg-neutral-700/50 border-2 border-neutral-700 text-white rounded-md w-full"}  />
-          {errorsRegister.password &&
-            errorsRegister.password.type === "required" && (
-              <span className="text-sm text-red-500 text-center">
-                please fill this field
-              </span>
-            )}
-          {errorsRegister.email && errorsRegister.email.type === "pattern" && (
-            <span className="text-sm w-full max-w-sm text-balance text-red-500 text-center">
-              Veuillez remplir un mot de passe contenant une manjuscule une minuscule un symbole parmi @,$,!,%,* et un chiffre
-            </span>
-          )}
-          <ButtonValidation className=" py-2    cursor-pointer  w-full  rounded-lg"
-            isLoading={mutation?.isPending} type='positive' typeButton='submit' title='register' /> */}
-
-        </form>
-        <Button
-          onClick={() => signIn("google", { callbackUrl: "/dashboard" })} 
+          <Button
+          onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
           variant="outline" className=" bx-sha1 py-5   border bg-zinc-800 hover:bg-neutral-900 cursor-pointer border-neutral-400/10 w-full  rounded-lg">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path
@@ -159,9 +108,9 @@ export default function  RegisterForm (){
         </Button>
 
         <Button
-          onClick={() => signIn("github", { callbackUrl: "/dashboard" })} 
+          onClick={() => signIn("github", { callbackUrl: "/dashboard" })}
           variant="outline" className=" bx-sha1 py-5   border hover:bg-neutral-900 cursor-pointer border-neutral-400/10 w-full  rounded-lg">
-      
+
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
@@ -180,9 +129,12 @@ export default function  RegisterForm (){
 
           register with Github
         </Button>
-        
+
         <div><span className="text-neutral-500"> you already have an account</span> <Link className="underline" href="/login">Sign In</Link></div>
       </div>
+      </div>
+
+
 
 
     </div>

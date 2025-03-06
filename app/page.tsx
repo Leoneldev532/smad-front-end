@@ -6,11 +6,14 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import  image1 from "@/public/list mail.png"
 import  formImage from "@/public/Form34.png"
+import fast from "@/public/fast.png"
+import allInOne from "@/public/allInOne.png"
 import gsap from  "gsap"
 import { finalCode } from "@/lib/utils";
 import { TabTemplateCode } from "./template/listTemplateCode";
 import Loader2 from "@/components/Loader2";
 import Script from "next/script";
+import { ScrollTrigger } from "gsap/all";
 
 export default function Home() {
 
@@ -28,6 +31,13 @@ export default function Home() {
         opacity:1,
         duration:0.6,
 
+      }).fromTo(".part11",{
+        y:40,
+        opacity:0},
+        {
+          y:0,
+          opacity:1,
+          duration:0.6,
       }).fromTo(".part2",{
         y:40,
         opacity:0
@@ -118,6 +128,7 @@ export default function Home() {
           setStep(prevStep => ({ ...prevStep, [stepName]: value }));
         };
 
+        gsap.registerPlugin(ScrollTrigger);
 
          const handleStartMagicAction = () =>{
            handleShowMagicBlock()
@@ -133,6 +144,53 @@ export default function Home() {
 
 
 
+          useEffect(()=>{
+            let currentIndex = 0 ;
+            const blocs = document.querySelectorAll(".bloc1txt,.bloc2txt")
+            const images = document.querySelectorAll(".fast-image,.all-in-one-image")
+            let blocsLength = blocs.length
+            const animateText = () =>{
+             const tk = gsap.timeline()
+             currentIndex = (currentIndex  + 1) % blocsLength
+              tk.to(blocs[currentIndex], {
+                opacity: 1,
+                duration:0.6,
+                onComplete: () => {
+
+                  if(currentIndex === 0 ){
+                    tk.to(images[0],{
+                      y: `0%`,
+                      duration:0.6,
+                    });
+                  }
+                  if(currentIndex === 1 ){
+                    tk.to(images[1],{
+                      y: `-100%`,
+                      duration:0.6,
+                    });
+                  }
+
+                setTimeout(() => {
+                  tk.to(blocs[currentIndex], {
+                  opacity: 0.4,
+                  });
+                  animateText();
+                }, 3000);
+                },
+              })
+           }
+
+           animateText()
+
+          },[])
+
+
+
+
+
+
+
+
   return (
     <main className="flex min-h-screen flex-col overflow-hidden items-center justify-between  px-8 lg:px-8 sm:px-8 py-4  ">
 
@@ -141,7 +199,7 @@ export default function Home() {
         <div className="w-full   md:w-8/12">
         <h1 className="md:text-5xl text-xl  flex lg:text-4xl text-balance  w-full ">
 
-        Effortlessly create newsletter forms and focus on growing your business.
+        Wow! Create newsletter forms effortlessly and focus on growing your business.
 
         </h1>
         <div className=" flex sm:flex-row md:w-8/12 flex-col justify-start gap-4   items-start py-6 ">
@@ -158,6 +216,35 @@ export default function Home() {
         </div>
 
       </section>
+      <section className="flex flex-col opacity-0 part11 gap-x-3 w-full justify-start items-center">
+        <h2 className="w-full text-left uppercase font-bold opacity-80">
+          Why use Smad?
+        </h2>
+        <div className="w-full flex  flex-col-reverse md:flex-row-reverse py-8 gap-x-4 justify-start items-center">
+          <div className="flex flex-col sm:flex-row md:flex-col gap-y-5 py-4 md:py-0 uppercase w-full  md:w-1/2">
+            <div className="flex bloc1txt flex-col gap-y-3">
+              <h2 className="text-2xl md:text-4xl line relative wb-gradient">Fast</h2>
+              <p className="text-sm md:text-lg lowercase text-balance text-neutral-500">
+                Build your newsletter, waitlist form for your landing page, blog etc... in less than 3 minutes
+              </p>
+            </div>
+            <div className="flex bloc2txt  flex-col gap-y-3 opacity-40">
+              <h2 className="text-2xl md:text-4xl line relative wb-gradient">All in One</h2>
+              <p className="text-sm md:text-lg lowercase text-balance text-neutral-500">
+                Build many waitlists and newsletters for multiple projects in one location (smad)
+              </p>
+            </div>
+          </div>
+          {/* <div className="w-[5px] h-28 mr-8 shadow-md border border-neutral-400 rounded-full relative overflow-hidden">
+            <div className="progress-bar w-full h-0 bg-green-500"></div>
+    */}
+            <div className="flex rounded-xs w-full h-56 flex-col overflow-hidden  md:w-1/2 md:h-96  relative justify-start items-center">
+            <Image src={fast} alt="faster image" className="object-contain h-auto md:h-96 w-full absolute fast-image" />
+            <Image src={allInOne} alt="all in one image" className="object-contain h-auto md:h-96 w-full absolute all-in-one-image" />
+          </div>
+        </div>
+      </section>
+
 
     {/* <span>{isWeUserStarter ? "fdsgsdf" :"11111222222"}</span> */}
 

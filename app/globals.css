@@ -387,7 +387,36 @@ span,b{
   font-family:var(--font-inter)
 }
 
+.linev{
+  &::before{
+    height:125px;
+    width:100%;
+    content:"";
+    position:absolute;
+    top:30%;
+    left:0;
+    z-index: 1;
+    background-image:-webkit-linear-gradient(45deg, transparent,white 40%,transparent);
+    background-position: center;
+    background-size: 200% 100%;
+  }
+}
 
+
+.linev2{
+  &::before{
+    height:125px;
+    width:100%;
+    content:"";
+    position:absolute;
+    top:30%;
+    left:0;
+    z-index: 1;
+    background-image:-webkit-linear-gradient(45deg, transparent,white 90%,transparent);
+    background-position: center;
+    background-size: 200% 100%;
+  }
+}
 
 
 
