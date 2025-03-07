@@ -199,7 +199,7 @@ export default function Home() {
         <div className="w-full   md:w-8/12">
         <h1 className="md:text-5xl text-xl  flex lg:text-4xl text-balance  w-full ">
 
-        Wow! Create newsletter , waitlist effortlessly and focus on growing your business.
+        Wow! Create mailing list , waitlist effortlessly and focus on growing your business.
 
         </h1>
         <div className=" flex sm:flex-row md:w-8/12 flex-col justify-start gap-4   items-start py-6 ">
