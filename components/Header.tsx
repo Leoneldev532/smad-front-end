@@ -84,6 +84,7 @@ const Header = () => {
                 <div className="flex  md:text-md w-1/2  md:w-1/2 overflow-hidden gap-x-2 justify-start items-center h-full ">
                     <Image src={logo} className="object-contain h-8 w-8" alt="logo" />
                     <span className="sm:block hidden"> Smad </span>
+
                 </div>
             </Link>
 
@@ -92,7 +93,7 @@ const Header = () => {
 
                     <button className="px-4 py-1.5 group  text-xs md:text-sm gap-x-4  border border-neutral-700 line1  hover:bg-neutral-700/30 relative overflow-hidden flex justify-center items-center rounded-lg text-center">
 
-                      
+
 
                         <span> Get Config  </span>
 
@@ -106,7 +107,7 @@ const Header = () => {
 
 
                             <div className="bg-white h-8 w-8  rounded-full overflow-hidden flex justify-center items-center">
-                                <Image alt={"avatar"} width="300" height="500" className="object-contain" 
+                                <Image alt={"avatar"} width="300" height="500" className="object-contain"
                                 src={`https://api.dicebear.com/9.x/lorelei/png?seed=${user?.name}`} />
                             </div>
                             <button onClick={() => toggleShowDropDown()}>
@@ -116,7 +117,7 @@ const Header = () => {
                                 </svg>
                             </button>
 
-                            
+
                             {dropdownIsOpen &&
                                 <div className="absolute z-50 w-48 lg:w-56 top-12 left-1/2 transform -translate-x-1/2 max-[1400px]:-translate-x-[160px]   max-h-[90vh] overflow-y-auto rounded-xl bg-neutral-900 border  border-neutral-700 flex flex-col justify-start items-start">
                                 <h3 className="text-lg px-3 py-2">Menu</h3>

@@ -197,9 +197,9 @@ export default function Home() {
       <section className="flex part1   opacity-0 flex-col-reverse md:flex-row  w-full pt-10  md:pb-14  relative   justify-start items-center">
 
         <div className="w-full   md:w-8/12">
-        <h1 className="md:text-5xl text-xl  flex lg:text-4xl text-balance  w-full ">
-
-        Wow! Create mailing list , waitlist effortlessly and focus on growing your business.
+        <h1 className="md:text-5xl text-xl  flex lg:text-4xl text-pretty  w-full ">
+        Create mailing list and waitlists in under 2 minutes. Grow your business! as developer
+        {/* Wow! Create mailing lists and waitlists effortlessly in under 2 minutes. Focus on growing your business!. */}
 
         </h1>
         <div className=" flex sm:flex-row md:w-8/12 flex-col justify-start gap-4   items-start py-6 ">

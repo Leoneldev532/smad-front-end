@@ -537,3 +537,12 @@ lite-youtube {
     font-weight: normal;
     font-style: normal;
 }
+
+
+.productHuntLink{
+  height:60px;
+  min-width:300px !important;
+  background-color: red;
+  background-image : url("https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=939285&theme=light&t=1741358193563");
+  background-size:contain;
+}
