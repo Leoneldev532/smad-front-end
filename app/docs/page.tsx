@@ -11,10 +11,12 @@ const Page = () => {
 
             <div className="flex justify-start bg-white/70 border-white/70 border-[0.4px]  overflow-hidden items-start h-56 md:h-[28rem] w-full rounded-lg">
 
-            <YouTubeEmbed videoid="1IiksZuKKq8" height={1500} width={1000}    />
+            <YouTubeEmbed videoid="vQO3hDJEhzo" height={1500} width={1000}    />
+
 
             </div>
-            <h1 className="text-3xl text-neutral-300 font-bold mb-4 text-left  w-full  py-4 max-w-xl">How To build a newsletters form in less than 2 minutes </h1>
+            <h1 className="text-3xl text-neutral-300 font-bold mb-4 text-left  w-full  py-4 max-w-xl">How To build a mailing list
+              , waitlist in less than 2 min </h1>
             <div className=" w-full overflow-hidden  border-t border-neutral-500/40">
 
 
