@@ -75,6 +75,8 @@ useEffect(()=>{
   return (
     <div className="flex gap-x-3 w-full h-full justify-center min-h-screen  items-start py-8">
 
+
+
       <div className="px-8 py-8  gap-x-8 rounded-2xl   relative overflow-hidden  w-full  flex md:flex-row flex-col  justify-center items-center">
 
       <Image  src={loginImage} className="object-contain  my-3 md:my-0 w-60 " alt="hero section image" />

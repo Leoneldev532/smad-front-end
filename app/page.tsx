@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import  image1 from "@/public/list mail.png"
-import  formImage from "@/public/Form34.png"
+import  form1 from "@/public/Form1.png"
 import fast from "@/public/fast.png"
 import allInOne from "@/public/allInOne.png"
 import gsap from  "gsap"
@@ -217,7 +217,7 @@ export default function Home() {
 
       </section>
       <section className="flex flex-col opacity-0 part11 gap-x-3 w-full justify-start items-center">
-        <h2 className="w-full text-left uppercase font-bold opacity-80">
+        <h2 className="w-full text-left text-4xl uppercase font-bold ">
           Why use Smad?
         </h2>
         <div className="w-full flex  flex-col-reverse md:flex-row-reverse py-8 gap-x-4 justify-start items-center">
@@ -225,31 +225,37 @@ export default function Home() {
             <div className="flex bloc1txt flex-col gap-y-3">
               <h2 className="text-2xl md:text-4xl line relative wb-gradient">Fast</h2>
               <p className="text-sm md:text-lg lowercase text-balance text-neutral-500">
-                Build your newsletter, waitlist form for your landing page, blog etc... in less than 3 minutes
+                Build your mailing list, waitlist form for your landing page, blog etc... in less than 2 minutes
               </p>
             </div>
             <div className="flex bloc2txt  flex-col gap-y-3 opacity-40">
               <h2 className="text-2xl md:text-4xl line relative wb-gradient">All in One</h2>
               <p className="text-sm md:text-lg lowercase text-balance text-neutral-500">
-                Build many waitlists and newsletters for multiple projects in one location (smad)
+                Build many waitlists and mailing list for multiple projects in one location (smad)
               </p>
             </div>
           </div>
           {/* <div className="w-[5px] h-28 mr-8 shadow-md border border-neutral-400 rounded-full relative overflow-hidden">
             <div className="progress-bar w-full h-0 bg-green-500"></div>
     */}
-            <div className="flex rounded-xs w-full h-56 flex-col overflow-hidden  md:w-1/2 md:h-96  relative justify-start items-center">
-            <Image src={fast} alt="faster image" className="object-contain h-auto md:h-96 w-full absolute fast-image" />
-            <Image src={allInOne} alt="all in one image" className="object-contain h-auto md:h-96 w-full absolute all-in-one-image" />
+            <div className="flex rounded-xs w-full h-72 flex-col overflow-hidden  md:w-1/2 md:h-96  relative justify-start items-center">
+            <Image src={fast} alt="faster image" className="object-contain h-72 md:h-96 w-full absolute fast-image" />
+            <Image src={allInOne} alt="all in one image" className="object-contain h-72 md:h-96 w-full absolute all-in-one-image" />
           </div>
         </div>
       </section>
 
 
     {/* <span>{isWeUserStarter ? "fdsgsdf" :"11111222222"}</span> */}
+    <section className="w-full part2 opacity-0 flex flex-col md:flex-row justify-center overflow-hidden items-center my-36">
+      <div className=" w-full flex flex-col justify-start items-start">
+        <h2 className="text-2xl md:text-4xl w-full text-center uppercase mb-4 text-neutral-500 text-balance">Focus on <span className="text-white">building your product</span>, not your waitlist or mailing list</h2>
+      </div>
+
+    </section>
 
       <section className="w-full part2 opacity-0 flex justify-between overflow-hidden items-center">
-        <h2 className="opacity-80 w-full text-left uppercase ">How it works?</h2>
+        <h2 className="text-4xl w-full text-left uppercase ">How it works?</h2>
 
 
 
@@ -279,7 +285,7 @@ export default function Home() {
       </section>
 
 
-      <div className=" flex-col gap-y-2 opacity-0   magicPart  hidden justify-start items-start min-h-72 w-full my-3 rounded-lg border border-neutral-800">
+      <div className=" flex-col gap-y-2 opacity-0   magicPart  hidden justify-start items-start min-h-72 w-full  rounded-lg border border-neutral-800">
         <div className="flex justify-between p-3 items-center w-full bg-neutral-900">
           <span> Good Action </span>
 
@@ -504,240 +510,96 @@ export default function Home() {
 
       </section>
         </>
-        <br/>
-
-        {/* <div className="flex flex-col justify-start items-start px-36">
-                    <span> ** If you want a customizable template (optional) </span>
-
-            <span className="text-neutral-400 text-xs md:text-sm pr-8 text-balance italic">Choose your template on page /template accessible by the button &quot;get Config&quot;,
-              copy the configuration, and import it into your project as component.</span>
-
-
-              <code className="py-2 rounded-md text-sm text-white">
-          <span className="text-neutral-400 tex-xs sm:text-sm">Set these data as environment variables </span>
-          <span className="text-neutral-400 tex-xs sm:text-sm">SMAD_API_PRIVATE_KEY</span>=your_api_key<br />
-          <span className="text-neutral-400 tex-xs sm:text-sm">SMAD_PROJECT_ID</span>=your_project_id
-            </code>
-
-
-              <div className="flex md:flex-row flex-col gap-2 py-2">
-
-          <button  onClick={()=>handleCopyCode()}
-          className=" px-3  bg-neutral-800 text-sm hover:bg-neutral-900 transition-all ease duration-300
-           text-neutral-300 rounded-md border flex gap-x-2 border-neutral-700 py-1  ">
-           <span>Copy Form Code</span>
-
-
-           { isCodeCopy ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
-
-                      className="size-4 stroke-slate-300">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                    </svg> :  <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1}
-                stroke="currentColor"
-                className="size-6 stroke-neutral-400"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z"
-                />
-              </svg>}
-           </button>
-
-
-          <Link href="/template" className=" px-3  bg-neutral-800 text-sm hover:bg-neutral-900 transition-all
-           ease duration-300  text-neutral-300 rounded-md border border-neutral-700 py-1  "><button className="">see All Templates</button></Link>
-            </div>
-
-            </div> */}
-      {/* <section className="hidden part3 md:flex opacity-0 mt-4 border relative lv line  border-neutral-700 rounded-xl flex-col gap-y-1 w-full ">
-
-        <div className="w-full  bg-neutral-700/50  overflow-auto">
-
-          <div className="w-full  pl-4 pr-2 py-2 flex gap-x-4  justify-between items-center">
-
-            <div className="flex justify-start gap-x-4 items-center">
-              <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700/30 border-neutral-700">1</div>
-              <span className="text-xs md:text-lg"> Begin by creating your account</span>
-            </div>
-
-            <Link href="/register" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10  hover:bg-neutral-800 transition-all ease duration-400 ">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
-                <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
-              </svg>
-
-            </Link>
-
-
-
-          </div>
-
-        </div>
-
-        <div className="w-full  overflow-auto">
-
-          <div className="w-full  pl-4 pr-2 py-2 flex gap-x-4  justify-between items-center">
-
-            <div className="flex justify-start gap-x-4 items-center">
-              <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">2</div>
-              <span className="text-xs md:text-lg">  Copy your API private key on the /account page and set it as environment variables in your project </span>
-            </div>
-
-            <Link href="/account" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10  hover:bg-neutral-800 transition-all ease duration-400 ">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
-                <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
-              </svg>
-
-            </Link>
-
-
-
-          </div>
-
-        </div>
-
-
-        <div className="w-full  overflow-auto">
-
-          <div className="w-full  pl-4 pr-2 py-2 flex gap-x-4  justify-between items-center">
-
-            <div className="flex justify-start  gap-x-4 items-center">
-              <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">3</div>
-              <span className="text-xs md:text-lg"> Create a project in the dashboard </span>
-            </div>
-
-            <Link href="/dashboard" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10  hover:bg-neutral-800 transition-all ease duration-400 ">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
-                <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
-              </svg>
-
-            </Link>
-
-
-
-          </div>
-
-        </div>
-
-
-        <div className="w-full  overflow-auto">
-
-          <div className="w-full  pl-4 pr-2 py-2 flex gap-x-4  justify-between items-center">
-
-            <div className="flex justify-start  gap-x-4 items-center">
-              <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">4</div>
-              <span className="text-xs md:text-lg"> Copy the project ID through the horizontal three dots button modal and set it as environment variables in your projects </span>
-            </div>
-
-            <Link href="/dashboard" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10 hover:bg-neutral-800 transition-all ease duration-400 ">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
-                <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
-              </svg>
-
-            </Link>
-
-
-
-          </div>
-
-        </div>
-
-
-        <div className="w-full  overflow-auto">
-
-          <div className="w-full  pl-4 pr-2 py-2 flex gap-x-4  justify-between items-center">
-
-            <div className="flex justify-start  gap-x-4 items-center">
-              <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">5</div>
-              <span className="pr-8 text-xs md:text-lg "> Click the {"'Get Config'"} header button, choose your template form, and copy the code</span>
-            </div>
-
-            <Link href="/template" target='_blank' className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10 hover:bg-neutral-800 transition-all ease duration-400 ">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
-                <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
-              </svg>
-
-            </Link>
-
-
-
-          </div>
-
-        </div>
-
-
-        <div className="w-full  overflow-auto">
-
-          <div className="w-full   pl-4 pr-2 py-2 flex gap-x-4  justify-between items-center">
-
-            <div className="flex justify-start    gap-x-4 items-center">
-              <div className="size-8  rounded-full min-h-8 min-w-8 flex justify-center items-center border bg-neutral-700  border-neutral-700">6</div>
-              <div className="flex">
-                <span className="flex text-xs md:text-lg justify-start items-center gap-2"> Copy the code and set it in a file as a component and import it where you want  </span>
+        <section className="flex w-full gap-4 py-0 md:py-8 md:justify-between justify-start  md:flex-row flex-col ">
+          <h2 className="text-4xl md:w-1/3  lg:w-1/2 "> FAQ </h2>
+          <ul className="md:w-1/2 divide-y  border border-neutral-700 overflow-hidden transition-all ease duration-300 rounded-xl">
+            <li>
+              <details className="group">
+                <summary className="flex items-center bg-neutral-800 gap-3 px-4 py-3 font-medium marker:content-none hover:cursor-pointer">
+                  <svg className="w-5 h-5 text-gray-500 transition group-open:rotate-90" xmlns="http://www.w3.org/2000/svg"
+                    width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                      d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z">
+                    </path>
+                  </svg>
+                  <span>How can I use Smad to build my mailing list?</span>
+                </summary>
+                <article className=" p-4">
+                  <ol className="list-decimal flex flex-col gap-y-3 text-neutral-400 list-inside">
+                    <li>Create an account on Smad and set up your first project in the dashboard.</li>
+                    <li>Copy the modal code shown and paste it into your code: (basic form default).
+                      If the project is already created, click on the three dots of the project,
+                      select {"Copy Code Integration"} and copy the code.</li>
+                  </ol>
+                </article>
+              </details>
+              </li>
+            <li>
+              <details className="group">
+                <summary className="flex items-center bg-neutral-800 gap-3 px-4 py-3 font-medium marker:content-none hover:cursor-pointer">
+                  <svg className="w-5 h-5 text-gray-500 transition group-open:rotate-90" xmlns="http://www.w3.org/2000/svg"
+                    width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                      d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z">
+                    </path>
+                  </svg>
+                  <span>How can I customize my mailing list form?</span>
+                </summary>
+                <article className="p-4">
+                  <ol className="list-decimal flex flex-col gap-y-3 text-neutral-400 list-inside">
+                    <li>Navigate to the dashboard and select your project.</li>
+                    <li>Click on the {"Customize"} button to open the form editor.</li>
+                    <li>Use the editor to add or remove fields, change styles, and configure settings.</li>
+                    <li>copy the updated integration code.</li>
+                    <li>Paste the updated code into your website to apply the customizations.</li>
+                  </ol>
+                </article>
+              </details>
+            </li>
+            <li>
+              <details className="group">
+                <summary className="flex items-center gap-3 px-4 py-3 font-medium marker:content-none hover:cursor-pointer">
+                  <svg className="w-5 h-5 text-gray-500 transition group-open:rotate-90" xmlns="http://www.w3.org/2000/svg"
+                    width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                      d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z">
+                    </path>
+                  </svg>
+                  <span>Is it true that it is free?</span>
+                </summary>
+                <article className="px-4 pb-4">
+                  <p className="text-neutral-400">
+                    Yes, Smad offers a free plan that allows you to create mailing lists and waitlists. You can start using it without any cost.
+                  </p>
+                </article>
+              </details>
+            </li>
+          </ul>
+        </section>
+        <section className="flex w-full gap-4 py-4 md:py-6 md:justify-between justify-start  md:flex-row flex-col ">
+          <h2 className="text-4xl md:w-1/3  lg:w-1/2 "> Pricing </h2>
+          <div className="md:w-1/2 flex flex-col gap-4">
+            <div className="border border-neutral-700 rounded-xl overflow-hidden">
+              <div className="bg-neutral-800 px-4 py-3 flex justify-between items-center">
+                <h3 className="text-lg font-medium">Free Plan</h3>
+                <span className="text-xl font-bold">$0</span>
               </div>
-            </div>
-            <Link href="/template" className=" rounded-lg  border  border-neutral-700 flex justify-center items-center min-h-10 min-w-10 hover:bg-neutral-800 transition-all ease duration-400 ">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
-                <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
-              </svg>
-
-            </Link>
-
-
-
-          </div>
-
-        </div>
-
-      </section> */}
+              <div className="p-4 flex flex-col gap-y-4  w-full">
+              <ul className="list-disc mx-4   w-full text-neutral-400 ">
+                <li>Create unlimited mailing lists and waitlists.</li>
+                <li>Access all basic templates and integrations.</li>
+                <li>Customize your forms.</li>
+                <li>Export as CSV format.</li>
+                <li>Share data with emailing service (Resend).</li>
+              </ul>
+              <Link href="/login" className="w-full "><Button variant="default" className="rounded-full px-0 md:px-16 font-bold  w-full  bx-shabtn py-2"> start now is free </Button></Link>
+              </div>
 
 
-      {/* <h2 className="text-lg md:text-xl part4 my-10 opacity-0 font-medium  text-neutral-400  uppercase text-left w-full   text-balance">
-
-         Design available for implementation with tailwind
-
-      </h2>
-
-      <section className="flex w-full lg:border part5 opacity-0  rounded-xl relative md:flex-row flex-col gap-y-4 lg:line lg:overflow-hidden gap-4 justify-start items-start">
-        <div className="flex w-full md:w-1/2     p-4  border border-neutral-700/30  bordergradient relative h-72 rounded-xl  overflow-hidden bg-neutral-700/30 ">
-
-          <div className="bg-neutral-900/30 rounded-xl overflow-hidden  px-4 h-full  w-full">
-        <Image src={formImage} className="object-contain w-full h-full" alt="form image"  />
+              </div>
 
           </div>
-
-
-        </div>
-        <div className="w-full md:w-1/2 flex gap-y-4 h-full flex-col md:px-0 py-8 px-4 justify-center  items-start">
-          <p className="text-xl md:text-2xl text-balance">Get beautiful form 🌟 Components for begining </p>
-          <span className="text-sm md:text-sm text-neutral-500 pr-4"> Save Time and Get to the Final Goal with Our Exclusive Newsletter!
-            Sign up  to save time and reach your goals faster with exclusive tips and regular updates.
-          </span>
-          <div className="flex  my-4 gap-4">
-            <Link href="/template" className="w-full"> <Button variant={"default"} className="rounded-full w-full px-8 bx-shabtn py-2"> See all design + code  </Button> </Link>
-          </div>
-        </div>
-
-      </section> */}
-
-
-      {/* <script type="text/javascript" src="https://templates.smadmail.com/js/iframeResizer.min.js"></script>
-      <div className="flex justify-center items-center w-full mt-4">
-      <iframe src="https://templates.smadmail.com/ui/form1.html?private_key=smad250208172113c78c8db84d&project_id=79b0b48a-fa25-4c24-a3d9-cb59e9b6f2a3"
-       scrolling="no"  ></iframe>
-
- </div> */}
-
-      {/* <link rel="stylesheet"  href="https://templates.smadmail.com/css/iframe.css"/>
-        <iframe id="iframe_container" src="https://templates.smadmail.com/ui/form1.html?private_key=smad250208172113c78c8db84d&project_id=79b0b48a-fa25-4c24-a3d9-cb59e9b6f2a3"
-        scrolling="no"  ></iframe> */}
-
-
-
+        </section>
 
     </main>
   );
