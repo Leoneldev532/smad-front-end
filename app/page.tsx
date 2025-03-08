@@ -217,7 +217,7 @@ export default function Home() {
 
       </section>
       <section className="flex flex-col opacity-0 part11 gap-x-3 w-full justify-start items-center">
-        <h2 className="w-full text-left text-4xl uppercase font-bold ">
+        <h2 className="w-full text-left text-2xl md:text-4xl uppercase font-bold ">
           Why use Smad?
         </h2>
         <div className="w-full flex  flex-col-reverse md:flex-row-reverse py-8 gap-x-4 justify-start items-center">
@@ -255,7 +255,7 @@ export default function Home() {
     </section>
 
       <section className="w-full part2 opacity-0 flex justify-between overflow-hidden items-center">
-        <h2 className="text-4xl w-full text-left uppercase ">How it works?</h2>
+        <h2 className="text-2xl md:text-4xl w-full text-left uppercase ">How it works?</h2>
 
 
 
@@ -510,8 +510,8 @@ export default function Home() {
 
       </section>
         </>
-        <section className="flex w-full gap-4 py-0 md:py-8 md:justify-between justify-start  md:flex-row flex-col ">
-          <h2 className="text-4xl md:w-1/3  lg:w-1/2 "> FAQ </h2>
+        <section className="flex w-full gap-4 py-6 md:justify-between justify-start  md:flex-row flex-col ">
+          <h2 className="text-2xl md:text-4xl md:w-1/3  lg:w-1/2 "> FAQ </h2>
           <ul className="md:w-1/2 divide-y  border border-neutral-700 overflow-hidden transition-all ease duration-300 rounded-xl">
             <li>
               <details className="group">
@@ -548,9 +548,10 @@ export default function Home() {
                 <article className="p-4">
                   <ol className="list-decimal flex flex-col gap-y-3 text-neutral-400 list-inside">
                     <li>Navigate to the dashboard and select your project.</li>
-                    <li>Click on the {"Customize"} button to open the form editor.</li>
-                    <li>Use the editor to add or remove fields, change styles, and configure settings.</li>
-                    <li>copy the updated integration code.</li>
+                    <li>Click on the vertical 3 dots of the project and select {"Copy Code Integration"}.</li>
+                    <li>In the modal that appears, click on the {"Customize"} button.</li>
+                    <li>Use the editor to change styles and configure settings.</li>
+                    <li>Copy the updated integration code.</li>
                     <li>Paste the updated code into your website to apply the customizations.</li>
                   </ol>
                 </article>
@@ -576,8 +577,8 @@ export default function Home() {
             </li>
           </ul>
         </section>
-        <section className="flex w-full gap-4 py-4 md:py-6 md:justify-between justify-start  md:flex-row flex-col ">
-          <h2 className="text-4xl md:w-1/3  lg:w-1/2 "> Pricing </h2>
+        <section className="flex w-full gap-4 py-6 md:justify-between justify-start  md:flex-row flex-col ">
+          <h2 className="text-2xl md:text-4xl md:w-1/3  lg:w-1/2 "> Pricing </h2>
           <div className="md:w-1/2 flex flex-col gap-4">
             <div className="border border-neutral-700 rounded-xl overflow-hidden">
               <div className="bg-neutral-800 px-4 py-3 flex justify-between items-center">
