@@ -48,12 +48,12 @@ const Page = () => {
     }, []);
 
 
-    
+
        const getUserTemplateInfo = useRecoilValue(templateInfo)
 
        console.log(getUserTemplateInfo)
 
-     
+
 const StringConfig = `https://templates.smadmail.com/ui/form1.html${getUserTemplateInfo ? getUserTemplateInfo.trim() : "?private_key=smad250208172113c78c8db84d&project_id=3fb6d9ce-2433-4b8c-9ede-bfd9c26c945d"}
                 ${bgBtn ? `&bg_btn=${bgBtn.hex.split("#")[1]}` : ''}
                 ${bgHoverBtn ? `&bg_hover_btn=${bgHoverBtn.hex.split("#")[1]}` : ''}
@@ -85,7 +85,7 @@ const StringConfig = `https://templates.smadmail.com/ui/form1.html${getUserTempl
     `
 
      const [isCodeCopy, setIsCodeCopy] = useState(false)
-        
+
           const handleCopyCode = () => {
             setIsCodeCopy(true)
             navigator.clipboard?.writeText(copyFinalCode || "")
@@ -93,7 +93,7 @@ const StringConfig = `https://templates.smadmail.com/ui/form1.html${getUserTempl
               setIsCodeCopy(false)
             }, 1000)
           }
-        
+
 
     return (
         <div className="flex flex-col w-full gap-y-2  lg:px-0 px-8 justify-center items-center">
@@ -102,10 +102,10 @@ const StringConfig = `https://templates.smadmail.com/ui/form1.html${getUserTempl
 
             <div className=" flex flex-col md:grid grid-cols-2 gap-2 p-2  w-full rounded-lg lg:h-96 bg-neutral-800">
                 <div className="rounded-lg h-full flex flex-col  justify-center items-center bg-neutral-300">
-                    <div className="flex justify-center items-center h-full md:pt-0 pt-8 w-full">{codeIframe}</div>
+                    <div className="flex justify-center items-center px-4 h-full md:pt-0 pt-8 w-full">{codeIframe}</div>
 
-                    <button  onClick={() => handleCopyCode()} className='border cursor-pointer mb-3 bg-neutral-700 text-white  flex gap-x-2 mt-8 hover:bg-neutral-900 transition-colors 
-      duration-300 ease justify-center items-center border-neutral-500/40  px-2 py-1 rounded-lg'> 
+                    <button  onClick={() => handleCopyCode()} className='border cursor-pointer mb-3 bg-neutral-700 text-white  flex gap-x-2 mt-8 hover:bg-neutral-900 transition-colors
+      duration-300 ease justify-center items-center border-neutral-500/40  px-2 py-1 rounded-lg'>
         <span className='text-sm'>Copy Code</span>
   { isCodeCopy ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
 
@@ -202,7 +202,7 @@ const StringConfig = `https://templates.smadmail.com/ui/form1.html${getUserTempl
 
                                 value={borderRadiusForm}
                                 onChange={(value) => setBorderRadiusForm(value as number)}
-                               
+
                             />
                         </div>
                         <div className="flex flex-col gap-y-1 relative">
@@ -213,7 +213,7 @@ const StringConfig = `https://templates.smadmail.com/ui/form1.html${getUserTempl
                                 styles={{ track:{backgroundColor:"#fbbf24"}}}
                                 value={borderRadiusBtn}
                                 onChange={(value) => setBorderRadiusBtn(value as number)}
-                                
+
                             />
                         </div>
                     </div>
