@@ -53,7 +53,8 @@ const Page = () => {
         <ul className="list-disc list-inside flex flex-col gap-y-6 justify-start items-start text-neutral-400 mb-4">
           <li><code className="bg-neutral-800 py-1 px-3 border border-neutral-700 rounded">email</code> : The email address you want to add to your mailing list.</li>
           <li><code className="bg-neutral-800 py-1 px-3 border border-neutral-700 rounded">project_id</code> : The unique identifier of your project. Replace <code>{"123-456-789-000"}</code> with your own project ID. You can retrieve it by clicking the{ "Copy Project ID"} button on the dashboard.</li>
-          <li><code className="bg-neutral-800 py-1 px-3 border border-neutral-700 rounded">private_key</code> : Your private key to authenticate the request. Replace <code>{"your_private_key_here"}</code> with your private key. You can retrieve it on the <code>/account</code> page accessible by clicking on the chevron near your profile picture and selecting the "Account & Pricing" menu. Then, on the new page, copy the <code>private_key</code>.</li>
+          <li><code className="bg-neutral-800 py-1 px-3 border border-neutral-700 rounded">private_key</code> : Your private key to authenticate the request. Replace <code>{"your_private_key_here"}</code> with your private key. You can retrieve it on the <code>/account</code> page accessible by clicking on the chevron near your profile picture and
+           selecting the {"Account & Pricing"} menu. Then, on the new page, copy the <code>private_key</code>.</li>
         </ul>
 
         <p className="text-neutral-400 mb-2">
