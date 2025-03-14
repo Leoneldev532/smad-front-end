@@ -44,6 +44,7 @@
     "node-polyfill-webpack-plugin": "^4.1.0",
     "posthog-js": "^1.215.6",
     "prisma": "^6.1.0",
+    "prismjs": "^1.30.0",
     "raw-body": "^3.0.0",
     "rc-slider": "^11.1.8",
     "react": "^18",

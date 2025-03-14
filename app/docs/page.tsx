@@ -1,98 +1,94 @@
 "use client"
-import React from 'react';
+import React,{useEffect} from 'react';
 import { YouTubeEmbed } from '@next/third-parties/google'
 import CodeHighlight from '@/components/CodeSection';
 import CodeHighlightWriter from '@/components/CodeSectionWritter';
+import CodeBlock from '@/components/editor';
+
 
 const Page = () => {
+
+
+
     return (
-        <section className="flex justify-start px-8 flex-col items-start w-full h-full">
-            <h5 className="text-xl font-bold mb-4 text-left text-neutral-400 w-full  py-4">How it work ?  </h5>
+      <section className="flex justify-start px-8 flex-col items-start w-full h-full">
+      <h5 className="text-xl font-bold mb-4 text-left text-neutral-400 w-full py-4">How it works?</h5>
 
-            <div className="flex justify-start bg-white/70 border-white/70 border-[0.4px]  overflow-hidden items-start h-56 md:h-[28rem] w-full rounded-lg">
+      <div className="flex justify-start bg-white/70 border-white/70 border-[0.4px] overflow-hidden items-start h-56 md:h-[28rem] w-full rounded-lg">
+        <YouTubeEmbed videoid="vQO3hDJEhzo" height={1500} width={1000} />
+      </div>
 
-            <YouTubeEmbed videoid="vQO3hDJEhzo" height={1500} width={1000}    />
+      <h1 className="text-3xl text-neutral-300 font-bold mb-4 text-left w-full py-4 max-w-xl">How to build a mailing list, waitlist in less than 2 minutes</h1>
 
+      <div className="w-full overflow-hidden border-t border-neutral-500/40">
+        <h3 className="text-xl text-yellow-400 font-bold mb-4 text-left w-full pt-4 max-w-xl">Use our API endpoints for custom integration</h3>
 
-            </div>
-            <h1 className="text-3xl text-neutral-300 font-bold mb-4 text-left  w-full  py-4 max-w-xl">How To build a mailing list
-              , waitlist in less than 2 min </h1>
-            <div className=" w-full overflow-hidden  border-t border-neutral-500/40">
+        <div>
+        <h2 className="text-xl font-semibold mb-4">Save an Email to Your Mailing List</h2>
 
+        <p className="text-neutral-400 mb-2">
+          To add an email to your mailing list, make a POST request to the following endpoint:
+        </p>
 
+        <pre className="bg-gray-800 text-white p-4 rounded mb-4">
+          <code className="language-javascript">
+          POST: https://api.smadmail.com/api/v1/email/save
+          </code>
+        </pre>
 
-            <h3 className="text-xl text-yellow-400 font-bold mb-4 text-left  w-full  pt-4 max-w-xl">How to custom form (example)  </h3>
-              <div className="pb-3">
+        <p className="text-neutral-400 mb-2">
+          The request body should be a JSON object with the following structure:
+        </p>
 
+        <CodeBlock language='javascript' code={`{
+    email: string;
+    project_id: string;
+    private_key: string;
+  }`} />
 
+        <p className="text-neutral-400 py-4 mb-2">
+          <strong className="text-2xl">Field Descriptions:</strong>
+        </p>
 
-            {`<link rel="stylesheet"  href="https://templates.smadmail.com/css/iframe.css"/>
-                <iframe src="https://templates.smadmail.com/ui/form1.html?private_key=smad250208172113c78c8ab94d&project_id=3fb6d9ce-2433-4b8c-ede-bfd9c26c945d
-                \n
-                &bg_btn=000000\n
-                &bg_hover_btn=black\n
-                &text_color_btn=white\n
-                &border_radius_btn=5px\n
-                &bg_input=f0f0f0\n
-                &text_color_input=333333\n
-                &border_radius_form=10px\n
-                &border_form=cccccc\n
-                &text_color_hover_btn=yellow" \n
-                 scrolling="no"  ></iframe>
-                 `}
-          </div>
+        <ul className="list-disc list-inside flex flex-col gap-y-6 justify-start items-start text-neutral-400 mb-4">
+          <li><code className="bg-neutral-800 py-1 px-3 border border-neutral-700 rounded">email</code> : The email address you want to add to your mailing list.</li>
+          <li><code className="bg-neutral-800 py-1 px-3 border border-neutral-700 rounded">project_id</code> : The unique identifier of your project. Replace <code>{"123-456-789-000"}</code> with your own project ID. You can retrieve it by clicking the "Copy Project ID" button on the dashboard.</li>
+          <li><code className="bg-neutral-800 py-1 px-3 border border-neutral-700 rounded">private_key</code> : Your private key to authenticate the request. Replace <code>{"your_private_key_here"}</code> with your private key. You can retrieve it on the <code>/account</code> page accessible by clicking on the chevron near your profile picture and selecting the "Account & Pricing" menu. Then, on the new page, copy the <code>private_key</code>.</li>
+        </ul>
 
-            <table className="min-w-full  border rounded-lg overflow-hidden border-neutral-700/30 text-neutral-400">
-            <thead className="bg-neutral-700">
-                <tr>
-                    <th className="py-2 px-4 border-b text-left text-xs md:text-sm">Parameter</th>
-                    <th className="py-2 px-4 border-b text-left text-xs md:text-sm">Description</th>
-                </tr>
-            </thead>
-            <tbody className="bg-neutral-900">
-                <tr>
-                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">bg_btn</td>
-                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">Background color of the button</td>
-                </tr>
-                <tr>
-                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">text_color_btn</td>
-                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">Text color of the button</td>
-                </tr>
-                <tr>
-                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">border_radius_btn</td>
-                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">Border radius of the button</td>
-                </tr>
-                <tr>
-                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">bg_input</td>
-                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">Background color of the input field</td>
-                </tr>
-                <tr>
-                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">text_color_input</td>
-                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">Text color of the input field</td>
-                </tr>
-                <tr>
-                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">border_radius_form</td>
-                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">Border radius of the form</td>
-                </tr>
-                <tr>
-                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">border_form</td>
-                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">Border color of the form</td>
-                </tr>
-                <tr>
-                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">bg_hover_btn</td>
-                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">Background color of the button on hover</td>
-                </tr>
-                <tr>
-                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">text_color_hover_btn</td>
-                    <td className="py-4 px-4  md:px-4 border-b  text-xs md:text-sm ">Text color of the button on hover</td>
-                </tr>
-            </tbody>
-        </table>
-            </div>
+        <p className="text-neutral-400 mb-2">
+          <strong className="text-2xl">Request Example:</strong>
+        </p>
 
+        <CodeBlock language='javascript' code={`{
+    "email": "example@gmail.com",
+    "project_id": "123-456-789-000",
+    "private_key": "your_private_key_here"
+  }`} />
 
+        <p className="text-neutral-400 py-3">
+          <strong className={"text-2xl"}>Instructions:</strong>
+        </p>
 
-        </section>
+        <ol className="list-decimal list-inside text-lg text-neutral-400 mb-4">
+          <li>Replace the example values with your actual data.</li>
+          <li>The private key is essential for authentication. Keep it secret, it should be stored as an environment variable.</li>
+          <li>Ensure the email address is valid before sending the request to avoid errors.</li>
+        </ol>
+
+        <p className="text-neutral-400 py-3">
+          <strong className={"text-2xl"}>Status Descriptions:</strong>
+        </p>
+
+        <ul className="list-disc list-inside flex flex-col gap-y-6 justify-start items-start text-neutral-400 mb-4">
+          <li><code className="bg-red-800 py-1 px-3 border border-red-700 rounded">400 Bad Request</code>: Private key is required.</li>
+          <li><code className="bg-orange-800 py-1 px-3 border border-orange-700 rounded">401 Unauthorized</code>: Invalid private key.</li>
+          <li><code className="bg-blue-800 py-1 px-3 border border-blue-700 rounded">404 Not Found</code>: User not found or invalid project ID or the project does not belong to the user.</li>
+          <li><code className="bg-purple-800 py-1 px-3 border border-purple-700 rounded">500 Internal Server Error</code>: Internal server error.</li>
+        </ul>
+        </div>
+      </div>
+      </section>
     );
 };
 

@@ -12,6 +12,8 @@ import { Analytics } from "@vercel/analytics/react"
 import Head from "next/head";
 import { CSPostHogProvider } from "@/lib/providerPostHog";
 
+import "prismjs/themes/prism-tomorrow.css"
+
 const inter =  Inter({subsets: ["latin"],weight:"400",variable:"--font-inter" })
 
 
