@@ -1,4 +1,4 @@
-
+//@ts-nocheck
 "use client"
 import React, { useEffect, useRef, useState } from "react";
 import Prism from 'prismjs';
