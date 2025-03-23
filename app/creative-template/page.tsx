@@ -68,11 +68,7 @@ const DeveloperGrid: React.FC = () => {
 
 
   useEffect(() => {
-    fetch('https://contribute.smadmail.com/api/developerForm',{
-      method: 'GET',
-      cache: 'no-store'
-
-    })
+    fetch('https://contribute.smadmail.com/api/developerForm')
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {

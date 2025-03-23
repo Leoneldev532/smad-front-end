@@ -7,7 +7,6 @@ export const getDevelopersFom = async () => {
     if (!formDevelopers) {
       throw new Error('formDevelopers not exist');
     }
-
     return formDevelopers;
 
   } catch (error) {
