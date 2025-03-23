@@ -90,7 +90,7 @@ const DeveloperGrid: React.FC = () => {
     <div className="flex flex-col justify-center items-center gap-y-3 w-full">
       <h2 className="text-2xl md:text-4xl pt-8 md:pt-0 text-center wb-gradient">Creative page forms waitlist form</h2>
       <span className="text-neutral-600"> Copy page code and paste in your project
-        <Link className="underline underline-offset-1" href="https://contribute.smadmail.com" >Contribute here </Link>  </span>
+        <Link className="underline underline-offset-1" href="https://contribute.smadmail.com pl-3 text-neutral-300" >Contribute here </Link>  </span>
 
       {activeDevelopers.length === 0 && <div className="px-36 w-full  flex justify-center items-center">
         <div className="text-center px-4 py-2 rounded-xl border border-neutral-800">No page forms found</div></div>}
