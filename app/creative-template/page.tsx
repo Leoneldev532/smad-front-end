@@ -59,14 +59,19 @@ const DeveloperCard: React.FC<Developer> = ({
   );
 };
 
+export const fetchCache = 'force-no-store';
+
 const DeveloperGrid: React.FC = () => {
   const [developers, setDevelopers] = useState<Developer[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
+
   useEffect(() => {
     fetch('/api/developerForm',{
       method: 'GET',
+      cache: 'no-store'
+
     })
       .then((response) => response.json())
       .then((data) => {
