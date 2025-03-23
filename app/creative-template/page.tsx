@@ -11,6 +11,7 @@ import { Developer } from '@/lib/type';
 const DeveloperCard: React.FC<Developer> = ({
   developerName,
   portfolioLink,
+  pageLink,
   image,
   languagesAndFrameworks,
   code
@@ -32,7 +33,9 @@ const DeveloperCard: React.FC<Developer> = ({
       </div>
 
       <div className="flex justify-between items-center mt-4 w-full">
-        <h2 className="text-xl font-bold mt-2">{developerName}</h2>
+        <h2 className="text-xl font-bold mt-2 flex gap-x-2"><span className="">{developerName}</span>
+      <Link href={portfolioLink} target="_blank" rel="noopener noreferrer"
+       className="text-neutral-400 border py-1 px-2 text-sm">Visit portfolio</Link> </h2>
 
         {isCodeCopy ? (
           <button onClick={() => handleCopyCode(code)} className="p-3 flex hover:bg-neutral-900 justify-center border items-center rounded-md">
@@ -48,8 +51,9 @@ const DeveloperCard: React.FC<Developer> = ({
           </button>
         )}
       </div>
-      <Link href={portfolioLink} target="_blank" rel="noopener noreferrer"
-       className="text-neutral-400 underline underline-offset-1 text-sm">Visit portfolio</Link>
+
+      <Link href={pageLink} target="_blank" rel="noopener noreferrer"
+       className="text-neutral-400 underline underline-offset-1 text-sm">Link of page</Link>
       <ul className="mt-2 flex flex-wrap gap-x-2 pt-6">
         {languagesAndFrameworks.map((tech, index) => (
           <li key={index} className="text-gray-400 px-3 border rounded-lg py-1 text-sm">{tech}</li>
