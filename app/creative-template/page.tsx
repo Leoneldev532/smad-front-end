@@ -65,7 +65,9 @@ const DeveloperGrid: React.FC = () => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch('/api/developerForm')
+    fetch('/api/developerForm',{
+      method: 'GET',
+    })
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
