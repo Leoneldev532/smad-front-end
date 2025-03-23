@@ -177,8 +177,7 @@ const Page = () => {
           />
 
           <p className="text-neutral-400 py-3">
-            <strong className={"text-xl md:text-2xl"}>Example with Node.js:</strong>
-            </p>
+             /tg<strong className={"text-xl md:text-2xl"}>Example with Node.js:</strong>  nxZ            </p>
             <CodeBlock
               language="javascript"
               code={`const fetch = require('node-fetch');

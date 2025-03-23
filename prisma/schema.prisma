@@ -18,11 +18,11 @@ model Subscription {
   id                String   @id @default(uuid())
   userId            String
   user              User     @relation(fields: [userId], references: [id])
-  customerId        Int?   
-  typeSubscription  String?   
+  customerId        Int?
+  typeSubscription  String?
   productId         Int?
   billingDate       DateTime?
-  subscriptionPrice Int 
+  subscriptionPrice Int
   isActive          Boolean  @default(true)
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
@@ -32,7 +32,7 @@ model Subscription {
 
 model User {
   id                String       @id @default(uuid())
-  name              String       
+  name              String
   email             String?      @unique
   projects          Project[]
   createdAt         DateTime     @default(now())
@@ -42,7 +42,7 @@ model User {
   password          String?
   emailVerified     DateTime?    @map("email_verified")
   resendApiKey      String?     @unique
-  privateKey        privateKey? 
+  privateKey        privateKey?
   trial_is_finished  Boolean @default(false)
   subscriptions     Subscription[]
 }
@@ -62,6 +62,18 @@ model privateKey {
 }
 
 
+model FormDeveloper {
+  id             String   @id @default(uuid())
+  developerName  String
+  portfolioLink  String
+  image      String
+  languagesAndFrameworks String[]
+  pageLink       String
+  isActive       Boolean  @default(false)
+  code           String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
 
 
 
@@ -124,9 +136,10 @@ model Project {
 
 model Email {
   id        String      @id @default(uuid())
-  email     String   
+  email     String
   projectId String
   project   Project  @relation(fields: [projectId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+

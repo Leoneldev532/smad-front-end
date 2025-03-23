@@ -4,7 +4,7 @@ import {prisma} from "@/lib/db"
 export async function DELETE(request: Request, { params }: { params: { user_id: string, project_Id: string } }) {
   const { project_Id } = params;
 
-  
+
 
   if (!project_Id) {
     return NextResponse.json({ error: 'Missing projectId' }, { status: 400 });
