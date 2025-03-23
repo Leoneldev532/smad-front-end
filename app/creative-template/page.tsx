@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
@@ -7,8 +7,6 @@ import Link from 'next/link';
 import Loader from '@/components/Loader';
 import { useGetDevelopers } from '@/hook/query';
 import { Developer } from '@/lib/type';
-
-
 
 const DeveloperCard: React.FC<Developer> = ({
   developerName,
@@ -62,13 +60,53 @@ const DeveloperCard: React.FC<Developer> = ({
 };
 
 const DeveloperGrid: React.FC = () => {
+  const [developers, setDevelopers] = useState<Developer[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
- const {data:developers,isLoading,isError:error} = useGetDevelopers()
+  useEffect(() => {
+    fetch('/api/developerForm')
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setDevelopers(data.developers);
+        }
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching developers:', error);
+        setError(true);
+        setLoading(false);
+      });
+  }, []);
 
-  if (isLoading) return <div><div className="py-10 flex justify-center items-center"><Loader /></div></div>;
+  const toggleActive = (id: string, isActive: boolean) => {
+    fetch('/api/developerForm', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id, isActive: !isActive }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setDevelopers((prevDevelopers) =>
+            prevDevelopers.map((developer) =>
+              developer.id === id ? { ...developer, isActive: !isActive } : developer
+            )
+          );
+        }
+      })
+      .catch((error) => {
+        console.error('Error updating developer:', error);
+      });
+  };
+
+  if (loading) return <div><div className="py-10 flex justify-center items-center"><Loader /></div></div>;
   if (error) return <div>Error loading developers form</div>;
 
-  const activeDevelopers = developers?.developers?.filter(developer => developer.isActive) || [];
+  const activeDevelopers = developers.filter(developer => developer.isActive);
 
   return (
     <div className="flex flex-col justify-center items-center gap-y-3 w-full">
