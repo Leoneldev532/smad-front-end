@@ -89,7 +89,7 @@ const Header = () => {
             </Link>
 
             <div className="flex gap-x-2 justify-end items-center  w-full    md:w-8/12">
-                <Link href="/create-template" className="">
+                <Link href="/creative-template" className="">
 
                     <button className="px-4 py-1.5 group  text-xs md:text-sm gap-x-4
                       border border-neutral-700 line1  hover:bg-neutral-700/30 relative
