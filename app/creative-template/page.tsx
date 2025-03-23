@@ -52,6 +52,10 @@ const DeveloperCard: React.FC<Developer> = ({
         )}
       </div>
 
+        <h2 className="text-xl  mt-2 flex "><span className="font-bold">preview</span>
+      <Link href={pageLink} target="_blank" rel="noopener noreferrer"
+       className="text-neutral-400 hover:underline underline-offset-2  py-1 px-2 text-sm ">{"> Link of page"}</Link> </h2>
+
       <Link href={pageLink} target="_blank" rel="noopener noreferrer"
        className="text-neutral-400 underline underline-offset-1 pt-4 text-sm">Link of page</Link>
       <ul className="mt-2 flex flex-wrap gap-x-2 pt-6">
