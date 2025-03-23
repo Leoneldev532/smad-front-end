@@ -60,7 +60,7 @@ const DeveloperCard: React.FC<Developer> = ({
         )}
       </div>
       <Link href={portfolioLink} target="_blank" rel="noopener noreferrer"
-       className="text-neutral-400 text-sm">Visiter son portfolio</Link>
+       className="text-neutral-400 underline underline-offset-1 text-sm">Visit portfolio</Link>
       <ul className="mt-2 flex flex-wrap gap-x-2 pt-6">
         {languagesAndFrameworks.map((tech, index) => (
           <li key={index} className="text-gray-400 px-3 border rounded-lg py-1 text-sm">{tech}</li>
@@ -88,12 +88,13 @@ const DeveloperGrid: React.FC = () => {
 
   return (
     <div className="flex flex-col justify-center items-center gap-y-3 w-full">
-      <h2 className="text-2xl md:text-4xl text-center wb-gradient">Creative page forms waitlist form</h2>
-      <span className="text-neutral-600"> Copy page code and paste in your project  </span>
+      <h2 className="text-2xl md:text-4xl pt-8 md:pt-0 text-center wb-gradient">Creative page forms waitlist form</h2>
+      <span className="text-neutral-600"> Copy page code and paste in your project
+        <Link className="underline underline-offset-1" href="https://contribute.smadmail.com" >Contribute here </Link>  </span>
 
       {activeDevelopers.length === 0 && <div className="px-36 w-full  flex justify-center items-center">
-        <div className="text-center px-4 py-2 rounded-xl border border-neutral-800">No page Forms found</div></div>}
-      <div className="grid grid-cols-1 w-full py-8 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="text-center px-4 py-2 rounded-xl border border-neutral-800">No page forms found</div></div>}
+      <div className="grid grid-cols-1 w-full py-8 md:px-0 px-8 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {activeDevelopers.map(developer => (
           <DeveloperCard key={developer.id} {...developer} />
         ))}
