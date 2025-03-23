@@ -10,7 +10,7 @@ export  type Email = {
     createdAt: Date;
     updatedAt: Date;
   };
-  
+
 
 export  type Project = {
     id: string;
@@ -21,7 +21,7 @@ export  type Project = {
     createdAt: Date;
     updatedAt: Date;
   };
-  
+
 
 export  type User = {
     id: string;
@@ -37,7 +37,7 @@ export  type User = {
     createdAt: Date;
     updatedAt: Date;
   };
-  
+
 
 
   export type UserSession =  {
@@ -48,7 +48,20 @@ export  type User = {
   }
 
 
-  
+ export interface Developer {
+    id: string;
+    developerName: string;
+    portfolioLink: string;
+    image: string;
+    languagesAndFrameworks: string[];
+    pageLink: string;
+    isActive: boolean;
+    code: string;
+    createdAt: Date;
+    updatedAt: Date;
+  }
+
+
   export type templateCardType = {
     id?:number,
     name?:string,

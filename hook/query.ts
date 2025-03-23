@@ -1,7 +1,7 @@
 import { getProducts } from "@/app/lemon";
 import { GetAudience } from "@/components/GetAudience";
 import axiosInstance from "@/lib/api.intercept";
-import { Email, Project, User } from "@/lib/type";
+import { Developer, Email, Project, User } from "@/lib/type";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -81,13 +81,13 @@ export const useGetAllEmailsOneProject = (userId: string | null | undefined, idP
         enabled: !!userId && !!idProject,
         staleTime: Infinity,
         refetchOnWindowFocus: false,
-        refetchInterval: false, 
+        refetchInterval: false,
         retry: 3,
     });
 };
 
 export const useGetAllProjectsOfOneUser = (userId: string | null | undefined) => {
-    
+
     return useQuery({
         queryKey: ["getAllProjectsOneUser", userId],
         queryFn: () => getAllProjectOneUserFunc(userId),
@@ -95,7 +95,7 @@ export const useGetAllProjectsOfOneUser = (userId: string | null | undefined) =>
         staleTime: Infinity,
         refetchOnWindowFocus: false,
         enabled: !!userId,
-        refetchInterval: false, 
+        refetchInterval: false,
         retry: 3,
     });
 };
@@ -135,7 +135,7 @@ export const GetAllAudienceOfUser = async (resendApiKey: string) => {
         const response = await axios.get(
             'https://api.resend.com/audiences',
             {
-                params:null, 
+                params:null,
                 headers: {
                     Authorization: `Bearer ${resendApiKey}`,
                     "Content-Type": "application/json"
@@ -170,8 +170,29 @@ export const useGetPricingProducts = () => {
     });
 };
 
+
+
+export const useGetDevelopers = () => {
+  return useQuery<{developers:Developer[]}>({
+    queryKey: ["developers"],
+    queryFn: async () => {
+      const response = await axios.get('/api/developerForm', {
+        headers: {
+          'Cache-Control': 'no-cache',
+        },
+      });
+      return response.data;
+    },
+    gcTime: 5 * 60 * 1000,
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  });
+};
+
+
+
 export const useAllUserTrialplan = (userId: string | null | undefined) => {
-   
+
     return useQuery({
         queryKey: ["getAllUserTrial_plan"],
         queryFn: () => getAllUserTrial_planFunc(userId),
@@ -185,12 +206,12 @@ export const useGetAllUserInfo = (userId: string | null | undefined) => {
     return useQuery({
         queryKey: ["userInfos", userId],
         queryFn: () => getAllUserInfo(userId),
-        gcTime: 5 * 60 * 1000, 
-        staleTime: Infinity, 
-        refetchOnWindowFocus: false, 
-        refetchInterval: false, 
+        gcTime: 5 * 60 * 1000,
+        staleTime: Infinity,
+        refetchOnWindowFocus: false,
+        refetchInterval: false,
         retry: 3,
-        enabled: !!userId 
+        enabled: !!userId
     });
 };
 
@@ -199,14 +220,15 @@ export const useGetResendUser = (userId: string | null | undefined) => {
     return useQuery({
         queryKey: ["resendApiKey", userId],
         queryFn: () => getResendApiKey(userId),
-        gcTime: 5 * 60 * 1000, 
-        staleTime: Infinity, 
-        refetchOnWindowFocus: false, 
-        refetchInterval: false, 
+        gcTime: 5 * 60 * 1000,
+        staleTime: Infinity,
+        refetchOnWindowFocus: false,
+        refetchInterval: false,
         retry: 3,
-        enabled: !!userId 
+        enabled: !!userId
     });
 };
+
 
 
 
@@ -214,12 +236,12 @@ export const useGetResendUserAudience = (resendApiKey: string | null | undefined
     return useQuery({
         queryKey: ["resendApiKeyAudience"],
         queryFn: () => GetAllAudienceOfUser(resendApiKey || " "),
-        gcTime: 5 * 60 * 1000, 
-        staleTime: Infinity, 
-        refetchOnWindowFocus: false, 
-        refetchInterval: false, 
+        gcTime: 5 * 60 * 1000,
+        staleTime: Infinity,
+        refetchOnWindowFocus: false,
+        refetchInterval: false,
         retry: 3,
-        enabled: !!resendApiKey 
+        enabled: !!resendApiKey
     });
 };
 

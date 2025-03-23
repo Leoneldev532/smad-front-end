@@ -5,19 +5,10 @@ import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 import Loader from '@/components/Loader';
+import { useGetDevelopers } from '@/hook/query';
+import { Developer } from '@/lib/type';
 
-interface Developer {
-  id: string;
-  developerName: string;
-  portfolioLink: string;
-  image: string;
-  languagesAndFrameworks: string[];
-  pageLink: string;
-  isActive: boolean;
-  code: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
+
 
 const DeveloperCard: React.FC<Developer> = ({
   developerName,
@@ -71,22 +62,11 @@ const DeveloperCard: React.FC<Developer> = ({
 };
 
 const DeveloperGrid: React.FC = () => {
-  const { isLoading, error, data: developers } = useQuery<{ developers: Developer[] }, Error>({
-    queryKey: ['developers'],
-    queryFn: async () => {
-      const response = await axios.get('/api/developerForm',{
-        headers: {
-          'Cache-Control': 'no-cache',
-        },
-      });
-      return response.data;
-    },
-    // gcTime:5* 60 * 1000,
-    // staleTime: Infinity,
-  });
+
+ const {data:developers,isLoading,isError:error} = useGetDevelopers()
 
   if (isLoading) return <div><div className="py-10 flex justify-center items-center"><Loader /></div></div>;
-  if (error) return <div>Error loading developers</div>;
+  if (error) return <div>Error loading developers form</div>;
 
   const activeDevelopers = developers?.developers?.filter(developer => developer.isActive) || [];
 
