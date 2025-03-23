@@ -52,12 +52,10 @@ const DeveloperCard: React.FC<Developer> = ({
         )}
       </div>
 
-        <h2 className="text-xl  mt-2 flex "><span className="font-bold">preview</span>
+        <h2 className="  mt-2 flex "><span className="font-bold text-lg">preview</span>
       <Link href={pageLink} target="_blank" rel="noopener noreferrer"
-       className="text-neutral-400 hover:underline underline-offset-2  py-1 px-2 text-sm ">{"> Link of page"}</Link> </h2>
+       className="text-neutral-400 hover:underline underline-offset-2  py-1 px-2 text-sm ">{" • Link of page"}</Link> </h2>
 
-      <Link href={pageLink} target="_blank" rel="noopener noreferrer"
-       className="text-neutral-400 underline underline-offset-1 pt-4 text-sm">Link of page</Link>
       <ul className="mt-2 flex flex-wrap gap-x-2 pt-6">
         {languagesAndFrameworks.map((tech, index) => (
           <li key={index} className="text-gray-400 px-3 border rounded-lg py-1 text-sm">{tech}</li>
