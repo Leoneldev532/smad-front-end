@@ -74,7 +74,11 @@ const DeveloperGrid: React.FC = () => {
   const { isLoading, error, data: developers } = useQuery<{ developers: Developer[] }, Error>({
     queryKey: ['developers'],
     queryFn: async () => {
-      const response = await axios.get('/api/developerForm');
+      const response = await axios.get('/api/developerForm',{
+        headers: {
+          'Cache-Control': 'no-cache',
+        },
+      });
       return response.data;
     },
     gcTime:5* 60 * 1000,
@@ -89,7 +93,7 @@ const DeveloperGrid: React.FC = () => {
   return (
     <div className="flex flex-col justify-center items-center gap-y-3 w-full">
       <h2 className="text-2xl md:text-4xl pt-8 md:pt-0 text-center wb-gradient">Creative Page Forms Waitlist</h2>
-      <span className="text-neutral-600"> Copy page code and paste in your project </span>
+      <span className="text-neutral-600 text-center"> Copy page code and paste in your project </span>
 
       <Link className="text-neutral-300 underline underline-offset-1" href="https://contribute.smadmail.com"  >Contribute here </Link>
 
