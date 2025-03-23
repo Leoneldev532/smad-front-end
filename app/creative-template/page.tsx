@@ -78,7 +78,7 @@ const DeveloperGrid: React.FC = () => {
       return response.data;
     },
     gcTime:5* 60 * 1000,
-    staleTime: Infinity,
+    // staleTime: Infinity,
   });
 
   if (isLoading) return <div><div className="py-10 flex justify-center items-center"><Loader /></div></div>;
