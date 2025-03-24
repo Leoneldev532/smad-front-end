@@ -63,16 +63,17 @@ model privateKey {
 
 
 model FormDeveloper {
-  id             String   @id @default(uuid())
-  developerName  String
-  portfolioLink  String
-  image      String
+  id                   String   @id @default(uuid())
+  templatename         String   @default("default_template_name")
+  developerName        String
+  portfolioLink        String
+  image                String
   languagesAndFrameworks String[]
-  pageLink       String
-  isActive       Boolean  @default(false)
-  code           String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  pageLink             String
+  isActive             Boolean  @default(false)
+  code                 String
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
 }
 
 

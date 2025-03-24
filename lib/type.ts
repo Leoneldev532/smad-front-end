@@ -53,6 +53,7 @@ export  type User = {
     developerName: string;
     portfolioLink: string;
     image: string;
+    templatename:string;
     languagesAndFrameworks: string[];
     pageLink: string;
     isActive: boolean;

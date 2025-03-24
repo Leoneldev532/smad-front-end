@@ -10,6 +10,7 @@ import { Developer } from '@/lib/type';
 
 const DeveloperCard: React.FC<Developer> = ({
   developerName,
+  templatename,
   portfolioLink,
   pageLink,
   image,
@@ -29,13 +30,14 @@ const DeveloperCard: React.FC<Developer> = ({
   return (
     <div className="card p-2 rounded-xl shadow bg-neutral-600/20">
       <div className="w-full overflow-hidden rounded-xl border">
-        <Image src={image} height={200} width={300} alt={`${developerName}'s image`} className="w-full h-48 object-cover rounded-lg" />
+        <Image src={image} height={200} width={300} alt={`${templatename}'s image`} className="w-full h-48 object-cover rounded-lg" />
       </div>
 
+
       <div className="flex justify-between items-center mt-4 w-full">
-        <h2 className="text-xl  mt-2 flex "><span className="font-bold">{developerName}</span>
-      <Link href={portfolioLink} target="_blank" rel="noopener noreferrer"
-       className="text-neutral-400 hover:underline underline-offset-2  py-1 px-2 text-sm ">{"> Visit portfolio"}</Link> </h2>
+
+
+      <h4 className="text-lg  mt-2 flex "><span className="font-bold">{templatename}</span></h4>
 
         {isCodeCopy ? (
           <button onClick={() => handleCopyCode(code)} className="p-3 flex hover:bg-neutral-900 justify-center border items-center rounded-md">
@@ -52,9 +54,23 @@ const DeveloperCard: React.FC<Developer> = ({
         )}
       </div>
 
-        <h2 className="  mt-2 flex "><span className="font-bold text-sm">preview</span>
-      <Link href={pageLink} target="_blank" rel="noopener noreferrer"
-       className="text-neutral-400 hover:underline underline-offset-2  py-1 px-2 text-sm ">{" • Link of page"}</Link> </h2>
+
+      <h2 className="text-neutral-400 mt-2 hover:underline underline-offset-2  py-1  text-sm ">
+        <span className="">{developerName}</span>
+        <Link href={portfolioLink} target="_blank" rel="noopener noreferrer"
+        >{" > Visit portfolio"}</Link>
+      </h2>
+
+
+      <h2 className="text-neutral-400 mt-2 hover:underline underline-offset-2  py-1  text-sm ">
+        <span className="">preview</span>
+        <Link href={pageLink} target="_blank" rel="noopener noreferrer"
+        >{" > Link of page"}</Link>
+      </h2>
+
+
+
+
 
       <ul className="mt-2 flex flex-wrap gap-x-2 pt-6">
         {languagesAndFrameworks.map((tech, index) => (
