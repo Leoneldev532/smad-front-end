@@ -61,12 +61,15 @@ const DeveloperCard: React.FC<Developer> = ({
         >{" > Visit portfolio"}</span>
       </Link>
 
+     <br/>
+
       <Link href={githubRepo} target="_blank"  className="text-neutral-400 mt-2 hover:underline underline-offset-2  py-1  text-sm ">
         <span className="">Repo Github</span>
         <span   rel="noopener noreferrer"
         >{" > Visit "}</span>
       </Link>
 
+      <br/>
 
       <Link href={pageLink} target="_blank" className="text-neutral-400 mt-2 hover:underline  underline-offset-2  py-1  text-sm ">
         <span className="">preview</span>
