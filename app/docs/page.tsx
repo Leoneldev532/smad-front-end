@@ -9,7 +9,7 @@ const Page = () => {
   return (
     <section className="flex justify-start px-8 flex-col items-start w-full h-full">
       <h5 className="text-xl font-bold mb-4 text-left text-neutral-400 w-full py-4">
-        How it works?
+        How does it work?
       </h5>
 
       <div className="flex justify-start bg-white/70 border-white/70 border-[0.4px] overflow-hidden items-start h-56 md:h-[28rem] w-full rounded-lg">
@@ -17,7 +17,7 @@ const Page = () => {
       </div>
 
       <h1 className="text-3xl text-neutral-300 font-bold mb-4 text-left w-full py-4 max-w-xl">
-        How to build a mailing list, waitlist in less than 2 minutes
+        How to build a mailing list or waitlist in less than 2 minutes
       </h1>
 
       <div className="w-full overflow-hidden border-t border-neutral-500/40">
@@ -49,10 +49,11 @@ const Page = () => {
           <CodeBlock
             language="javascript"
             code={`{
-  email: string;
-  project_id: string;
-  private_key: string;
-}`}
+        email: string;
+        project_id: string;
+        private_key: string;
+        name: string; // Optional, only if "add user name field" is enabled when you create the project
+      }`}
           />
 
           <p className="text-neutral-400 py-4 mb-2">
@@ -86,6 +87,13 @@ const Page = () => {
               the {"Account & Pricing"} menu. Then, on the new page, copy the{" "}
               <code>private_key</code>.
             </li>
+            <li>
+              <code className="bg-neutral-800 py-1 px-3 border border-neutral-700 rounded">
+                name
+              </code>{" "}
+              : The name of the user. This field is optional and will only be
+              considered if the {"add user name field"} checkbox was enabled during project creation.
+            </li>
           </ul>
 
           <p className="text-neutral-400 mb-2">
@@ -95,10 +103,11 @@ const Page = () => {
           <CodeBlock
             language="javascript"
             code={`{
-  "email": "example@gmail.com",
-  "project_id": "123-456-789-000",
-  "private_key": "your_private_key_here"
-}`}
+        "email": "example@gmail.com",
+        "project_id": "123-456-789-000",
+        "private_key": "your_private_key_here",
+        "name": "John Doe" //  Optional, only if "add user name field" is enabled when you create the project, else set null
+      }`}
           />
 
           <p className="text-neutral-400 py-3">
@@ -109,107 +118,81 @@ const Page = () => {
             <li>Replace the example values with your actual data.</li>
             <li>
               The private key is essential for authentication. Keep it secret,
-              it should be stored as an environment variable.
+              and it should be stored as an environment variable.
             </li>
             <li>
               Ensure the email address is valid before sending the request to
               avoid errors.
             </li>
+            <li>
+              If the {"add user name field"} checkbox was enabled during project creation, include the {`name`} field in the payload.
+            </li>
           </ol>
 
           <p className="text-neutral-400 py-3">
-            <strong className={"text-xl md:text-2xl"}>Status Descriptions:</strong>
-          </p>
-
-          <ul className="list-disc list-inside flex flex-col gap-y-6 justify-start items-start text-neutral-400 mb-4">
-            <li>
-              <code className="bg-red-800 py-1 px-3 border border-red-700 rounded">
-                400 Bad Request
-              </code>
-              : Private key is required.
-            </li>
-            <li>
-              <code className="bg-orange-800 py-1 px-3 border border-orange-700 rounded">
-                401 Unauthorized
-              </code>
-              : Invalid private key.
-            </li>
-            <li>
-              <code className="bg-blue-800 py-1 px-3 border border-blue-700 rounded">
-                404 Not Found
-              </code>
-              : User not found or invalid project ID or the project does not
-              belong to the user.
-            </li>
-            <li>
-              <code className="bg-purple-800 py-1 px-3 border border-purple-700 rounded">
-                500 Internal Server Error
-              </code>
-              : Internal server error.
-            </li>
-          </ul>
-
-          <p className="text-neutral-400 py-3">
-            <strong className={"text-xl md:text-2xl"}>Example with javascript:</strong>
+            <strong className={"text-xl md:text-2xl"}>Example with JavaScript:</strong>
           </p>
 
           <CodeBlock
             language="javascript"
-            code={`async function saveEmailToMailingList(email) {
-  const response = await fetch('https://api.smadmail.com/api/v1/email/save', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      email: email,
-      project_id: process.env.PROJECT_ID,
-      private_key: process.env.PRIVATE_KEY
-    })
-  });
+            code={`async function saveEmailToMailingList(email, name) {
+        const response = await fetch('https://api.smadmail.com/api/v1/email/save', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: email,
+            project_id: process.env.PROJECT_ID,
+            private_key: process.env.PRIVATE_KEY,
+            name: name //  Optional, only if "add user name field" is enabled when you create the project, else set null
+          })
+        });
 
-  if (!response.ok) {
-    throw new Error('Failed to save email');
-  }
+        if (!response.ok) {
+          throw new Error('Failed to save email');
+        }
 
-  return await response.json();
-}`}
+        return await response.json();
+      }`}
           />
 
           <p className="text-neutral-400 py-3">
-             /tg<strong className={"text-xl md:text-2xl"}>Example with Node.js:</strong>  nxZ            </p>
-            <CodeBlock
-              language="javascript"
-              code={`const fetch = require('node-fetch');
+            <strong className={"text-xl md:text-2xl"}>Example with Node.js:</strong>
+          </p>
 
-            async function saveEmailToMailingList(email) {
-              try {
-                const response = await fetch('https://api.smadmail.com/api/v1/email/save', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({
-                    email: email,
-                    project_id: process.env.PROJECT_ID,
-                    private_key: process.env.PRIVATE_KEY,
-                  }),
-                });
+          <CodeBlock
+            language="javascript"
+            code={`const fetch = require('node-fetch');
 
-                if (!response.ok) {
-                  throw new Error(\`Failed to save email: \${response.statusText}\`);
-                }
+      async function saveEmailToMailingList(email, name) {
+        try {
+          const response = await fetch('https://api.smadmail.com/api/v1/email/save', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email: email,
+              project_id: process.env.PROJECT_ID,
+              private_key: process.env.PRIVATE_KEY,
+              name: name // Include name  Optional, only if "add user name field" is enabled when you create the project, else set null
+            }),
+          });
 
-                return await response.json();
-              } catch (error) {
-                console.error(\`Error saving email: \${error.message}\`);
-                throw error;
-              }
-            }
+          if (!response.ok) {
+            throw new Error(\`Failed to save email: \${response.statusText}\`);
+          }
 
-            module.exports = saveEmailToMailingList;
-            `}
-            />
+          return await response.json();
+        } catch (error) {
+          console.error(\`Error saving email: \${error.message}\`);
+          throw error;
+        }
+      }
+
+      module.exports = saveEmailToMailingList;`}
+          />
 
           <p className="text-neutral-400 py-3">
             <strong className={"text-xl md:text-2xl"}>Example with PHP:</strong>
@@ -218,30 +201,31 @@ const Page = () => {
           <CodeBlock
             language="javascript"
             code={`<?php
-$url = 'https://api.smadmail.com/api/v1/email/save';
-$data = array(
-  'email' => 'example@gmail.com',
-  'project_id' => getenv('PROJECT_ID'),
-  'private_key' => getenv('PRIVATE_KEY')
-);
+      $url = 'https://api.smadmail.com/api/v1/email/save';
+      $data = array(
+        'email' => 'example@gmail.com',
+        'project_id' => getenv('PROJECT_ID'),
+        'private_key' => getenv('PRIVATE_KEY'),
+        'name' => 'John Doe' //  Optional, only if "add user name field" is enabled when you create the project, else set null
+      );
 
-$options = array(
-  'http' => array(
-    'header'  => "Content-Type: application/json\r\n",
-    'method'  => 'POST',
-    'content' => json_encode($data),
-  ),
-);
+      $options = array(
+        'http' => array(
+          'header'  => "Content-Type: application/json\r\n",
+          'method'  => 'POST',
+          'content' => json_encode($data),
+        ),
+      );
 
-$context  = stream_context_create($options);
-$result = file_get_contents($url, false, $context);
+      $context  = stream_context_create($options);
+      $result = file_get_contents($url, false, $context);
 
-if ($result === FALSE) {
-  throw new Exception('Failed to save email');
-}
+      if ($result === FALSE) {
+        throw new Exception('Failed to save email');
+      }
 
-var_dump($result);
-?>`}
+      var_dump($result);
+      ?>`}
           />
         </div>
       </div>
