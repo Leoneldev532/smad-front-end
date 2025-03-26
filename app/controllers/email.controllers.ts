@@ -5,12 +5,17 @@ interface AppError extends Error {
 }
 
 // Contrôleur pour ajouter un email à un projet
-export const addEmailToProject = async (projectId: string, email: string): Promise<any> => {
+export const addEmailToProject = async (projectId: string, email: string,name:string | undefined | null): Promise<any> => {
   try {
     const newEmail = await prisma.email.create({
       data: {
         email,
-        projectId,
+        name: name ? name : undefined,
+        project: {
+          connect: {
+            id: projectId,
+          },
+        },
       },
     });
     return newEmail;

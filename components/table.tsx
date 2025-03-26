@@ -39,15 +39,15 @@ import ButtonValidation from "./ButtonValidation"
 
 
 
- const  TableData = ({emailsList,project_Id,refetchEmail}:{emailsList:Email[] | [] | undefined,project_Id:string,refetchEmail:()=>void}) => {
- 
+ const  TableData = ({emailsList,project_Id,withName,refetchEmail}:{emailsList:Email[] | [] | undefined,withName:boolean,project_Id:string,refetchEmail:()=>void}) => {
+
   const [selectedIdArray,setSelectedIdArray] = useState<string[]>([])
 
   const handleSelected = (status:CheckedState,id:string) =>{
     if(status){
       setSelectedIdArray((prev) => {
         if (!prev.includes(id)) {
-          return [...prev, id]; 
+          return [...prev, id];
         }
         return prev;
       });
@@ -59,6 +59,8 @@ import ButtonValidation from "./ButtonValidation"
     }
   }
 
+
+
   const [checkAllActived,setCheckAllActivated] = useState<boolean>(false)
 
   const handleCheckedAll = (status:CheckedState) =>{
@@ -66,11 +68,11 @@ import ButtonValidation from "./ButtonValidation"
       emailsList?.forEach((email)=>{
       handleSelected(true,email.id)
       })
-     
+
       setCheckAllActivated(true)
     }else{
      setSelectedIdArray([])
-     
+
      setCheckAllActivated(false)
     }
   }
@@ -93,7 +95,7 @@ import ButtonValidation from "./ButtonValidation"
     setisOpenDialogDeleteEmail(false)
   }
 
-  
+
   const mutationDeleteEmailOneProject = useMutation({
     mutationFn: (emailId: string) => deleteEmail(user?.id || " ",project_Id, emailId),
     onSuccess: () => {
@@ -114,7 +116,7 @@ import ButtonValidation from "./ButtonValidation"
     setEmailUpdateValue(e.target.value)
   }
 
-  
+
   const mutationUpdateEmailOneProject = useMutation({
     mutationFn: (emailId: string) => updateEmail(user?.id || " ",project_Id, emailId,emailUpdateValue),
     onSuccess: () => {
@@ -131,14 +133,14 @@ import ButtonValidation from "./ButtonValidation"
   const handleValidateEmail  = (emailId:string) =>{
     mutationUpdateEmailOneProject.mutate(emailId)
   }
-  
-  
+
+
   const handleDeleteEmail = (emailId: string) => {
     mutationDeleteEmailOneProject.mutate(emailId);
   };
 
-  
-  
+
+
    const inputRef = useRef<HTMLInputElement>(null)
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -166,11 +168,11 @@ import ButtonValidation from "./ButtonValidation"
     <AlertDialogFooter>
       <Button  variant="ghost" onClick={()=>handleCloseModalDeleteEmail()}>Cancel</Button>
       <ButtonValidation title={"delete"}  isLoading={mutationDeleteEmailOneProject?.isPending} typeButton="button" type='negative'  onClick={()=>handleDeleteEmail(idEmailSelected)}/>
-   
+
     </AlertDialogFooter>
   </AlertDialogContent>
 </AlertDialog>
-    
+
     <Table className="border rounded-md overflow-hidden  relative">
       <TableHeader>
         <TableRow>
@@ -178,19 +180,29 @@ import ButtonValidation from "./ButtonValidation"
           <Checkbox checked={(selectedIdArray.length === emailsList?.length && checkAllActived) }  onCheckedChange={(status)=>handleCheckedAll(status)} key={"all"} id="terms" />
           <span>Select</span>
           </TableHead>
+          <TableHead className="w-1/3">{withName && "Name"}</TableHead>
           <TableHead className="w-1/2">Email</TableHead>
           <TableHead className="w-1/3">Actions</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody className="overflow-y-auto ">
         {emailsList?.map((email) => (
-          <TableRow key={email.id} className="py-0 h-8 max-h-8">
-            <TableCell className="font-medium w-1/6"> 
-            <Checkbox      checked={selectedIdArray.includes(email.id)}  
-            onCheckedChange={(status)=>handleSelected(status,email.id)} 
+          <TableRow key={email.id} className="py-0 h-8  max-h-8">
+
+
+
+            <TableCell className="font-medium w-1/6">
+            <Checkbox      checked={selectedIdArray.includes(email.id)}
+            onCheckedChange={(status)=>handleSelected(status,email.id)}
             key={email?.id} id="terms" />
-              
+
             </TableCell>
+
+            <TableCell className="font-medium w-1/6">
+{withName && <span>{email?.name}</span> }
+
+            </TableCell>
+
             <TableCell className="font-medium w-1/2 flex justify-start gap-4 items-center" >
 
             {isUpdateEmail ? (
@@ -201,7 +213,7 @@ import ButtonValidation from "./ButtonValidation"
                 disabled={mutationUpdateEmailOneProject.isPending}
                 ref={inputRef}
                 value={emailUpdateValue}
-                onChange={(e) => handleUpdateEmail(e)} 
+                onChange={(e) => handleUpdateEmail(e)}
                 onKeyPress={(e) => {
                   if (e.key === 'Enter') {
                     handleValidateEmail(email.id);
@@ -209,16 +221,27 @@ import ButtonValidation from "./ButtonValidation"
                 }}
               />
   ) : (
-    <span>{email.email}</span> 
+    <span>{email.email}</span>
   )
 ) : (
-  <span>{email.email}</span> 
+  <span>{email.email}</span>
 )}
 
 <div className="w-6 h-6 flex justify-center items-center">   { emailIdUpdateValue === email.id && mutationUpdateEmailOneProject?.isPending &&  <Loader  height="6" width="6" /> }     </div>
-                
+
 
              </TableCell>
+
+
+
+
+
+
+
+
+
+
+
             <TableCell className="font-medium w-1/2" >
             <DropdownMenu >
         <DropdownMenuTrigger asChild>
@@ -229,7 +252,7 @@ import ButtonValidation from "./ButtonValidation"
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="bg-neutral-900">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-         
+
           <DropdownMenuSeparator />
           <DropdownMenuItem className="cursor-pointer" onClick={() => navigator.clipboard.writeText(email.email)}>
             Copy email
@@ -238,22 +261,31 @@ import ButtonValidation from "./ButtonValidation"
           <DropdownMenuItem className="cursor-pointer" onClick={() => {setEmailUpdateValue(email?.email) ; setEmailIdUpdateValue(email?.id) ;setIsUpdateEmail(true) } }>
             Update
           </DropdownMenuItem>
-          
+
           <DropdownMenuSeparator />
           <DropdownMenuItem className="cursor-pointer" onClick={() => { setIdEmailSelected(email.id) ; handleShowModalDeleteEmail();   } }>
             delete
           </DropdownMenuItem>
         </DropdownMenuContent>
-        
+
              </DropdownMenu>
             </TableCell>
+
+
+
+
           </TableRow>
         ))}
       </TableBody>
-      <TableFooter>
-        <TableRow className="bg-neutral-700/30 hover:bg-neutral-700/30">
-          <TableCell colSpan={2}>Total</TableCell>
-          <TableCell className=" flex w-full gap-x-2"> <span>{emailsList?.length } row(s)</span></TableCell>
+      <TableFooter className=" w-full">
+        <TableRow className="bg-neutral-700/30   w-full hover:bg-neutral-700/30">
+          <TableCell colSpan={1}>Total</TableCell>
+          <TableCell colSpan={1}></TableCell>
+          <TableCell ></TableCell>
+          <TableCell className=" flex w-full gap-x-2 ">
+             <span className="w-full ">{emailsList?.length} row(s)
+             </span>
+             </TableCell>
         </TableRow>
       </TableFooter>
     </Table>

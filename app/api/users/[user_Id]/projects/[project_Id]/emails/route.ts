@@ -19,14 +19,14 @@ export async function GET(request: Request, { params }: { params: { project_Id: 
 
 export async function POST(request: Request, { params }: { params: { project_Id: string } }) {
   const { project_Id } = params;
-  const { email } = await request.json();
+  const { email,name } = await request.json();
 
   if (!project_Id || !email) {
     return NextResponse.json({ error: 'Missing project_Id or email' }, { status: 400 });
   }
 
   try {
-    const newEmail = await addEmailToProject(project_Id, email);
+    const newEmail = await addEmailToProject(project_Id, email,name);
     return NextResponse.json(newEmail, { status: 201 });
   } catch (error: any) {
     return NextResponse.json({ error: error?.message }, { status: 500 });

@@ -11,12 +11,13 @@ export const createAppError = (message: string, statusCode: number): AppError =>
   return error;
 };
 
-export const createProject = async (userId: string, name: string): Promise<any> => {
+export const createProject = async (userId: string, name: string,withName:boolean): Promise<any> => {
   try {
     const existingProject = await prisma.project.findFirst({
       where: {
         name,
         userId,
+
       },
     });
 
@@ -28,6 +29,7 @@ export const createProject = async (userId: string, name: string): Promise<any> 
       data: {
         name,
         userId,
+        withName
       },
     });
     return project;
@@ -67,7 +69,7 @@ export const deleteProject = async (projectId: string): Promise<any> => {
         projectId: projectId,
       },
     });
-    
+
     const project = await prisma.project.delete({
       where: { id: projectId },
     });

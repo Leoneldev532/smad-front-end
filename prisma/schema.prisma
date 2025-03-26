@@ -71,7 +71,7 @@ model FormDeveloper {
   languagesAndFrameworks String[]
   pageLink             String
   isActive             Boolean  @default(false)
-  code                 String
+  githubRepo            String @default("null")
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
 }
@@ -129,6 +129,7 @@ model Project {
   id        String      @id @default(uuid())
   name      String
   userId    String
+  withName  Boolean @default(false)
   user      User     @relation(fields: [userId], references: [id])
   emails    Email[]
   createdAt DateTime @default(now())
@@ -139,6 +140,7 @@ model Email {
   id        String      @id @default(uuid())
   email     String
   projectId String
+  name      String @default("null")
   project   Project  @relation(fields: [projectId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

@@ -5,6 +5,7 @@ import { ReactNode } from "react";
 export  type Email = {
     id: string;
     email: string;
+    name: string;
     projectId: string;
     project: Project;
     createdAt: Date;
@@ -17,6 +18,7 @@ export  type Project = {
     name: string;
     userId?: string;
     user?: User;
+    withName:boolean;
     emails?: Email[];
     createdAt: Date;
     updatedAt: Date;
@@ -57,7 +59,7 @@ export  type User = {
     languagesAndFrameworks: string[];
     pageLink: string;
     isActive: boolean;
-    code: string;
+    githubRepo: string;
     createdAt: Date;
     updatedAt: Date;
   }

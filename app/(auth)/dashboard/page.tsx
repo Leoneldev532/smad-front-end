@@ -103,10 +103,12 @@ export default   function Page() {
 
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [currentIdProject,setCurrentIdProject]= useState<string>("")
+  const [projectIswithName,setProjectIswithName]= useState<boolean>(false)
 
-  const handleTabClick = (index:number,idProject:string,nameProject:string) => {
+  const handleTabClick = (index:number,idProject:string,nameProject:string,withName:boolean) => {
     setActiveTabIndex(index);
     setCurrentIdProject(idProject)
+    setProjectIswithName(withName)
     handlShowEmailsOneProject(idProject,nameProject)
   };
 
@@ -166,6 +168,7 @@ export default   function Page() {
   const [isOpenCreateProject,setIsOpenCreateProject] = useState<boolean>(false)
   const [isOpenAddEmailDialog,setIsOpenAddEmailDialog] = useState<boolean>(false)
   const [projectName,setProjectName] = useState<string>("")
+  const [isCheckedFieldNameUser,setIsCheckedFieldNameUser] = useState<boolean>(false)
 
    const handleShowDialogAddEmail = ()=>{
 
@@ -321,7 +324,7 @@ const {data:allAudiences,isLoading:loadingAllAudiences,refetch:refetchAudiences}
     const [isCodeCopyCodeScript,setIsCodeCopyCodeScript] = useState(false)
 
   const mutationAddProject = useMutation({
-    mutationFn: () => createProject(user?.id || " ",projectName),
+    mutationFn: () => createProject(user?.id || " ",projectName,isCheckedFieldNameUser),
     onSuccess: (data:{id:string}) => {
       toast.success("operation d'ajout reuissie")
       setIsOpenCreateProject(false)
@@ -339,12 +342,13 @@ const {data:allAudiences,isLoading:loadingAllAudiences,refetch:refetchAudiences}
 
 
   const mutationAddEmailAdress = useMutation({
-    mutationFn: () => addEmailAddress(user?.id  || " ",idProjectActive,emailAddress),
+    mutationFn: () => addEmailAddress(user?.id  || " ",idProjectActive,emailAddress,projectIswithName,name),
     onSuccess: () => {
       toast.success("operation d'ajout reuissie")
       handleCloseDialogAddEmail()
       allEmailsOneProjectRefetch()
       setEmailAddress(" ")
+      setName(" ")
     },
     onError:(error)=>{
       toast.error("Une erreur est survenue" + error)
@@ -366,6 +370,7 @@ const {data:allAudiences,isLoading:loadingAllAudiences,refetch:refetchAudiences}
   }
 
   const [emailAddress,setEmailAddress] = useState("")
+  const [name,setName] = useState("")
 
 
 
@@ -378,6 +383,10 @@ const {data:allAudiences,isLoading:loadingAllAudiences,refetch:refetchAudiences}
 
   const handleSetEmailAddress = (e:ChangeEvent<HTMLInputElement>) =>{
     setEmailAddress(e.target.value)
+  }
+
+  const handleSetName = (e:ChangeEvent<HTMLInputElement>) =>{
+    setName(e.target.value)
   }
 
   const [audiencesOfUser,setAudiencesOfUser ] = useState([])
@@ -541,7 +550,18 @@ const handleCopyCode = () => {
         <Input type="text" value={projectName}
          onChange={(e)=>handleSetProjectName(e)} placeholder="name"
                         className=" rounded-md border border-neutral-700" />
-
+                        <div className="flex items-center mt-4">
+                          <input
+                          checked={isCheckedFieldNameUser}
+                          onChange={(e: ChangeEvent<HTMLInputElement>) => setIsCheckedFieldNameUser(e.target.checked)}
+                            type="checkbox"
+                            id="addNameUser"
+                            className="mr-2 size-5 rounded-lg"
+                          />
+                          <label htmlFor="addNameUser" className="text-sm">
+                            Add name Field
+                          </label>
+                        </div>
       </AlertDialogDescription>
 
     <AlertDialogFooter className="pt-3">
@@ -643,12 +663,27 @@ const handleCopyCode = () => {
       </AlertDialogHeader>
       <form onSubmit={(e)=>handleAddEmailAddress(e)} >
       <AlertDialogDescription>
+        {projectIswithName && (
+          <Input
+            type="text"
+            required
+            value={name}
+            onChange={(e) => handleSetName(e)}
+            placeholder="Name"
+            className="rounded-md my-3 border border-neutral-700"
+          />
+        )}
 
-        <Input type="email" required pattern={`[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$`} value={emailAddress}
-         onChange={(e)=>handleSetEmailAddress(e)} placeholder="monEmail@gmail.com"
-                        className=" rounded-md border border-neutral-700" />
-
-      </AlertDialogDescription>
+        <Input
+          type="email"
+          required
+          pattern={`[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$`}
+          value={emailAddress}
+          onChange={(e) => handleSetEmailAddress(e)}
+          placeholder="monEmail@gmail.com"
+          className="rounded-md border border-neutral-700"
+        />
+            </AlertDialogDescription>
 
 
     <AlertDialogFooter className="my-3">
@@ -748,7 +783,7 @@ const handleCopyCode = () => {
               privateKey={privateKey || " "}
               refetch={()=>allProjectsOneUserRefetch()}
                isActive={index === activeTabIndex} className="bg-red-500"
-              onClick={()=>handleTabClick(index,item.id,item.name)} key={"p"+ index} />
+              onClick={()=>handleTabClick(index,item.id,item.name,item.withName)} key={"p"+ index} />
              ))}
 
 
@@ -766,7 +801,7 @@ const handleCopyCode = () => {
                   <ProjectItemMobile
                     name={item.name}
                     isActive={index === activeTabIndex}
-                    onClick={() => handleTabClick(index, item.id, item.name)} key={"p" + index} />
+                    onClick={() => handleTabClick(index, item.id, item.name,item.withName)} key={"p" + index} />
                 ))}
 
 
@@ -781,7 +816,7 @@ const handleCopyCode = () => {
                     privateKey={privateKey || " "}
                     refetch={() => allProjectsOneUserRefetch()}
                     isActive={index === activeTabIndex} className="bg-red-500"
-                    onClick={() => handleTabClick(index, item.id, item.name)} key={"p" + index} />
+                    onClick={() => handleTabClick(index, item.id, item.name,item.withName)} key={"p" + index} />
                 ))}
 
 
@@ -897,7 +932,9 @@ const handleCopyCode = () => {
               <div className="flex justify-center h-auto  relative items-center w-full">
 
 
-              <TableData project_Id={currentIdProject} refetchEmail={allEmailsOneProjectRefetch} emailsList={ allProjectsOneUser ? filterTabEmails : []}  />
+              <TableData project_Id={currentIdProject} withName={projectIswithName}
+              refetchEmail={allEmailsOneProjectRefetch}
+              emailsList={ allProjectsOneUser ? filterTabEmails : []}  />
 
 
 

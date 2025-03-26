@@ -12,7 +12,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-        
+
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu"
 import { MoreHorizontal } from 'lucide-react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -37,15 +37,15 @@ import { templateInfo } from '@/lib/atom'
 import { useRouter } from 'next/navigation'
          const ProjectTabItem = ({project,onClick,isActive,refetch,className,privateKey}:
           {project:Project,onClick:()=>void,refetch:()=>void,className:string,isActive:boolean,privateKey:string}) => {
-          
+
   const queryClient = useQueryClient();
   const {user} = useGetUserInfo()
 
 
-  
 
-  
-  
+
+
+
   const [isprojectNameUpdate,setIsprojectNameUpdate] = useState<boolean>(false)
   const [idProject,setIdProject] = useState<string>(" ")
   const [newNameProject,setNewNameProject] = useState<string>(" ")
@@ -54,7 +54,7 @@ import { useRouter } from 'next/navigation'
 
 
   const mutationUpdateProjectName = useMutation({
-    mutationFn: () => updateProject(user?.id || " ",project.id,newNameProject), 
+    mutationFn: () => updateProject(user?.id || " ",project.id,newNameProject),
     onSuccess: () => {
       queryClient.invalidateQueries({queryKey:['getAllProjectsOneUser', user?.id]});
       toast.success("operation de modification reuissie")
@@ -65,13 +65,13 @@ import { useRouter } from 'next/navigation'
     onError:()=>{
       toast.error("Une erreur est survenue")
     }
-    
+
   });
 
 
 
   const mutationDeleteProject = useMutation({
-    mutationFn: () => deleteProject(user?.id || " ",project.id), 
+    mutationFn: () => deleteProject(user?.id || " ",project.id),
     onSuccess: () => {
       queryClient.invalidateQueries({queryKey:['getAllProjectsOneUser', user?.id]});
       toast.success("operation de suppression reuissie")
@@ -81,7 +81,7 @@ import { useRouter } from 'next/navigation'
     onError:()=>{
       toast.error("Une erreur est survenue")
     }
-    
+
   });
 
 
@@ -115,7 +115,7 @@ import { useRouter } from 'next/navigation'
       document.removeEventListener('mousedown', handleClickOutside);
     };
   },[])
-  
+
 
   const [isOpenModalConfig,setIsOpenModalConfig] = useState(false)
   const [isCodeCopyCodeScript,setIsCodeCopyCodeScript] = useState(false)
@@ -123,18 +123,18 @@ import { useRouter } from 'next/navigation'
 
   const codeScript = `
 <link rel="stylesheet"  href="https://templates.smadmail.com/css/iframe.css"/>
-  <iframe src="https://templates.smadmail.com/ui/form1.html?private_key=${privateKey}&project_id=${project?.id}" scrolling="no"  ></iframe>`  
+  <iframe src="https://templates.smadmail.com/ui/form1.html?private_key=${privateKey}&project_id=${project?.id}" scrolling="no"  ></iframe>`
 
 
     const router  = useRouter()
-   
+
       const setDataUser = useSetRecoilState(templateInfo)
-   
+
      const handleCustomize = () =>{
        setDataUser(`?private_key=${privateKey}&project_id=${project?.id.trim()}`)
        router.push("/playground")
      }
-   
+
 
   const handleCopyCodeScript = () => {
     setIsCodeCopyCodeScript(true)
@@ -167,10 +167,10 @@ import { useRouter } from 'next/navigation'
               value={codeScript}
             />
 <div className="flex justify-end items-center w-full gap-x-3 py-3">
-{<button  onClick={() => handleCopyCodeScript()} 
-  className='border  cursor-pointer 
-              flex-shrink flex gap-x-2 w-full  hover:bg-neutral-900 transition-colors 
-      duration-300 ease justify-center text-lg items-center border-neutral-500/40 text-neutral-500 px-2 py-2.5 rounded-lg'> 
+{<button  onClick={() => handleCopyCodeScript()}
+  className='border  cursor-pointer
+              flex-shrink flex gap-x-2 w-full  hover:bg-neutral-900 transition-colors
+      duration-300 ease justify-center text-lg items-center border-neutral-500/40 text-neutral-500 px-2 py-2.5 rounded-lg'>
         <span className="text-xs"> Copy Code  </span>
   { isCodeCopyCodeScript ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
 
@@ -192,7 +192,7 @@ import { useRouter } from 'next/navigation'
               </svg>}
             </button> }
 
-          
+
 
          <Button onClick={()=>handleCloseScriptCode()}>Cancel</Button>
          </div>
@@ -205,7 +205,7 @@ import { useRouter } from 'next/navigation'
       </AlertDialogDescription>
     </AlertDialogHeader>
     <AlertDialogFooter>
-      
+
       {/* <Button onClick={()=>handleCloseDialogDelete()}>Cancel</Button> */}
       {/* <ButtonValidation title={"confirm"}  isLoading={mutationDeleteProject.isPending} typeButton="button" type='negative' onClick={()=>handleDelete(project?.id)} /> */}
 
@@ -222,7 +222,7 @@ import { useRouter } from 'next/navigation'
       </AlertDialogDescription>
     </AlertDialogHeader>
     <AlertDialogFooter>
-      
+
       <Button onClick={()=>handleCloseDialogDelete()}>Cancel</Button>
       <ButtonValidation title={"confirm"}  isLoading={mutationDeleteProject.isPending} typeButton="button" type='negative' onClick={()=>handleDelete(project?.id)} />
 
@@ -235,7 +235,7 @@ import { useRouter } from 'next/navigation'
 
             <button type="button" onClick={onClick}  className={cn("py-2 flex px-3 text-sm rounded-md  w-full justify-between items-center gap-x-3 ",className, isActive ? "bg-neutral-800":"bg-transparent")}>
             <div  className="flex gap-2 justify-start items-center w-full">
-            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.875" 
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.875"
              strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-table2 grid-area-1-1"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2
              2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"></path></svg>
                   {isprojectNameUpdate ? (
@@ -268,18 +268,18 @@ import { useRouter } from 'next/navigation'
             <MoreHorizontal />
           </Button>
         </DropdownMenuTrigger>
-        
+
         <DropdownMenuSeparator />
         <DropdownMenuContent className="bg-neutral-900"  align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          
+
         <DropdownMenuSeparator />
         <DropdownMenuItem className="cursor-pointer"  onClick={() => navigator.clipboard.writeText(project.id)} >Copy project ID </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="cursor-pointer"  onClick={() => handleOpenScriptCode()} > 
+        <DropdownMenuItem className="cursor-pointer"  onClick={() => handleOpenScriptCode()} >
                   show code integration
          </DropdownMenuItem>
-          
+
         <DropdownMenuSeparator />
           <DropdownMenuItem className="cursor-pointer" onClick={()=>{setIsprojectNameUpdate(true) ; setIdProject(project.id) ; setNewNameProject(project.name) } } >
             Update
@@ -288,15 +288,14 @@ import { useRouter } from 'next/navigation'
           <DropdownMenuSeparator />
           <DropdownMenuItem className="cursor-pointer" onClick={() =>handleShowDialogDelete()}>
                 delete
-      
+
           </DropdownMenuItem>
         </DropdownMenuContent>
              </DropdownMenu>
-              </button> 
-              
+              </button>
+
             </>
           )
         }
-        
+
         export default ProjectTabItem
-        

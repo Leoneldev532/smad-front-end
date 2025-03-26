@@ -49,10 +49,11 @@ export const updateEmail = async (idUser: string | null | undefined, idProject: 
     return response.data;
 };
 
-export const createProject = async (idUser: string | null | undefined, nameProject: string) => {
-    if (!idUser || !nameProject) throw new Error("Invalid user ID or project name");
+export const createProject = async (idUser: string | null | undefined, nameProject: string,isCheckedFieldNameUser:boolean) => {
+    if (!idUser || !nameProject ) throw new Error("Invalid user ID or project name");
     const response = await axiosInstance.post(`./api/users/${idUser}/projects`, {
-        name: nameProject
+        name: nameProject,
+        withName:isCheckedFieldNameUser
     });
     return response.data;
 };
@@ -65,10 +66,11 @@ export const updateProject = async (idUser: string | null | undefined, idProject
     return response.data;
 };
 
-export const addEmailAddress = async (idUser: string | null | undefined, idProject: string, nameEmail: string) => {
+export const addEmailAddress = async (idUser: string | null | undefined, idProject: string, nameEmail: string,withName:boolean,name:string) => {
     if (!idUser || !idProject || !nameEmail) throw new Error("Invalid parameters");
     const response = await axiosInstance.post(`./api/users/${idUser}/projects/${idProject}/emails`, {
-        email: nameEmail
+        email: nameEmail,
+        name:withName ? name : null
     });
     return response.data;
 };
