@@ -515,7 +515,7 @@ export default function Home() {
                   absolute top-0 left-0 flex justify-between items-end p-4 overflow-hidden">
                     <h5 className="text-lg "> waitlist product template 1 </h5>
 
-                    <Link href="/" className="underline text-sm flex justify-center items-center w-auto gap-x-1"> <span> See more</span>
+                    <Link href="/creative-template" className="underline text-sm flex justify-center items-center w-auto gap-x-1"> <span> See more</span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                      viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
                         <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
@@ -542,7 +542,7 @@ export default function Home() {
   absolute top-0 left-0 flex justify-between items-end p-4 overflow-hidden">
     <h5 className="text-lg "> waitlist product template 2 </h5>
 
-    <Link href="/" className="underline text-sm flex justify-center items-center w-auto gap-x-1"> <span> See more</span>
+    <Link href="/creative-template" className="underline text-sm flex justify-center items-center w-auto gap-x-1"> <span> See more</span>
     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
      viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
         <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
