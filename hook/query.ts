@@ -131,6 +131,14 @@ export const setResendApiKey = async (idUser: string | null | undefined,resendAp
 };
 
 
+export const getUserProjectsWithEmailsGroupedByDate = async (idUser: string | null | undefined): Promise<
+  { projectId: string; emailCountsByDate: Record<string, number> }[]
+> => {
+  if (!idUser) throw new Error("Invalid user ID");
+  const response = await axiosInstance.get(`./api/users/${idUser}/analytics`);
+  return response.data;
+};
+
 
 export const GetAllAudienceOfUser = async (resendApiKey: string) => {
     try {
@@ -257,4 +265,18 @@ export const useGetAudience = (audienceId:string) => {
         queryFn: () => GetAudience(audienceId),
         enabled: !!audienceId,
     });
+};
+
+
+export const useGetUserProjectsWithEmailsGroupedByDate = (userId: string | null | undefined) => {
+  return useQuery({
+    queryKey: ["userProjectsWithEmailsGroupedByDate", userId],
+    queryFn: () => getUserProjectsWithEmailsGroupedByDate(userId),
+    enabled: !!userId,
+    gcTime: 5 * 60 * 1000,
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+    refetchInterval: false,
+    retry: 3,
+  });
 };

@@ -41,11 +41,6 @@ import { useRouter } from 'next/navigation'
   const queryClient = useQueryClient();
   const {user} = useGetUserInfo()
 
-
-
-
-
-
   const [isprojectNameUpdate,setIsprojectNameUpdate] = useState<boolean>(false)
   const [idProject,setIdProject] = useState<string>(" ")
   const [newNameProject,setNewNameProject] = useState<string>(" ")

@@ -197,10 +197,8 @@ export default function Home() {
       <section className="flex part1   opacity-0 flex-col-reverse md:flex-row  w-full pt-10  md:pb-14  relative   justify-start items-center">
 
         <div className="w-full   md:w-8/12">
-        <h1 className="md:text-5xl text-xl  flex lg:text-4xl text-pretty  w-full ">
-        Create mailing list and waitlists in under 2 minutes. Grow your business! as developer
-        {/* Wow! Create mailing lists and waitlists effortlessly in under 2 minutes. Focus on growing your business!. */}
-
+        <h1 className="md:text-5xl text-xl flex lg:text-4xl text-pretty w-full">
+          Build Your Waitlist in Just 30 Seconds and Start Growing Today!
         </h1>
         <div className=" flex sm:flex-row md:w-8/12 flex-col justify-start gap-4   items-start py-6 ">
           <Link href="/login" className="w-full "><Button variant="default" className="rounded-full px-0 md:px-16 font-bold  w-full  bx-shabtn py-2"> start now is free </Button></Link>
@@ -225,13 +223,13 @@ export default function Home() {
             <div className="flex bloc1txt flex-col gap-y-3">
               <h2 className="text-2xl md:text-4xl line relative wb-gradient">Fast</h2>
               <p className="text-sm md:text-lg lowercase text-balance text-neutral-500">
-                Build your mailing list, waitlist form for your landing page, blog etc... in less than 2 minutes
+                Build your waitlist , waitlist form for your landing page, blog etc... in less than 2 minutes
               </p>
             </div>
             <div className="flex bloc2txt  flex-col gap-y-3 opacity-40">
               <h2 className="text-2xl md:text-4xl line relative wb-gradient">All in One</h2>
               <p className="text-sm md:text-lg lowercase text-balance text-neutral-500">
-                Build many waitlists and mailing list for multiple projects in one location (smad)
+                Build many waitlists and waitlist  for multiple projects in one location (smad)
               </p>
             </div>
           </div>
@@ -249,7 +247,7 @@ export default function Home() {
     {/* <span>{isWeUserStarter ? "fdsgsdf" :"11111222222"}</span> */}
     <section className="w-full part2 opacity-0 flex flex-col md:flex-row justify-center overflow-hidden items-center my-36">
       <div className=" w-full flex flex-col justify-start items-start">
-        <h2 className="text-2xl md:text-4xl w-full text-center uppercase mb-4 text-neutral-500 text-balance">Focus on <span className="text-white">building your product</span>, not your waitlist or mailing list</h2>
+        <h2 className="text-2xl md:text-4xl w-full text-center uppercase mb-4 text-neutral-500 text-balance">Focus on <span className="text-white">building your product</span>, not your waitlist or waitlist </h2>
       </div>
 
     </section>
@@ -494,22 +492,71 @@ export default function Home() {
 
 
 
-          {/* <div className="flex flex-col  lr gap-y-3 border border-neutral-800 bg-neutral-700/30 justify-start w-full items-start py-4 rounded-md relative">
-        <div className="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-neutral-700 text-white rounded-full w-8 h-8 flex items-center wb-gradient2 justify-center">3</div>
-        <div className="flex gap-x-3 justify-start items-start w-full pl-6 md:pr-2 pr-3">
-          <div className="flex flex-col justify-start gap-y-2 items-start">
-            <b className="text-md">Import & Start Using</b>
-            <span className="text-neutral-400 text-sm md:text-base">Choose your template on page /template accessible by the button &quot;get Config&quot;,
-              copy the configuration, and import it into your project as component.</span>
-
-
-          </div>
-
-        </div>
-          </div> */}
 
       </section>
         </>
+
+        <section className="flex w-full gap-4 py-16 justify-start items-start  flex-col ">
+
+        <h2 className="text-2xl md:text-4xl md:w-1/3 text-balance  lg:w-1/2 "> Build fast a waitlist form with Template Available </h2>
+        <span className="max-w-lg text-neutral-500"> Simply clone the template repository, replace the project_id and private_key with your own credentials,
+           customize it to fit your needs, and deploy effortlessly. </span>
+
+              <div className="py-10 flex  md:flex-row flex-col gap-8 justify-start w-full items-start">
+
+     <div className="w-full md:w-1/2 flex h-96   rounded-xl overflow-hidden  flex-col justify-start items-start relative">
+
+                <Image  className="w-full absolute top-0 left-0 h-full object-right object-cover"
+                 src={"https://res.cloudinary.com/dx1axx1s2/image/upload/v1742872680/developers/trchxjggijugqvewcov5.png"}
+                 alt="template 1 " height={500} width={400} />
+
+
+                 <div className="w-full h-full  bg-gradient-to-t from-neutral-800 via-transparent to-transparent
+                  absolute top-0 left-0 flex justify-between items-end p-4 overflow-hidden">
+                    <h5 className="text-lg "> waitlist product template 1 </h5>
+
+                    <Link href="/" className="underline text-sm flex justify-center items-center w-auto gap-x-1"> <span> See more</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                     viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                      </svg>
+                     </Link>
+
+                 </div>
+
+                </div>
+
+
+
+
+
+
+     <div className="w-full md:w-1/2 flex h-96   rounded-xl overflow-hidden  flex-col justify-start items-start relative">
+
+<Image  className="w-full absolute top-0 left-0 h-full object-center object-cover"
+ src={"https://res.cloudinary.com/dx1axx1s2/image/upload/v1742859922/developers/n4daqwginapyofulr80h.png"}
+ alt="template 1 " height={500} width={400} />
+
+
+ <div className="w-full h-full  bg-gradient-to-t from-neutral-800 via-transparent to-transparent
+  absolute top-0 left-0 flex justify-between items-end p-4 overflow-hidden">
+    <h5 className="text-lg "> waitlist product template 2 </h5>
+
+    <Link href="/" className="underline text-sm flex justify-center items-center w-auto gap-x-1"> <span> See more</span>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+     viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+        <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+      </svg>
+     </Link>
+
+ </div>
+
+</div>
+
+              </div>
+
+         </section>
+
         <section className="flex w-full gap-4 py-6 md:justify-between justify-start  md:flex-row flex-col ">
           <h2 className="text-2xl md:text-4xl md:w-1/3  lg:w-1/2 "> FAQ </h2>
           <ul className="md:w-1/2 divide-y  border border-neutral-700 overflow-hidden transition-all ease duration-300 rounded-xl">
@@ -518,11 +565,11 @@ export default function Home() {
                 <summary className="flex items-center bg-neutral-800 gap-3 px-4 py-3 font-medium marker:content-none hover:cursor-pointer">
                   <svg className="w-5 h-5 text-gray-500 transition group-open:rotate-90" xmlns="http://www.w3.org/2000/svg"
                     width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
+                    <path fillRule="evenodd"
                       d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z">
                     </path>
                   </svg>
-                  <span>How can I use Smad to build my mailing list?</span>
+                  <span>How can I use Smad to build my waitlist ?</span>
                 </summary>
                 <article className=" p-4">
                   <ol className="list-decimal flex flex-col gap-y-3 text-neutral-400 list-inside">
@@ -539,11 +586,11 @@ export default function Home() {
                 <summary className="flex items-center bg-neutral-800 gap-3 px-4 py-3 font-medium marker:content-none hover:cursor-pointer">
                   <svg className="w-5 h-5 text-gray-500 transition group-open:rotate-90" xmlns="http://www.w3.org/2000/svg"
                     width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
+                    <path fillRule="evenodd"
                       d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z">
                     </path>
                   </svg>
-                  <span>How can I customize my mailing list form?</span>
+                  <span>How can I customize my waitlist  form?</span>
                 </summary>
                 <article className="p-4">
                   <ol className="list-decimal flex flex-col gap-y-3 text-neutral-400 list-inside">
@@ -562,7 +609,7 @@ export default function Home() {
                 <summary className="flex items-center gap-3 px-4 py-3 font-medium marker:content-none hover:cursor-pointer">
                   <svg className="w-5 h-5 text-gray-500 transition group-open:rotate-90" xmlns="http://www.w3.org/2000/svg"
                     width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
+                    <path fillRule="evenodd"
                       d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z">
                     </path>
                   </svg>
