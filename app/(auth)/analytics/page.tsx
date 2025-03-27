@@ -34,6 +34,10 @@ const Page = () => {
     return <div>Error loading data</div>;
   }
 
+  if (projectsWithEmailsGroupedByDate.length === 0) {
+    return <div className="w-full flex justify-center h-36 items-center">No projects available</div>;
+  }
+
   // Get the current month and year
   const currentDate = new Date();
   const currentMonth = currentDate.getMonth() + 1; // Months are zero-indexed
