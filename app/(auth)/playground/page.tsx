@@ -186,7 +186,7 @@ const Page = () => {
                 max={100}
                 trackStyle={{ backgroundColor: "#fbbf24" }}
                 value={borderRadiusBtn}
-                onChange={(value: number) => setBorderRadiusBtn(value)}
+                onChange={(value: any) => setBorderRadiusBtn(value)}
               />
             </div>
           </div>
