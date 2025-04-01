@@ -14,3 +14,10 @@ export const userInfoState = atom({
     key: 'templateCode',
   effects_UNSTABLE: [persistAtom],
   });
+
+
+  export const templateInfoType = atom({
+    default: "",
+    key: 'templateInfoType',
+  effects_UNSTABLE: [persistAtom],
+  });

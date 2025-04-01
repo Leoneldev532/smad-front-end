@@ -43,7 +43,7 @@ import Link from "next/link"
 import dayjs, { Dayjs } from "dayjs"
 import ProjectItemMobile from "@/components/ui/ProjectItemMobile"
 import { useRecoilValue, useSetRecoilState } from "recoil"
-import {  templateInfo, userInfoState } from "@/lib/atom"
+import {  templateInfo, templateInfoType, userInfoState } from "@/lib/atom"
 import { Resend } from 'resend';
 import { ResendServerComponent } from "@/components/resendData"
 import SkeletonEmailLine from "@/components/ui/skeletonEmailLine"
@@ -446,7 +446,7 @@ const handleCopyCode = () => {
 
       const codeScript = `
 <link rel="stylesheet"  href="https://templates.smadmail.com/css/iframe.css"/>
-      <iframe src="https://templates.smadmail.com/ui/form1.html?private_key=${privateKey}&project_id=${currentIdProject}"
+      <iframe src="https://templates.smadmail.com/ui/form-${projectIswithName ? "m1":"m2"}.html"}?private_key=${privateKey}&project_id=${currentIdProject}"
        scrolling="no"  ></iframe>`
 
 
@@ -467,8 +467,10 @@ const handleCopyCode = () => {
   const router  = useRouter()
 
    const setDataUser = useSetRecoilState(templateInfo)
+   const setTypeForm = useSetRecoilState(templateInfoType)
 
   const handleCustomize = () =>{
+    setTypeForm(projectIswithName ? "1":"2")
     setDataUser(`?private_key=${privateKey}&project_id=${currentIdProject.trim()}`)
     router.push("/playground")
   }
@@ -781,6 +783,7 @@ const handleCopyCode = () => {
             {!allProjectsOneUserLoading && filterTabProjects?.map((item:Project,index:number)=>(
               <ProjectTabItem project={item}
               privateKey={privateKey || " "}
+              withName={item.withName}
               refetch={()=>allProjectsOneUserRefetch()}
                isActive={index === activeTabIndex} className="bg-red-500"
               onClick={()=>handleTabClick(index,item.id,item.name,item.withName)} key={"p"+ index} />
@@ -814,6 +817,7 @@ const handleCopyCode = () => {
                 {!allProjectsOneUserLoading && filterTabProjects?.map((item: Project, index: number) => (
                   <ProjectTabItem project={item}
                     privateKey={privateKey || " "}
+                    withName={item.withName}
                     refetch={() => allProjectsOneUserRefetch()}
                     isActive={index === activeTabIndex} className="bg-red-500"
                     onClick={() => handleTabClick(index, item.id, item.name,item.withName)} key={"p" + index} />
