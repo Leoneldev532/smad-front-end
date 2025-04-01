@@ -176,7 +176,7 @@ const Page = () => {
                 max={100}
                 trackStyle={{ backgroundColor: "#36f051" }}
                 value={borderRadiusForm}
-                onChange={(value: number) => setBorderRadiusForm(value)}
+                onChange={(value: any) => setBorderRadiusForm(value)}
               />
             </div>
             <div className="flex flex-col gap-y-1 relative">
