@@ -11,7 +11,7 @@ import { RecoilRoot } from "recoil";
 import { Analytics } from "@vercel/analytics/react"
 import Head from "next/head";
 import { CSPostHogProvider } from "@/lib/providerPostHog";
-
+import {Helmet} from "react-helmet";
 import "prismjs/themes/prism-tomorrow.css"
 import Link from "next/link";
 
@@ -38,7 +38,7 @@ export default function RootLayout({
       <RecoilRoot>
       <CSPostHogProvider>
       <html lang="en" className="dark" >
-      <Head>
+        <Helmet>
         <title>Smad by leonel Yimga</title>
         <link rel="icon" href="/logo.png" sizes="any" />
         <meta name="description" content={"Build quickly a waitlist  and more for your landing page, website"} />
@@ -55,7 +55,8 @@ export default function RootLayout({
     <meta name="twitter:description" content="Create waitlist in under 30s for your landing page or website." />
     <meta name="twitter:image" content="https://www.smadmail.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.c3efdc39.png&w=640&q=75" />
 
-      </Head>
+      </Helmet>
+
         <body className={`flex justify-center flex-col  bg-black items-center w-full ${inter.variable} `}>
         {/* test */}
         <div className="flex justify-center items-center gap-x-1 py-3 w-full bg-neutral-800 text-xs  md:text-sm text-neutral-400"> <span>we now available on product Hunt support us</span>

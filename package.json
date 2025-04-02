@@ -52,6 +52,7 @@
     "react-chartjs-2": "^5.3.0",
     "react-color-palette": "^7.3.0",
     "react-dom": "^18",
+    "react-helmet": "^6.1.0",
     "react-hook-form": "^7.54.2",
     "react-simple-typewriter": "^5.0.1",
     "react-typed": "^2.0.12",
