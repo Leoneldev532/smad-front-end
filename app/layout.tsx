@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
 
   useEffect(()=>{
-      document.title = "Smad by leonel Yimga";
+      document.title = "Build Your Waitlist in Just 30 Seconds and Start Growing Today";
   },[])
 
   return (
@@ -39,13 +39,13 @@ export default function RootLayout({
       <CSPostHogProvider>
       <html lang="en" className="dark" >
         <Helmet>
-        <title>Smad by leonel Yimga</title>
+        <title>Build Your Waitlist in Just 30 Seconds and Start Growing Today</title>
         <link rel="icon" href="/logo.png" sizes="any" />
         <meta name="description" content={"Build quickly a waitlist  and more for your landing page, website"} />
 
         <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.smadmail.com/" />
-    <meta property="og:title" content=" Build Your Waitlist in Just 30 Seconds and Start Growing Today" />
+    <meta property="og:title" content="Build Your Waitlist in Just 30 Seconds and Start Growing Today" />
     <meta property="og:description" content="Create waitlist in under 30s for your landing page or website." />
     <meta property="og:image" content="https://www.smadmail.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.c3efdc39.png&w=640&q=75" />
 
