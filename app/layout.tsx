@@ -14,6 +14,7 @@ import { CSPostHogProvider } from "@/lib/providerPostHog";
 import {Helmet} from "react-helmet";
 import "prismjs/themes/prism-tomorrow.css"
 import Link from "next/link";
+import { NextSeo } from 'next-seo';
 
 const inter =  Inter({subsets: ["latin"],weight:"400",variable:"--font-inter" })
 
@@ -38,11 +39,11 @@ export default function RootLayout({
       <RecoilRoot>
       <CSPostHogProvider>
       <html lang="en" className="dark" >
-        <Helmet>
+        {/* <Helmet> */}
         <title>Build Your Waitlist in Just 30 Seconds and Start Growing Today</title>
         <link rel="icon" href="/logo.png" sizes="any" />
         <meta name="description" content={"Build quickly a waitlist  and more for your landing page, website"} />
-
+{/*
         <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.smadmail.com/" />
     <meta property="og:title" content="Build Your Waitlist in Just 30 Seconds and Start Growing Today" />
@@ -54,8 +55,37 @@ export default function RootLayout({
     <meta name="twitter:title" content=" Build Your Waitlist in Just 30 Seconds and Start Growing Today" />
     <meta name="twitter:description" content="Create waitlist in under 30s for your landing page or website." />
     <meta name="twitter:image" content="https://www.smadmail.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.c3efdc39.png&w=640&q=75" />
+ */}
 
-      </Helmet>
+<NextSeo
+    title="Build Your Waitlist in Just 30 Seconds and Start Growing Today"
+    description="Create waitlist in under 30s for your landing page or website."
+    canonical="https://smadmail.com"
+    openGraph={{
+        type: 'article',
+        article: {
+            publishedTime: '2022-06-21T23:04:13Z',
+            modifiedTime: '2022-01-21T18:04:43Z',
+            authors: [
+                'https://smadmail.com',
+                'https://smadmail.com',
+            ],
+            tags: ['waitlist', 'newsletter', 'maillist'],
+        },
+        images: [
+            {
+                url: 'https://www.smadmail.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.c3efdc39.png&w=640&q=75',
+                width: 850,
+                height: 650,
+                alt: 'Photo of text',
+            },
+        ],
+        site_name: 'SMAD',
+    }}
+/>
+
+
+      {/* </Helmet> */}
 
         <body className={`flex justify-center flex-col  bg-black items-center w-full ${inter.variable} `}>
         {/* test */}
