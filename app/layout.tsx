@@ -49,7 +49,7 @@ export default function RootLayout({
     <meta property="og:title" content="Build Your Waitlist in 30s & Start Growing Today" />
     <meta property="og:description" content="Create a waitlist in under 30 seconds for your landing page or website. Transform visitors into subscribers effortlessly and start growing your audience today!" />
     <meta property="og:image" content="https://www.smadmail.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.c3efdc39.png&w=640&q=75" />
-
+    <meta property="og:image" itemProp="image" content="https://www.smadmail.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.c3efdc39.png&w=640&q=75" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://www.smadmail.com/" />
     <meta name="twitter:title" content=" Build Your Waitlist in 30s & Start Growing Today" />
