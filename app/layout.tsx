@@ -44,7 +44,7 @@ export default function RootLayout({
         <meta name="description" content={"Build quickly a newsletter form , wailist form and more for your landing page, website"} />
       </Head>
         <body className={`flex justify-center flex-col  bg-black items-center w-full ${inter.variable} `}>
-
+        {/* test */}
         <div className="flex justify-center items-center gap-x-1 py-3 w-full bg-neutral-800 text-xs  md:text-sm text-neutral-400"> <span>we now available on product Hunt support us</span>
                <Link href="https://www.producthunt.com/products/smad#smad" className="underline">Here</Link>  </div>
           <NextAuthProvider>
