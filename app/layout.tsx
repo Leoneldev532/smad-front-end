@@ -29,7 +29,7 @@ export default function RootLayout({
 }>) {
 
   useEffect(()=>{
-      document.title = "Build Your Waitlist in Just 30 Seconds and Start Growing Today";
+      document.title = "Build Your Waitlist in 30s & Start Growing Today";
   },[])
 
   return (
@@ -40,49 +40,36 @@ export default function RootLayout({
       <CSPostHogProvider>
       <html lang="en" className="dark" >
         {/* <Helmet> */}
-        <title>Build Your Waitlist in Just 30 Seconds and Start Growing Today</title>
+        <title>Build Your Waitlist in 30s & Start Growing Today</title>
         <link rel="icon" href="/logo.png" sizes="any" />
-        <meta name="description" content={"Build quickly a waitlist  and more for your landing page, website"} />
-{/*
-        <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.smadmail.com/" />
-    <meta property="og:title" content="Build Your Waitlist in Just 30 Seconds and Start Growing Today" />
-    <meta property="og:description" content="Create waitlist in under 30s for your landing page or website." />
-    <meta property="og:image" content="https://www.smadmail.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.c3efdc39.png&w=640&q=75" />
+        <meta name="description" content={"Create a waitlist in under 30 seconds for your landing page or website. Transform visitors into subscribers effortlessly and start growing your audience today!"} />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://www.smadmail.com/" />
-    <meta name="twitter:title" content=" Build Your Waitlist in Just 30 Seconds and Start Growing Today" />
-    <meta name="twitter:description" content="Create waitlist in under 30s for your landing page or website." />
-    <meta name="twitter:image" content="https://www.smadmail.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.c3efdc39.png&w=640&q=75" />
- */}
-
-<NextSeo
-    title="Build Your Waitlist in Just 30 Seconds and Start Growing Today"
-    description="Create waitlist in under 30s for your landing page or website."
-    canonical="https://smadmail.com"
-    openGraph={{
-        type: 'article',
-        article: {
-            publishedTime: '2022-06-21T23:04:13Z',
-            modifiedTime: '2022-01-21T18:04:43Z',
-            authors: [
-                'https://smadmail.com',
-                'https://smadmail.com',
-            ],
-            tags: ['waitlist', 'newsletter', 'maillist'],
-        },
-        images: [
-            {
-                url: 'https://www.smadmail.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.c3efdc39.png&w=640&q=75',
-                width: 850,
-                height: 650,
-                alt: 'Photo of text',
-            },
-        ],
-        site_name: 'SMAD',
-    }}
-/>
+        <NextSeo
+            title="Build Your Waitlist in 30s & Start Growing Today"
+            description="Create a waitlist in under 30 seconds for your landing page or website. Transform visitors into subscribers effortlessly and start growing your audience today!"
+            canonical="https://smadmail.com"
+            openGraph={{
+                type: 'article',
+                article: {
+                    publishedTime: '2022-06-21T23:04:13Z',
+                    modifiedTime: '2022-01-21T18:04:43Z',
+                    authors: [
+                        'https://smadmail.com',
+                        'https://smadmail.com',
+                    ],
+                    tags: ['waitlist', 'newsletter', 'maillist'],
+                },
+                images: [
+                    {
+                        url: 'https://www.smadmail.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.c3efdc39.png&w=640&q=75',
+                        width: 850,
+                        height: 650,
+                        alt: 'Photo of text',
+                    },
+                ],
+                site_name: 'SMAD',
+            }}
+        />
 
 
       {/* </Helmet> */}
