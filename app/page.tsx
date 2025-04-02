@@ -223,13 +223,13 @@ export default function Home() {
             <div className="flex bloc1txt flex-col gap-y-3">
               <h2 className="text-2xl md:text-4xl line relative wb-gradient">Fast</h2>
               <p className="text-sm md:text-lg lowercase text-balance text-neutral-500">
-                Build your waitlist , waitlist form for your landing page, blog etc... in less than 2 minutes
+                Build your waitlist for your landing page, blog etc... in less than 2 minutes
               </p>
             </div>
             <div className="flex bloc2txt  flex-col gap-y-3 opacity-40">
               <h2 className="text-2xl md:text-4xl line relative wb-gradient">All in One</h2>
               <p className="text-sm md:text-lg lowercase text-balance text-neutral-500">
-                Build many waitlists and waitlist  for multiple projects in one location (smad)
+                Build many waitlists for multiple projects in one location (smad)
               </p>
             </div>
           </div>
@@ -462,7 +462,8 @@ export default function Home() {
         <div className="flex gap-x-3 justify-start items-start w-full pl-6 md:pr-0 pr-3">
           <div className="flex flex-col justify-start gap-y-2 items-start">
             <b className="text-md">Create Account & Setup Project</b>
-            <span className="text-neutral-400 tex-xs sm:text-sm md:text-base">Create your account and set up your first project in the dashboard.</span>
+            <span className="text-neutral-400 tex-xs sm:text-sm md:text-base">Create your account and set up your first
+              project in the dashboard.</span>
 
           <Link href="/register" className=" px-3 my-2 bg-neutral-800 text-sm hover:bg-neutral-900 transition-all
            ease duration-300  text-neutral-300 rounded-md border border-neutral-700 py-1  "><button className="">Sign Up</button></Link>
