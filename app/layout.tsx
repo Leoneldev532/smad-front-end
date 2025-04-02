@@ -42,6 +42,19 @@ export default function RootLayout({
         <title>Smad by leonel Yimga</title>
         <link rel="icon" href="/logo.png" sizes="any" />
         <meta name="description" content={"Build quickly a newsletter form , wailist form and more for your landing page, website"} />
+
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="https://www.smadmail.com/"/>
+        <meta property="og:title" content="Smad by leonel Yimga"/>
+        <meta property="og:description" content="Build quickly a newsletter form, waitlist form and more for your landing page, website"/>
+        <meta property="og:image" content="https://www.smadmail.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.c3efdc39.png&w=640&q=75"/>
+
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:url" content="https://www.smadmail.com/"/>
+        <meta name="twitter:title" content="Smad by leonel Yimga"/>
+        <meta name="twitter:description" content="Build quickly a newsletter form, waitlist form and more for your landing page, website"/>
+        <meta name="twitter:image" content="https://www.smadmail.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.c3efdc39.png&w=640&q=75"/>
+
       </Head>
         <body className={`flex justify-center flex-col  bg-black items-center w-full ${inter.variable} `}>
         {/* test */}
