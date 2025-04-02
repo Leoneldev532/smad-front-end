@@ -13,6 +13,7 @@ import Head from "next/head";
 import { CSPostHogProvider } from "@/lib/providerPostHog";
 
 import "prismjs/themes/prism-tomorrow.css"
+import Link from "next/link";
 
 const inter =  Inter({subsets: ["latin"],weight:"400",variable:"--font-inter" })
 
@@ -42,9 +43,13 @@ export default function RootLayout({
         <link rel="icon" href="/logo.png" sizes="any" />
         <meta name="description" content={"Build quickly a newsletter form , wailist form and more for your landing page, website"} />
       </Head>
-        <body className={`flex justify-center bg-black items-center w-full ${inter.variable} `}>
+        <body className={`flex justify-center flex-col  bg-black items-center w-full ${inter.variable} `}>
+
+        <div className="flex justify-center items-center gap-x-1 py-3 w-full bg-neutral-800 text-xs  md:text-sm text-neutral-400"> <span>we now available on product Hunt support us</span>
+               <Link href="https://www.producthunt.com/products/smad#smad" className="underline">Here</Link>  </div>
           <NextAuthProvider>
             <div className="flex max-w-[1050px] w-full gap-x-4  p-2 h-full justify-center items-center flex-col">
+
 
               <div className="flex py-4  min-h-[90vh] w-full flex-col justify-start items-center  ">
                 <Header />

@@ -9,7 +9,7 @@ import { useRecoilValue } from 'recoil';
 import Head from 'next/head';
 
 const Page = () => {
-  const [bgBtn, setBgBtn] = useColor("transparent");
+  const [bgBtn, setBgBtn] = useColor("#000000");
   const [textColorBtn, setTextColorBtn] = useColor("#000000");
   const [borderRadiusBtn, setBorderRadiusBtn] = useState<number>(0);
   const [bgInput, setBgInput] = useColor("white");
