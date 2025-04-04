@@ -87,7 +87,8 @@ export default function RootLayout({
 
         <body className={`flex justify-center flex-col  bg-black items-center w-full ${inter.variable} `}>
         {/* test */}
-        <div className="flex justify-center items-center gap-x-1 py-3 w-full bg-neutral-800 text-xs  md:text-sm text-neutral-400"> <span>we now available on product Hunt support us</span>
+        <div className="flex justify-center items-center gap-x-1 py-3 w-full bg-neutral-800 text-xs  md:text-sm text-neutral-400">
+           <span>we are now available on product Hunt . Support us</span>
                <Link href="https://www.producthunt.com/products/smad#smad" target="_blank" className="underline">Here</Link>  </div>
           <NextAuthProvider>
             <div className="flex max-w-[1050px] w-full gap-x-4  p-2 h-full justify-center items-center flex-col">

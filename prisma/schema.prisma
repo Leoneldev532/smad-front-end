@@ -136,10 +136,13 @@ model Project {
   updatedAt DateTime @updatedAt
 }
 
+
 model Email {
   id        String      @id @default(uuid())
   email     String
   projectId String
+  country   String   @default("null")
+  referrer  String   @default("null")
   name      String @default("null")
   project   Project  @relation(fields: [projectId], references: [id])
   createdAt DateTime @default(now())
