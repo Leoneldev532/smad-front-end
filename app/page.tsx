@@ -247,7 +247,7 @@ export default function Home() {
     {/* <span>{isWeUserStarter ? "fdsgsdf" :"11111222222"}</span> */}
     <section className="w-full part2 opacity-0 flex flex-col md:flex-row justify-center overflow-hidden items-center my-36">
       <div className=" w-full flex flex-col justify-start items-start">
-        <h2 className="text-2xl md:text-4xl w-full text-center uppercase mb-4 text-neutral-500 text-balance">Focus on <span className="text-white">building your product</span>, not your waitlist or waitlist </h2>
+        <h2 className="text-2xl md:text-4xl w-full text-center uppercase mb-4 text-neutral-500 text-balance">Focus on <span className="text-white">building your product</span>, not your waitlist  </h2>
       </div>
 
     </section>
