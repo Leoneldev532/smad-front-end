@@ -994,6 +994,9 @@ const handleCopyCode = () => {
                   <ProjectTabItem project={item}
                     privateKey={privateKey || " "}
                     withName={item.withName}
+                    withMap={getMap && getMap?.length > 0 || false}
+                    mapId={mapId}
+                    linkMap={linkMap}
                     refetch={() => allProjectsOneUserRefetch()}
                     isActive={index === activeTabIndex} className="bg-red-500"
                     onClick={() => handleTabClick(index, item.id, item.name,item.withName)} key={"p" + index} />
