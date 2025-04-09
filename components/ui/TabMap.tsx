@@ -118,7 +118,7 @@ const TableMap = ({ mapsList, project_Id, refetchMaps }: {
     },
   });
 
-  const mutationUpdateMap = useMutation<UpdateMapData, UpdateMapError, UpdateMapVariables>({
+  const mutationUpdateMap = useMutation<UpdateMapData, UpdateMapError, string>({
     mutationFn: () => updateMap(),
     onError: (err) => {
       toast.error("Erreur lors de la mise à jour: " + err.message);
@@ -153,7 +153,7 @@ const TableMap = ({ mapsList, project_Id, refetchMaps }: {
   }
 
   const handleValidateLink = (mapId: string) => {
-    mutationUpdateMap.mutate(mapId || "");
+    mutationUpdateMap.mutate(mapId);
   }
 
   const handleClickOutside = (event: MouseEvent) => {
