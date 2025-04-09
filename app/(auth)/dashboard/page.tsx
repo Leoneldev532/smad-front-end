@@ -930,7 +930,7 @@ const handleCopyCode = () => {
             </button>
             <button
               disabled={!idProjectActive?.length}
-              onClick={allEmailsOneProjectRefetch}
+              onClick={()=>allEmailsOneProjectRefetch()}
               className="text-4xl bg-neutral-500/20 border border-neutral-700 px-2 py-2 rounded-md flex justify-center items-center"
             >
               <svg
