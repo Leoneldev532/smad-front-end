@@ -150,6 +150,7 @@ const TableData = ({ emailsList, project_Id, withName, refetchEmail }: { emailsL
 
   const sortedEmailsList = emailsList?.slice().sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
+
   return (
     <>
       <AlertDialog open={isOpenDialogDeleteEmail}>
@@ -193,28 +194,31 @@ const TableData = ({ emailsList, project_Id, withName, refetchEmail }: { emailsL
                 {withName && <span>{email?.name}</span>}
               </TableCell>
               <TableCell className="font-medium w-1/2 flex justify-start gap-4 items-center" >
-                {isUpdateEmail ? (
-                  emailIdUpdateValue === email.id ? (
-                    <Input
-                      type="text"
-                      className="w-full min-w-72 "
-                      disabled={mutationUpdateEmailOneProject.isPending}
-                      ref={inputRef}
-                      value={emailUpdateValue}
-                      onChange={(e) => handleUpdateEmail(e)}
-                      onKeyPress={(e) => {
-                        if (e.key === 'Enter') {
-                          handleValidateEmail(email.id);
-                        }
-                      }}
-                    />
+                  {isUpdateEmail ? (
+                    emailIdUpdateValue === email.id ? (
+                      <Input
+                        type="text"
+                        className="w-full min-w-72 "
+                        disabled={mutationUpdateEmailOneProject.isPending}
+                        ref={inputRef}
+                        value={emailUpdateValue}
+                        onChange={(e) => handleUpdateEmail(e)}
+                        onKeyPress={(e) => {
+                          if (e.key === 'Enter') {
+                            handleValidateEmail(email.id);
+                          }
+                        }}
+                      />
+                    ) : (
+                      <span>{email.email}</span>
+                    )
                   ) : (
                     <span>{email.email}</span>
-                  )
-                ) : (
-                  <span>{email.email}</span>
-                )}
-                <div className="w-6 h-6 flex justify-center items-center">   {emailIdUpdateValue === email.id && mutationUpdateEmailOneProject?.isPending && <Loader height="6" width="6" />}     </div>
+                  )}
+
+                <div className="w-6 h-6 flex justify-center items-center">
+                   {emailIdUpdateValue === email.id && mutationUpdateEmailOneProject?.isPending && <Loader height="6" width="6" />}
+                       </div>
               </TableCell>
               <TableCell className={`font-medium  w-1/6`}>
                 <span><Time date={email?.createdAt} /></span>
@@ -241,6 +245,7 @@ const TableData = ({ emailsList, project_Id, withName, refetchEmail }: { emailsL
                     <DropdownMenuItem className="cursor-pointer" onClick={() => { setIdEmailSelected(email.id); handleShowModalDeleteEmail(); }}>
                       delete
                     </DropdownMenuItem>
+
                   </DropdownMenuContent>
                 </DropdownMenu>
               </TableCell>

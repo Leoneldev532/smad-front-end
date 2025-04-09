@@ -3,6 +3,7 @@
 "use client"
 
 import Loader from "@/components/Loader"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import ProjectTabItem from "@/components/ProjectTabItem"
 import TableData from "@/components/table"
 import {
@@ -16,7 +17,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 
-import { addEmailAddress, createProject, setResendApiKey, useGetAllEmailsOneProject, useGetAllProjectsOfOneUser, useGetAllUserInfo, useGetAudience, useGetResendUser, useGetResendUserAudience } from "@/hook/query"
+import { addEmailAddress, createProject, setResendApiKey, useAddMapMutation, useGetAllEmailsOneProject, useGetAllProjectsOfOneUser, useGetAllUserInfo, useGetAudience, useGetOneMapOfOneProjectUser, useGetResendUser, useGetResendUserAudience } from "@/hook/query"
 import { Email, Project } from "@/lib/type"
 import  { isDatePassed, useGetUserInfo}  from "@/lib/utils"
 import { ChangeEvent, FormEvent, useEffect, useState } from "react"
@@ -51,6 +52,8 @@ import SkeletonProject from "@/components/ui/skeletonProject"
 import { GetAudience, SendContactToAudience } from "@/components/GetAudience"
 import Loader2 from "@/components/Loader2"
 import { useRouter } from "next/navigation"
+import TableMap from "@/components/ui/TabMap"
+import { Skeleton } from "@/components/ui/skeleton"
 
 
 
@@ -171,8 +174,6 @@ export default   function Page() {
   const [isCheckedFieldNameUser,setIsCheckedFieldNameUser] = useState<boolean>(false)
 
    const handleShowDialogAddEmail = ()=>{
-
-
 
     if(getAllUserInfo?.privateKey?.expiresAt && !isDatePassed(dayjs(getAllUserInfo?.privateKey?.expiresAt)) ){
     setIsOpenAddEmailDialog(true)
@@ -476,9 +477,67 @@ const handleCopyCode = () => {
   }
 
 
+  const [isOpenAddMapDialog, setIsOpenAddMapDialog] = useState<boolean>(false)
+  const [mapLink, setMapLink] = useState<string>("")
+
+
+  const {data:getMap,refetch:refetchFunctionGetMap,isLoading:isLoadingGetOneMap} =useGetOneMapOfOneProjectUser(user?.id,currentIdProject)
+
+
+ const { mutate: addMapMutation, isPending: isPendingAddMapMutation } = useAddMapMutation({
+    idUser: user?.id || "",
+    projectId: currentIdProject,
+    link: mapLink,
+    onSuccessCallBack: () => {
+      setIsOpenAddMapDialog(false);
+      refetchFunctionGetMap();
+    },
+  });
+
+
+  const handleAddMap = (e: FormEvent) => {
+    e.preventDefault()
+    addMapMutation()
+  }
+
+  const withMap = getMap && getMap?.length > 0 || false;
+  const linkMap = getMap?.[0]?.link || " ";
+  const mapId = getMap?.[0]?.id || " "
 
   return (
     <>
+
+<AlertDialog open={isOpenAddMapDialog}>
+        <AlertDialogContent className="bg-neutral-900">
+          <AlertDialogHeader>
+            <AlertDialogTitle>Add a New Map</AlertDialogTitle>
+          </AlertDialogHeader>
+          <form onSubmit={handleAddMap}>
+            <AlertDialogDescription>
+              <Input
+                type="text"
+                required
+                value={mapLink}
+                onChange={(e) => setMapLink(e.target.value)}
+                placeholder="Enter map link (e.g., https://example.com)"
+                className="rounded-md border border-neutral-700"
+              />
+            </AlertDialogDescription>
+            <AlertDialogFooter className="mt-3">
+              <Button type="button" variant="ghost" onClick={() => setIsOpenAddMapDialog(false)}>
+                Cancel
+              </Button>
+              <ButtonValidation
+                title="Add Map"
+                isLoading={isPendingAddMapMutation}
+                typeButton="submit"
+                type="positive"
+              />
+            </AlertDialogFooter>
+          </form>
+        </AlertDialogContent>
+      </AlertDialog>
+
 
 <AlertDialog open={isOpenModalConfig}>
   <AlertDialogContent>
@@ -582,10 +641,10 @@ const handleCopyCode = () => {
       </AlertDialogHeader>
 
       <ul className="flex flex-col gap-y-2">
-        <li><button className="px-4 py-2 w-full group  text-xs md:text-sm gap-x-4  border border-neutral-700 line1
+        <li><button className="px-4 py-2 w-full group text-xs md:text-sm gap-x-4  border border-neutral-700 line1
          hover:bg-neutral-600 relative  flex justify-center items-center rounded-lg text-center" onClick={()=>  downloadCSV(filterTabEmails || [],`${nameProjectActive}-${dayjs()}`)}> Export To CSV </button></li>
 
-          {<form className="w-full flex flex-col p-4 rounded-lg gap-y-2  border border-neutral-600/40 mt-8">
+          {/* {<form className="w-full flex flex-col p-4 rounded-lg gap-y-2  border border-neutral-600/40 mt-8">
           <h5 className="font-bold">Share data to Resend </h5>
           <span className="text-sm py-1 "> Your Api Key :  </span>
           <div className="flex gap-x-2">
@@ -644,7 +703,7 @@ const handleCopyCode = () => {
 
 
           </form>
-               }
+               } */}
 
 
 
@@ -697,6 +756,7 @@ const handleCopyCode = () => {
 </AlertDialog>
 
 
+
 {allProjectsOneUser?.length === 0 ?
     <div className="w-full    px-0 py-3 gap-2 text-balance flex overflow-auto flex-col min-h-72 justify-center items-center">
       <div className="flex flex-col gap-y-4 justify-center items-center max-w-sm  text-center ">
@@ -720,7 +780,7 @@ const handleCopyCode = () => {
 
 
 
-          <div className="w-1/3 lg:flex hidden h-auto  overflow-y-auto     rounded-md px-3 py-3  flex-col justify-start items-start">
+          <div className="w-1/3 lg:flex hidden h-auto  overflow-y-auto     rounded-md px-2 py-2  flex-col justify-start items-start">
 
           <div className="flex flex-col w-full   justify-start items-start gap-y-2">
 
@@ -750,26 +810,23 @@ const handleCopyCode = () => {
               </svg>}
             </button> } */}
 
-
+              <div className="flex justify-between items-center w-full">
              <h3 className=" text-xl  w-full font-bold "> Yours projects   </h3>
-              <div className="flex gap-x-2  justify-start w-full items-center">
-
-                <div className="w-full flex justify-start  h-full  items-center">
-                  <input  type="search" onChange={(e)=>handleSearchProject(e)}
-                     className="px-3 appearance-none py-2 bg-neutral-500/20 border border-neutral-700 text-white rounded-md w-full" placeholder="search..." />
-                </div>
-
-                <button onClick={()=>handleShowDialogCreateProject()} className="text-4xl bg-neutral-500/20 border border-neutral-700   px-3 py-3 rounded-md flex justify-center items-center">
+              <div className="flex gap-x-2  justify-start  items-center">
+                <button onClick={()=>handleShowDialogCreateProject()} className="text-4xl bg-neutral-500/20
+                 border border-neutral-700   px-2 py-2 rounded-md flex justify-center items-center">
                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                 </svg>
                 </button>
-                <button onClick={()=> allProjectsOneUserRefetch()} className="text-4xl  bg-neutral-500/20 border border-neutral-700  px-3 py-3 rounded-md flex justify-center items-center">
+                <button onClick={()=> allProjectsOneUserRefetch()} className="text-4xl  bg-neutral-500/20 border
+                 border-neutral-700  px-2 py-2 rounded-md flex justify-center items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
                     </svg>
                 </button>
 
+              </div>
               </div>
           </div>
 
@@ -784,6 +841,9 @@ const handleCopyCode = () => {
               <ProjectTabItem project={item}
               privateKey={privateKey || " "}
               withName={item.withName}
+              withMap={withMap}
+              mapId={mapId}
+              linkMap={linkMap}
               refetch={()=>allProjectsOneUserRefetch()}
                isActive={index === activeTabIndex} className="bg-red-500"
               onClick={()=>handleTabClick(index,item.id,item.name,item.withName)} key={"p"+ index} />
@@ -793,20 +853,136 @@ const handleCopyCode = () => {
            </ul>
            </div>
 
-           <div className="w-full min-h-[90vh]   px-0 py-3 gap-2 flex overflow-auto flex-col  justify-start items-center">
+
+           <Tabs defaultValue="account" className=" w-full bg-transparent ">
+  <TabsList className="bg-transparent border-b border-neutral-700 px-0 py-4 rounded-none  flex justify-start items-center">
+    <TabsTrigger value="account" className="  py-2 border-b rounded-none data-[state=active]:border-white
+      data-[state=active]:bg-transparent
+     bg-transparent w-1/4">Email</TabsTrigger>
+    <TabsTrigger value="password" className="unset  border-b  rounded-none data-[state=active]:border-white
+     data-[state=active]:bg-transparent  py-2 bg-transparent w-1/4">Map</TabsTrigger>
+  </TabsList>
+  <TabsContent value="account">
+  {!allProjectsOneUserLoading && allProjectsOneUser && (
+  <div className="flex w-full rounded-lg m-0 border border-neutral-700/30 bg-neutral-900 p-3 justify-between items-start">
+    <h3 className="text-sm md:text-lg flex justify-start items-center h-8 gap-x-2 font-bold">
+      {nameProjectActive && (
+        <>
+          <span className="text-neutral-500 text-sm">Project name</span>:
+          {" " + nameProjectActive}
+          {!allProjectsOneUserLoading && allProjectsOneUser && allProjectsOneUser.length > 0 && (
+            <button
+              onClick={() => handleCopyCode()}
+              className="border my-1 cursor-pointer flex-shrink flex gap-x-2 hover:bg-neutral-900 transition-colors duration-300 ease justify-center items-center border-neutral-500/40 text-neutral-500 px-2 py-1 rounded-lg"
+            >
+              <span className="text-xs">ID of Project</span>
+              {isCodeCopy ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-4 stroke-slate-300"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1}
+                  stroke="currentColor"
+                  className="size-4 stroke-neutral-400"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z"
+                  />
+                </svg>
+              )}
+            </button>
+          )}
+        </>
+      )}
+    </h3>
+    <div className="flex justify-between gap-x-2 items-start m-0 p-0">
+      <div className="flex justify-start items-center gap-x-3">
+        {!allProjectsOneUserLoading && allProjectsOneUser && allProjectsOneUser.length > 0 && (
+          <>
+            <button
+              disabled={!idProjectActive?.length}
+              onClick={() => idProjectActive?.length && handleShowDialogAddEmail()}
+              className="text-4xl bg-neutral-500/20 border border-neutral-700 px-2 py-2 rounded-md flex justify-center items-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-4"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+            </button>
+            <button
+              disabled={!idProjectActive?.length}
+              onClick={allEmailsOneProjectRefetch}
+              className="text-4xl bg-neutral-500/20 border border-neutral-700 px-2 py-2 rounded-md flex justify-center items-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-4"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+              </svg>
+            </button>
+            <button
+              disabled={!idProjectActive?.length}
+              onClick={handleOpenExportModal}
+              className="text-4xl bg-neutral-500/20 border border-neutral-700 px-2 py-2 rounded-md flex justify-center items-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="1em"
+                height="1em"
+                className="size-4"
+              >
+                <path
+                  fill="currentColor"
+                  d="M13 14h-2a9 9 0 0 0-7.968 4.81A10 10 0 0 1 3 18C3 12.477 7.477 8 13 8V3l10 8l-10 8z"
+                ></path>
+              </svg>
+            </button>
+          </>
+        )}
+      </div>
+    </div>
+  </div>
+)}
+
+  <div className="w-full min-h-[90vh]   px-0 py-3 gap-2 flex overflow-auto flex-col  justify-start items-center">
            <div className="w-full   overflow-x-auto overflow-y-hidden lg:hidden  h-12 justify-start items-start flex gap-x-2">
               <ul className="w-full flex  py-3 gap-x-3 justify-start items-start h-full ">
 
                 {allProjectsOneUserLoading && <div className="py-10 flex justify-center items-center"><Loader /></div>}
 
                 {!allProjectsOneUserLoading && filterTabProjects?.length === 0 && <div className="py-8"><NoData /></div>}
+
                 {!allProjectsOneUserLoading && filterTabProjects?.map((item: Project, index: number) => (
                   <ProjectItemMobile
                     name={item.name}
                     isActive={index === activeTabIndex}
                     onClick={() => handleTabClick(index, item.id, item.name,item.withName)} key={"p" + index} />
                 ))}
-
 
               </ul>
            <ul className="w-full hidden lg:flex  py-3 gap-x-3 justify-center items-center ">
@@ -835,97 +1011,11 @@ const handleCopyCode = () => {
             )} */}
 
 
-            <div className=" flex w-full p-0 m-0   justify-between items-start ">
-
-           <h3 className=" text-sm md:text-lg    flex justify-start items-center h-8  gap-x-2 font-bold "> Emails
-             {nameProjectActive &&
-              <>   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
-              className="size-4 stroke-neutral-400">
-  <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-</svg>
- {nameProjectActive}
-
-  {!allProjectsOneUserLoading && allProjectsOneUser && allProjectsOneUser?.length > 0  && <button  onClick={() => handleCopyCode()} className='border my-1 cursor-pointer
-              flex-shrink flex gap-x-2 hover:bg-neutral-900 transition-colors
-      duration-300 ease justify-center items-center border-neutral-500/40 text-neutral-500 px-2 py-1 rounded-lg'>
-        <span className="text-xs">ID of Project</span>
-  { isCodeCopy ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
-
-                      className="size-4 stroke-slate-300">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                    </svg> :  <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1}
-                stroke="currentColor"
-                className="size-4 stroke-neutral-400"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z"
-                />
-              </svg>}
-            </button> } </>
-
-            }
-  </h3>
 
 
 
 
-           </div>
 
-
-
-              <div className="flex justify-between gap-x-2 items-start m-0 p-0  w-full ">
-                  <div className="w-full flex justify-start items-start  ">
-                      <input type="search" onChange={(e)=>handleSearchEmails(e)} placeholder="Search..."
-                        className="px-3 appearance-none py-2 bg-neutral-500/20 border border-neutral-700 text-white rounded-md w-full" />
-                   </div>
-
-                   <div className="flex justify-start items-center gap-x-3">
-                    {!allProjectsOneUserLoading &&  allProjectsOneUser && allProjectsOneUser?.length > 0 &&
-                   <button disabled={idProjectActive?.length === 0} onClick={()=> {idProjectActive?.length !== 0 && handleShowDialogAddEmail() }}
-                    className="text-4xl bg-neutral-500/20 border border-neutral-700   px-3 py-3 rounded-md flex justify-center items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                </svg>
-                </button>}
-
-                {!allProjectsOneUserLoading && !allEmailsOneProjectLoading &&  allProjectsOneUser && allProjectsOneUser?.length > 0 &&
-                   <button disabled={idProjectActive?.length === 0} onClick={()=> allEmailsOneProjectRefetch()}
-                    className="text-4xl bg-neutral-500/20 border border-neutral-700   px-3 py-3 rounded-md flex justify-center items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
-                    </svg>
-
-                </button>}
-
-
-                {!allProjectsOneUserLoading && !allEmailsOneProjectLoading &&  allProjectsOneUser && allProjectsOneUser?.length > 0 &&
-                   <button disabled={idProjectActive?.length === 0} onClick={()=> handleOpenExportModal()}
-                    className="text-4xl bg-neutral-500/20 border border-neutral-700   px-3 py-3 rounded-md flex justify-center items-center">
-
-
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            width="1em"
-                            height="1em"
-                            className="size-4"
-                          >
-                            <path
-                              fill="currentColor"
-                              d="M13 14h-2a9 9 0 0 0-7.968 4.81A10 10 0 0 1 3 18C3 12.477 7.477 8 13 8V3l10 8l-10 8z"
-                            ></path>
-                          </svg>
-
-                </button>}
-
-                    </div>
-              </div>
 
 
            { allEmailsOneProjectLoading && <div className="py-3 flex justify-start w-full h-full items-start"><SkeletonEmailLine/></div>}
@@ -945,6 +1035,45 @@ const handleCopyCode = () => {
               </div>
               </>  }
            </div>
+
+  </TabsContent>
+
+  <TabsContent value="password">
+
+    <div className="w-full pt-1 flex justify-center items-center ">
+
+{isLoadingGetOneMap ? (
+  <SkeletonEmailLine />
+) : ( getMap && getMap.length === 0 ? (
+    <button
+      onClick={() => setIsOpenAddMapDialog(true)}
+      className="px-3 py-2 rounded-lg bg-[#dbdbdb] border text-black flex justify-center
+      items-center border-white hover:bg-black hover:text-white"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        className="size-4 mr-2"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+      </svg>
+      <span className="text-sm">Add a Map</span>
+    </button>
+  ) : (
+    <TableMap mapsList={getMap || []} project_Id={currentIdProject} refetchMaps={refetchFunctionGetMap} />
+  )
+)}
+
+
+    </div>
+
+
+  </TabsContent>
+
+</Tabs>
 
 
           </div>

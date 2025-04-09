@@ -1,15 +1,34 @@
 import { getProducts } from "@/app/lemon";
 import { GetAudience } from "@/components/GetAudience";
 import axiosInstance from "@/lib/api.intercept";
-import { Developer, Email, Project, User } from "@/lib/type";
-import { useQuery } from "@tanstack/react-query";
+import { AddMapParams, DeleteMapParams, Developer, Email, Map, MapResponse, Project, UpdateMapParams, User } from "@/lib/type";
+import { useMutation, UseMutationResult, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { toast } from "sonner";
 
 export const getAllProjectOneUserFunc = async (idUser: string | null | undefined): Promise<Project[]> => {
     if (!idUser) throw new Error("Invalid user ID");
     const response = await axiosInstance.get(`./api/users/${idUser}/projects`);
     return response.data;
 };
+
+export const getAllMapOfOneProject = async (idUser: string | null | undefined,projectId:string): Promise<Map[]> => {
+  if (!idUser || !projectId) throw new Error("Invalid user ID or projectID");
+  const response = await axiosInstance.get(`./api/users/${idUser}/projects/${projectId}/map`);
+  return response.data;
+};
+
+
+export const deleteMapOfOneProject = async (
+  idUser: string | null | undefined,
+  project_Id: string,
+  map_Id: string
+): Promise<Map> => {
+  if (!idUser || !project_Id || !map_Id) throw new Error("Invalid user ID or projectID or mapId");
+  const response = await axios.delete(`./api/users/${idUser}/projects/${project_Id}/map/${map_Id}`);
+  return response.data;
+};
+
 
 export const getAllEmailsOneProjectFunc = async (idUser: string | null | undefined, idProject: string): Promise<Email[]> => {
     if (!idUser || !idProject) throw new Error("Invalid user ID or project ID");
@@ -58,6 +77,17 @@ export const createProject = async (idUser: string | null | undefined, nameProje
     return response.data;
 };
 
+
+export const createMap = async (idUser: string | null | undefined, project_Id: string,link:string) => {
+  if (!idUser || !project_Id  || !link) throw new Error("Invalid user ID or project id or link");
+  const response = await axiosInstance.post(`./api/users/${idUser}/projects/${project_Id}/map`, {
+      link,
+  });
+  return response.data;
+};
+
+
+
 export const updateProject = async (idUser: string | null | undefined, idProject: string, newNameProject: string) => {
     if (!idUser || !idProject || !newNameProject) throw new Error("Invalid parameters");
     const response = await axiosInstance.put(`./api/users/${idUser}/projects/${idProject}/update`, {
@@ -101,6 +131,20 @@ export const useGetAllProjectsOfOneUser = (userId: string | null | undefined) =>
         retry: 3,
     });
 };
+
+export const useGetOneMapOfOneProjectUser = (userId: string | null | undefined,projectId:string) => {
+  return useQuery({
+      queryKey: ["getMapOfOneProject", userId,projectId],
+      queryFn: () => getAllMapOfOneProject(userId,projectId),
+      gcTime: 5 * 60 * 1000,
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+      enabled: !!userId ,
+      refetchInterval: false,
+      retry: 3,
+  });
+};
+
 
 export const getprivateKeyUser = async (idUser: string | null | undefined): Promise<{ privateKey: string, expiresAt: string }> => {
     if (!idUser) throw new Error("Invalid user ID");
@@ -278,5 +322,89 @@ export const useGetUserProjectsWithEmailsGroupedByDate = (userId: string | null 
     refetchOnWindowFocus: false,
     refetchInterval: false,
     retry: 3,
+  });
+};
+
+
+
+
+export const useDeleteMapMutation = ({
+  idUser,
+  projectId,
+  mapId,
+}: DeleteMapParams): UseMutationResult<
+  Map,
+  Error,
+  void, // Plus besoin de passer des paramètres à mutate
+  unknown
+> => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: () => deleteMapOfOneProject(idUser, projectId, mapId), // Les paramètres sont déjà connus
+    onSuccess: (data: Map) => {
+      queryClient.invalidateQueries({
+        queryKey: ["maps", data.projectId],
+      });
+      toast.success("Map deleted successfully");
+    },
+    onError: (error: Error) => {
+      toast.error(`Error during deletion: ${error.message}`);
+    },
+    onSettled: () => {
+      console.log("Mutation completed");
+    },
+  });
+};
+
+
+
+export const useAddMapMutation = ({ idUser, projectId, link, onSuccessCallBack }: AddMapParams) => {
+  const queryClient = useQueryClient();
+  return useMutation<MapResponse, Error, void>({
+    mutationFn: async () => {
+      const response = await axios.post(`./api/users/${idUser}/projects/${projectId}/map`, { link });
+      return response.data;
+    },
+    onSuccess: (data: MapResponse) => {
+      onSuccessCallBack();
+      queryClient.invalidateQueries({
+        queryKey: ["maps", data.projectId],
+      });
+      toast.success("Map added successfully");
+    },
+    onError: (error: Error) => {
+      toast.error(`Error adding map: ${error.message}`);
+    },
+    onSettled: () => {
+      console.log("Map addition mutation completed");
+    },
+  });
+};
+
+
+
+export const useUpdateMapMutation = ({ idUser, projectId, link, onSuccessCallBack ,mapId}: UpdateMapParams) => {
+  const queryClient = useQueryClient();
+  return useMutation<MapResponse, Error, void>({
+    mutationFn: async () => {
+      const response = await axios.put(
+        `./api/users/${idUser}/projects/${projectId}/map/${mapId}`,
+        { link }
+      );
+      return response.data;
+    },
+    onSuccess: (data: MapResponse) => {
+      onSuccessCallBack();
+      queryClient.invalidateQueries({
+        queryKey: ["maps", data.projectId],
+      });
+      toast.success("Map updated successfully");
+    },
+    onError: (error: Error) => {
+      toast.error(`Error updating map: ${error.message}`);
+    },
+    onSettled: () => {
+      console.log("Map update mutation completed");
+    },
   });
 };

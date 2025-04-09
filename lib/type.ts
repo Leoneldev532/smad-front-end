@@ -6,11 +6,28 @@ export  type Email = {
     id: string;
     email: string;
     name: string;
+    country:string;
+    referer:string;
     projectId: string;
     project: Project;
     createdAt: Date;
     updatedAt: Date;
   };
+
+export type Map = {
+    id: string;
+    link: string;
+    projectId: string;
+    project: Project;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+
+export type  DeleteMapParams  = {
+  idUser: string | null | undefined;
+  projectId: string;
+  mapId:string;
+}
 
 
 export  type Project = {
@@ -76,4 +93,28 @@ export  type User = {
     isActive?:boolean,
     isSelected?:boolean,
     name:string
+  }
+
+
+  export type AddMapParams = {
+    idUser: string
+    projectId: string
+    link: string
+    onSuccessCallBack:()=>void
+  }
+
+  export type UpdateMapParams = {
+    idUser:string,
+     projectId:string,
+    link:string,
+     onSuccessCallBack: ()=>void,
+     mapId:string
+  }
+
+  export type  MapResponse = {
+    id: string
+    link: string
+    projectId: string
+    createdAt: string
+    updatedAt: string
   }
