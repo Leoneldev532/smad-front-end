@@ -36,6 +36,7 @@ import { useGetUserInfo } from "@/lib/utils"
 import { useDeleteMapMutation, useUpdateMapMutation } from "@/hook/query"
 import { Input } from "../ui/input"
 import Loader from "../Loader"
+import { MapResponse } from "@/lib/type"
 
 // Définition du type Map
 export type Map = {
@@ -102,28 +103,28 @@ const TableMap = ({ mapsList, project_Id, refetchMaps }: {
     mapId: selectedMapId || "",
   });
 
-  // Mutation pour mettre à jour une map
-  // Appel du hook personnalisé pour obtenir la fonction de mutation
-const { mutateAsync: updateMap } = useUpdateMapMutation({
-  idUser: String(user?.id),
-  projectId: project_Id,
-  link: linkUpdateValue,
-  mapId: linkIdUpdateValue,
-  onSuccessCallBack: () => {
-    toast.success("Lien mis à jour avec succès");
-    refetchMaps();
-    setIsUpdateLink(false);
-  },
-});
+  type UpdateMapData = MapResponse; // Adjust this type if `updateMap` returns a different type
+  type UpdateMapError = { message: string }; // Adjust this type if the error structure is different
+  type UpdateMapVariables = void; // Adjust this type if `updateMap` takes arguments
 
-// Configuration de la mutation avec useMutation
-const mutationUpdateMap = useMutation({
-  mutationFn: (mapId: string) => updateMap(mapId),
-  onError: (err) => {
-    toast.error("Erreur lors de la mise à jour: " + err.message);
-  }
-});
-  // Gestion de la suppression
+  const { mutateAsync: updateMap } = useUpdateMapMutation({
+    idUser: String(user?.id),
+    projectId: project_Id,
+    link: linkUpdateValue,
+    mapId: linkIdUpdateValue,
+    onSuccessCallBack: () => {
+      refetchMaps();
+      setIsUpdateLink(false);
+    },
+  });
+
+  const mutationUpdateMap = useMutation<UpdateMapData, UpdateMapError, UpdateMapVariables>({
+    mutationFn: () => updateMap(),
+    onError: (err) => {
+      toast.error("Erreur lors de la mise à jour: " + err.message);
+    }
+  });
+
   const handleShowDialogDelete = (mapId: string) => {
     setSelectedMapId(mapId);
     setIsOpenDelete(true);
@@ -152,7 +153,7 @@ const mutationUpdateMap = useMutation({
   }
 
   const handleValidateLink = (mapId: string) => {
-    mutationUpdateMap.mutate(mapId);
+    mutationUpdateMap.mutate(mapId || "");
   }
 
   const handleClickOutside = (event: MouseEvent) => {
