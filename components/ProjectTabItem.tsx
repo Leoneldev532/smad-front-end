@@ -123,7 +123,7 @@ const ProjectTabItem = ({
 <iframe src="https://templates.smadmail.com/ui/form-${withName ? "m1" : "m2"}.html?private_key=${privateKey}&project_id=${project?.id}" scrolling="no"></iframe>`;
 
   const codeScriptMap = `
-<link rel="stylesheet" href="https://templates.smadmail.com/css/iframe.css"/>
+<link rel="stylesheet" href="https://templates.smadmail.com/css/iframeMap.css"/>
 <iframe src="https://templates.smadmail.com/ui/map.html?private_key=${privateKey}&project_id=${project?.id}&map_id=${mapId}" scrolling="no"></iframe>`;
 
   const handleCustomize = () => {

@@ -449,7 +449,7 @@ const handleCopyCode = () => {
 
 
        const codeScriptMap = `
-       <link rel="stylesheet" href="https://templates.smadmail.com/css/iframe.css"/>
+       <link rel="stylesheet" href="https://templates.smadmail.com/css/iframeMap.css"/>
        <iframe src="https://templates.smadmail.com/ui/map.html?private_key=${privateKey}&project_id=${currentIdProject}&map_id=${mapId}"
        scrolling="no"></iframe>`;
 
