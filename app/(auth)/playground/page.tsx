@@ -78,7 +78,7 @@ const Page = () => {
     setIsCodeCopy(true);
     navigator.clipboard.writeText(copyFinalCode);
     setTimeout(() => setIsCodeCopy(false), 1000);
-  };P
+  };
 
   const toggleColorPicker = (picker: keyof typeof showColorPicker) => {
     setShowColorPicker((prev) => ({
