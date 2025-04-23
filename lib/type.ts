@@ -7,7 +7,7 @@ export  type Email = {
     email: string;
     name: string;
     country:string;
-    referer:string;
+    referrer:string;
     projectId: string;
     project: Project;
     createdAt: Date;

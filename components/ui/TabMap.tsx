@@ -116,7 +116,7 @@ const TableMap = ({ mapsList, project_Id, refetchMaps }: {
       refetchMaps();
       setIsUpdateLink(false);
     },
-  });
+  })
 
   const mutationUpdateMap = useMutation<UpdateMapData, UpdateMapError, string>({
     mutationFn: () => updateMap(),

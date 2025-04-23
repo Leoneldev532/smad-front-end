@@ -193,7 +193,7 @@ const TableData = ({ emailsList, project_Id, withName, refetchEmail }: { emailsL
               <TableCell className={`font-medium ${!withName && "hidden"} w-1/6`}>
                 {withName && <span>{email?.name}</span>}
               </TableCell>
-              <TableCell className="font-medium w-1/2 flex justify-start gap-4 items-center" >
+              <TableCell className="font-medium w-full flex justify-start gap-4 items-center" >
                   {isUpdateEmail ? (
                     emailIdUpdateValue === email.id ? (
                       <Input
@@ -210,10 +210,22 @@ const TableData = ({ emailsList, project_Id, withName, refetchEmail }: { emailsL
                         }}
                       />
                     ) : (
+                      <div className="flex flex-col w-full">
                       <span>{email.email}</span>
+                      <div className="flex w-full text-xs text-neutral-500">
+                      <span>{email?.country}</span>
+                      <span>{" - "+email?.referrer}</span>
+                      </div>
+                      </div>
                     )
                   ) : (
+                    <div className="flex flex-col  w-full">
                     <span>{email.email}</span>
+                    <div className="flex text-xs w-full text-neutral-500">
+                    <span>{email?.country}</span>
+                    <span>{" - "+email?.referrer}</span>
+                    </div>
+                    </div>
                   )}
 
                 <div className="w-6 h-6 flex justify-center items-center">
