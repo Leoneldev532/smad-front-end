@@ -12,6 +12,7 @@ The objective of Smad is to empower users to build their waitlist in just 30 sec
 - **Customization**: Customize forms using the built-in editor to match your branding and requirements.
 - **Data Export**: Export collected email data in CSV format for further analysis.
 - **Email Integration**: Seamlessly share data with emailing services like Resend.
+- **API Access**: REST API for developers to integrate Smad programmatically into custom projects.
 - **Free Plan**: Create unlimited mailing lists and waitlists at no cost, with access to all basic features.
 
 ## 🔄 Process
@@ -36,7 +37,6 @@ The objective of Smad is to empower users to build their waitlist in just 30 sec
 - **Additional Email Integrations**: Support for more email service providers like Mailchimp, SendGrid, and ConvertKit.
 - **Advanced Analytics**: Enhanced reporting with conversion rates, user behavior tracking, and predictive analytics.
 - **A/B Testing**: Test different form designs and messaging to optimize conversion rates.
-- **API Access**: Provide a REST API for developers to integrate Smad programmatically.
 - **Mobile Application**: Native mobile apps for iOS and Android to manage waitlists on the go.
 - **Automation Features**: Auto-responders, drip email campaigns, and triggered notifications.
 - **Enhanced Customization**: More themes, fonts, animations, and branding options.
@@ -69,7 +69,7 @@ The objective of Smad is to empower users to build their waitlist in just 30 sec
 1. **Clone the repository:**
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Leoneldev532/smad-front-end.git
    cd smad-front-end
    ```
 

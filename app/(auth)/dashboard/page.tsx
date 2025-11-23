@@ -232,8 +232,6 @@ export default function Page() {
     currentIdProject,
   );
 
-  console.log(codeScript,"----df",getAllUserInfo)
-
   const codeScriptMap = generateCodeScriptMap(
     privateKey || "",
     currentIdProject,

@@ -282,7 +282,7 @@ const TableData = ({
               </TableCell>
               <TableCell className={"font-medium  w-1/6"}>
                 <span>
-                  <time dateTime={email?.createdAt}>
+                  <time dateTime={email?.createdAt.toLocaleDateString()}>
                     {new Date(email?.createdAt).toLocaleDateString()}
                   </time>
                 </span>
