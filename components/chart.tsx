@@ -1,25 +1,48 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from "chart.js";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 import { Email } from "@/lib/type";
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+);
 
-const EmailsTodayChart = ({ emailsList }: { emailsList: Email[] | [] | undefined }) => {
+const EmailsTodayChart = ({
+  emailsList,
+}: {
+  emailsList: Email[] | [] | undefined;
+}) => {
   const today = new Date();
   const hours = Array.from({ length: 24 }, (_, i) => i);
 
   // Count emails created at each hour of the day
   const emailCountsByHour = hours.map((hour) => {
-    return emailsList?.filter((email) => {
-      const emailDate = new Date(email.createdAt);
-      return (
-        emailDate.getFullYear() === today.getFullYear() &&
-        emailDate.getMonth() === today.getMonth() &&
-        emailDate.getDate() === today.getDate() &&
-        emailDate.getHours() === hour
-      );
-    }).length || 0;
+    return (
+      emailsList?.filter((email) => {
+        const emailDate = new Date(email.createdAt);
+        return (
+          emailDate.getFullYear() === today.getFullYear() &&
+          emailDate.getMonth() === today.getMonth() &&
+          emailDate.getDate() === today.getDate() &&
+          emailDate.getHours() === hour
+        );
+      }).length || 0
+    );
   });
 
   const data = {

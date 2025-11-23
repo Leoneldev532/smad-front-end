@@ -3,27 +3,27 @@ import { prisma } from "@/lib/db";
 export async function getProjectMaps(projectId: string) {
   const maps = await prisma.map.findMany({
     where: {
-      projectId: projectId
+      projectId: projectId,
     },
     select: {
       id: true,
       link: true,
       projectId: true,
       createdAt: true,
-      updatedAt: true
+      updatedAt: true,
     },
     orderBy: {
-      createdAt: 'desc'
-    }
+      createdAt: "desc",
+    },
   });
 
   return maps;
 }
 
 export async function deleteProjectMap(projectId: string, mapId: string) {
-
   // Validation des paramètres avec des messages plus spécifiques
-  if (!projectId) throw new Error("L'identifiant du projet (projectId) est requis");
+  if (!projectId)
+    throw new Error("L'identifiant du projet (projectId) est requis");
   if (!mapId) throw new Error("L'identifiant de la carte (mapId) est requis");
 
   // Vérification préalable de l'existence (optionnel mais recommandé)
@@ -44,19 +44,16 @@ export async function deleteProjectMap(projectId: string, mapId: string) {
       id: mapId,
       projectId: projectId,
     },
-
   });
 
   return deletedMap;
 }
 
-
-
 export async function createProjectMap(projectId: string, link: string) {
-  if (!projectId) throw new Error("L'identifiant du projet (projectId) est requis");
+  if (!projectId)
+    throw new Error("L'identifiant du projet (projectId) est requis");
   if (!link) throw new Error("Le lien (link) est requis pour créer une carte");
 
-  // Vérifier si le projet existe (optionnel mais recommandé)
   const projectExists = await prisma.project.findUnique({
     where: { id: projectId },
   });
@@ -75,12 +72,17 @@ export async function createProjectMap(projectId: string, link: string) {
   return newMap;
 }
 
-
-export async function updateProjectMap(projectId: string, mapId: string, data: { link: string }) {
+export async function updateProjectMap(
+  projectId: string,
+  mapId: string,
+  data: { link: string },
+) {
   // Validation des paramètres
-  if (!projectId) throw new Error("L'identifiant du projet (projectId) est requis");
+  if (!projectId)
+    throw new Error("L'identifiant du projet (projectId) est requis");
   if (!mapId) throw new Error("L'identifiant de la carte (mapId) est requis");
-  if (!data.link) throw new Error("Le lien (link) est requis pour mettre à jour une carte");
+  if (!data.link)
+    throw new Error("Le lien (link) est requis pour mettre à jour une carte");
 
   // Vérification préalable de l'existence de la carte
   const mapExists = await prisma.map.findUnique({

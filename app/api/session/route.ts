@@ -8,7 +8,7 @@ export async function GET(request: Request) {
   if (!session) {
     return new NextResponse(
       JSON.stringify({ status: "fail", message: "You are not logged in" }),
-      { status: 401 }
+      { status: 401 },
     );
   }
 

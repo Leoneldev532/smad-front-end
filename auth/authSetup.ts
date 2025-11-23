@@ -1,15 +1,14 @@
 // authSetup.ts
-import NextAuth, { NextAuthOptions } from 'next-auth';
-import GoogleProvider from 'next-auth/providers/google';
-import GitHubProvider from 'next-auth/providers/github';
-import CredentialsProvider from 'next-auth/providers/credentials';
-import { compare } from 'bcryptjs';
+import NextAuth, { NextAuthOptions } from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import GitHubProvider from "next-auth/providers/github";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { compare } from "bcryptjs";
 
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { generateFinalDate, generateprivateKey } from '@/lib/utils';
+import { generateFinalDate, generateprivateKey } from "@/lib/utils";
 
 import { prisma } from "@/lib/db";
-
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma as any),
@@ -23,9 +22,8 @@ export const authOptions: NextAuthOptions = {
         params: {
           prompt: "consent",
           access_type: "offline",
-          response_type: "code"
-        }
-
+          response_type: "code",
+        },
       },
       profile(profile) {
         return {
@@ -44,9 +42,8 @@ export const authOptions: NextAuthOptions = {
         params: {
           prompt: "consent",
           access_type: "offline",
-          response_type: "code"
-        }
-
+          response_type: "code",
+        },
       },
       profile(profile) {
         return {
@@ -57,15 +54,15 @@ export const authOptions: NextAuthOptions = {
       },
     }),
     CredentialsProvider({
-      name: 'Sign in',
-      id: 'credentials',
+      name: "Sign in",
+      id: "credentials",
       credentials: {
         email: {
-          label: 'Email',
-          type: 'email',
-          placeholder: 'example@example.com',
+          label: "Email",
+          type: "email",
+          placeholder: "example@example.com",
         },
-        password: { label: 'Password', type: 'password' },
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials.password) {
@@ -86,23 +83,18 @@ export const authOptions: NextAuthOptions = {
           id: user.id,
           email: user.email,
           name: user.name,
-          randomKey: 'Hey cool',
+          randomKey: "Hey cool",
         };
       },
     }),
   ],
 
-  
-  callbacks: {   
+  callbacks: {
     async signIn({ user, account }) {
-
-      // Vérifiez si l'utilisateur existe déjà dans la base de données
       const existingUser = await prisma.user.findUnique({
-        where: { email: user?.email  || " "  },
+        where: { email: user?.email || " " },
       });
-  
-      // console.log(process.env.NEXTAUTH_URL,process.env.GOOGLE_CLIENT_ID,process.env.GOOGLE_CLIENT_SECRET)
-      // Si l'utilisateur n'existe pas, créez-le
+
       if (!existingUser) {
         await prisma.user.create({
           data: {
@@ -111,14 +103,12 @@ export const authOptions: NextAuthOptions = {
             privateKey: {
               create: {
                 key: generateprivateKey(user?.email?.toLowerCase() || " "),
-                expiresAt: generateFinalDate("1year").toDate(), 
+                expiresAt: generateFinalDate("1year").toDate(),
               },
             },
           },
         });
-  
       } else {
-        // Si l'utilisateur existe déjà, vérifiez si le compte Google est lié
         const linkedAccount = await prisma.account.findUnique({
           where: {
             provider_providerAccountId: {
@@ -127,8 +117,7 @@ export const authOptions: NextAuthOptions = {
             },
           },
         });
-  
-        // Si le compte Google n'est pas lié, liez-le à l'utilisateur existant
+
         if (!linkedAccount) {
           await prisma.account.create({
             data: {
@@ -139,10 +128,10 @@ export const authOptions: NextAuthOptions = {
           });
         }
       }
-  
-      return true; // Autoriser la connexion
+
+      return true;
     },
-  
+
     session: ({ session, token }) => {
       return {
         ...session,
@@ -166,14 +155,13 @@ export const authOptions: NextAuthOptions = {
     },
   },
   pages: {
-    signIn: '/login',
-    newUser: '/dashboard',
-    error: '/login',
-    signOut: '/login',
+    signIn: "/login",
+    newUser: "/dashboard",
+    error: "/login",
+    signOut: "/login",
   },
   session: {
-    strategy: 'jwt',
+    strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
-

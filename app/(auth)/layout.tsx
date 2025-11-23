@@ -1,9 +1,9 @@
 // src/app/layout.tsx
 "use client";
 
-import Loader from "@/components/Loader";
-import UserInfoProvider from "@/hook/UserIdHook";
-import UserIdProvider from "@/hook/UserIdHook";
+import Loader from "@/components/loader";
+import UserInfoProvider from "@/hook/userIdHook";
+import UserIdProvider from "@/hook/userIdHook";
 import { SessionProvider, useSession } from "next-auth/react";
 
 export default function RootLayout({
@@ -11,8 +11,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  const { status ,data:session} = useSession({ required: true });
+  const { status, data: session } = useSession({ required: true });
 
   if (status === "loading") {
     return (
@@ -24,9 +23,15 @@ export default function RootLayout({
 
   if (status === "authenticated") {
     return (
-      <SessionProvider refetchInterval={5 * 60} session={session} refetchOnWindowFocus={false}>
+      <SessionProvider
+        refetchInterval={5 * 60}
+        session={session}
+        refetchOnWindowFocus={false}
+      >
         <UserInfoProvider>
-          <div className="flex justify-center items-center w-full">{children}</div>
+          <div className="flex justify-center items-center w-full">
+            {children}
+          </div>
         </UserInfoProvider>
       </SessionProvider>
     );

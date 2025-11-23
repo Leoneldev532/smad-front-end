@@ -1,15 +1,15 @@
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import Link from "next/link"
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import Link from "next/link";
 
 export function SignUpForm({
   className,
@@ -21,7 +21,7 @@ export function SignUpForm({
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Welcome back</CardTitle>
           <CardDescription>
-            Create your account with your Apple or Google 
+            Create your account with your Apple or Google
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -75,14 +75,13 @@ export function SignUpForm({
                   <Input id="password" type="password" required />
                 </div>
                 <Button type="submit" className="w-full">
-                Sign up
-                   </Button>
+                  Sign up
+                </Button>
               </div>
               <div className="text-center text-sm">
                 Don&apos;t have an account?{" "}
-                <Link  href="#" className="underline underline-offset-4">
-             
-                Login  
+                <Link href="#" className="underline underline-offset-4">
+                  Login
                 </Link>
               </div>
             </div>
@@ -94,5 +93,5 @@ export function SignUpForm({
         and <a href="#">Privacy Policy</a>.
       </div>
     </div>
-  )
+  );
 }

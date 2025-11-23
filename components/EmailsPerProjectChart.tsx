@@ -1,23 +1,36 @@
-import React from 'react';
-import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
-import { Email } from '@/lib/type';
+import React from "react";
+import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Email, EmailsPerProjectChartProps } from "@/lib/type";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+);
 
-interface EmailsPerProjectChartProps {
-  projectsWithEmails: { projectId: string; emails: Email[] }[];
-}
-
-const EmailsPerProjectChart: React.FC<EmailsPerProjectChartProps> = ({ projectsWithEmails }) => {
+const emailsPerProjectChart: React.FC<EmailsPerProjectChartProps> = ({
+  projectsWithEmails,
+}) => {
   const data = {
     labels: projectsWithEmails.map((project) => project.projectId),
     datasets: [
       {
-        label: 'Number of Emails',
+        label: "Number of Emails",
         data: projectsWithEmails.map((project) => project.emails.length),
-        backgroundColor: 'rgba(75, 192, 192, 0.6)',
-        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: "rgba(75, 192, 192, 0.6)",
+        borderColor: "rgba(75, 192, 192, 1)",
         borderWidth: 1,
       },
     ],
@@ -27,11 +40,11 @@ const EmailsPerProjectChart: React.FC<EmailsPerProjectChartProps> = ({ projectsW
     responsive: true,
     plugins: {
       legend: {
-        position: 'top' as const,
+        position: "top" as const,
       },
       title: {
         display: true,
-        text: 'Emails per Project',
+        text: "Emails per Project",
       },
     },
   };
@@ -39,4 +52,4 @@ const EmailsPerProjectChart: React.FC<EmailsPerProjectChartProps> = ({ projectsW
   return <Bar data={data} options={options} />;
 };
 
-export default EmailsPerProjectChart;
+export default emailsPerProjectChart;

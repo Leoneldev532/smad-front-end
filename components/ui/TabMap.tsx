@@ -6,15 +6,15 @@ import {
   TableHeader,
   TableRow,
   TableFooter,
-} from "@/components/ui/table"
+} from "@/components/ui/table";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from "./dropdown-menu"
+  DropdownMenuTrigger,
+} from "./dropdown-menu";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -23,64 +23,52 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogAction,
-} from "@/components/ui/alert-dialog"
-import { MoreHorizontal } from "lucide-react"
-import { Button } from "./button"
-import { Checkbox } from "./checkbox"
-import { CheckedState } from "@radix-ui/react-checkbox"
-import { ChangeEvent, useEffect, useRef, useState } from "react"
-import { useMutation } from "@tanstack/react-query"
-import { toast } from "sonner"
-import Time from "../Time"
-import { useGetUserInfo } from "@/lib/utils"
-import { useDeleteMapMutation, useUpdateMapMutation } from "@/hook/query"
-import { Input } from "../ui/input"
-import Loader from "../Loader"
-import { MapResponse } from "@/lib/type"
+} from "@/components/ui/alert-dialog";
+import { MoreHorizontal } from "lucide-react";
+import { Button } from "./button";
+import { Checkbox } from "./checkbox";
+import { CheckedState } from "@radix-ui/react-checkbox";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
+import time from "../time";
+import { useGetUserInfo } from "@/lib/utils";
+import { useDeleteMapMutation, useUpdateMapMutation } from "@/hook/query";
+import { Input } from "../ui/input";
+import Loader from "../loader";
+import { MapResponse, Map, Project } from "@/lib/type";
 
-// Définition du type Map
-export type Map = {
-  id: string;
-  link: string;
-  projectId: string;
-  project: Project;
-  createdAt: Date;
-  updatedAt: Date;
-};
-
-// Type Project minimal
-type Project = {
-  id: string;
-  name: string;
-};
-
-const TableMap = ({ mapsList, project_Id, refetchMaps }: {
-  mapsList: Map[]
-  project_Id: string,
-  refetchMaps: () => void
+const TableMap = ({
+  mapsList,
+  project_Id,
+  refetchMaps,
+}: {
+  mapsList: Map[];
+  project_Id: string;
+  refetchMaps: () => void;
 }) => {
-  const [selectedIdArray, setSelectedIdArray] = useState<string[]>([])
-  const [checkAllActived, setCheckAllActivated] = useState<boolean>(false)
-  const { user } = useGetUserInfo()
-  const [isOpenDelete, setIsOpenDelete] = useState<boolean>(false)
-  const [selectedMapId, setSelectedMapId] = useState<string | null>(null)
+  const [selectedIdArray, setSelectedIdArray] = useState<string[]>([]);
+  const [checkAllActived, setCheckAllActivated] = useState<boolean>(false);
+  const { user } = useGetUserInfo();
+  const [isOpenDelete, setIsOpenDelete] = useState<boolean>(false);
+  const [selectedMapId, setSelectedMapId] = useState<string | null>(null);
 
-  // États pour la modification
-  const [isUpdateLink, setIsUpdateLink] = useState<boolean>(false)
-  const [linkUpdateValue, setLinkUpdateValue] = useState<string>("")
-  const [linkIdUpdateValue, setLinkIdUpdateValue] = useState<string>("")
-  const inputRef = useRef<HTMLInputElement>(null)
+  // States for modification
+  const [isUpdateLink, setIsUpdateLink] = useState<boolean>(false);
+  const [linkUpdateValue, setLinkUpdateValue] = useState<string>("");
+  const [linkIdUpdateValue, setLinkIdUpdateValue] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  // Gestion de la sélection individuelle
+  // Handling individual selection
   const handleSelected = (status: CheckedState, id: string) => {
     if (status) {
-      setSelectedIdArray((prev) => !prev.includes(id) ? [...prev, id] : prev);
+      setSelectedIdArray((prev) => (!prev.includes(id) ? [...prev, id] : prev));
     } else {
       setSelectedIdArray(selectedIdArray.filter((elem) => elem !== id));
     }
-  }
+  };
 
-  // Gestion de la sélection de tous les éléments
+  // Handling selection of all elements
   const handleCheckedAll = (status: CheckedState) => {
     if (status) {
       mapsList?.forEach((map) => handleSelected(true, map.id));
@@ -89,14 +77,14 @@ const TableMap = ({ mapsList, project_Id, refetchMaps }: {
       setSelectedIdArray([]);
       setCheckAllActivated(false);
     }
-  }
+  };
 
-  // Reset de la sélection quand la liste change
+  // Reset selection when the list changes
   useEffect(() => {
     setSelectedIdArray([]);
-  }, [mapsList])
+  }, [mapsList]);
 
-  // Mutation pour supprimer une map
+  // Mutation to delete a map
   const mutationDeleteMap = useDeleteMapMutation({
     idUser: String(user?.id),
     projectId: project_Id,
@@ -116,24 +104,24 @@ const TableMap = ({ mapsList, project_Id, refetchMaps }: {
       refetchMaps();
       setIsUpdateLink(false);
     },
-  })
+  });
 
   const mutationUpdateMap = useMutation<UpdateMapData, UpdateMapError, string>({
     mutationFn: () => updateMap(),
     onError: (err) => {
       toast.error("Erreur lors de la mise à jour: " + err.message);
-    }
+    },
   });
 
   const handleShowDialogDelete = (mapId: string) => {
     setSelectedMapId(mapId);
     setIsOpenDelete(true);
-  }
+  };
 
   const handleCloseDialogDelete = () => {
     setIsOpenDelete(false);
     setSelectedMapId(null);
-  }
+  };
 
   const handleDelete = () => {
     if (selectedMapId) {
@@ -147,14 +135,14 @@ const TableMap = ({ mapsList, project_Id, refetchMaps }: {
     }
   };
 
-  // Gestion de la modification
+  // Handling modification
   const handleUpdateLink = (e: ChangeEvent<HTMLInputElement>) => {
     setLinkUpdateValue(e.target.value);
-  }
+  };
 
   const handleValidateLink = (mapId: string) => {
     mutationUpdateMap.mutate(mapId);
-  }
+  };
 
   const handleClickOutside = (event: MouseEvent) => {
     if (inputRef.current && !inputRef.current.contains(event.target as Node)) {
@@ -169,9 +157,12 @@ const TableMap = ({ mapsList, project_Id, refetchMaps }: {
     };
   }, []);
 
-  const sortedMapsList = mapsList?.slice().sort((a, b) =>
-    new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-  );
+  const sortedMapsList = mapsList
+    ?.slice()
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+    );
 
   return (
     <>
@@ -180,7 +171,8 @@ const TableMap = ({ mapsList, project_Id, refetchMaps }: {
           <AlertDialogHeader>
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete the map from the project.
+              This action cannot be undone. This will permanently delete the map
+              from the project.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -201,7 +193,9 @@ const TableMap = ({ mapsList, project_Id, refetchMaps }: {
           <TableRow>
             <TableHead className="w-1/6 flex gap-x-3 justify-start items-center">
               <Checkbox
-                checked={(selectedIdArray.length === mapsList?.length && checkAllActived)}
+                checked={
+                  selectedIdArray.length === mapsList?.length && checkAllActived
+                }
                 onCheckedChange={handleCheckedAll}
                 id="terms-all"
               />
@@ -233,12 +227,14 @@ const TableMap = ({ mapsList, project_Id, refetchMaps }: {
                       value={linkUpdateValue}
                       onChange={handleUpdateLink}
                       onKeyPress={(e) => {
-                        if (e.key === 'Enter') {
+                        if (e.key === "Enter") {
                           handleValidateLink(map.id);
                         }
                       }}
                     />
-                    {mutationUpdateMap.isPending && <Loader height="6" width="6" />}
+                    {mutationUpdateMap.isPending && (
+                      <Loader height="6" width="6" />
+                    )}
                   </div>
                 ) : (
                   <a
@@ -252,7 +248,9 @@ const TableMap = ({ mapsList, project_Id, refetchMaps }: {
                 )}
               </TableCell>
               <TableCell className="font-medium w-1/2">
-                <Time date={map.createdAt} />
+                <time dateTime={map.createdAt.toLocaleDateString()} >
+  {new Date(map?.createdAt).toLocaleDateString()}
+                  </time>
               </TableCell>
               <TableCell className="font-medium w-1/2">
                 <DropdownMenu>

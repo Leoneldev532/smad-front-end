@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import { YouTubeEmbed } from "@next/third-parties/google";
-import CodeHighlight from "@/components/CodeSection";
-import CodeHighlightWriter from "@/components/CodeSectionWritter";
+import CodeHighlight from "@/components/codeSection";
+import CodeHighlightWriter from "@/components/codeSectionWritter";
 import CodeBlock from "@/components/editor";
 
 const Page = () => {
@@ -73,8 +73,8 @@ const Page = () => {
               </code>{" "}
               : The unique identifier of your project. Replace{" "}
               <code>{"123-456-789-000"}</code> with your own project ID. You can
-              retrieve it by clicking the{" "}
-              {"Copy Project ID"} button on the dashboard.
+              retrieve it by clicking the {"Copy Project ID"} button on the
+              dashboard.
             </li>
             <li>
               <code className="bg-neutral-800 py-1 px-3 border border-neutral-700 rounded">
@@ -92,7 +92,8 @@ const Page = () => {
                 name
               </code>{" "}
               : The name of the user. This field is optional and will only be
-              considered if the {"add user name field"} checkbox was enabled during project creation.
+              considered if the {"add user name field"} checkbox was enabled
+              during project creation.
             </li>
           </ul>
 
@@ -125,12 +126,15 @@ const Page = () => {
               avoid errors.
             </li>
             <li>
-              If the {"add user name field"} checkbox was enabled during project creation, include the {`name`} field in the payload.
+              If the {"add user name field"} checkbox was enabled during project
+              creation, include the {"name"} field in the payload.
             </li>
           </ol>
 
           <p className="text-neutral-400 py-3">
-            <strong className={"text-xl md:text-2xl"}>Example with JavaScript:</strong>
+            <strong className={"text-xl md:text-2xl"}>
+              Example with JavaScript:
+            </strong>
           </p>
 
           <CodeBlock
@@ -158,7 +162,9 @@ const Page = () => {
           />
 
           <p className="text-neutral-400 py-3">
-            <strong className={"text-xl md:text-2xl"}>Example with Node.js:</strong>
+            <strong className={"text-xl md:text-2xl"}>
+              Example with Node.js:
+            </strong>
           </p>
 
           <CodeBlock

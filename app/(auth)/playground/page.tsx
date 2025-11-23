@@ -1,12 +1,13 @@
 "use client";
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from "react";
 import { ColorPicker, useColor } from "react-color-palette";
-import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
+import Slider from "rc-slider";
+import "rc-slider/assets/index.css";
 import "react-color-palette/css";
-import { templateInfo, templateInfoType } from '@/lib/atom';
-import { useRecoilValue } from 'recoil';
-import Head from 'next/head';
+import { templateInfo, templateInfoType } from "@/lib/atom";
+import { useRecoilValue } from "recoil";
+import Head from "next/head";
+import { URL_TEMPLATE_ORIGIN } from "@/lib/constants";
 
 const Page = () => {
   const [bgBtn, setBgBtn] = useColor("#000000");
@@ -48,7 +49,10 @@ const Page = () => {
   }, []);
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (colorPickerRef.current && !colorPickerRef.current.contains(event.target as Node)) {
+    if (
+      colorPickerRef.current &&
+      !colorPickerRef.current.contains(event.target as Node)
+    ) {
       setShowColorPicker({
         bgBtn: false,
         textColorBtn: false,
@@ -64,14 +68,14 @@ const Page = () => {
   const getUserTemplateInfo = useRecoilValue<string | null>(templateInfo);
   const getUserTemplateInfoType = useRecoilValue<string>(templateInfoType);
 
-  const StringConfig = `https://templates.smadmail.com/ui/form-m${(
-    getUserTemplateInfoType.trim()
-  )}.html${(
-    getUserTemplateInfo ? getUserTemplateInfo.trim() : "?private_key=smad250208172113c78c8db84d&project_id=3fb6d9ce-2433-4b8c-9ede-bfd9c26c945d"
-  )}${bgBtn.hex ? `&bg_btn=${bgBtn.hex.slice(1)}` : ''}${bgHoverBtn.hex ? `&bg_hover_btn=${bgHoverBtn.hex.slice(1)}` : ''}${textColorBtn.hex ? `&text_color_btn=${textColorBtn.hex.slice(1)}` : ''}${bgInput.hex ? `&bg_input=${bgInput.hex.slice(1)}` : ''}${textColorInput.hex ? `&text_color_input=${textColorInput.hex.slice(1)}` : ''}${borderRadiusForm ? `&border_radius_form=${borderRadiusForm}px` : ''}${borderRadiusBtn ? `&border_radius_btn=${borderRadiusBtn}px` : ''}${borderForm.hex ? `&border_form=${borderForm.hex.slice(1)}` : ''}${textColorHoverBtn.hex ? `&text_color_hover_btn=${textColorHoverBtn.hex.slice(1)}` : ''}`;
+  const StringConfig = `${URL_TEMPLATE_ORIGIN}/ui/form-m${getUserTemplateInfoType.trim()}.html${
+    getUserTemplateInfo
+      ? getUserTemplateInfo.trim()
+      : "?private_key=smad250208172113c78c8db84d&project_id=3fb6d9ce-2433-4b8c-9ede-bfd9c26c945d"
+  }${bgBtn.hex ? `&bg_btn=${bgBtn.hex.slice(1)}` : ""}${bgHoverBtn.hex ? `&bg_hover_btn=${bgHoverBtn.hex.slice(1)}` : ""}${textColorBtn.hex ? `&text_color_btn=${textColorBtn.hex.slice(1)}` : ""}${bgInput.hex ? `&bg_input=${bgInput.hex.slice(1)}` : ""}${textColorInput.hex ? `&text_color_input=${textColorInput.hex.slice(1)}` : ""}${borderRadiusForm ? `&border_radius_form=${borderRadiusForm}px` : ""}${borderRadiusBtn ? `&border_radius_btn=${borderRadiusBtn}px` : ""}${borderForm.hex ? `&border_form=${borderForm.hex.slice(1)}` : ""}${textColorHoverBtn.hex ? `&text_color_hover_btn=${textColorHoverBtn.hex.slice(1)}` : ""}`;
 
   const copyFinalCode = `
-    <link rel="stylesheet" href="https://templates.smadmail.com/css/iframe.css" />
+    <link rel="stylesheet" href="${URL_TEMPLATE_ORIGIN}/css/iframe.css" />
     <iframe src="${StringConfig}" scrolling="no"></iframe>`;
 
   const handleCopyCode = () => {
@@ -82,7 +86,10 @@ const Page = () => {
 
   const toggleColorPicker = (picker: keyof typeof showColorPicker) => {
     setShowColorPicker((prev) => ({
-      ...Object.keys(prev).reduce((acc, key) => ({ ...acc, [key]: false }), {} as typeof showColorPicker),
+      ...Object.keys(prev).reduce(
+        (acc, key) => ({ ...acc, [key]: false }),
+        {} as typeof showColorPicker,
+      ),
       [picker]: !prev[picker],
     }));
   };
@@ -90,14 +97,21 @@ const Page = () => {
   return (
     <div className="flex flex-col w-full gap-y-2 lg:px-0 px-8 justify-center items-center">
       <Head>
-        <link rel="stylesheet" href="https://templates.smadmail.com/css/iframe.css" />
+        <link rel="stylesheet" href={`${URL_TEMPLATE_ORIGIN}/css/iframe.css`} />
       </Head>
-      <h1 className="wb-gradient text-2xl sm:text-3xl my-3">Customize Your Form</h1>
+      <h1 className="wb-gradient text-2xl sm:text-3xl my-3">
+        Customize Your Form
+      </h1>
       <div className="flex flex-col md:grid grid-cols-2 gap-2 p-2 w-full rounded-lg lg:h-96 bg-neutral-800">
         <div className="rounded-lg h-full flex flex-col justify-center items-center bg-neutral-300">
           <div className="flex justify-center items-center px-4 h-full md:pt-0 pt-8 w-full">
             {isMounted ? (
-              <iframe key={StringConfig} src={StringConfig} scrolling="no" className="w-full h-full" />
+              <iframe
+                key={StringConfig}
+                src={StringConfig}
+                scrolling="no"
+                className="w-full h-full"
+              />
             ) : (
               <p>Loading...</p>
             )}
@@ -116,7 +130,11 @@ const Page = () => {
                 stroke="currentColor"
                 className="size-4 stroke-slate-300"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m4.5 12.75 6 6 9-13.5"
+                />
               </svg>
             ) : (
               <svg
@@ -138,39 +156,74 @@ const Page = () => {
         </div>
         <div className="flex flex-col gap-y-2 p-4">
           <div className="grid xs:grid-cols-2 grid-cols-1 lg:grid-cols-3 gap-4">
-          {
-  [
-    { label: "Button Background", color: bgBtn, setColor: setBgBtn, picker: "bgBtn" as const },
-    { label: "Button Text Color", color: textColorBtn, setColor: setTextColorBtn, picker: "textColorBtn" as const },
-    { label: "Input Background", color: bgInput, setColor: setBgInput, picker: "bgInput" as const },
-    { label: "Input Text Color", color: textColorInput, setColor: setTextColorInput, picker: "textColorInput" as const },
-    { label: "Form Border Color", color: borderForm, setColor: setBorderForm, picker: "borderForm" as const },
-    { label: "Button Hover Bg", color: bgHoverBtn, setColor: setBgHoverBtn, picker: "bgHoverBtn" as const },
-    {
-      label: "Button Hover Text Color",
-      color: textColorHoverBtn,
-      setColor: setTextColorHoverBtn,
-      picker: "textColorHoverBtn" as const,
-    },
-  ].map(({ label, color, setColor, picker }) => (
-    <div key={picker} className="flex flex-col gap-y-1 relative">
-      <span className="text-xs lowercase text-neutral-400">{label}</span>
-      <button
-        className="styled-button rounded-xl bg-neutral-700 hover:bg-neutral-950 text-xs lowercase transition-all ease duration-400"
-        onClick={() => toggleColorPicker(picker)}
-      >
-        Select Color
-      </button>
-      {showColorPicker[picker] && (
-        <div ref={colorPickerRef} className="absolute z-10 color-picker">
-          <ColorPicker color={color} onChange={setColor} />
-        </div>
-      )}
-    </div>
-  ))
-}
+            {[
+              {
+                label: "Button Background",
+                color: bgBtn,
+                setColor: setBgBtn,
+                picker: "bgBtn" as const,
+              },
+              {
+                label: "Button Text Color",
+                color: textColorBtn,
+                setColor: setTextColorBtn,
+                picker: "textColorBtn" as const,
+              },
+              {
+                label: "Input Background",
+                color: bgInput,
+                setColor: setBgInput,
+                picker: "bgInput" as const,
+              },
+              {
+                label: "Input Text Color",
+                color: textColorInput,
+                setColor: setTextColorInput,
+                picker: "textColorInput" as const,
+              },
+              {
+                label: "Form Border Color",
+                color: borderForm,
+                setColor: setBorderForm,
+                picker: "borderForm" as const,
+              },
+              {
+                label: "Button Hover Bg",
+                color: bgHoverBtn,
+                setColor: setBgHoverBtn,
+                picker: "bgHoverBtn" as const,
+              },
+              {
+                label: "Button Hover Text Color",
+                color: textColorHoverBtn,
+                setColor: setTextColorHoverBtn,
+                picker: "textColorHoverBtn" as const,
+              },
+            ].map(({ label, color, setColor, picker }) => (
+              <div key={picker} className="flex flex-col gap-y-1 relative">
+                <span className="text-xs lowercase text-neutral-400">
+                  {label}
+                </span>
+                <button
+                  className="styled-button rounded-xl bg-neutral-700 hover:bg-neutral-950 text-xs lowercase transition-all ease duration-400"
+                  onClick={() => toggleColorPicker(picker)}
+                >
+                  Select Color
+                </button>
+                {showColorPicker[picker] && (
+                  <div
+                    ref={colorPickerRef}
+                    className="absolute z-10 color-picker"
+                  >
+                    <ColorPicker color={color} onChange={setColor} />
+                  </div>
+                )}
+              </div>
+            ))}
             <div className="flex flex-col gap-y-1 relative">
-              <span className="text-xs lowercase text-neutral-400">Border radius form {borderRadiusForm}</span>
+              <span className="text-xs lowercase text-neutral-400">
+                Border radius form {borderRadiusForm}
+              </span>
               <Slider
                 min={0}
                 max={100}
@@ -180,7 +233,9 @@ const Page = () => {
               />
             </div>
             <div className="flex flex-col gap-y-1 relative">
-              <span className="text-xs lowercase text-neutral-400">Button Border Radius {borderRadiusBtn}</span>
+              <span className="text-xs lowercase text-neutral-400">
+                Button Border Radius {borderRadiusBtn}
+              </span>
               <Slider
                 min={0}
                 max={100}

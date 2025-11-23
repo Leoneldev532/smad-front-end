@@ -1,33 +1,28 @@
 //@ts-nocheck
-"use client"
+"use client";
 import React, { useEffect, useRef, useState } from "react";
-import Prism from 'prismjs';
+import Prism from "prismjs";
 
 const CodeBlock = ({ code, language }: { language: string; code: string }) => {
-
-  const [isCodeCopy, setIsCodeCopy] = useState(false)
-  const [numberLines, setNumberOfLines] = useState(0)
-  const refCode = useRef<HTMLElement>(null)
+  const [isCodeCopy, setIsCodeCopy] = useState(false);
+  const [numberLines, setNumberOfLines] = useState(0);
+  const refCode = useRef<HTMLElement>(null);
 
   useEffect(() => {
     Prism.highlightAll();
-    const numberOfLines = code.split('\n').length;
-    setNumberOfLines(numberOfLines)
+    const numberOfLines = code.split("\n").length;
+    setNumberOfLines(numberOfLines);
+  }, [language, code]);
 
-  }, [language, code])
-
-
-  const linesArray = Array.from({ length: numberLines })
-
-
+  const linesArray = Array.from({ length: numberLines });
 
   const handleCopyCode = () => {
-    setIsCodeCopy(true)
-    navigator.clipboard?.writeText(code.trim())
+    setIsCodeCopy(true);
+    navigator.clipboard?.writeText(code.trim());
     setTimeout(() => {
-      setIsCodeCopy(false)
-    }, 1000)
-  }
+      setIsCodeCopy(false);
+    }, 1000);
+  };
 
   return (
     <div className="rounded-xl editor bg-neutral-900 backdrop-blur-3xl  border ring-offset-1 border-neutral-700 w-full overflow-hidden">
@@ -38,18 +33,31 @@ const CodeBlock = ({ code, language }: { language: string; code: string }) => {
 
           <div className="flex justify-center items-center h-3 w-3 bg-white rounded-full"></div>
         </div>
-        {isCodeCopy ?
-
-          <button onClick={() => handleCopyCode()} className="p-2 flex justify-center border-neutral-700  items-center rounded-xl">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
-
-              className="size-6 stroke-slate-300">
-              <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+        {isCodeCopy ? (
+          <button
+            onClick={() => handleCopyCode()}
+            className="p-2 flex justify-center border-neutral-700  items-center rounded-xl"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-6 stroke-slate-300"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m4.5 12.75 6 6 9-13.5"
+              />
             </svg>
           </button>
-
-          :
-          <button onClick={() => handleCopyCode()} className="p-2 flex justify-center border-neutral-700  items-center rounded-xl">
+        ) : (
+          <button
+            onClick={() => handleCopyCode()}
+            className="p-2 flex justify-center border-neutral-700  items-center rounded-xl"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -65,24 +73,32 @@ const CodeBlock = ({ code, language }: { language: string; code: string }) => {
               />
             </svg>
           </button>
-        }
+        )}
       </div>
       <div>
         <div className="w-full max-h-[50vh] flex justify-start   items-start overflow-auto">
           <div className="line-number flex flex-col px-2 whitespace-pre h-full ">
             {linesArray.map((line, index) => (
-              <span className="hidden md:block text-slate-600 flex-none  text-right select-none w-[1.125rem]" key={index}>{index + 1}</span>
+              <span
+                className="hidden md:block text-slate-600 flex-none  text-right select-none w-[1.125rem]"
+                key={index}
+              >
+                {index + 1}
+              </span>
             ))}
           </div>
           <div className=" w-11/12 overflow-auto flex justify-start items-start  h-full  ">
-            <pre className="h-full w-full overflow-hidden" >
-              <code ref={refCode} className={`language-${language} overflow-hidden  h-full w-full `}>{code.trim()}</code>
+            <pre className="h-full w-full overflow-hidden">
+              <code
+                ref={refCode}
+                className={`language-${language} overflow-hidden  h-full w-full `}
+              >
+                {code.trim()}
+              </code>
             </pre>
           </div>
-
         </div>
       </div>
-
     </div>
   );
 };

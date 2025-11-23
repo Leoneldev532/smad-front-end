@@ -1,23 +1,21 @@
-import { atom, selector } from 'recoil';
-import { recoilPersist } from 'recoil-persist'
+import { atom, selector } from "recoil";
+import { recoilPersist } from "recoil-persist";
 
-
-const { persistAtom } = recoilPersist()
+const { persistAtom } = recoilPersist();
 
 export const userInfoState = atom({
-    key: 'userInfoState',
-    default: {id:null,name:null},
-  });
+  key: "userInfoState",
+  default: { id: null, name: null },
+});
 
-  export const templateInfo = atom({
-    default: "",
-    key: 'templateCode',
+export const templateInfo = atom({
+  default: "",
+  key: "templateCode",
   effects_UNSTABLE: [persistAtom],
-  });
+});
 
-
-  export const templateInfoType = atom({
-    default: "",
-    key: 'templateInfoType',
+export const templateInfoType = atom({
+  default: "",
+  key: "templateInfoType",
   effects_UNSTABLE: [persistAtom],
-  });
+});

@@ -1,10 +1,10 @@
+import { Resend } from "resend"; // Assurez-vous d'importer correctement le SDK Resend
 
-
-
-
-import { Resend } from 'resend'; // Assurez-vous d'importer correctement le SDK Resend
-
-export const ResendServerComponent = ({ resendApiKey }:{resendApiKey:string}) => {
+export const ResendServerComponent = ({
+  resendApiKey,
+}: {
+  resendApiKey: string;
+}) => {
   // Initialiser l'instance Resend
   const resend = resendApiKey && new Resend(resendApiKey);
 
@@ -15,4 +15,3 @@ export const ResendServerComponent = ({ resendApiKey }:{resendApiKey:string}) =>
     audiences,
   };
 };
-

@@ -1,50 +1,52 @@
 //@ts-nocheck
 
-import React, { useEffect, useState } from 'react';
-import rehypePrettyCode from 'rehype-pretty-code';
-import rehypeStringify from 'rehype-stringify';
-import { unified } from 'unified';
-import rehypeParse from 'rehype-parse';
-import { useTypewriter } from 'react-simple-typewriter';
-import { escape } from 'html-escaper';
+import React, { useEffect, useState } from "react";
+import rehypePrettyCode from "rehype-pretty-code";
+import rehypeStringify from "rehype-stringify";
+import { unified } from "unified";
+import rehypeParse from "rehype-parse";
+import { useTypewriter } from "react-simple-typewriter";
+import { escape } from "html-escaper";
 
 const CodeHighlightWriter = ({
-    code,
-    onTypingComplete, 
-  }: {
-    code: string;
-    onTypingComplete?: () => void; 
-  }) => {
-    
-  const [html, setHtml] = useState<string>('');
+  code,
+  onTypingComplete,
+}: {
+  code: string;
+  onTypingComplete?: () => void;
+}) => {
+  const [html, setHtml] = useState<string>("");
   const [isTypingComplete, setIsTypingComplete] = useState(false);
   const typingDelay = 0;
 
   useEffect(() => {
     const processCode = async () => {
+      const escapeCode = escape(code);
 
-        const escapeCode = escape(code);
-
-        const file = await unified()
+      const file = await unified()
         .use(rehypeParse, { fragment: true })
         .use(rehypePrettyCode, {
-          theme: 'tokyo-night',
-          onVisitLine(node:any) {
-            if (node.children.length === 1 && node.children[0].type === 'text' && node.children[0].value === '') {
+          theme: "tokyo-night",
+          onVisitLine(node: any) {
+            if (
+              node.children.length === 1 &&
+              node.children[0].type === "text" &&
+              node.children[0].value === ""
+            ) {
               node.children = [];
             }
           },
-          onVisitHighlightedLine(node:any) {
+          onVisitHighlightedLine(node: any) {
             // Ajouter une classe personnalisée aux lignes mises en surbrillance
             if (!node.properties.className) {
               node.properties.className = [];
             }
-            node.properties.className.push('highlighted');
+            node.properties.className.push("highlighted");
           },
-          onVisitHighlightedWord(node:any) {
-            node.properties.className = ['word'];
+          onVisitHighlightedWord(node: any) {
+            node.properties.className = ["word"];
           },
-        } as any )
+        } as any)
         .use(rehypeStringify)
         .process(`<pre><code class="language-jsx">${escapeCode}</code></pre>`);
 
@@ -55,15 +57,15 @@ const CodeHighlightWriter = ({
   }, [code]);
 
   const stripHtml = (html: string) => {
-    const div = document.createElement('div');
+    const div = document.createElement("div");
     div.innerHTML = html;
-    return div.textContent || div.innerText || '';
+    return div.textContent || div.innerText || "";
   };
 
   const [text, helper] = useTypewriter({
     words: [code],
     loop: 1,
-    typeSpeed:0 ,
+    typeSpeed: 0,
   });
 
   const { isType, isDelete, isDelay, isDone } = helper;
@@ -82,9 +84,9 @@ const CodeHighlightWriter = ({
           <span>{text}</span>
         </div>
       ) : (
-        <div 
+        <div
           className="font-mono text-sm h-full "
-          dangerouslySetInnerHTML={{ __html: html }} 
+          dangerouslySetInnerHTML={{ __html: html }}
         />
       )}
     </div>

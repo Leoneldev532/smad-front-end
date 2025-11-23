@@ -1,68 +1,44 @@
 "use client";
-
-import Loader from "@/components/Loader";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ProjectTabItem from "@/components/ProjectTabItem";
-import TableData from "@/components/table";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
-
 import {
   addEmailAddress,
   createProject,
-  setResendApiKey,
   useAddMapMutation,
   useGetAllEmailsOneProject,
   useGetAllProjectsOfOneUser,
   useGetAllUserInfo,
-  useGetAudience,
   useGetOneMapOfOneProjectUser,
-  useGetResendUser,
-  useGetResendUserAudience,
 } from "@/hook/query";
 import { Email, Project } from "@/lib/type";
-import { isDatePassed, useGetUserInfo } from "@/lib/utils";
+import { isDatePassed } from "@/lib/utils";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
-import ButtonValidation from "@/components/ButtonValidation";
-import NoData from "@/components/NoData";
-import Message from "@/components/Message";
-import Link from "next/link";
-import dayjs, { Dayjs } from "dayjs";
-import ProjectItemMobile from "@/components/ui/ProjectItemMobile";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { templateInfo, templateInfoType, userInfoState } from "@/lib/atom";
-import { Resend } from "resend";
-import { ResendServerComponent } from "@/components/resendData";
-import SkeletonEmailLine from "@/components/ui/skeletonEmailLine";
-import SkeletonProject from "@/components/ui/skeletonProject";
-import { GetAudience, SendContactToAudience } from "@/components/GetAudience";
-import Loader2 from "@/components/Loader2";
 import { useRouter } from "next/navigation";
-import TableMap from "@/components/ui/TabMap";
-import { Skeleton } from "@/components/ui/skeleton";
+import dayjs from "dayjs";
+
+import ProjectCreationDialog from "@/components/dashboard/projectCreationDialog";
+import EmailAdditionDialog from "@/components/dashboard/emailAdditionDialog";
+import MapCreationDialog from "@/components/dashboard/mapCreationDialog";
+import ExportModal from "@/components/dashboard/exportModal";
+import CodeDisplayModal from "@/components/dashboard/codeDisplayModal";
+import ProjectSidebar from "@/components/dashboard/projectSidebar";
+import EmptyState from "@/components/dashboard/emptyState";
+import Loader from "@/components/loader";
+import NoData from "@/components/noData";
+import ProjectItemMobile from "@/components/ui/projectItemMobile";
+import SkeletonProject from "@/components/ui/skeletonProject";
+import ProjectTabItem from "@/components/projectTabItem";
+import SkeletonEmailLine from "@/components/ui/skeletonEmailLine";
+import TableData from "@/components/table";
+import TableMap from "@/components/ui/tabMap";
+import {
+  generateCodeScript,
+  generateCodeScriptMap,
+} from "@/lib/codeGenerators";
 
 export default function Page() {
   const user = useRecoilValue(userInfoState);
@@ -93,13 +69,6 @@ export default function Page() {
     refetch: allEmailsOneProjectRefetch,
   } = useGetAllEmailsOneProject(user?.id, idProjectActive);
 
-  const {
-    data: resendApiKeydata,
-    isLoading: resendApiKeyLoading,
-    isError: resendApiKeyError,
-    refetch: resendApiKeyRefetch,
-  } = useGetResendUser(user?.id);
-
   useEffect(() => {
     if (allProjectsOneUser) {
       setIdProjectActive(allProjectsOneUser[0]?.id);
@@ -123,7 +92,7 @@ export default function Page() {
     index: number,
     idProject: string,
     nameProject: string,
-    withName: boolean
+    withName: boolean,
   ) => {
     setActiveTabIndex(index);
     setCurrentIdProject(idProject);
@@ -137,50 +106,6 @@ export default function Page() {
   const [filterTabProjects, setFilterTabProjects] = useState<
     Project[] | [] | undefined
   >([]);
-
-  const handleSearchEmails = (e: ChangeEvent<HTMLInputElement>) => {
-    const searchWord = e.target.value;
-
-    const result = allEmailsOneProject?.filter((email) =>
-      email.email.toLowerCase().includes(searchWord.toLowerCase())
-    );
-
-    if (searchWord.length === 0) {
-      setFilterTabEmails(allEmailsOneProject);
-    }
-
-    if (!result) return;
-
-    if (result?.length === 0) {
-      setFilterTabEmails([]);
-    }
-
-    if (result?.length > 0) {
-      setFilterTabEmails(result);
-    }
-  };
-
-  const handleSearchProject = (e: ChangeEvent<HTMLInputElement>) => {
-    const searchWord = e.target.value;
-
-    const result = allProjectsOneUser?.filter((project) =>
-      project.name.toLowerCase().includes(searchWord.toLowerCase())
-    );
-
-    if (searchWord.length === 0) {
-      setFilterTabProjects(allProjectsOneUser);
-    }
-
-    if (!result) return;
-
-    if (result?.length === 0) {
-      setFilterTabProjects([]);
-    }
-
-    if (result?.length > 0) {
-      setFilterTabProjects(result);
-    }
-  };
 
   useEffect(() => {
     setFilterTabEmails(allEmailsOneProject);
@@ -199,14 +124,12 @@ export default function Page() {
     useState<boolean>(false);
 
   const handleShowDialogAddEmail = () => {
-    if (
-      getAllUserInfo?.privateKey?.expiresAt &&
-      !isDatePassed(dayjs(getAllUserInfo?.privateKey?.expiresAt))
-    ) {
+    // if (
+    //   getAllUserInfo?.privateKey?.expiresAt &&
+    //   !isDatePassed(dayjs(getAllUserInfo?.privateKey?.expiresAt))
+    // ) {
       setIsOpenAddEmailDialog(true);
-    } else {
-      // toast.error("Please subscription a new plan")
-    }
+    // }
   };
 
   const handleCloseDialogAddEmail = () => {
@@ -214,76 +137,10 @@ export default function Page() {
   };
 
   const handleShowDialogCreateProject = () => {
-    // if(getAllUserInfo?.privateKey?.expiresAt && !isDatePassed(dayjs(getAllUserInfo?.privateKey?.expiresAt))){
     setIsOpenCreateProject(true);
-    // }else{
-    //   toast.error("Please subscription a new plan")
-    // }
   };
   const handleCloseDialogCreateProject = () => {
     setIsOpenCreateProject(false);
-  };
-
-  const GetCorrectFormOfTabCsvData = (data: Email[]) => {
-    const newTab = data.map((item: Email, index: number) => {
-      if (typeof item === "object" && item !== null && "email" in item) {
-        return {
-          email: item.email,
-        };
-      } else {
-        console.warn(`Element invalide trouvé à l'index ${index}:`, item);
-        return {
-          email: "N/A",
-        };
-      }
-    });
-    return newTab as Email[];
-  };
-
-  // const convertToCSV = (objArray:Email[]) => {
-  //   const array = typeof objArray !== 'object' ? JSON.parse(objArray) : objArray;
-  //   let str = '';
-
-  //   for (let i = 0; i < array.length; i++) {
-  //     let line = '';
-  //     for (let index in array[i]) {
-  //       if (line !== '') line += ',';
-
-  //       line += array[i][index];
-  //     }
-  //     str += line + '\r\n';
-  //   }
-  //   return str;
-  // };
-
-  const convertToCSV = (objArray: Email[]) => {
-    const array =
-      typeof objArray !== "object" ? JSON.parse(objArray) : objArray;
-    let str = "emails\r\n"; // Add the header for the email column
-
-    for (let i = 0; i < array.length; i++) {
-      const email = array[i].email;
-      str += email + "\r\n"; // Append each email to the CSV string
-    }
-
-    return str;
-  };
-
-  const downloadCSV = (data: Email[], fileName: string) => {
-    const csvData = new Blob([convertToCSV(GetCorrectFormOfTabCsvData(data))], {
-      type: "text/csv",
-    });
-    const csvURL = URL.createObjectURL(csvData);
-    const link = document.createElement("a");
-    link.href = csvURL;
-    link.download = `${fileName}.csv`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
-  const handleSetProjectName = (e: ChangeEvent<HTMLInputElement>) => {
-    setProjectName(e.target.value);
   };
 
   const [isOpenExportModal, setIsOpenExportModal] = useState(false);
@@ -291,52 +148,6 @@ export default function Page() {
   const handleOpenExportModal = () => {
     setIsOpenExportModal(true);
   };
-
-  const [resendApiKeyState, setResendApiKeyState] = useState<string | null>(
-    resendApiKeydata?.resendApiKey || null
-  );
-
-  useEffect(() => {
-    setResendApiKeyState(resendApiKeydata?.resendApiKey || " ");
-  }, [resendApiKeydata]);
-
-  const [isOpenFormResendApiKey, setisOpenFormResendApiKey] =
-    useState<boolean>(false);
-  const {
-    data: allAudiences,
-    isLoading: loadingAllAudiences,
-    refetch: refetchAudiences,
-  } = useGetAudience(resendApiKeyState || " ");
-
-  const handleShowInputResendApiKey = (e: any) => {
-    e.preventDefault();
-    if (isOpenFormResendApiKey) {
-      if (resendApiKeydata?.resendApiKey === resendApiKeyState) {
-        toast.error("Key identical to the one already registered");
-      }
-      if (resendApiKeyState?.length === 0) {
-        toast.error("Veuillez remplir ce champ");
-      } else {
-        mutationAddResendApiKey.mutate();
-      }
-    } else {
-      setisOpenFormResendApiKey(true);
-    }
-  };
-
-  const mutationAddResendApiKey = useMutation({
-    mutationFn: () => setResendApiKey(user?.id, resendApiKeyState),
-    onSuccess: () => {
-      toast.success("operation d'ajout reuissie");
-      setisOpenFormResendApiKey(false);
-      // handleCloseModalExport()
-      refetchAudiences();
-    },
-    onError: (error) => {
-      setisOpenFormResendApiKey(true);
-      toast.error("Une erreur est survenue" + error);
-    },
-  });
 
   const [isOpenModalConfig, setIsOpenModalConfig] = useState(false);
   const [isCodeCopyCodeScript, setIsCodeCopyCodeScript] = useState(false);
@@ -364,7 +175,7 @@ export default function Page() {
         idProjectActive,
         emailAddress,
         projectIswithName,
-        name
+        name,
       ),
     onSuccess: () => {
       toast.success("operation d'ajout reuissie");
@@ -393,79 +204,15 @@ export default function Page() {
 
   const handleCloseModalExport = () => {
     setIsOpenExportModal(false);
-
-    setIdAudienceSelected(null);
-  };
-
-  const handleSetEmailAddress = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmailAddress(e.target.value);
-  };
-
-  const handleSetName = (e: ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
-
-  const [audiencesOfUser, setAudiencesOfUser] = useState([]);
-  const [idAudienceSelected, setIdAudienceSelected] = useState<string | null>(
-    null
-  );
-
-  const handleSelectedAudience = (id: string) => {
-    setIdAudienceSelected(id);
-  };
-
-  const mutationSendContactResend = useMutation({
-    mutationKey: ["sendContactToAudience"], // Clé unique pour cette mutation
-    mutationFn: async ({
-      idAudience,
-      resendApiKeyState,
-      TabEmail,
-    }: {
-      idAudience: string;
-      resendApiKeyState: string;
-      TabEmail: string[];
-    }) => {
-      return SendContactToAudience(
-        idAudience,
-        resendApiKeyState || " ",
-        TabEmail || []
-      );
-    },
-    onSuccess: () => {
-      toast.success("Opération réussie !");
-    },
-    onError: (error) => {
-      console.error("Erreur :", error);
-      toast.error("Une erreur est survenue.");
-    },
-  });
-
-  const handleResendExport = async (idAudience: string) => {
-    const TabEmail =
-      allEmailsOneProject && allEmailsOneProject?.map((item) => item.email);
-    mutationSendContactResend.mutate({
-      idAudience,
-      resendApiKeyState: resendApiKeyState || " ",
-      TabEmail: TabEmail || [],
-    });
   };
 
   const [isCodeCopy, setIsCodeCopy] = useState(false);
-  const [isCodeCopyPrivateApiKey, setIsCodeCopyPrivateApiKey] = useState(false);
 
   const handleCopyCode = () => {
     setIsCodeCopy(true);
     navigator.clipboard?.writeText(idProjectActive || " ");
     setTimeout(() => {
       setIsCodeCopy(false);
-    }, 1000);
-  };
-
-  const handleCopyCodePrivateApiKey = () => {
-    setIsCodeCopyPrivateApiKey(true);
-    navigator.clipboard?.writeText(privateKey || " ");
-    setTimeout(() => {
-      setIsCodeCopyPrivateApiKey(false);
     }, 1000);
   };
 
@@ -479,17 +226,19 @@ export default function Page() {
   const linkMap = getMap?.[0]?.link || " ";
   const mapId = getMap?.[0]?.id || " ";
 
-  const codeScript = `
-<link rel="stylesheet"  href="https://templates.smadmail.com/css/iframe.css"/>
-      <iframe src="https://templates.smadmail.com/ui/form-${
-        projectIswithName ? "m1" : "m2"
-      }.html?private_key=${privateKey}&project_id=${currentIdProject}"
-       scrolling="no"  ></iframe>`;
+  const codeScript = generateCodeScript(
+    projectIswithName,
+    privateKey || "",
+    currentIdProject,
+  );
 
-  const codeScriptMap = `
-       <link rel="stylesheet" href="https://templates.smadmail.com/css/iframeMap.css"/>
-       <iframe src="https://templates.smadmail.com/ui/map.html?private_key=${privateKey}&project_id=${currentIdProject}&map_id=${mapId}"
-       scrolling="no"></iframe>`;
+  console.log(codeScript,"----df",getAllUserInfo)
+
+  const codeScriptMap = generateCodeScriptMap(
+    privateKey || "",
+    currentIdProject,
+    mapId,
+  );
 
   const handleCopyCodeScript = () => {
     setIsCodeCopyCodeScript(true);
@@ -511,16 +260,16 @@ export default function Page() {
   const handleCustomize = () => {
     setTypeForm(projectIswithName ? "1" : "2");
     setDataUser(
-      `?private_key=${privateKey}&project_id=${currentIdProject.trim()}`
+      `?private_key=${privateKey}&project_id=${currentIdProject.trim()}`,
     );
     router.push("/playground");
   };
 
   const [isOpenAddMapDialog, setIsOpenAddMapDialog] = useState<boolean>(false);
-  const [isOpenMapShowCodeDialog, setIsOpenMapShowCodeDialog] =
-    useState<boolean>(false);
+
   const [isOpenMapCreatedModal, setIsOpenMapCreatedModal] =
-    useState<boolean>(false); // New state for the map creation modal
+    useState<boolean>(false);
+
   const [mapLink, setMapLink] = useState<string>("");
 
   const { mutate: addMapMutation, isPending: isPendingAddMapMutation } =
@@ -531,21 +280,13 @@ export default function Page() {
       onSuccessCallBack: () => {
         setIsOpenAddMapDialog(false);
         refetchFunctionGetMap();
-        setIsOpenMapCreatedModal(true); // Show the modal after map creation
+        setIsOpenMapCreatedModal(true);
       },
     });
 
   const handleAddMap = (e: FormEvent) => {
     e.preventDefault();
     addMapMutation();
-  };
-
-  const handleCloseAddMapDialog = () => {
-    setIsOpenMapShowCodeDialog(false);
-  };
-
-  const handleOpenAddMapDialog = () => {
-    setIsOpenMapShowCodeDialog(true);
   };
 
   const handleCopyCodeScriptMap = () => {
@@ -562,526 +303,83 @@ export default function Page() {
 
   return (
     <>
-      <AlertDialog open={isOpenAddMapDialog}>
-        <AlertDialogContent className="bg-neutral-900">
-          <AlertDialogHeader>
-            <AlertDialogTitle>Add a New Map</AlertDialogTitle>
-          </AlertDialogHeader>
-          <form onSubmit={handleAddMap}>
-            <AlertDialogDescription>
-              <Input
-                type="text"
-                required
-                value={mapLink}
-                onChange={(e) => setMapLink(e.target.value)}
-                placeholder="Enter map link (e.g., https://example.com)"
-                className="rounded-md border border-neutral-700"
-              />
-            </AlertDialogDescription>
-            <AlertDialogFooter className="mt-3">
-              <Button
-                type="button"
-                variant="ghost"
-                onClick={() => setIsOpenAddMapDialog(false)}
-              >
-                Cancel
-              </Button>
-              <ButtonValidation
-                title="Add Map"
-                isLoading={isPendingAddMapMutation}
-                typeButton="submit"
-                type="positive"
-              />
-            </AlertDialogFooter>
-          </form>
-        </AlertDialogContent>
-      </AlertDialog>
+      <MapCreationDialog
+        isOpen={isOpenAddMapDialog}
+        onClose={() => setIsOpenAddMapDialog(false)}
+        mapLink={mapLink}
+        setMapLink={setMapLink}
+        onSubmit={handleAddMap}
+        isLoading={isPendingAddMapMutation}
+      />
 
-      <AlertDialog open={isOpenModalConfig}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>
-              Copy this code and paste in your code{" "}
-            </AlertDialogTitle>
-            <AlertDialogDescription>
-              <div className="flex flex-col justify-start items-start py-3  w-full">
-                <textarea
-                  readOnly
-                  className="w-full outline  border border-neutral-700/50   rounded-md bg-neutral-900 p-4 "
-                  rows={10}
-                  value={codeScript}
-                />
-                <div className="flex justify-end items-center w-full gap-x-3 py-3">
-                  {
-                    <button
-                      onClick={() => handleCopyCodeScript()}
-                      className="border  cursor-pointer
-              flex-shrink flex gap-x-2 w-full  hover:bg-neutral-900 transition-colors
-      duration-300 ease justify-center text-lg items-center border-neutral-500/40 text-neutral-500 px-2 py-2.5 rounded-lg"
-                    >
-                      <span className="text-xs"> Copy Code </span>
-                      {isCodeCopyCodeScript ? (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="size-4 stroke-slate-300"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="m4.5 12.75 6 6 9-13.5"
-                          />
-                        </svg>
-                      ) : (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1}
-                          stroke="currentColor"
-                          className="size-4 stroke-neutral-400"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z"
-                          />
-                        </svg>
-                      )}
-                    </button>
-                  }
+      <CodeDisplayModal
+        isOpen={isOpenModalConfig}
+        onClose={handleCloseScriptCode}
+        title="Copy this code and paste in your code"
+        code={codeScript}
+        onCopy={handleCopyCodeScript}
+        isCodeCopy={isCodeCopyCodeScript}
+        onCustomize={handleCustomize}
+        showCustomizeButton={true}
+      />
 
-                  <Button
-                    className="bg-yellow-500 flex gap-x-3 "
-                    onClick={() => handleCustomize()}
-                  >
-                    {" "}
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="size-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
-                      />
-                    </svg>
-                    <span>Customize</span>
-                  </Button>
+      <CodeDisplayModal
+        isOpen={isOpenMapCreatedModal}
+        onClose={handleCloseMapCreatedModal}
+        title="Map Created Successfully"
+        code={codeScriptMap}
+        onCopy={handleCopyCodeScriptMap}
+        isCodeCopy={isCodeCopyCodeScript}
+        showCustomizeButton={false}
+      />
 
-                  <Button onClick={() => handleCloseScriptCode()}>
-                    Cancel
-                  </Button>
-                </div>
-              </div>
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            {/* <Button onClick={()=>handleCloseDialogDelete()}>Cancel</Button> */}
-            {/* <ButtonValidation title={"confirm"}  isLoading={mutationDeleteProject.isPending} typeButton="button" type='negative' onClick={()=>handleDelete(project?.id)} /> */}
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      <ProjectCreationDialog
+        isOpen={isOpenCreateProject}
+        onClose={handleCloseDialogCreateProject}
+        projectName={projectName}
+        setProjectName={setProjectName}
+        isCheckedFieldNameUser={isCheckedFieldNameUser}
+        setIsCheckedFieldNameUser={setIsCheckedFieldNameUser}
+        onSubmit={handleCreateProject}
+        isLoading={mutationAddProject.isPending}
+      />
 
-      <AlertDialog open={isOpenMapCreatedModal}>
-        <AlertDialogContent className="bg-neutral-900">
-          <AlertDialogHeader>
-            <AlertDialogTitle>Map Created Successfully</AlertDialogTitle>
-            <AlertDialogDescription>
-              <div className="flex flex-col justify-start items-start py-3 w-full">
-                <p className="text-sm text-neutral-400">
-                  Your map has been created. Copy the code below to embed it:
-                </p>
-                <textarea
-                  readOnly
-                  className="w-full outline border border-neutral-700/50 rounded-md bg-neutral-900 p-4 mt-2"
-                  rows={10}
-                  value={codeScriptMap}
-                />
-                <div className="flex justify-end items-center w-full gap-x-3 py-3">
-                  <button
-                    onClick={() => handleCopyCodeScriptMap()}
-                    className="border cursor-pointer flex-shrink flex gap-x-2 w-full hover:bg-neutral-900 transition-colors duration-300 ease justify-center text-lg items-center border-neutral-500/40 text-neutral-500 px-2 py-2.5 rounded-lg"
-                  >
-                    <span className="text-xs">Copy Code</span>
-                    {isCodeCopyCodeScript ? (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="size-4 stroke-slate-300"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="m4.5 12.75 6 6 9-13.5"
-                        />
-                      </svg>
-                    ) : (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1}
-                        stroke="currentColor"
-                        className="size-4 stroke-neutral-400"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z"
-                        />
-                      </svg>
-                    )}
-                  </button>
-                  <Button onClick={handleCloseMapCreatedModal}>Close</Button>
-                </div>
-              </div>
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-        </AlertDialogContent>
-      </AlertDialog>
+      <ExportModal
+        isOpen={isOpenExportModal}
+        onClose={handleCloseModalExport}
+        projectName={nameProjectActive}
+        emails={filterTabEmails}
+      />
 
-      <AlertDialog open={isOpenCreateProject}>
-        <AlertDialogContent className="bg-neutral-900">
-          <AlertDialogHeader>
-            <AlertDialogTitle className="">Create a project</AlertDialogTitle>
-          </AlertDialogHeader>
-          <form onSubmit={handleCreateProject}>
-            <AlertDialogDescription>
-              <Input
-                type="text"
-                value={projectName}
-                onChange={(e) => handleSetProjectName(e)}
-                placeholder="name"
-                className=" rounded-md border border-neutral-700"
-              />
-              <div className="flex items-center mt-4">
-                <input
-                  checked={isCheckedFieldNameUser}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    setIsCheckedFieldNameUser(e.target.checked)
-                  }
-                  type="checkbox"
-                  id="addNameUser"
-                  className="mr-2 size-5 rounded-lg"
-                />
-                <label htmlFor="addNameUser" className="text-sm">
-                  Add name Field
-                </label>
-              </div>
-            </AlertDialogDescription>
-
-            <AlertDialogFooter className="pt-3">
-              <Button
-                type="reset"
-                variant="ghost"
-                onClick={() => handleCloseDialogCreateProject()}
-              >
-                Cancel
-              </Button>
-              <ButtonValidation
-                title={"create"}
-                isLoading={mutationAddProject.isPending}
-                typeButton="submit"
-                type="positive"
-              />
-            </AlertDialogFooter>
-          </form>
-        </AlertDialogContent>
-      </AlertDialog>
-
-      <AlertDialog open={isOpenExportModal}>
-        <AlertDialogContent className="bg-neutral-900">
-          <AlertDialogHeader>
-            <AlertDialogTitle className="">
-              Export mail address of project : {nameProjectActive}{" "}
-            </AlertDialogTitle>
-          </AlertDialogHeader>
-
-          <ul className="flex flex-col gap-y-2">
-            <li>
-              <button
-                className="px-4 py-2 w-full group text-xs md:text-sm gap-x-4  border border-neutral-700 line1
-         hover:bg-neutral-600 relative  flex justify-center items-center rounded-lg text-center"
-                onClick={() =>
-                  downloadCSV(
-                    filterTabEmails || [],
-                    `${nameProjectActive}-${dayjs()}`
-                  )
-                }
-              >
-                {" "}
-                Export To CSV{" "}
-              </button>
-            </li>
-
-            {/* {<form className="w-full flex flex-col p-4 rounded-lg gap-y-2  border border-neutral-600/40 mt-8">
-          <h5 className="font-bold">Share data to Resend </h5>
-          <span className="text-sm py-1 "> Your Api Key :  </span>
-          <div className="flex gap-x-2">
-          <input  autoComplete="off" placeholder="set yout resend Api Key"
-           type="password" value={resendApiKeyState || ""} onChange={(e)=>setResendApiKeyState(e.target.value)}
-                     className="px-3 appearance-none py-2 w-10/12 bg-neutral-500/20 border border-neutral-700 text-white rounded-md"
-                      />
-
-                      <button  type="submit" className="px-4 w-2/12 py-2  overflow-hidden group  text-xs md:text-sm gap-x-4  border border-neutral-700 line1
-         hover:bg-neutral-600 relative  flex justify-center items-center rounded-lg text-center"
-         onClick={(e)=> handleShowInputResendApiKey(e)}>
-         {mutationAddResendApiKey.isPending ? <><Loader2/></>  : <span>Save</span>}
-            </button>
-
-                      </div>
-                      {resendApiKeydata?.resendApiKey && resendApiKeydata?.resendApiKey?.length > 0 ?
-                     <>
-                      <div className="flex justify-between   w-full">
-                          <h5>Vos audiences  </h5>
-                         <span className="px-3 py-1 rounded-full bg-neutral-700"> {allAudiences?.data?.data.length} </span>
-                      </div>
-
-                      {loadingAllAudiences && <SkeletonProject/> }
-
-                      {allAudiences?.data?.data && allAudiences?.data?.data?.length > 0 ? <div className="flex flex-col gap-2  ">
-
-                        <select className="bg-neutral-800 h-10 px-1 outline-none rounded-sm pr-2"
-                         onChange={(e)=>handleSelectedAudience(e.target.value)}
-                        >
-                          <option className="flex bg-neutral-900  gap-2" selected disabled> select One audience </option>
-                        {allAudiences?.data?.data.map((item:any,index:number)=>(
-                        <option key={index +  "io"} value={item?.id} className="flex bg-neutral-900  gap-2">
-                          {item?.name}
-                        </option>
-                           ))}
-
-                        </select>
-
-
-
-                      </div> :
-                       <p className="w-full text-center font-bold">
-                           No audiences find !!
-                        </p>}
-                        </> :
-                        <p>Please set your resend APi Key </p>
-                        }
-            <li>
-          <button  style={{opacity:idAudienceSelected === null ? "0.3": "1",pointerEvents:idAudienceSelected === null ? "none": "auto"}}
-           type="button" className="px-4 py-2 w-full group  text-xs md:text-sm gap-x-4  border border-neutral-700 line1
-         hover:bg-neutral-600 relative  flex justify-center items-center rounded-lg text-center"
-         onClick={()=> handleResendExport(idAudienceSelected || " ")}
-         >
-         {mutationSendContactResend.isPending ? <><span>En cours</span><Loader2/></>  : <span>Set as Contact Resend</span>}
-            </button></li>
-
-
-          </form>
-               } */}
-          </ul>
-
-          <div className="w-full flex justify-end items-center">
-            <Button
-              className="w-full "
-              onClick={() => handleCloseModalExport()}
-            >
-              Cancel
-            </Button>
-          </div>
-        </AlertDialogContent>
-      </AlertDialog>
-
-      <AlertDialog open={isOpenAddEmailDialog}>
-        <AlertDialogContent className="bg-neutral-900">
-          <AlertDialogHeader>
-            <AlertDialogTitle className="">
-              Add email on project : {nameProjectActive}{" "}
-            </AlertDialogTitle>
-          </AlertDialogHeader>
-          <form onSubmit={(e) => handleAddEmailAddress(e)}>
-            <AlertDialogDescription>
-              {projectIswithName && (
-                <Input
-                  type="text"
-                  required
-                  value={name}
-                  onChange={(e) => handleSetName(e)}
-                  placeholder="Name"
-                  className="rounded-md my-3 border border-neutral-700"
-                />
-              )}
-
-              <Input
-                type="email"
-                required
-                pattern={`[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$`}
-                value={emailAddress}
-                onChange={(e) => handleSetEmailAddress(e)}
-                placeholder="monEmail@gmail.com"
-                className="rounded-md border border-neutral-700"
-              />
-            </AlertDialogDescription>
-
-            <AlertDialogFooter className="my-3">
-              <Button
-                type="reset"
-                variant="ghost"
-                onClick={() => handleCloseDialogAddEmail()}
-              >
-                Cancel
-              </Button>
-              <ButtonValidation
-                title={"Create"}
-                isLoading={mutationAddEmailAdress.isPending}
-                typeButton="submit"
-                type="positive"
-              />
-            </AlertDialogFooter>
-          </form>
-        </AlertDialogContent>
-      </AlertDialog>
+      <EmailAdditionDialog
+        isOpen={isOpenAddEmailDialog}
+        onClose={handleCloseDialogAddEmail}
+        projectName={nameProjectActive}
+        projectIswithName={projectIswithName}
+        emailAddress={emailAddress}
+        setEmailAddress={setEmailAddress}
+        name={name}
+        setName={setName}
+        onSubmit={handleAddEmailAddress}
+        isLoading={mutationAddEmailAdress.isPending}
+      />
 
       {allProjectsOneUser?.length === 0 ? (
-        <div className="w-full    px-0 py-3 gap-2 text-balance flex overflow-auto flex-col min-h-72 justify-center items-center">
-          <div className="flex flex-col gap-y-4 justify-center items-center max-w-sm  text-center ">
-            <h2 className="font-extrabold text-3xl">
-              Begin with your first project now{" "}
-            </h2>
-            <span className="text-neutral-400">
-              {" "}
-              Get the ID project and your private key available on page account
-              & billing{" "}
-            </span>
-            <Button
-              onClick={() => handleShowDialogCreateProject()}
-              className="px-4 py-2 rounded-lg bg-[#dbdbdb] border border-white hover:bg-black hover:text-white"
-            >
-              <b className="text-2xl">+</b> <span>Create a project </span>{" "}
-            </Button>
-
-            {/* <span className=" italic text-neutral-400 max-w-sm text-balance"> you can make a new subscription here :   <Link href="/pricing" className="underline"> <span> pricing </span></Link> */}
-            {/* </span>  */}
-          </div>
-        </div>
+        <EmptyState onCreateProject={handleShowDialogCreateProject} />
       ) : (
-        <div className="flex flex-1   rounded-md p-2 h-full w-full justify-start items-start md:px-0 px-6  gap-4  ">
-          <div className="w-1/3 lg:flex hidden h-auto  overflow-y-auto     rounded-md px-2 py-2  flex-col justify-start items-start">
-            <div className="flex flex-col w-full   justify-start items-start gap-y-2">
-              {/* {!allProjectsOneUserLoading && allProjectsOneUser && allProjectsOneUser?.length > 0  && <button  onClick={() => handleCopyCodePrivateApiKey()}
-  className='border my-1 cursor-pointer
-              flex-shrink flex gap-x-2 w-full hover:bg-neutral-900 transition-colors
-      duration-300 ease justify-center text-lg items-center border-neutral-500/40 text-neutral-500 px-2 py-2 rounded-lg'>
-        <span className="text-xs"> Copy private API  key  </span>
-  { isCodeCopyPrivateApiKey ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
-
-                      className="size-4 stroke-slate-300">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                    </svg> :  <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1}
-                stroke="currentColor"
-                className="size-4 stroke-neutral-400"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z"
-                />
-              </svg>}
-            </button> } */}
-
-              <div className="flex justify-between items-center w-full">
-                <h3 className=" text-xl  w-full font-bold ">
-                  {" "}
-                  Yours projects{" "}
-                </h3>
-                <div className="flex gap-x-2  justify-start  items-center">
-                  <button
-                    onClick={() => handleShowDialogCreateProject()}
-                    className="text-4xl bg-neutral-500/20
-                 border border-neutral-700   px-2 py-2 rounded-md flex justify-center items-center"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="size-4"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M12 4.5v15m7.5-7.5h-15"
-                      />
-                    </svg>
-                  </button>
-                  <button
-                    onClick={() => allProjectsOneUserRefetch()}
-                    className="text-4xl  bg-neutral-500/20 border
-                 border-neutral-700  px-2 py-2 rounded-md flex justify-center items-center"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="size-4"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <ul className="w-full flex flex-col py-3 gap-y-3 justify-center items-center ">
-              {allProjectsOneUserLoading && (
-                <div className="py-0 w-full h-full flex justify-center items-center">
-                  <SkeletonProject />
-                </div>
-              )}
-
-              {!allProjectsOneUserLoading &&
-                filterTabProjects?.length === 0 && (
-                  <div className="py-1 md:py-1  w-full">
-                    <NoData />
-                  </div>
-                )}
-              {!allProjectsOneUserLoading &&
-                filterTabProjects?.map((item: Project, index: number) => (
-                  <ProjectTabItem
-                    project={item}
-                    privateKey={privateKey || " "}
-                    withName={item.withName}
-                    withMap={withMap}
-                    mapId={mapId}
-                    linkMap={linkMap}
-                    refetch={() => allProjectsOneUserRefetch()}
-                    isActive={index === activeTabIndex}
-                    className="bg-red-500"
-                    onClick={() =>
-                      handleTabClick(index, item.id, item.name, item.withName)
-                    }
-                    key={"p" + index}
-                  />
-                ))}
-            </ul>
-          </div>
+        <div className="flex flex-1 rounded-md p-2 h-full w-full justify-start items-start md:px-0 px-6 gap-4">
+          <ProjectSidebar
+            allProjectsOneUser={allProjectsOneUser}
+            allProjectsOneUserLoading={allProjectsOneUserLoading}
+            privateKey={privateKey}
+            activeTabIndex={activeTabIndex}
+            withMap={withMap}
+            mapId={mapId}
+            linkMap={linkMap}
+            onCreateProject={handleShowDialogCreateProject}
+            onRefreshProjects={allProjectsOneUserRefetch}
+            onTabClick={handleTabClick}
+          />
 
           <Tabs defaultValue="account" className=" w-full bg-transparent ">
             <TabsList className="bg-transparent border-b border-neutral-700 px-0 py-4 rounded-none  flex justify-start items-center">
@@ -1255,7 +553,7 @@ export default function Page() {
                               index,
                               item.id,
                               item.name,
-                              item.withName
+                              item.withName,
                             )
                           }
                           key={"p" + index}
@@ -1293,7 +591,7 @@ export default function Page() {
                               index,
                               item.id,
                               item.name,
-                              item.withName
+                              item.withName,
                             )
                           }
                           key={"p" + index}
@@ -1302,15 +600,12 @@ export default function Page() {
                   </ul>
                 </div>
 
-                {/* {getAllUserInfo?.privateKey?.expiresAt && isDatePassed(dayjs(getAllUserInfo.privateKey.expiresAt)) && (
-                <Message text="Your plan has expired. Please renew your subscription." variant="error" />
-            )} */}
-
                 {allEmailsOneProjectLoading && (
                   <div className="py-3 flex justify-start w-full h-full items-start">
                     <SkeletonEmailLine />
                   </div>
                 )}
+
                 {!allEmailsOneProjectLoading &&
                   filterTabEmails?.length === 0 && (
                     <div className="w-full h-full flex justify-start items-start">

@@ -43,7 +43,7 @@ export async function POST(req: Request) {
         status: "error",
         message: error.message,
       }),
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -1,5 +1,5 @@
 export const logicImportString = `import axios, { AxiosError } from "axios";
-import { useEffect, useState } from "react";`
+import { useEffect, useState } from "react";`;
 
 export const logicEmailSubmition: string = `
 type ValidationRules = {
@@ -112,13 +112,12 @@ const useEmailForm = (project_id: string, private_key: string, customValidationR
     };
 };
 
-`
-
+`;
 
 export const TabTemplateCode = [
-    {
-        id: 1,
-        code: `const project_id = process.env.SMAD_PROJECT_ID|| " ";
+  {
+    id: 1,
+    code: `const project_id = process.env.SMAD_PROJECT_ID|| " ";
     const private_key = process.env.SMAD_API_PRIVATE_KEY  || " ";
 
     const { data, setData, errors, handleSubmit, loading, success } = useEmailForm(project_id, private_key);
@@ -175,10 +174,11 @@ export const TabTemplateCode = [
             </form>
             {errors.email && <p className="text-red-500 mt-2 w-full text-center">{errors.email}</p>}
         </section>)
-        `
-    }, {    
-        id: 2,
-        code: `
+        `,
+  },
+  {
+    id: 2,
+    code: `
          const project_id = process.env.SMAD_PROJECT_ID || " ";
     const private_key = process.env.SMAD_API_PRIVATE_KEY  || " ";
 
@@ -239,11 +239,11 @@ export const TabTemplateCode = [
             </form>
             {errors.email && <p className=" mt-2 w-full text-red-500 text-center">{errors.email}</p>}
         </section>)
-        `
-    },
-    {
-        id:3,
-        code: `
+        `,
+  },
+  {
+    id: 3,
+    code: `
            const project_id = process.env.SMAD_PROJECT_ID  || " ";
     const private_key = process.env.SMAD_API_PRIVATE_KEY  || " ";
 
@@ -306,6 +306,6 @@ export const TabTemplateCode = [
             {errors.email && <p className=" mt-2 w-full text-red-500 text-center">{errors.email}</p>}
         </section>)
         
-        `
-    }
-]
+        `,
+  },
+];

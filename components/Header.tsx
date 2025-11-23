@@ -1,166 +1,220 @@
-
-
-"use client"
-import Image from 'next/image'
-import React, { useState } from 'react'
-import logo from "@/public/logo.png"
-import { Separator } from './ui/separator'
-import LinkSideBar, { LinkSideBarPropsType } from './LinkSideBar'
-import { cn, useGetUserInfo } from '@/lib/utils'
-import { signOut } from 'next-auth/react'
-import Link from 'next/link'
-import Loader from './Loader'
+"use client";
+import Image from "next/image";
+import React, { useState } from "react";
+import logo from "@/public/logo.png";
+import { Separator } from "./ui/separator";
+import LinkSideBar from "./linkSideBar";
+import { cn, useGetUserInfo } from "@/lib/utils";
+import { signOut } from "next-auth/react";
+import Link from "next/link";
+import Loader from "./loader";
+import { LinkSideBarPropsType } from "@/lib/type";
 const Header = () => {
+  const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
 
-    const [dropdownIsOpen, setDropdownIsOpen] = useState(false)
+  const { user, status } = useGetUserInfo();
 
-    const { user, status } = useGetUserInfo()
-
-    const LinkTab: LinkSideBarPropsType[] = [
-        {
-            title: "account & billing",
-            link: "/account",
-            onClick: () => handleHideDropDown(),
-            type: "link",
-            icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-            </svg>
-
-        },
-        {
-            title: "dashboard",
-            link: "/dashboard",
-            onClick: () => handleHideDropDown(),
-            type: "link",
-            icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" />
-            </svg>
-
-
-        },
-        {
-          title: "Analytics",
-          link: "/analytics",
-          onClick: () => handleHideDropDown(),
-          type: "link",
-          icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" />
+  const LinkTab: LinkSideBarPropsType[] = [
+    {
+      title: "account & billing",
+      link: "/account",
+      onClick: () => handleHideDropDown(),
+      type: "link",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="size-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+          />
         </svg>
+      ),
+    },
+    {
+      title: "dashboard",
+      link: "/dashboard",
+      onClick: () => handleHideDropDown(),
+      type: "link",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="size-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z"
+          />
+        </svg>
+      ),
+    },
+    {
+      title: "Analytics",
+      link: "/analytics",
+      onClick: () => handleHideDropDown(),
+      type: "link",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="size-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"
+          />
+        </svg>
+      ),
+    },
 
-
-
+    {
+      type: "button",
+      title: "Sign-out",
+      onClick: () => {
+        signOut({ callbackUrl: "/login" });
       },
-        // {
-        //     title: "pricing",
-        //     link: "/pricing",
-        //     onClick: () => handleHideDropDown(),
-        //     type: "link",
-        //     icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-        //         <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
-        //     </svg>
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="size-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="m15 15 6-6m0 0-6-6m6 6H9a6 6 0 0 0 0 12h3"
+          />
+        </svg>
+      ),
+    },
+  ];
 
+  const handleShowDropDown = () => {
+    setDropdownIsOpen(true);
+  };
 
+  const handleHideDropDown = () => {
+    setDropdownIsOpen(false);
+  };
 
-        // },
-        {
-            type: "button",
-            title: "Sign-out",
-            onClick: () => { signOut({ callbackUrl: "/login" }) },
-            icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="m15 15 6-6m0 0-6-6m6 6H9a6 6 0 0 0 0 12h3" />
-            </svg>
-        }
-
-    ]
-
-    const handleShowDropDown = () => {
-        setDropdownIsOpen(true)
+  const toggleShowDropDown = () => {
+    if (dropdownIsOpen) {
+      handleHideDropDown();
+    } else {
+      handleShowDropDown();
     }
+  };
 
-    const handleHideDropDown = () => {
-        setDropdownIsOpen(false)
-    }
-
-    const toggleShowDropDown = () => {
-        if (dropdownIsOpen) {
-            handleHideDropDown()
-        } else {
-            handleShowDropDown()
-        }
-    }
-
-    return (
-        <div className="flex justify-between items-center  md:px-0 px-6  pb-4 w-full min-h-8">
-
-            <Link href="/" className=' w-1/3 md:w-1/2 outline-none' tabIndex={-1}>
-                <div className="flex  md:text-md w-1/2  md:w-1/2 overflow-hidden gap-x-2 justify-start items-center h-full ">
-                    <Image src={logo} className="object-contain h-8 w-8" alt="logo" />
-                    <span className="sm:block hidden"> Smad </span>
-
-                </div>
-            </Link>
-
-            <div className="flex gap-x-2 justify-end items-center  w-full    md:w-8/12">
-                <Link href="/creative-template" className="">
-
-                    <button className="px-4 py-1.5 group  text-xs md:text-sm gap-x-4
-                      border border-neutral-700 line1  hover:bg-neutral-700/30 relative
-                      overflow-hidden flex justify-center items-center rounded-lg text-center">
-
-
-
-                        <span> creative templates  </span>
-
-                    </button>  </Link>
-
-                {status === "loading" ? <div className="flex gap-x-2 md:gap-x-4  justify-end items-center ">  <Loader /> </div> :
-                    status !== "unauthenticated" && user ?
-                        <div className='flex rounded-4xl gap-x-2 relative   justify-center items-center  '>
-
-
-
-
-                            <div className="bg-white h-8 w-8  rounded-full overflow-hidden flex justify-center items-center">
-                                <Image alt={"avatar"} width="300" height="500" className="object-contain"
-                                src={`https://api.dicebear.com/9.x/lorelei/png?seed=${user?.name}`} />
-                            </div>
-                            <button onClick={() => toggleShowDropDown()}>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
-                                    className={cn("size-4 transition-transform ease duration-300 ", dropdownIsOpen && "rotate-45", dropdownIsOpen && "-rotate-90",)}>
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                </svg>
-                            </button>
-
-
-                            {dropdownIsOpen &&
-                                <div className="absolute z-50 w-48 lg:w-56 top-12 left-1/2 transform -translate-x-1/2 max-[1400px]:-translate-x-[160px]   max-h-[90vh] overflow-y-auto rounded-xl bg-neutral-900 border  border-neutral-700 flex flex-col justify-start items-start">
-                                <h3 className="text-lg px-3 py-2">Menu</h3>
-                                <Separator className="bg-neutral-700" />
-                                <div className="w-full flex flex-col  ">
-                                    {LinkTab?.map((link, index) => (
-                                        <React.Fragment key={index}>
-                                            <LinkSideBar LinkSideBarProps={link} />
-                                            {/* <Separator className="bg-neutral-700" /> */}
-                                        </React.Fragment>
-                                    ))}
-                                </div>
-                            </div>
-
-                            }
-
-
-                        </div> :
-
-                        <div className="flex gap-x-2 w-auto justify-end items-center ">
-                            <Link href="/login"> <button className="px-4 py-1.5 text-xs md:text-sm  hover:bg-neutral-700 border border-neutral-700 line relative overflow-hidden rounded-lg text-center"> Sign-in </button>  </Link>
-                            <Link href="/register"> <button className="px-4 py-1.5 text-xs md:text-sm hover:bg-neutral-700 border rounded-lg text-center"> Register </button>  </Link>
-                        </div>
-
-
-                }
-            </div>
+  return (
+    <div className="flex justify-between items-center  md:px-0 px-6  pb-4 w-full min-h-8">
+      <Link href="/" className=" w-1/3 md:w-1/2 outline-none" tabIndex={-1}>
+        <div className="flex  md:text-md w-1/2  md:w-1/2 overflow-hidden gap-x-2 justify-start items-center h-full ">
+          <Image src={logo} className="object-contain h-8 w-8" alt="logo" />
+          <span className="sm:block hidden"> Smad </span>
         </div>
-    )
-}
+      </Link>
 
-export default Header
+      <div className="flex gap-x-2 justify-end items-center  w-full    md:w-8/12">
+        <Link href="/creative-template" className="">
+          <button
+            className="px-4 py-1.5 group  text-xs md:text-sm gap-x-4
+                      border border-neutral-700 line1  hover:bg-neutral-700/30 relative
+                      overflow-hidden flex justify-center items-center rounded-lg text-center"
+          >
+            <span> creative templates </span>
+          </button>
+        </Link>
+
+        {status === "loading" ? (
+          <div className="flex gap-x-2 md:gap-x-4  justify-end items-center ">
+            {" "}
+            <Loader />{" "}
+          </div>
+        ) : status !== "unauthenticated" && user ? (
+          <div className="flex rounded-4xl gap-x-2 relative   justify-center items-center  ">
+            <div className="bg-white h-8 w-8  rounded-full overflow-hidden flex justify-center items-center">
+              <Image
+                alt={"avatar"}
+                width="300"
+                height="500"
+                className="object-contain"
+                src={`https://api.dicebear.com/9.x/lorelei/png?seed=${user?.name}`}
+              />
+            </div>
+            <button onClick={() => toggleShowDropDown()}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className={cn(
+                  "size-4 transition-transform ease duration-300 ",
+                  dropdownIsOpen && "rotate-45",
+                  dropdownIsOpen && "-rotate-90",
+                )}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                />
+              </svg>
+            </button>
+
+            {dropdownIsOpen && (
+              <div className="absolute z-50 w-48 lg:w-56 top-12 left-1/2 transform -translate-x-1/2 max-[1400px]:-translate-x-[160px]   max-h-[90vh] overflow-y-auto rounded-xl bg-neutral-900 border  border-neutral-700 flex flex-col justify-start items-start">
+                <h3 className="text-lg px-3 py-2">Menu</h3>
+                <Separator className="bg-neutral-700" />
+                <div className="w-full flex flex-col  ">
+                  {LinkTab?.map((link, index) => (
+                    <React.Fragment key={index}>
+                      <LinkSideBar LinkSideBarProps={link} />
+                    </React.Fragment>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="flex gap-x-2 w-auto justify-end items-center ">
+            <Link href="/login">
+              {" "}
+              <button className="px-4 py-1.5 text-xs md:text-sm  hover:bg-neutral-700 border border-neutral-700 line relative overflow-hidden rounded-lg text-center">
+                {" "}
+                Sign-in{" "}
+              </button>{" "}
+            </Link>
+            <Link href="/register">
+              {" "}
+              <button className="px-4 py-1.5 text-xs md:text-sm hover:bg-neutral-700 border rounded-lg text-center">
+                {" "}
+                Register{" "}
+              </button>{" "}
+            </Link>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Header;
