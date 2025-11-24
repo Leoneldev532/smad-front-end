@@ -15,7 +15,6 @@ The objective of Smad is to empower users to build their waitlist in just 30 sec
 - **Pre-built Templates**: Choose from available templates to quickly generate waitlist forms.
 - **Customization**: Customize forms using the built-in editor to match your branding and requirements.
 - **Data Export**: Export collected email data in CSV format for further analysis.
-- **Email Integration**: Seamlessly share data with emailing services like Resend.
 - **API Access**: REST API for developers to integrate Smad programmatically into custom projects.
 - **Free Plan**: Create unlimited mailing lists and waitlists at no cost, with access to all basic features.
 
@@ -54,8 +53,7 @@ The objective of Smad is to empower users to build their waitlist in just 30 sec
 - **UI Components**: Radix UI, Lucide React
 - **Database**: Prisma, PostgreSQL (via Prisma ORM)
 - **Authentication**: NextAuth.js
-- **Charts and Analytics**: Chart.js, Recharts
-- **Email Service**: Resend
+- **Charts and Analytics**: Recharts
 - **State Management**: Recoil
 - **Animations**: GSAP
 - **Other Libraries**: Axios, Day.js, UUID, Bcryptjs, and more
