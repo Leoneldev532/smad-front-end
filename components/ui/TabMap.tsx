@@ -37,6 +37,7 @@ import { useDeleteMapMutation, useUpdateMapMutation } from "@/hook/query";
 import { Input } from "../ui/input";
 import Loader from "../loader";
 import { MapResponse, Map, Project } from "@/lib/type";
+/* eslint-disable semi */
 
 const TableMap = ({
   mapsList,
@@ -208,7 +209,7 @@ const TableMap = ({
         </TableHeader>
         <TableBody className="overflow-y-auto">
           {sortedMapsList?.map((map) => {
-            console.log('map.createdAt type:', typeof map?.createdAt, 'value:', map?.createdAt);
+            console.log("map.createdAt type:", typeof map?.createdAt, "value:", map?.createdAt);
             return (
             <TableRow key={map.id} className="py-0 h-8 w-full max-h-8">
               <TableCell className="font-medium w-1/6">

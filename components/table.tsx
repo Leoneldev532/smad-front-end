@@ -43,6 +43,7 @@ import { useGetUserInfo } from "@/lib/utils";
 import ButtonValidation from "./buttonValidation";
 import time from "./time";
 import EmailsTodayChart from "./chart";
+/* eslint-disable semi */
 
 const TableData = ({
   emailsList,
@@ -224,7 +225,7 @@ const TableData = ({
         </TableHeader>
         <TableBody className="overflow-y-auto ">
           {sortedEmailsList?.map((email) => {
-            console.log('email.createdAt type:', typeof email?.createdAt, 'value:', email?.createdAt);
+            console.log("email.createdAt type:", typeof email?.createdAt, "value:", email?.createdAt);
             return (
               <TableRow key={email.id} className="py-0 h-8 w-full max-h-8">
               <TableCell className="font-medium w-1/6">
