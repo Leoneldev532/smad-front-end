@@ -207,7 +207,9 @@ const TableMap = ({
           </TableRow>
         </TableHeader>
         <TableBody className="overflow-y-auto">
-          {sortedMapsList?.map((map) => (
+          {sortedMapsList?.map((map) => {
+            console.log('map.createdAt type:', typeof map?.createdAt, 'value:', map?.createdAt);
+            return (
             <TableRow key={map.id} className="py-0 h-8 w-full max-h-8">
               <TableCell className="font-medium w-1/6">
                 <Checkbox
@@ -248,9 +250,9 @@ const TableMap = ({
                 )}
               </TableCell>
               <TableCell className="font-medium w-1/2">
-                <time dateTime={map.createdAt.toLocaleDateString()} >
+                <time dateTime={new Date(map.createdAt).toLocaleDateString()} >
   {new Date(map?.createdAt).toLocaleDateString()}
-                  </time>
+                </time>
               </TableCell>
               <TableCell className="font-medium w-1/2">
                 <DropdownMenu>
@@ -291,7 +293,7 @@ const TableMap = ({
                 </DropdownMenu>
               </TableCell>
             </TableRow>
-          ))}
+          )})}
         </TableBody>
         <TableFooter className="w-full">
           <TableRow className="bg-neutral-700/30 w-full hover:bg-neutral-700/30">

@@ -1,5 +1,9 @@
 # 🚀 Smad - Waitlist Builder
 
+## 🔗 Backend Repository
+
+The backend for Smad is available at: [https://github.com/Leoneldev532/smad-back-end](https://github.com/Leoneldev532/smad-back-end)
+
 ## 🎯 Objective
 
 The objective of Smad is to empower users to build their waitlist in just 30 seconds and start growing their audience today. Smad is a fast, all-in-one platform designed for managing multiple waitlists across different projects, allowing developers and businesses to focus on building their products rather than handling waitlist infrastructure.

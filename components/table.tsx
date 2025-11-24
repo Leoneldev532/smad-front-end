@@ -223,8 +223,10 @@ const TableData = ({
           </TableRow>
         </TableHeader>
         <TableBody className="overflow-y-auto ">
-          {sortedEmailsList?.map((email) => (
-            <TableRow key={email.id} className="py-0 h-8 w-full max-h-8">
+          {sortedEmailsList?.map((email) => {
+            console.log('email.createdAt type:', typeof email?.createdAt, 'value:', email?.createdAt);
+            return (
+              <TableRow key={email.id} className="py-0 h-8 w-full max-h-8">
               <TableCell className="font-medium w-1/6">
                 <Checkbox
                   checked={selectedIdArray.includes(email.id)}
@@ -282,7 +284,7 @@ const TableData = ({
               </TableCell>
               <TableCell className={"font-medium  w-1/6"}>
                 <span>
-                  <time dateTime={email?.createdAt.toLocaleDateString()}>
+                  <time dateTime={new Date(email?.createdAt).toLocaleDateString()}>
                     {new Date(email?.createdAt).toLocaleDateString()}
                   </time>
                 </span>
@@ -329,7 +331,7 @@ const TableData = ({
                 </DropdownMenu>
               </TableCell>
             </TableRow>
-          ))}
+          )})}
         </TableBody>
         <TableFooter className=" w-full">
           <TableRow className="bg-neutral-700/30   w-full hover:bg-neutral-700/30">
