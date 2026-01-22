@@ -37,15 +37,16 @@ export const generateprivateKey = (email: string): string => {
   const hours = now.getHours().toString().padStart(2, "0");
   const minutes = now.getMinutes().toString().padStart(2, "0");
   const seconds = now.getSeconds().toString().padStart(2, "0");
+  const milliseconds = now.getMilliseconds().toString().padStart(3, "0");
 
   const emailHash = createHash("sha256")
-    .update(email)
+    .update(email + now.getTime())
     .digest("hex")
-    .slice(0, 10);
+    .slice(0, 8);
 
-  const privateKey = `smad${year}${month}${day}${hours}${minutes}${seconds}${emailHash}`;
+  const privateKey = `smad${year}${month}${day}${hours}${minutes}${seconds}${milliseconds}${emailHash}`;
 
-  return privateKey.slice(0, 27);
+  return privateKey.slice(0, 32);
 };
 
 import dayjs, { Dayjs } from "dayjs";
