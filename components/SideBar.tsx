@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import logo from "@/public/logo.png";
-import LinkSideBar  from "./linkSideBar";
+import LinkSideBar  from "./LinkSideBar";
 import { LinkSideBarPropsType } from "@/lib/type";
 const sideBar = () => {
   const LinkTab: LinkSideBarPropsType[] = [

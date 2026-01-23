@@ -1,8 +1,6 @@
 "use client";
 import React from "react";
 import { YouTubeEmbed } from "@next/third-parties/google";
-import CodeHighlight from "@/components/codeSection";
-import CodeHighlightWriter from "@/components/codeSectionWritter";
 import CodeBlock from "@/components/editor";
 
 const Page = () => {

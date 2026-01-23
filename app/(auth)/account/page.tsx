@@ -1,5 +1,5 @@
 "use client";
-import Loader from "@/components/loader";
+import Loader from "@/components/Loader";
 import { useGetAllUserInfo } from "@/hook/query";
 import { userInfoState } from "@/lib/atom";
 import Image from "next/image";

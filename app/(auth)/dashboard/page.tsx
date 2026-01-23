@@ -27,18 +27,18 @@ import ExportModal from "@/components/dashboard/exportModal";
 import CodeDisplayModal from "@/components/dashboard/codeDisplayModal";
 import ProjectSidebar from "@/components/dashboard/projectSidebar";
 import EmptyState from "@/components/dashboard/emptyState";
-import Loader from "@/components/loader";
-import NoData from "@/components/noData";
-import ProjectItemMobile from "@/components/ui/projectItemMobile";
+import Loader from "@/components/Loader";
+import NoData from "@/components/NoData";
 import SkeletonProject from "@/components/ui/skeletonProject";
-import ProjectTabItem from "@/components/projectTabItem";
+import ProjectTabItem from "@/components/ProjectTabItem";
 import SkeletonEmailLine from "@/components/ui/skeletonEmailLine";
 import TableData from "@/components/table";
-import TableMap from "@/components/ui/tabMap";
 import {
   generateCodeScript,
   generateCodeScriptMap,
 } from "@/lib/codeGenerators";
+import ProjectItemMobile from "@/components/ui/ProjectItemMobile";
+import TableMap from "@/components/ui/TabMap";
 
 export default function Page() {
   const user = useRecoilValue(userInfoState);

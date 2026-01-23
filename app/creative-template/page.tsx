@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Loader from "@/components/loader";
+import Loader from "@/components/Loader";
 import { useGetDevelopers } from "@/hook/query";
 import { Developer } from "@/lib/type";
 import { CONTRIBUTE_URL } from "@/lib/constants";

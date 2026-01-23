@@ -31,11 +31,10 @@ import { CheckedState } from "@radix-ui/react-checkbox";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
-import time from "../time";
 import { useGetUserInfo } from "@/lib/utils";
 import { useDeleteMapMutation, useUpdateMapMutation } from "@/hook/query";
 import { Input } from "../ui/input";
-import Loader from "../loader";
+import Loader from "../Loader";
 import { MapResponse, Map, Project } from "@/lib/type";
 /* eslint-disable semi */
 

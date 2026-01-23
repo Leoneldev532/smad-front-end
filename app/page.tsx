@@ -10,7 +10,7 @@ import allInOne from "@/public/allInOne.png";
 import gsap from "gsap";
 import { finalCode } from "@/lib/utils";
 import { TabTemplateCode } from "./template/listTemplateCode";
-import loader2 from "@/components/loader2";
+import loader2 from "@/components/Loader2";
 import Script from "next/script";
 import { ScrollTrigger } from "gsap/all";
 

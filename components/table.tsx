@@ -38,11 +38,10 @@ import { useMutation } from "@tanstack/react-query";
 import { deleteEmail, updateEmail } from "@/hook/query";
 import { toast } from "sonner";
 import { Input } from "./ui/input";
-import Loader from "./loader";
+import Loader from "./Loader";
 import { useGetUserInfo } from "@/lib/utils";
-import ButtonValidation from "./buttonValidation";
-import time from "./time";
-import EmailsTodayChart from "./chart";
+import ButtonValidation from "./ButtonValidation";
+
 /* eslint-disable semi */
 
 const TableData = ({

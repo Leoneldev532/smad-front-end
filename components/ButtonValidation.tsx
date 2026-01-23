@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, ButtonProps } from "./ui/button";
-import Loader2 from "./loader2";
+import Loader2 from "./Loader2";
 import { cn } from "@/lib/utils";
 import { ButtonValidationProps } from "@/lib/type";
 

@@ -12,7 +12,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import Loader from "@/components/loader";
+import Loader from "@/components/Loader";
 
 const Page = () => {
   const user = useRecoilValue(userInfoState);

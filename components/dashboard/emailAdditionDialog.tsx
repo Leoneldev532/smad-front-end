@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import ButtonValidation from "@/components/buttonValidation";
+import ButtonValidation from "@/components/ButtonValidation";
 import { EmailAdditionDialogProps } from "@/lib/type";
 
 export default function EmailAdditionDialog({

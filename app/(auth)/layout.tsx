@@ -1,9 +1,9 @@
 // src/app/layout.tsx
 "use client";
 
-import Loader from "@/components/loader";
-import UserInfoProvider from "@/hook/userIdHook";
-import UserIdProvider from "@/hook/userIdHook";
+import Loader from "@/components/Loader";
+import UserInfoProvider from "@/hook/UserIdHook";
+import UserIdProvider from "@/hook/UserIdHook";
 import { SessionProvider, useSession } from "next-auth/react";
 
 export default function RootLayout({

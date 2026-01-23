@@ -62,7 +62,7 @@ export async function POST(req: Request) {
     console.error("Registration error:", error);
     
     // Handle unique constraint violations
-    if (error.code === 'P2002') {
+    if (error.code === "P2002") {
       return new NextResponse(
         JSON.stringify({
           status: "error",

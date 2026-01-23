@@ -1,11 +1,11 @@
 "use client";
 
 import TableData from "@/components/table";
-import NoData from "@/components/noData";
+import NoData from "@/components/NoData";
 import SkeletonEmailLine from "@/components/ui/skeletonEmailLine";
-import ProjectItemMobile from "@/components/ui/projectItemMobile";
-import ProjectTabItem from "@/components/projectTabItem";
-import Loader from "@/components/loader";
+import ProjectItemMobile from "@/components/ui/ProjectItemMobile";
+import ProjectTabItem from "@/components/ProjectTabItem";
+import Loader from "@/components/Loader";
 import SkeletonProject from "@/components/ui/skeletonProject";
 import { Project, Email, EmailTabContentProps } from "@/lib/type";
 
