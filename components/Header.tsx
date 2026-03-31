@@ -2,12 +2,13 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import logo from "@/public/logo.png";
-import { Separator } from "./ui/separator";import { cn, useGetUserInfo } from "@/lib/utils";
+import { Separator } from "./ui/separator";
+import { cn, useGetUserInfo } from "@/lib/utils";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { LinkSideBarPropsType } from "@/lib/type";
-import LinkSideBar from "./LinkSideBar";
-import Loader from "./Loader";
+import LinkSideBar from "./link-side-bar";
+import Loader from "./loader";
 const Header = () => {
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
 

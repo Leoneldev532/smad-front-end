@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@auth/unstorage-adapter": "^2.7.4",
+    "@hookform/resolvers": "^5.2.2",
     "@lemonsqueezy/lemonsqueezy.js": "^4.0.0",
     "@lemonsqueezy/wedges": "^1.4.0",
     "@mdx-js/loader": "^3.1.0",
@@ -73,7 +74,8 @@
     "tailwindcss-animate": "^1.0.7",
     "unified": "^11.0.5",
     "unstorage": "^1.13.1",
-    "uuid": "^11.0.3"
+    "uuid": "^11.0.3",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",

@@ -10,35 +10,34 @@ import {
   useGetOneMapOfOneProjectUser,
 } from "@/hook/query";
 import { Email, Project } from "@/lib/type";
-import { isDatePassed } from "@/lib/utils";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { ProjectInput, EmailInput, MapInput } from "@/lib/schemas";
 
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { templateInfo, templateInfoType, userInfoState } from "@/lib/atom";
 import { useRouter } from "next/navigation";
-import dayjs from "dayjs";
 
-import ProjectCreationDialog from "@/components/dashboard/projectCreationDialog";
-import EmailAdditionDialog from "@/components/dashboard/emailAdditionDialog";
-import MapCreationDialog from "@/components/dashboard/mapCreationDialog";
-import ExportModal from "@/components/dashboard/exportModal";
-import CodeDisplayModal from "@/components/dashboard/codeDisplayModal";
-import ProjectSidebar from "@/components/dashboard/projectSidebar";
-import EmptyState from "@/components/dashboard/emptyState";
-import Loader from "@/components/Loader";
-import NoData from "@/components/NoData";
-import SkeletonProject from "@/components/ui/skeletonProject";
-import ProjectTabItem from "@/components/ProjectTabItem";
-import SkeletonEmailLine from "@/components/ui/skeletonEmailLine";
+import ProjectCreationDialog from "@/components/dashboard/project-creation-dialog";
+import EmailAdditionDialog from "@/components/dashboard/email-addition-dialog";
+import MapCreationDialog from "@/components/dashboard/map-creation-dialog";
+import ExportModal from "@/components/dashboard/export-modal";
+import CodeDisplayModal from "@/components/dashboard/code-display-modal";
+import ProjectSidebar from "@/components/dashboard/project-sidebar";
+import EmptyState from "@/components/dashboard/empty-state";
+import Loader from "@/components/loader";
+import NoData from "@/components/no-data";
+import SkeletonProject from "@/components/ui/skeleton-project";
+import ProjectTabItem from "@/components/project-tab-item";
+import SkeletonEmailLine from "@/components/ui/skeleton-email-line";
 import TableData from "@/components/table";
 import {
   generateCodeScript,
   generateCodeScriptMap,
-} from "@/lib/codeGenerators";
-import ProjectItemMobile from "@/components/ui/ProjectItemMobile";
-import TableMap from "@/components/ui/TabMap";
+} from "@/lib/code-generators";
+import ProjectItemMobile from "@/components/ui/project-item-mobile";
+import TableMap from "@/components/ui/tab-map";
 
 export default function Page() {
   const user = useRecoilValue(userInfoState);
@@ -119,17 +118,9 @@ export default function Page() {
     useState<boolean>(false);
   const [isOpenAddEmailDialog, setIsOpenAddEmailDialog] =
     useState<boolean>(false);
-  const [projectName, setProjectName] = useState<string>("");
-  const [isCheckedFieldNameUser, setIsCheckedFieldNameUser] =
-    useState<boolean>(false);
 
   const handleShowDialogAddEmail = () => {
-    // if (
-    //   getAllUserInfo?.privateKey?.expiresAt &&
-    //   !isDatePassed(dayjs(getAllUserInfo?.privateKey?.expiresAt))
-    // ) {
-      setIsOpenAddEmailDialog(true);
-    // }
+    setIsOpenAddEmailDialog(true);
   };
 
   const handleCloseDialogAddEmail = () => {
@@ -153,54 +144,48 @@ export default function Page() {
   const [isCodeCopyCodeScript, setIsCodeCopyCodeScript] = useState(false);
 
   const mutationAddProject = useMutation({
-    mutationFn: () =>
-      createProject(user?.id || " ", projectName, isCheckedFieldNameUser),
+    mutationFn: (data: ProjectInput) =>
+      createProject(user?.id || " ", data.name, data.withName),
     onSuccess: (data: { id: string }) => {
-      toast.success("operation d'ajout reuissie");
+      toast.success("Projet créé avec succès");
       setIsOpenCreateProject(false);
       setCurrentIdProject(data?.id || " ");
       setIsOpenModalConfig(true);
       allProjectsOneUserRefetch();
-      setProjectName("");
     },
     onError: (error) => {
-      toast.error("Une erreur est survenue" + error);
+      toast.error(
+        "Une erreur est survenue lors de la création du projet" + error,
+      );
     },
   });
 
   const mutationAddEmailAdress = useMutation({
-    mutationFn: () =>
+    mutationFn: (data: EmailInput) =>
       addEmailAddress(
         user?.id || " ",
         idProjectActive,
-        emailAddress,
+        data.email,
         projectIswithName,
-        name,
+        data.name || "",
       ),
     onSuccess: () => {
-      toast.success("operation d'ajout reuissie");
+      toast.success("Email ajouté avec succès");
       handleCloseDialogAddEmail();
       allEmailsOneProjectRefetch();
-      setEmailAddress(" ");
-      setName(" ");
     },
     onError: (error) => {
-      toast.error("Une erreur est survenue" + error);
+      toast.error("Une erreur est survenue lors de l'ajout de l'email" + error);
     },
   });
 
-  const handleCreateProject = (e: FormEvent) => {
-    e.preventDefault();
-    mutationAddProject.mutate();
+  const handleCreateProject = async (data: ProjectInput) => {
+    mutationAddProject.mutate(data);
   };
 
-  const handleAddEmailAddress = (e: FormEvent) => {
-    e.preventDefault();
-    mutationAddEmailAdress.mutate();
+  const handleAddEmailAddress = async (data: EmailInput) => {
+    mutationAddEmailAdress.mutate(data);
   };
-
-  const [emailAddress, setEmailAddress] = useState("");
-  const [name, setName] = useState("");
 
   const handleCloseModalExport = () => {
     setIsOpenExportModal(false);
@@ -268,13 +253,10 @@ export default function Page() {
   const [isOpenMapCreatedModal, setIsOpenMapCreatedModal] =
     useState<boolean>(false);
 
-  const [mapLink, setMapLink] = useState<string>("");
-
   const { mutate: addMapMutation, isPending: isPendingAddMapMutation } =
     useAddMapMutation({
       idUser: user?.id || "",
       projectId: currentIdProject,
-      link: mapLink,
       onSuccessCallBack: () => {
         setIsOpenAddMapDialog(false);
         refetchFunctionGetMap();
@@ -282,9 +264,8 @@ export default function Page() {
       },
     });
 
-  const handleAddMap = (e: FormEvent) => {
-    e.preventDefault();
-    addMapMutation();
+  const handleAddMap = async (data: MapInput) => {
+    addMapMutation(data);
   };
 
   const handleCopyCodeScriptMap = () => {
@@ -304,8 +285,6 @@ export default function Page() {
       <MapCreationDialog
         isOpen={isOpenAddMapDialog}
         onClose={() => setIsOpenAddMapDialog(false)}
-        mapLink={mapLink}
-        setMapLink={setMapLink}
         onSubmit={handleAddMap}
         isLoading={isPendingAddMapMutation}
       />
@@ -334,10 +313,6 @@ export default function Page() {
       <ProjectCreationDialog
         isOpen={isOpenCreateProject}
         onClose={handleCloseDialogCreateProject}
-        projectName={projectName}
-        setProjectName={setProjectName}
-        isCheckedFieldNameUser={isCheckedFieldNameUser}
-        setIsCheckedFieldNameUser={setIsCheckedFieldNameUser}
         onSubmit={handleCreateProject}
         isLoading={mutationAddProject.isPending}
       />
@@ -354,10 +329,6 @@ export default function Page() {
         onClose={handleCloseDialogAddEmail}
         projectName={nameProjectActive}
         projectIswithName={projectIswithName}
-        emailAddress={emailAddress}
-        setEmailAddress={setEmailAddress}
-        name={name}
-        setName={setName}
         onSubmit={handleAddEmailAddress}
         isLoading={mutationAddEmailAdress.isPending}
       />

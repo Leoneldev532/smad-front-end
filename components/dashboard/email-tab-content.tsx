@@ -1,12 +1,12 @@
 "use client";
 
 import TableData from "@/components/table";
-import NoData from "@/components/NoData";
-import SkeletonEmailLine from "@/components/ui/skeletonEmailLine";
-import ProjectItemMobile from "@/components/ui/ProjectItemMobile";
-import ProjectTabItem from "@/components/ProjectTabItem";
-import Loader from "@/components/Loader";
-import SkeletonProject from "@/components/ui/skeletonProject";
+import NoData from "@/components/no-data";
+import SkeletonEmailLine from "@/components/ui/skeleton-email-line";
+import ProjectItemMobile from "@/components/ui/project-item-mobile";
+import ProjectTabItem from "@/components/project-tab-item";
+import Loader from "@/components/loader";
+import SkeletonProject from "@/components/ui/skeleton-project";
 import { Project, Email, EmailTabContentProps } from "@/lib/type";
 
 export default function emailTabContent({

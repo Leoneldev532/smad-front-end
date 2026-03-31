@@ -2,7 +2,7 @@ import React, { ReactNode, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRecoilState } from "recoil";
 import { userInfoState } from "@/lib/atom";
-import Loader from "@/components/Loader";
+import Loader from "@/components/loader";
 import { UserInfoProviderProps } from "@/lib/type";
 
 const UserInfoProvider: React.FC<UserInfoProviderProps> = ({ children }) => {

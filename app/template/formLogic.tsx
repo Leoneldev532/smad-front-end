@@ -1,48 +1,35 @@
 import { useEffect, useState } from "react";
+import { EmailSchema } from "@/lib/schemas";
 import {
   ValidationRules,
   FormData,
   EmailSubmissionState,
   FormValidationState,
 } from "@/lib/type";
-import { saveEmailToExternalAPI2 } from "@/hook/query";
-
-const getErrorMessage = (error: any) => error.message || "An error occurred";
-
-const defaultValidationRules: ValidationRules = {
-  email: (email) => {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!email) {
-      return "Email address is required";
-    } else if (!emailRegex.test(email)) {
-      return "Email address must be valid";
-    }
-    return null;
-  },
-};
+import { ApiService } from "@/lib/api-service";
 
 const useEmailForm = (
   project_id: string,
   private_key: string,
   customValidationRules?: ValidationRules,
 ) => {
-  const validationRules = customValidationRules || defaultValidationRules;
-
   const [data, setData] = useState({ email: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
   const validate = () => {
-    const validationErrors: Record<string, string> = {};
-    Object.keys(validationRules).forEach((email: string) => {
-      const rule: any = validationRules[email];
-      const error = rule(data.email as any);
-      if (error) {
-        validationErrors[email] = error;
-      }
-    });
-    return validationErrors;
+    const result = EmailSchema.safeParse(data);
+    if (!result.success) {
+      const fieldErrors: Record<string, string> = {};
+      result.error.issues.forEach((issue) => {
+        if (issue.path.length > 0) {
+          fieldErrors[issue.path[0] as string] = issue.message;
+        }
+      });
+      return fieldErrors;
+    }
+    return {};
   };
 
   const handleSubmit = async () => {
@@ -54,10 +41,14 @@ const useEmailForm = (
     setErrors({});
     setLoading(true);
     try {
-      await saveEmailToExternalAPI2(data.email, project_id, private_key);
+      await ApiService.saveEmailExternalAlt(
+        data.email,
+        project_id,
+        private_key,
+      );
       setSuccess(true);
-    } catch (error) {
-      setErrors({ email: getErrorMessage(error) });
+    } catch (error: any) {
+      setErrors({ email: error.message || "An error occurred" });
     } finally {
       setLoading(false);
     }

@@ -1,4 +1,5 @@
-import axiosInstance from "@/lib/api.intercept";
+import { ApiService } from "@/lib/api-service";
+import { MapInput } from "@/lib/schemas";
 import {
   AddMapParams,
   DeleteMapParams,
@@ -16,16 +17,14 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import axios from "axios";
 import { toast } from "sonner";
-import { API_URL } from "@/lib/constants";
+import { handleError } from "@/lib/error-handler";
 
 export const getAllProjectOneUserFunc = async (
   idUser: string | null | undefined,
 ): Promise<Project[]> => {
   if (!idUser) throw new Error("Invalid user ID");
-  const response = await axiosInstance.get(`./api/users/${idUser}/projects`);
-  return response.data;
+  return ApiService.getProjects(idUser);
 };
 
 export const getAllMapOfOneProject = async (
@@ -33,10 +32,7 @@ export const getAllMapOfOneProject = async (
   projectId: string,
 ): Promise<Map[]> => {
   if (!idUser || !projectId) throw new Error("Invalid user ID or projectID");
-  const response = await axiosInstance.get(
-    `./api/users/${idUser}/projects/${projectId}/map`,
-  );
-  return response.data;
+  return ApiService.getMaps(idUser, projectId);
 };
 
 export const deleteMapOfOneProject = async (
@@ -46,10 +42,7 @@ export const deleteMapOfOneProject = async (
 ): Promise<Map> => {
   if (!idUser || !project_Id || !map_Id)
     throw new Error("Invalid user ID or projectID or mapId");
-  const response = await axios.delete(
-    `./api/users/${idUser}/projects/${project_Id}/map/${map_Id}`,
-  );
-  return response.data;
+  return ApiService.deleteMap(idUser, project_Id, map_Id);
 };
 
 export const getAllEmailsOneProjectFunc = async (
@@ -57,26 +50,21 @@ export const getAllEmailsOneProjectFunc = async (
   idProject: string,
 ): Promise<Email[]> => {
   if (!idUser || !idProject) throw new Error("Invalid user ID or project ID");
-  const response = await axiosInstance.get(
-    `./api/users/${idUser}/projects/${idProject}/emails`,
-  );
-  return response.data;
+  return ApiService.getEmails(idUser, idProject);
 };
 
 export const getAllUserInfo = async (
   idUser: string | null | undefined,
 ): Promise<User> => {
   if (!idUser) throw new Error("Invalid user ID");
-  const response = await axiosInstance.get(`./api/users/${idUser}`);
-  return response.data;
+  return ApiService.getUserInfo(idUser);
 };
 
 export const getAllUserTrial_planFunc = async (
   idUser: string | null | undefined,
 ): Promise<{ trial_is_finished: boolean }> => {
   if (!idUser) throw new Error("Invalid user ID");
-  const response = await axiosInstance.get(`./api/users/${idUser}/trialplan`);
-  return response.data;
+  return ApiService.getUserTrialPlan(idUser);
 };
 
 export const deleteProject = async (
@@ -84,10 +72,7 @@ export const deleteProject = async (
   idProject: string,
 ): Promise<Email[]> => {
   if (!idUser || !idProject) throw new Error("Invalid user ID or project ID");
-  const response = await axiosInstance.delete(
-    `./api/users/${idUser}/projects/${idProject}/delete`,
-  );
-  return response.data;
+  return ApiService.deleteProject(idUser, idProject);
 };
 
 export const deleteEmail = async (
@@ -97,10 +82,7 @@ export const deleteEmail = async (
 ): Promise<Email[]> => {
   if (!idUser || !idProject || !idEmail)
     throw new Error("Invalid user ID, project ID, or email ID");
-  const response = await axiosInstance.delete(
-    `./api/users/${idUser}/projects/${idProject}/emails/${idEmail}/delete`,
-  );
-  return response.data;
+  return ApiService.deleteEmail(idUser, idProject, idEmail);
 };
 
 export const updateEmail = async (
@@ -111,13 +93,7 @@ export const updateEmail = async (
 ): Promise<Email[]> => {
   if (!idUser || !idProject || !idEmail || !newValue)
     throw new Error("Invalid parameters");
-  const response = await axiosInstance.put(
-    `./api/users/${idUser}/projects/${idProject}/emails/${idEmail}/update`,
-    {
-      newEmail: newValue,
-    },
-  );
-  return response.data;
+  return ApiService.updateEmail(idUser, idProject, idEmail, newValue);
 };
 
 export const createProject = async (
@@ -127,11 +103,7 @@ export const createProject = async (
 ) => {
   if (!idUser || !nameProject)
     throw new Error("Invalid user ID or project name");
-  const response = await axiosInstance.post(`./api/users/${idUser}/projects`, {
-    name: nameProject,
-    withName: isCheckedFieldNameUser,
-  });
-  return response.data;
+  return ApiService.createProject(idUser, nameProject, isCheckedFieldNameUser);
 };
 
 export const createMap = async (
@@ -141,13 +113,7 @@ export const createMap = async (
 ) => {
   if (!idUser || !project_Id || !link)
     throw new Error("Invalid user ID or project id or link");
-  const response = await axiosInstance.post(
-    `./api/users/${idUser}/projects/${project_Id}/map`,
-    {
-      link,
-    },
-  );
-  return response.data;
+  return ApiService.createMap(idUser, project_Id, link);
 };
 
 export const updateProject = async (
@@ -157,13 +123,7 @@ export const updateProject = async (
 ) => {
   if (!idUser || !idProject || !newNameProject)
     throw new Error("Invalid parameters");
-  const response = await axiosInstance.put(
-    `./api/users/${idUser}/projects/${idProject}/update`,
-    {
-      name: newNameProject,
-    },
-  );
-  return response.data;
+  return ApiService.updateProject(idUser, idProject, newNameProject);
 };
 
 export const addEmailAddress = async (
@@ -175,14 +135,7 @@ export const addEmailAddress = async (
 ) => {
   if (!idUser || !idProject || !nameEmail)
     throw new Error("Invalid parameters");
-  const response = await axiosInstance.post(
-    `./api/users/${idUser}/projects/${idProject}/emails`,
-    {
-      email: nameEmail,
-      name: withName ? name : null,
-    },
-  );
-  return response.data;
+  return ApiService.addEmail(idUser, idProject, nameEmail, withName ? name : null);
 };
 
 export const useGetAllEmailsOneProject = (
@@ -226,7 +179,7 @@ export const useGetOneMapOfOneProjectUser = (
     gcTime: 5 * 60 * 1000,
     staleTime: Infinity,
     refetchOnWindowFocus: false,
-    enabled: !!userId,
+    enabled: !!userId && !!projectId,
     refetchInterval: false,
     retry: 3,
   });
@@ -236,8 +189,7 @@ export const getprivateKeyUser = async (
   idUser: string | null | undefined,
 ): Promise<{ privateKey: string; expiresAt: string }> => {
   if (!idUser) throw new Error("Invalid user ID");
-  const response = await axiosInstance.get(`./api/users/${idUser}/privateKey`);
-  return response.data;
+  return ApiService.getPrivateKey(idUser);
 };
 
 
@@ -251,8 +203,7 @@ export const getUserProjectsWithEmailsGroupedByDate = async (
   { projectId: string; emailCountsByDate: Record<string, number> }[]
 > => {
   if (!idUser) throw new Error("Invalid user ID");
-  const response = await axiosInstance.get(`./api/users/${idUser}/analytics`);
-  return response.data;
+  return ApiService.getAnalytics(idUser);
 };
 
 
@@ -274,12 +225,7 @@ export const useGetDevelopers = () => {
   return useQuery<{ developers: Developer[] }>({
     queryKey: ["developers"],
     queryFn: async () => {
-      const response = await axios.get("/api/developerForm", {
-        headers: {
-          "Cache-Control": "no-cache",
-        },
-      });
-      return response.data;
+      return ApiService.getDevelopers();
     },
     gcTime: 5 * 60 * 1000,
     staleTime: Infinity,
@@ -349,8 +295,7 @@ export const useDeleteMapMutation = ({
       toast.success("Map deleted successfully");
     },
     onError: (error: Error) => {
-      toast.error(`Error during deletion: ${error.message}`);
-    },
+     },
     onSettled: () => {
       // console.log("Mutation completed");
     },
@@ -360,17 +305,12 @@ export const useDeleteMapMutation = ({
 export const useAddMapMutation = ({
   idUser,
   projectId,
-  link,
   onSuccessCallBack,
-}: AddMapParams) => {
+}: Omit<AddMapParams, "link">) => {
   const queryClient = useQueryClient();
-  return useMutation<MapResponse, Error, void>({
-    mutationFn: async () => {
-      const response = await axios.post(
-        `./api/users/${idUser}/projects/${projectId}/map`,
-        { link },
-      );
-      return response.data;
+  return useMutation<MapResponse, Error, MapInput>({
+    mutationFn: async (data: MapInput) => {
+      return ApiService.createMap(idUser as string, projectId, data.link);
     },
     onSuccess: (data: MapResponse) => {
       onSuccessCallBack();
@@ -380,7 +320,7 @@ export const useAddMapMutation = ({
       toast.success("Map added successfully");
     },
     onError: (error: Error) => {
-      toast.error(`Error adding map: ${error.message}`);
+      // toast.error(`Error adding map: ${error.message}`);
     },
     onSettled: () => {
       // console.log("Map addition mutation completed");
@@ -391,18 +331,13 @@ export const useAddMapMutation = ({
 export const useUpdateMapMutation = ({
   idUser,
   projectId,
-  link,
   onSuccessCallBack,
   mapId,
-}: UpdateMapParams) => {
+}: Omit<UpdateMapParams, "link">) => {
   const queryClient = useQueryClient();
-  return useMutation<MapResponse, Error, void>({
-    mutationFn: async () => {
-      const response = await axios.put(
-        `./api/users/${idUser}/projects/${projectId}/map/${mapId}`,
-        { link },
-      );
-      return response.data;
+  return useMutation<MapResponse, Error, MapInput>({
+    mutationFn: async (data: MapInput) => {
+      return ApiService.updateMap(idUser as string, projectId, mapId, data.link);
     },
     onSuccess: (data: MapResponse) => {
       onSuccessCallBack();
@@ -412,7 +347,7 @@ export const useUpdateMapMutation = ({
       toast.success("Map updated successfully");
     },
     onError: (error: Error) => {
-      toast.error(`Error updating map: ${error.message}`);
+      // toast.error(`Error updating map: ${error.message}`);
     },
     onSettled: () => {
       // console.log("Map update mutation completed");
@@ -426,21 +361,12 @@ export const saveEmailToExternalAPI = async (
   private_key: string,
   name?: string,
 ) => {
-  const response = await axios.post(
-    API_URL,
-    {
-      email,
-      project_id,
-      private_key,
-      name,
-    },
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
-  );
-  return response.data;
+  try {
+    return ApiService.saveEmailExternal(email, project_id, private_key, name);
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
 };
 
 export const saveEmailToExternalAPI2 = async (
@@ -449,19 +375,10 @@ export const saveEmailToExternalAPI2 = async (
   private_key: string,
   name?: string,
 ) => {
-  const response = await axios.post(
-    "https://smad.api.leonelyimga.com/api/v1/email/save",
-    {
-      email,
-      project_id,
-      private_key,
-      name,
-    },
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
-  );
-  return response.data;
+  try {
+    return ApiService.saveEmailExternalAlt(email, project_id, private_key, name);
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
 };

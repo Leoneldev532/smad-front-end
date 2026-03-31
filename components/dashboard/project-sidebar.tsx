@@ -1,8 +1,8 @@
 "use client";
 
-import ProjectTabItem from "@/components/ProjectTabItem";
-import NoData from "@/components/NoData";
-import SkeletonProject from "@/components/ui/skeletonProject";
+import ProjectTabItem from "@/components/project-tab-item";
+import NoData from "@/components/no-data";
+import SkeletonProject from "@/components/ui/skeleton-project";
 import { Project, ProjectSidebarProps } from "@/lib/type";
 
 export default function ProjectSidebar({

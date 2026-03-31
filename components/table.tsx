@@ -38,9 +38,9 @@ import { useMutation } from "@tanstack/react-query";
 import { deleteEmail, updateEmail } from "@/hook/query";
 import { toast } from "sonner";
 import { Input } from "./ui/input";
-import Loader from "./Loader";
+import Loader from "./loader";
 import { useGetUserInfo } from "@/lib/utils";
-import ButtonValidation from "./ButtonValidation";
+import ButtonValidation from "./button-validation";
 
 /* eslint-disable semi */
 
@@ -167,7 +167,7 @@ const TableData = ({
     ?.slice()
     .sort(
       (a, b) =>
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
     );
 
   return (
@@ -224,114 +224,126 @@ const TableData = ({
         </TableHeader>
         <TableBody className="overflow-y-auto ">
           {sortedEmailsList?.map((email) => {
-            console.log("email.createdAt type:", typeof email?.createdAt, "value:", email?.createdAt);
+            console.log(
+              "email.createdAt type:",
+              typeof email?.createdAt,
+              "value:",
+              email?.createdAt,
+            );
             return (
               <TableRow key={email.id} className="py-0 h-8 w-full max-h-8">
-              <TableCell className="font-medium w-1/6">
-                <Checkbox
-                  checked={selectedIdArray.includes(email.id)}
-                  onCheckedChange={(status) => handleSelected(status, email.id)}
-                  key={email?.id}
-                  id="terms"
-                />
-              </TableCell>
-              <TableCell
-                className={`font-medium ${!withName && "hidden"} w-1/6`}
-              >
-                {withName && <span>{email?.name}</span>}
-              </TableCell>
-              <TableCell className="font-medium w-full flex justify-start gap-4 items-center">
-                {isUpdateEmail ? (
-                  emailIdUpdateValue === email.id ? (
-                    <Input
-                      type="text"
-                      className="w-full min-w-72 "
-                      disabled={mutationUpdateEmailOneProject.isPending}
-                      ref={inputRef}
-                      value={emailUpdateValue}
-                      onChange={(e) => handleUpdateEmail(e)}
-                      onKeyPress={(e) => {
-                        if (e.key === "Enter") {
-                          handleValidateEmail(email.id);
-                        }
-                      }}
-                    />
+                <TableCell className="font-medium w-1/6">
+                  <Checkbox
+                    checked={selectedIdArray.includes(email.id)}
+                    onCheckedChange={(status) =>
+                      handleSelected(status, email.id)
+                    }
+                    key={email?.id}
+                    id="terms"
+                  />
+                </TableCell>
+                <TableCell
+                  className={`font-medium ${!withName && "hidden"} w-1/6`}
+                >
+                  {withName && <span>{email?.name}</span>}
+                </TableCell>
+                <TableCell className="font-medium w-full flex justify-start gap-4 items-center">
+                  {isUpdateEmail ? (
+                    emailIdUpdateValue === email.id ? (
+                      <Input
+                        type="text"
+                        className="w-full min-w-72 "
+                        disabled={mutationUpdateEmailOneProject.isPending}
+                        ref={inputRef}
+                        value={emailUpdateValue}
+                        onChange={(e) => handleUpdateEmail(e)}
+                        onKeyPress={(e) => {
+                          if (e.key === "Enter") {
+                            handleValidateEmail(email.id);
+                          }
+                        }}
+                      />
+                    ) : (
+                      <div className="flex flex-col w-full">
+                        <span>{email.email}</span>
+                        <div className="flex w-full text-xs text-neutral-500">
+                          <span>{email?.country}</span>
+                          <span>{" - " + email?.referrer}</span>
+                        </div>
+                      </div>
+                    )
                   ) : (
-                    <div className="flex flex-col w-full">
+                    <div className="flex flex-col  w-full">
                       <span>{email.email}</span>
-                      <div className="flex w-full text-xs text-neutral-500">
+                      <div className="flex text-xs w-full text-neutral-500">
                         <span>{email?.country}</span>
                         <span>{" - " + email?.referrer}</span>
                       </div>
                     </div>
-                  )
-                ) : (
-                  <div className="flex flex-col  w-full">
-                    <span>{email.email}</span>
-                    <div className="flex text-xs w-full text-neutral-500">
-                      <span>{email?.country}</span>
-                      <span>{" - " + email?.referrer}</span>
-                    </div>
-                  </div>
-                )}
+                  )}
 
-                <div className="w-6 h-6 flex justify-center items-center">
-                  {emailIdUpdateValue === email.id &&
-                    mutationUpdateEmailOneProject?.isPending && (
-                      <Loader height="6" width="6" />
-                    )}
-                </div>
-              </TableCell>
-              <TableCell className={"font-medium  w-1/6"}>
-                <span>
-                  <time dateTime={new Date(email?.createdAt).toLocaleDateString()}>
-                    {new Date(email?.createdAt).toLocaleDateString()}
-                  </time>
-                </span>
-              </TableCell>
-              <TableCell className="font-medium w-1/2">
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="h-8   w-8 p-0">
-                      <span className="sr-only">Open menu</span>
-                      <MoreHorizontal />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="bg-neutral-900">
-                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem
-                      className="cursor-pointer"
-                      onClick={() => navigator.clipboard.writeText(email.email)}
+                  <div className="w-6 h-6 flex justify-center items-center">
+                    {emailIdUpdateValue === email.id &&
+                      mutationUpdateEmailOneProject?.isPending && (
+                        <Loader height="6" width="6" />
+                      )}
+                  </div>
+                </TableCell>
+                <TableCell className={"font-medium  w-1/6"}>
+                  <span>
+                    <time
+                      dateTime={new Date(email?.createdAt).toLocaleDateString()}
                     >
-                      Copy email
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem
-                      className="cursor-pointer"
-                      onClick={() => {
-                        setEmailUpdateValue(email?.email);
-                        setEmailIdUpdateValue(email?.id);
-                        setIsUpdateEmail(true);
-                      }}
-                    >
-                      Update
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem
-                      className="cursor-pointer"
-                      onClick={() => {
-                        setIdEmailSelected(email.id);
-                        handleShowModalDeleteEmail();
-                      }}
-                    >
-                      delete
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </TableCell>
-            </TableRow>
-          )})}
+                      {new Date(email?.createdAt).toLocaleDateString()}
+                    </time>
+                  </span>
+                </TableCell>
+                <TableCell className="font-medium w-1/2">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" className="h-8   w-8 p-0">
+                        <span className="sr-only">Open menu</span>
+                        <MoreHorizontal />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className="bg-neutral-900">
+                      <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem
+                        className="cursor-pointer"
+                        onClick={() =>
+                          navigator.clipboard.writeText(email.email)
+                        }
+                      >
+                        Copy email
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem
+                        className="cursor-pointer"
+                        onClick={() => {
+                          setEmailUpdateValue(email?.email);
+                          setEmailIdUpdateValue(email?.id);
+                          setIsUpdateEmail(true);
+                        }}
+                      >
+                        Update
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem
+                        className="cursor-pointer"
+                        onClick={() => {
+                          setIdEmailSelected(email.id);
+                          handleShowModalDeleteEmail();
+                        }}
+                      >
+                        delete
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
         <TableFooter className=" w-full">
           <TableRow className="bg-neutral-700/30   w-full hover:bg-neutral-700/30">

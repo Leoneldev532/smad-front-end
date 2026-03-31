@@ -1,7 +1,7 @@
 "use client";
 
-import TableMap from "@/components/ui/TabMap";
-import SkeletonEmailLine from "@/components/ui/skeletonEmailLine";
+import TableMap from "@/components/ui/tab-map";
+import SkeletonEmailLine from "@/components/ui/skeleton-email-line";
 import { Map, MapTabContentProps } from "@/lib/type";
 
 export default function mapTabContent({

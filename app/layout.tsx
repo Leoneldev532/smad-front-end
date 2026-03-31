@@ -7,30 +7,49 @@ import {
   Inter,
 } from "next/font/google";
 import "./globals.css";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  QueryClient,
+  QueryClientProvider,
+  QueryCache,
+  MutationCache,
+} from "@tanstack/react-query";
+import { handleError } from "@/lib/error-handler";
 import { Toaster } from "sonner";
 import { NextAuthProvider } from "@/components/providers";
-import Header from "@/components/Header";
+import Header from "@/components/header";
 import { Suspense, useEffect } from "react";
 import { RecoilRoot } from "recoil";
 import { Analytics } from "@vercel/analytics/react";
 import Head from "next/head";
-import { CSPostHogProvider } from "@/lib/providerPostHog";
+import { CSPostHogProvider } from "@/lib/provider-post-hog";
 import { Helmet } from "react-helmet";
 import "prismjs/themes/prism-tomorrow.css";
 import Link from "next/link";
 import { NextSeo } from "next-seo";
 
-const inter =  ({
+const inter = {
   subsets: ["latin"],
   weight: "400",
   variable: "--font-inter",
+};
+
+const queryClient = new QueryClient({
+  queryCache: new QueryCache({
+    onError: (error) => {
+      // Only handle errors that haven't been handled by axios interceptor
+      // or are generic query errors.
+      handleError(error);
+    },
+  }),
+  mutationCache: new MutationCache({
+    onError: (error) => {
+      handleError(error);
+    },
+  }),
 });
 
-const queryClient = new QueryClient();
-
 export default function RootLayout({
-  children, 
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {

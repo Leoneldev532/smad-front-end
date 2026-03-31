@@ -1,10 +1,10 @@
 "use client";
 import { templateCardType } from "@/lib/type";
 import React from "react";
-import FormRegisterEmail1 from "@/components/FormRegisterEmail1";
-import FormRegisterEmail2 from "@/components/FormRegisterEmail2";
-import FormRegisterEmail3 from "@/components/FormRegisterEmail3";
-import TemplateCard from "@/components/TemplateCard";
+import FormRegisterEmail1 from "@/components/form-register-email-1";
+import FormRegisterEmail2 from "@/components/form-register-email-2";
+import FormRegisterEmail3 from "@/components/form-register-email-3";
+import TemplateCard from "@/components/template-card";
 import EmailRegistrationForm from "@/components/form";
 
 const Page = () => {
