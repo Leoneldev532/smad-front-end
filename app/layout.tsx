@@ -16,7 +16,7 @@ import {
 import { handleError } from "@/lib/error-handler";
 import { Toaster } from "sonner";
 import { NextAuthProvider } from "@/components/providers";
-import Header from "@/components/header";
+import Header from "@/components/page-header";
 import { Suspense, useEffect } from "react";
 import { RecoilRoot } from "recoil";
 import { Analytics } from "@vercel/analytics/react";
