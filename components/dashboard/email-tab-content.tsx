@@ -5,7 +5,7 @@ import NoData from "@/components/no-data";
 import SkeletonEmailLine from "@/components/ui/skeleton-email-line";
 import ProjectItemMobile from "@/components/ui/project-item-mobile";
 import ProjectTabItem from "@/components/project-tab-item";
-import Loader from "@/components/loader";
+import Loader from "@/components/page-loader";
 import SkeletonProject from "@/components/ui/skeleton-project";
 import { Project, Email, EmailTabContentProps } from "@/lib/type";
 
