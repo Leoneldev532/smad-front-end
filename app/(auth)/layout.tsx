@@ -1,7 +1,7 @@
 // src/app/layout.tsx
 "use client";
 
-import Loader from "@/components/loader";
+import Loader from "@/components/page-loader";
 import UserInfoProvider from "@/hook/UserIdHook";
 import UserIdProvider from "@/hook/UserIdHook";
 import { SessionProvider, useSession } from "next-auth/react";

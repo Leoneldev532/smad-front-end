@@ -26,7 +26,7 @@ import ExportModal from "@/components/dashboard/export-modal";
 import CodeDisplayModal from "@/components/dashboard/code-display-modal";
 import ProjectSidebar from "@/components/dashboard/project-sidebar";
 import EmptyState from "@/components/dashboard/empty-state";
-import Loader from "@/components/loader";
+import Loader from "@/components/page-loader";
 import NoData from "@/components/no-data";
 import SkeletonProject from "@/components/ui/skeleton-project";
 import ProjectTabItem from "@/components/project-tab-item";
