@@ -35,10 +35,10 @@ class ErrorBoundary extends Component<Props, State> {
         this.props.fallback || (
           <div className="flex flex-col items-center justify-center p-6 border border-red-500/20 bg-red-500/5 rounded-lg text-center">
             <h2 className="text-lg font-semibold text-red-500 mb-2">
-              Oups ! Quelque chose s'est mal passé.
+              Oups ! Quelque chose s&apos;est mal passé.
             </h2>
             <p className="text-sm text-neutral-400 mb-4">
-              Une erreur inattendue a empêché l'affichage de ce composant.
+              Une erreur inattendue a empêché l&apos;affichage de ce composant.
             </p>
             <button
               onClick={() => this.setState({ hasError: false })}
