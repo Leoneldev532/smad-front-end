@@ -9,6 +9,8 @@ import Loader from "@/components/page-loader";
 import SkeletonProject from "@/components/ui/skeleton-project";
 import { Project, Email, EmailTabContentProps } from "@/lib/type";
 
+// ----------------------------------------------------------------
+
 export default function emailTabContent({
   allProjectsOneUser,
   allProjectsOneUserLoading,
