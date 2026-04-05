@@ -8,7 +8,7 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { LinkSideBarPropsType } from "@/lib/type";
 import LinkSideBar from "./link-side-bar";
-import Loader from "./loader";
+import Loader from "./page-loader";
 const Header = () => {
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
 

@@ -23,7 +23,7 @@ import { deleteProject, updateProject } from "@/hook/query";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import Loader from "./loader";
+import Loader from "./page-loader";
 import ButtonValidation from "./button-validation";
 import { useSetRecoilState } from "recoil";
 import { templateInfo, templateInfoType } from "@/lib/atom";

@@ -38,7 +38,7 @@ import { useMutation } from "@tanstack/react-query";
 import { deleteEmail, updateEmail } from "@/hook/query";
 import { toast } from "sonner";
 import { Input } from "./ui/input";
-import Loader from "./loader";
+import Loader from "./page-loader";
 import { useGetUserInfo } from "@/lib/utils";
 import ButtonValidation from "./button-validation";
 

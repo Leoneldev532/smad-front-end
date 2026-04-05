@@ -34,7 +34,7 @@ import { toast } from "sonner";
 import { useGetUserInfo } from "@/lib/utils";
 import { useDeleteMapMutation, useUpdateMapMutation } from "@/hook/query";
 import { Input } from "../ui/input";
-import Loader from "../loader";
+import Loader from "../page-loader";
 import { MapResponse, Map, Project } from "@/lib/type";
 /* eslint-disable semi */
 
